@@ -1,5 +1,6 @@
 ﻿package it.unibo.oop.smartercities;
 
+import it.unibo.oop.googleMapsWeb.GoogleMapsWebBrowser;
 import it.unibo.oop.streetObservers.StreetObserver;
 
 import java.awt.BorderLayout;
@@ -16,9 +17,12 @@ public class SmarterCitiesViewGUI implements SmarterCitiesView{
 	private static final int DEFAULT_HEIGHT = 700;
 
 	private JFrame mainFrame;
-	private JPanel controlPanel;
+	private JTabbedPane tabbedPane;
+	private JPanel panelFirstPage;
 	private JScrollPane scrollControlPanel;
+	private JPanel controlPanel;
 	private JPanel infoPanel;
+	
 	
 	private GridBagConstraints cnst;
 
@@ -36,30 +40,39 @@ public class SmarterCitiesViewGUI implements SmarterCitiesView{
 		infoPanel.add(new JButton("tanti bei bottoncini qui"));
 		infoPanel.add(new JTextArea("qualche info quà e la :)"));
 		
-		// creation of an empty controlPanel
+		// creation of controlPanel
 		controlPanel = new JPanel();
 		controlPanel.setBorder(new TitledBorder("Controllers"));
 		controlPanel.setLayout(new GridBagLayout());
 		scrollControlPanel = new JScrollPane(controlPanel);
-		
-		// vertical disposition of the element of the panel (controlPanel)
+		// vertical disposition of the element of the controlPanel
 		cnst = new GridBagConstraints () ;
 		cnst.gridy = 0;
 		cnst.insets = new Insets (5 ,5 ,5 ,5);
 		
-		// join of the two panels, and showing of the mainFrame
-		mainFrame.add(scrollControlPanel, BorderLayout.CENTER);
-		mainFrame.add(infoPanel, BorderLayout.EAST);
+		// creation of the panel of the first page
+		panelFirstPage = new JPanel(new BorderLayout());
+		panelFirstPage.add(scrollControlPanel, BorderLayout.CENTER);
+		panelFirstPage.add(infoPanel, BorderLayout.EAST);
+		
+		// creation of tabbedPanel
+		tabbedPane = new JTabbedPane();
+		tabbedPane.add("first panel", panelFirstPage);
+		tabbedPane.add("second panel", new GoogleMapsWebBrowser());
+		
+		// join with mainframe
+		mainFrame.add(tabbedPane, BorderLayout.CENTER);
 		mainFrame.setVisible(true);
 
 	}
 
 	@Override
 	public boolean pluginRequest(Double latitude, Double longitude) {
-		String msg = "There is a new request for plugging a new street observer. \nIt's location is: " +
-					 "\n   - Latitude:  " + latitude +
-					 "\n   - Longitude: " + longitude +
-					 "\n\nDo you want to plug it?";
+		String msg = new StringBuilder().append("There is a new request for plugging a new street observer. \nIt's location is: ")
+					 .append("\n   - Latitude:  " + latitude)
+					 .append("\n   - Longitude: " + longitude)
+					 .append("\nDo you want to plug it?")
+					 .toString();
 		
 		Integer choice = JOptionPane.showOptionDialog(null, 
 												  msg,
@@ -86,9 +99,8 @@ public class SmarterCitiesViewGUI implements SmarterCitiesView{
 
 	}
 
-	
 	@Override
-	public void sendInformationsTo() {
+	public void sendInformationsTo(int id) {
 		// TODO
 	}
 
