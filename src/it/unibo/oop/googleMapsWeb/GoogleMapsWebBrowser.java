@@ -12,16 +12,15 @@ public class GoogleMapsWebBrowser extends JFXPanel {
 	private WebEngine webEngine;
 	
 	public GoogleMapsWebBrowser() {
-		Platform.runLater(() -> {
-				initialiseJavaFXScene();
-			});
-		}
+		Platform.runLater( ()->{initialiseJavaFXScene();} );
+	}
+	
 	private void initialiseJavaFXScene() {
 		webView = new WebView();
 		webEngine = webView.getEngine();
 		webEngine.load("https://www.google.it/maps");
 		
-		Scene scene = new Scene(webView, 100, 100, true);
+		Scene scene = new Scene(webView);
 		setScene(scene);
 	}
 }
