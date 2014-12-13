@@ -7,14 +7,15 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 public class SCViewGUI implements SCViewInterface{
 
-	private static final int DEFAULT_WIDTH = 700;
-	private static final int DEFAULT_HEIGHT = 700;
+	private static final int DEFAULT_WIDTH = (Toolkit.getDefaultToolkit().getScreenSize().width/3)*2;
+	private static final int DEFAULT_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().width/2;
 	
 	private SCViewObserverInterface viewObserver;
 	
