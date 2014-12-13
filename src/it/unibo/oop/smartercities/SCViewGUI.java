@@ -11,11 +11,13 @@ import java.awt.Insets;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
-public class SmarterCitiesViewGUI implements SmarterCitiesView{
+public class SCViewGUI implements SCViewInterface{
 
 	private static final int DEFAULT_WIDTH = 700;
 	private static final int DEFAULT_HEIGHT = 700;
-
+	
+	private SCViewObserverInterface viewObserver;
+	
 	private JFrame mainFrame;
 	private JTabbedPane tabbedPane;
 	private JPanel panelFirstPage;
@@ -23,10 +25,10 @@ public class SmarterCitiesViewGUI implements SmarterCitiesView{
 	private JPanel controlPanel;
 	private JPanel infoPanel;
 	
-	
 	private GridBagConstraints cnst;
 
-	public SmarterCitiesViewGUI() {
+	public SCViewGUI() {
+		
 		// creation mainFrame
 		mainFrame = new JFrame("Smarter Cities");
 		mainFrame.setLayout(new BorderLayout());
@@ -65,9 +67,14 @@ public class SmarterCitiesViewGUI implements SmarterCitiesView{
 		mainFrame.setVisible(true);
 
 	}
+	
+	@Override
+	public void attachViewObserver(final SCViewObserverInterface viewObserver) {
+		this.viewObserver = viewObserver;
+	}
 
 	@Override
-	public boolean pluginRequest(Double latitude, Double longitude) {
+	public boolean pluginRequest(int id, Double latitude, Double longitude) {
 		String msg = new StringBuilder().append("There is a new request for plugging a new street observer. \nIt's location is: ")
 					 .append("\n   - Latitude:  " + latitude)
 					 .append("\n   - Longitude: " + longitude)
@@ -85,7 +92,7 @@ public class SmarterCitiesViewGUI implements SmarterCitiesView{
 		if(choice.equals(JOptionPane.YES_OPTION)) {
 			//TODO  fallo come liste! qui sto perdendo info dei labels e degli StreetObserver
 			JLabel controlLabel = new JLabel();
-			StreetObserver so = new StreetObserver(latitude, longitude);
+			StreetObserver so = new StreetObserver(id, latitude, longitude);
 			controlLabel.setBorder(new TitledBorder("Street Observer" + " " + so.getID()));
 			controlLabel.setIcon(so.getPositionMap());
 			controlPanel.add(controlLabel, cnst);
@@ -100,7 +107,7 @@ public class SmarterCitiesViewGUI implements SmarterCitiesView{
 	}
 
 	@Override
-	public void sendInformationsTo(int id) {
+	public void newPassage(int id) {
 		// TODO
 	}
 

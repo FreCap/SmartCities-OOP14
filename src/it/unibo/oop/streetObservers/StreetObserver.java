@@ -7,14 +7,13 @@ public class StreetObserver {
 	private final int ID;
 	private final Double LATITUDE;
 	private final Double LONGITUDE;
-	private final ImageIcon icon;
-	private Informations info;	
+	private final ImageIcon ICON;
 	
-	public StreetObserver(Double lat, Double lng) {
-		this.ID = MakeID.getNewID();
+	public StreetObserver(int id, Double lat, Double lng) {
+		this.ID = id;
 		this.LATITUDE = lat;
 		this.LONGITUDE= lng;
-		this.icon = new StreetObserverLocationMap().getMapOf(this. ID, this.LATITUDE, this.LONGITUDE);
+		this.ICON = new StreetObserverLocationMap().getMapOf(this. ID, this.LATITUDE, this.LONGITUDE);
 	}
 	
 	public int getID() {
@@ -29,12 +28,8 @@ public class StreetObserver {
 		return LONGITUDE;
 	}
 	
-	public Informations getInfo() {
-		return this.info;
-	}
-	
 	public ImageIcon getPositionMap() {
-		return icon;
+		return ICON;
 	}
 
 }
