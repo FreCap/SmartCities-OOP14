@@ -9,6 +9,10 @@ public class StreetObserver {
 	private final Double LONGITUDE;
 	private final ImageIcon ICON;
 	
+	// TODO
+	//private final dataCreazione
+	//private final dataUltimoAvvistamento
+	
 	public StreetObserver(int id, Double lat, Double lng) {
 		this.ID = id;
 		this.LATITUDE = lat;
