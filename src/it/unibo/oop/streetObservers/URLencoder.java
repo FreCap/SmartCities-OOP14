@@ -3,6 +3,10 @@ package it.unibo.oop.streetObservers;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+// TODO
+// estendi da qualche classe URL encored, per fare di questo un oggetto speciale di encoder
+// UTILIZZALO COME PATTERN SINGLETON!!
+
 public class URLencoder {
 	
 	private static final String STATIC_MAP_REQUEST_PREFIX = "https://maps.googleapis.com/maps/api/staticmap";

@@ -1,4 +1,4 @@
-package it.unibo.oop.streetObservers;
+package it.unibo.oop.stolenCars;
 
 public class NumberPlate {
 

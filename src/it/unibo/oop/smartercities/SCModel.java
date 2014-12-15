@@ -1,16 +1,24 @@
 package it.unibo.oop.smartercities;
 
-import it.unibo.oop.streetObservers.NumberPlate;
+import java.util.HashSet;
 
-public class SCModel implements SCModelInterface{
+import it.unibo.oop.stolenCars.NumberPlate;
+import it.unibo.oop.streetObservers.IStreetObserver;
+import it.unibo.oop.streetObservers.StreetObserver;
+
+public class SCModel extends HashSet<IStreetObserver> implements SCModelInterface{
+
+	private static final long serialVersionUID = 126469849652984989L;
 
 	public SCModel() {
-		// TODO
+		super();
 	}
 	
 	@Override
-	public void addNewStreetObserver(int id, Double latitude, Double longitude) {
-		// TODO
+	public IStreetObserver addNewStreetObserver(Double latitude, Double longitude) {
+		IStreetObserver aso = new StreetObserver(MakeID.getMaker().getID(), latitude, longitude);
+		this.add(aso);
+		return aso;
 	}
 
 	@Override
@@ -24,5 +32,6 @@ public class SCModel implements SCModelInterface{
 		// TODO
 		return false;
 	}
-
+	
+	//TODO override di equals e hash
 }

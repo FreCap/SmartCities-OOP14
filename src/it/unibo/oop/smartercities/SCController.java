@@ -1,11 +1,12 @@
 package it.unibo.oop.smartercities;
 
-import it.unibo.oop.streetObservers.NumberPlate;
+import it.unibo.oop.stolenCars.NumberPlate;
+import it.unibo.oop.streetObservers.IStreetObserver;
 
 public class SCController implements SCViewObserverInterface {
 
-	SCViewInterface scView;
-	SCModelInterface scModel;
+	private final SCViewInterface scView;
+	private final SCModelInterface scModel;
 	
 	public SCController(final SCViewInterface scView) {
 		this.scModel = new SCModel();
@@ -14,9 +15,9 @@ public class SCController implements SCViewObserverInterface {
 	}
 	
 	@Override
-	public Object getInfoOf(int id) {
+	public Object getStreetObserverInfo(int id) {
 		// TODO
-		return null;
+		return scModel.takeInfoOf(id);
 	}
 
 	@Override
@@ -26,19 +27,19 @@ public class SCController implements SCViewObserverInterface {
 	}
 
 	@Override
-	public boolean pluginRequest(int id, Double latitude, Double longitude) {
+	public boolean pluginRequest(Double latitude, Double longitude) {
 		boolean req;
-		req = this.scView.pluginRequest(id, latitude, longitude);
+		req = this.scView.pluginRequest(latitude, longitude);
 		if(req){
-			this.scModel.addNewStreetObserver(id, latitude, longitude);
+			IStreetObserver aso;
+			aso = this.scModel.addNewStreetObserver(latitude, longitude);
+			scView.addStreetObserver(aso);
 		}
 		return req;
 	}
 
 	@Override
 	public void newPassage(int id, Object informations) {
-		// TODO
-		
+		// TODO	
 	}
-
 }

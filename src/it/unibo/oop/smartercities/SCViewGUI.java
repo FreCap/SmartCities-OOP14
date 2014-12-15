@@ -1,7 +1,8 @@
 ﻿package it.unibo.oop.smartercities;
 
 import it.unibo.oop.googleMapsWeb.GoogleMapsWebBrowser;
-import it.unibo.oop.streetObservers.StreetObserver;
+import it.unibo.oop.streetObservers.IStreetObserver;
+import it.unibo.oop.streetObservers.LocationMapsConstructor;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -30,7 +31,7 @@ public class SCViewGUI implements SCViewInterface{
 
 	public SCViewGUI() {
 		
-		// creation mainFrame
+		// creation of mainFrame
 		mainFrame = new JFrame("Smarter Cities");
 		mainFrame.setLayout(new BorderLayout());
 		mainFrame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -75,36 +76,25 @@ public class SCViewGUI implements SCViewInterface{
 	}
 
 	@Override
-	public boolean pluginRequest(int id, Double latitude, Double longitude) {
+	public boolean pluginRequest(Double latitude, Double longitude) {
 		String msg = new StringBuilder().append("There is a new request for plugging a new street observer. \nIt's location is: ")
-					 .append("\n   - Latitude:  " + latitude)
-					 .append("\n   - Longitude: " + longitude)
-					 .append("\nDo you want to plug it?")
-					 .toString();
+										.append("\n   - Latitude:  " + latitude)
+										.append("\n   - Longitude: " + longitude)
+										.append("\nDo you want to plug it?")
+										.toString();
 		
 		Integer choice = JOptionPane.showOptionDialog(null, 
-												  msg,
-												  "New plugging request",
-												  JOptionPane.YES_NO_OPTION, 
-												  JOptionPane.QUESTION_MESSAGE, 
-												  null, null, null);
-		
+													  msg,
+													  "New plugging request",
+													  JOptionPane.YES_NO_OPTION, 
+													  JOptionPane.QUESTION_MESSAGE, 
+													  null, null, null);
 		
 		if(choice.equals(JOptionPane.YES_OPTION)) {
-			//TODO  fallo come liste! qui sto perdendo info dei labels e degli StreetObserver
-			JLabel controlLabel = new JLabel();
-			StreetObserver so = new StreetObserver(id, latitude, longitude);
-			controlLabel.setBorder(new TitledBorder("Street Observer" + " " + so.getID()));
-			controlLabel.setIcon(so.getPositionMap());
-			controlPanel.add(controlLabel, cnst);
-			cnst.gridy++;
-			mainFrame.validate();
-			mainFrame.repaint();
 			return true;
 		} else {
 			return false;
 		}
-
 	}
 
 	@Override
@@ -112,4 +102,15 @@ public class SCViewGUI implements SCViewInterface{
 		// TODO
 	}
 
+	@Override
+	public void addStreetObserver(IStreetObserver aso) {
+		JLabel controlLabel = new JLabel();
+		controlLabel.setBorder(new TitledBorder("Street Observer" + " " + aso.getID()));
+		controlLabel.setIcon(LocationMapsConstructor.getLocationMapConstructor().getMapOf(aso.getID(), aso.getLat(), aso.getLng()));
+		controlPanel.add(controlLabel, cnst);
+		cnst.gridy++;
+		mainFrame.validate();
+		mainFrame.repaint();
+		
+	}
 }
