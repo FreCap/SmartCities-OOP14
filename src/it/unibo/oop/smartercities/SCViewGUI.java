@@ -77,7 +77,7 @@ public class SCViewGUI implements SCViewInterface{
 
 	@Override
 	public boolean pluginRequest(Double latitude, Double longitude) {
-		String msg = new StringBuilder().append("There is a new request for plugging a new street observer. \nIt's location is: ")
+		String msg = new StringBuilder().append("There is a new request to plug a new observer. \nIt's location is: ")
 										.append("\n   - Latitude:  " + latitude)
 										.append("\n   - Longitude: " + longitude)
 										.append("\nDo you want to plug it?")
