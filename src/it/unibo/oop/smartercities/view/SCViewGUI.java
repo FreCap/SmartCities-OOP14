@@ -1,18 +1,12 @@
 ﻿package it.unibo.oop.smartercities.view;
 
-import it.unibo.oop.googleMapsWeb.GoogleMapsWebBrowser;
 import it.unibo.oop.smartercities.control.SCViewObserverInterface;
 import it.unibo.oop.streetObservers.IStreetObserver;
-import it.unibo.oop.streetObservers.LocationMapsConstructor;
 
 import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.Toolkit;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 
 public class SCViewGUI implements SCViewInterface{
 
@@ -21,14 +15,11 @@ public class SCViewGUI implements SCViewInterface{
 	
 	private SCViewObserverInterface viewObserver;
 	
-	private JFrame mainFrame;
-	private JTabbedPane tabbedPane;
-	private JPanel panelFirstPage;
-	private JScrollPane scrollControlPanel;
-	private JPanel controlPanel;
-	private JPanel infoPanel;
+	private final JFrame mainFrame;
+	private final JTabbedPane tabbedPane;
 	
-	private GridBagConstraints cnst;
+	private final InfoPanelInterface infoPanel;
+	private final GoogleMapsWebBrowser locationPanel;
 
 	public SCViewGUI() {
 		
@@ -39,36 +30,16 @@ public class SCViewGUI implements SCViewInterface{
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setLocationRelativeTo(null);
 		
-		// creation of infoPanel
-		infoPanel = new JPanel();
-		infoPanel.setBorder(new TitledBorder("Info"));
-		infoPanel.add(new JButton("tanti bei bottoncini qui"));
-		infoPanel.add(new JTextArea("qualche info quà e la :)"));
-		
-		// creation of controlPanel
-		controlPanel = new JPanel();
-		controlPanel.setBorder(new TitledBorder("Controllers"));
-		controlPanel.setLayout(new GridBagLayout());
-		scrollControlPanel = new JScrollPane(controlPanel);
-		// vertical disposition of the element of the controlPanel
-		cnst = new GridBagConstraints () ;
-		cnst.gridy = 0;
-		cnst.insets = new Insets (5 ,5 ,5 ,5);
-		
-		// creation of the panel of the first page
-		panelFirstPage = new JPanel(new BorderLayout());
-		panelFirstPage.add(scrollControlPanel, BorderLayout.CENTER);
-		panelFirstPage.add(infoPanel, BorderLayout.EAST);
-		
 		// creation of tabbedPanel
 		tabbedPane = new JTabbedPane();
-		tabbedPane.add("first panel", panelFirstPage);
-		tabbedPane.add("second panel", new GoogleMapsWebBrowser());
+		infoPanel = new InfoPanel();
+		tabbedPane.add(" Informations ", infoPanel.getPanel());
+		locationPanel = new GoogleMapsWebBrowser();
+		tabbedPane.add(" Locations ", locationPanel);
 		
 		// join with mainframe
 		mainFrame.add(tabbedPane, BorderLayout.CENTER);
 		mainFrame.setVisible(true);
-
 	}
 	
 	@Override
@@ -99,19 +70,12 @@ public class SCViewGUI implements SCViewInterface{
 	}
 
 	@Override
+	public void addStreetObserver(IStreetObserver iSo) {
+		this.infoPanel.addStreetObserver(iSo);
+	}
+	
+	@Override
 	public void newPassage(int id) {
 		// TODO
-	}
-
-	@Override
-	public void addStreetObserver(IStreetObserver aso) {
-		JLabel controlLabel = new JLabel();
-		controlLabel.setBorder(new TitledBorder("Street Observer" + " " + aso.getID()));
-		controlLabel.setIcon(LocationMapsConstructor.getLocationMapConstructor().getMapOf(aso.getID(), aso.getLat(), aso.getLng()));
-		controlPanel.add(controlLabel, cnst);
-		cnst.gridy++;
-		mainFrame.validate();
-		mainFrame.repaint();
-		
 	}
 }

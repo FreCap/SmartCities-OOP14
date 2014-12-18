@@ -1,4 +1,4 @@
-package it.unibo.oop.googleMapsWeb;
+package it.unibo.oop.smartercities.view;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
@@ -7,15 +7,17 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 public class GoogleMapsWebBrowser extends JFXPanel {
+	
 	private static final long serialVersionUID = 6541846132164168451L;
 	private WebView webView;
 	private WebEngine webEngine;
 	
 	public GoogleMapsWebBrowser() {
-		Platform.runLater( ()->{initialiseJavaFXScene();} );
+		super();
+		Platform.runLater( ()->{googleMapsScene();} );
 	}
 	
-	private void initialiseJavaFXScene() {
+	private void googleMapsScene() {
 		webView = new WebView();
 		webEngine = webView.getEngine();
 		webEngine.load("https://www.google.it/maps");
