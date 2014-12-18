@@ -7,6 +7,10 @@ public class StreetObserver implements IStreetObserver{
 	private final Double LATITUDE;
 	private final Double LONGITUDE;
 	
+	// TODO
+	//private final dataCreazione
+	//private final dataUltimoAvvistamento
+	
 	public StreetObserver(int id, Double lat, Double lng) {
 		this.id = id;
 		this.LATITUDE = lat;
