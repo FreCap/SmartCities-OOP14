@@ -22,6 +22,7 @@ public class URLencoder {
 	private String maptype;
 	private String markerColor;
 	
+	// TODO fallo privato tanto è inutile
 	public URLencoder () {
 		this.zoom = DEFAULT_ZOOM;
 		this.sizeWidth = DEFAULT_WIDTH;
@@ -30,9 +31,8 @@ public class URLencoder {
 		this.markerColor = DEFAULT_MARKERCOLOR;
 	}
 	
-	public URL getURLfor(int labelID, double lat, double lng){
+	public URL getURLfor(int labelID, double lat, double lng) {
 		try {
-			//TODO usare url builder
 			return new URL( new StringBuilder()
 								.append(STATIC_MAP_REQUEST_PREFIX)
 								.append("?center=" + lat + "," + lng)
@@ -41,7 +41,8 @@ public class URLencoder {
 								.append("&maptype=" + maptype)
 								.append("&markers=color:" + markerColor + "%7Clabel:" + labelID + "%7C" + lat + "," + lng)
 								.toString());
-		} catch (MalformedURLException e) {
+		}
+		catch(MalformedURLException e) {
 			//TODO fa qualcosa per questa povera eccezione
 			e.printStackTrace();
 			return null;

@@ -1,4 +1,4 @@
-package it.unibo.oop.smartercities;
+package it.unibo.oop.smartercities.model;
 
 import it.unibo.oop.stolenCars.NumberPlate;
 import it.unibo.oop.streetObservers.IStreetObserver;

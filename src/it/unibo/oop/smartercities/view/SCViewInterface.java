@@ -1,5 +1,6 @@
-package it.unibo.oop.smartercities;
+package it.unibo.oop.smartercities.view;
 
+import it.unibo.oop.smartercities.control.SCViewObserverInterface;
 import it.unibo.oop.streetObservers.IStreetObserver;
 
 public interface SCViewInterface {

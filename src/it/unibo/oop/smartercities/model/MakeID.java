@@ -1,4 +1,4 @@
-package it.unibo.oop.smartercities;
+package it.unibo.oop.smartercities.model;
 
 public class MakeID {
 	private static MakeID MAKE_ID = null;
@@ -15,7 +15,7 @@ public class MakeID {
 		return MAKE_ID;
 	}
 	
-	public int getID() {
+	public synchronized  int getID() {
 		return this.count++;
 	}
 }

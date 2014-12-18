@@ -1,4 +1,4 @@
-package it.unibo.oop.smartercities;
+package it.unibo.oop.smartercities.control;
 
 import it.unibo.oop.stolenCars.NumberPlate;
 
