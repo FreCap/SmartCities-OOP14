@@ -1,4 +1,4 @@
-package it.unibo.oop.stolenCars;
+package it.unibo.oop.smartercities.datatype;
 
 public class NumberPlate {
 
@@ -9,6 +9,6 @@ public class NumberPlate {
 	}
 	
 	String get() {
-		return np.toString();
+		return np;
 	}
 }

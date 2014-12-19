@@ -2,7 +2,7 @@ package it.unibo.oop.smartercities.view;
 
 import javax.swing.JPanel;
 
-import it.unibo.oop.streetObservers.IStreetObserver;
+import it.unibo.oop.smartercities.datatype.IStreetObserver;
 
 public interface InfoPanelInterface {
 	

@@ -1,10 +1,10 @@
 package it.unibo.oop.smartercities.control;
 
+import it.unibo.oop.smartercities.datatype.IStreetObserver;
+import it.unibo.oop.smartercities.datatype.NumberPlate;
 import it.unibo.oop.smartercities.model.SCModel;
 import it.unibo.oop.smartercities.model.SCModelInterface;
 import it.unibo.oop.smartercities.view.SCViewInterface;
-import it.unibo.oop.stolenCars.NumberPlate;
-import it.unibo.oop.streetObservers.IStreetObserver;
 
 public class SCController implements SCViewObserverInterface {
 

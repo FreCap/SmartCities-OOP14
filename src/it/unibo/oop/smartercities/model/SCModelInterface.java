@@ -1,7 +1,7 @@
 package it.unibo.oop.smartercities.model;
 
-import it.unibo.oop.stolenCars.NumberPlate;
-import it.unibo.oop.streetObservers.IStreetObserver;
+import it.unibo.oop.smartercities.datatype.IStreetObserver;
+import it.unibo.oop.smartercities.datatype.NumberPlate;
 
 public interface SCModelInterface {
 

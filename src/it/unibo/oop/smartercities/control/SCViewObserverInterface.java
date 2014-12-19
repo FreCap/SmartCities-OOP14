@@ -1,6 +1,6 @@
 package it.unibo.oop.smartercities.control;
 
-import it.unibo.oop.stolenCars.NumberPlate;
+import it.unibo.oop.smartercities.datatype.NumberPlate;
 
 public interface SCViewObserverInterface {
 	

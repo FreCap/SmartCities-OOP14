@@ -1,7 +1,7 @@
 ﻿package it.unibo.oop.smartercities.view;
 
 import it.unibo.oop.smartercities.control.SCViewObserverInterface;
-import it.unibo.oop.streetObservers.IStreetObserver;
+import it.unibo.oop.smartercities.datatype.IStreetObserver;
 
 import java.awt.BorderLayout;
 import java.awt.Toolkit;

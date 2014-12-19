@@ -1,4 +1,4 @@
-package it.unibo.oop.streetObservers;
+package it.unibo.oop.smartercities.datatype;
 
 public interface IStreetObserver {
 	
@@ -6,7 +6,5 @@ public interface IStreetObserver {
 	
 	int getID();
 	
-	Double getLat();
-	
-	Double getLng();
+	Coordinates getPosition();
 }

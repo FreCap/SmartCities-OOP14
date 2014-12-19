@@ -3,9 +3,9 @@ package it.unibo.oop.smartercities.model;
 import java.util.AbstractList;
 import java.util.LinkedList;
 
-import it.unibo.oop.stolenCars.NumberPlate;
-import it.unibo.oop.streetObservers.IStreetObserver;
-import it.unibo.oop.streetObservers.StreetObserver;
+import it.unibo.oop.smartercities.datatype.IStreetObserver;
+import it.unibo.oop.smartercities.datatype.NumberPlate;
+import it.unibo.oop.smartercities.datatype.StreetObserver;
 
 public class SCModel implements SCModelInterface{
 	
