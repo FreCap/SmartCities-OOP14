@@ -13,11 +13,11 @@ import javax.swing.*;
  * PATTERN SINGLETON!!
  * 
  */
-public class LocationMapsConstructor {
+public class LocationMapsConstructor extends Thread{
 	
 	private static LocationMapsConstructor SOL_MAP = null;
 	
-	private static final String DEFAULT_ICON_PATH = "res/images/somethingWrongHappened.png";
+	private static final String DEFAULT_ICON_PATH = "/images/somethingWrongHappened.png";
 	private Optional<ImageIcon> controlIcon;
 	
 	private LocationMapsConstructor () {
@@ -37,7 +37,7 @@ public class LocationMapsConstructor {
 			return controlIcon.get();
 		}
 		else{
-			return new ImageIcon(DEFAULT_ICON_PATH);
+			return new ImageIcon(LocationMapsConstructor.class.getResource(DEFAULT_ICON_PATH));
 		}
 	}
 }
