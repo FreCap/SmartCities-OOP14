@@ -3,7 +3,7 @@ package it.unibo.oop.smartercities.model;
 import it.unibo.oop.smartercities.datatype.IStreetObserver;
 import it.unibo.oop.smartercities.datatype.NumberPlate;
 
-public interface SCModelInterface {
+public interface ModelInterface {
 
 	// aggiunta di un nuovo street observer
 	IStreetObserver addNewStreetObserver(Double latitude, Double longitude);

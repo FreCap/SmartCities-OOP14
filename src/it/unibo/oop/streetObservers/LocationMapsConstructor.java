@@ -23,7 +23,7 @@ public class LocationMapsConstructor {
 	private LocationMapsConstructor () {
 	}
 	
-	public static synchronized LocationMapsConstructor getLocationMapConstructor() {
+	public static synchronized LocationMapsConstructor getLMC() {
 		if(SOL_MAP == null){
 			SOL_MAP = new LocationMapsConstructor();
 		}

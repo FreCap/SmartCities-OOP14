@@ -2,7 +2,7 @@ package it.unibo.oop.smartercities.control;
 
 import it.unibo.oop.smartercities.datatype.NumberPlate;
 
-public interface SCViewObserverInterface {
+public interface ControllerInterface {
 	
 	// richiesta della view di avere info su un osservatore(id)
 	Object getStreetObserverInfo(int id);
@@ -12,7 +12,7 @@ public interface SCViewObserverInterface {
 	
 	// funzione per la richiesta di plugin di un nuovo street observer
 	// valore di ritorno: true se è stato accettato, false altrimenti
-	boolean pluginRequest(Double latitude, Double longitude);
+	void pluginRequest(Double latitude, Double longitude);
 	
 	// quando si verifica un nuovo passaggio sotto uno street observer, invia info
 	void newPassage(int id, Object informations);

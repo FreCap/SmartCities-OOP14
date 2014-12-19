@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -55,10 +56,11 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	}
 	
 	@Override
-	public void addStreetObserver(IStreetObserver iSo) {
+	public void addStreetObserver(IStreetObserver so) {
 		JLabel controlLabel = new JLabel();
-		controlLabel.setBorder(new TitledBorder("Street Observer" + " " + iSo.getID()));
-		controlLabel.setIcon(LocationMapsConstructor.getLocationMapConstructor().getMapOf(iSo.getID(), iSo.getPosition().getLatitude(), iSo.getPosition().getLongitude()));
+		controlLabel.setBorder(new TitledBorder("Street Observer" + " " + so.getID()));
+		ImageIcon ii = LocationMapsConstructor.getLMC().getMapOf(so.getID(), so.getPosition().getLatitude(), so.getPosition().getLongitude());
+		controlLabel.setIcon(ii);
 		controlPanel.add(controlLabel, cnst);
 		cnst.gridy++;
 	}

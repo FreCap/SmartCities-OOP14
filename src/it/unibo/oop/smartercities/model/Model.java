@@ -7,11 +7,11 @@ import it.unibo.oop.smartercities.datatype.IStreetObserver;
 import it.unibo.oop.smartercities.datatype.NumberPlate;
 import it.unibo.oop.smartercities.datatype.StreetObserver;
 
-public class SCModel implements SCModelInterface{
+public class Model implements ModelInterface{
 	
 	private AbstractList<IStreetObserver> soList = new LinkedList<>();
 
-	public SCModel() {
+	public Model() {
 		super();
 	}
 	

@@ -1,6 +1,7 @@
 ﻿package it.unibo.oop.smartercities.view;
 
-import it.unibo.oop.smartercities.control.SCViewObserverInterface;
+import it.unibo.oop.smartercities.control.ControllerInterface;
+import it.unibo.oop.smartercities.datatype.Coordinates;
 import it.unibo.oop.smartercities.datatype.IStreetObserver;
 
 import java.awt.BorderLayout;
@@ -8,12 +9,12 @@ import java.awt.Toolkit;
 
 import javax.swing.*;
 
-public class SCViewGUI implements SCViewInterface{
+public class ViewGUI implements ViewInterface{
 
 	private static final int DEFAULT_WIDTH = (Toolkit.getDefaultToolkit().getScreenSize().width/3)*2;
 	private static final int DEFAULT_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().width/2;
 	
-	private SCViewObserverInterface viewObserver;
+	private ControllerInterface viewObserver;
 	
 	private final JFrame mainFrame;
 	private final JTabbedPane tabbedPane;
@@ -21,7 +22,7 @@ public class SCViewGUI implements SCViewInterface{
 	private final InfoPanelInterface infoPanel;
 	private final GoogleMapsWebBrowser locationPanel;
 
-	public SCViewGUI() {
+	public ViewGUI() {
 		
 		// creation of mainFrame
 		mainFrame = new JFrame("Smarter Cities");
@@ -43,30 +44,24 @@ public class SCViewGUI implements SCViewInterface{
 	}
 	
 	@Override
-	public void attachViewObserver(final SCViewObserverInterface viewObserver) {
+	public void attachViewObserver(final ControllerInterface viewObserver) {
 		this.viewObserver = viewObserver;
 	}
 
 	@Override
-	public boolean pluginRequest(Double latitude, Double longitude) {
-		String msg = new StringBuilder().append("There is a new request to plug a new observer. \nIt's location is: ")
-										.append("\n   - Latitude:  " + latitude)
-										.append("\n   - Longitude: " + longitude)
-										.append("\nDo you want to plug it?")
+	public void newPlug(Coordinates c) {
+		String msg = new StringBuilder().append("A new Street Observer is been plugged.\n It's positions is: ")
+										.append("\n   - Latitude:  " + c.getLatitude())
+										.append("\n   - Longitude: " + c.getLongitude())
 										.toString();
 		
-		Integer choice = JOptionPane.showOptionDialog(null, 
-													  msg,
-													  "New plugging request",
-													  JOptionPane.YES_NO_OPTION, 
-													  JOptionPane.QUESTION_MESSAGE, 
-													  null, null, null);
-		
-		if(choice.equals(JOptionPane.YES_OPTION)) {
-			return true;
-		} else {
-			return false;
-		}
+		// TODO su differente thread
+		JOptionPane.showOptionDialog(null, 
+									 msg,
+									 "Plug info",
+									 JOptionPane.CLOSED_OPTION, 
+									 JOptionPane.INFORMATION_MESSAGE, 
+									 null, null, null);
 	}
 
 	@Override

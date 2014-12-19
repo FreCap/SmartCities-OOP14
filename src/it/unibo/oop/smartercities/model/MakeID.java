@@ -2,7 +2,7 @@ package it.unibo.oop.smartercities.model;
 
 public class MakeID {
 	private static MakeID MAKE_ID = null;
-	private int count;
+	private volatile int count;
 	
 	private MakeID() {
 		this.count = 0;
