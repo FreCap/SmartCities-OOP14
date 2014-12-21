@@ -21,4 +21,26 @@ public class Coordinates {
 	public double getLatitude() {
 		return latitude;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if(o instanceof Coordinates) {
+			return this.getLatitude() == ((Coordinates)o).getLatitude() && this.getLongitude() == ((Coordinates)o).getLongitude();
+		}
+		else {
+			return false;
+		}
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(latitude);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(longitude);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
 }

@@ -10,5 +10,5 @@ public interface InfoPanelInterface {
 
 	void addStreetObserver(Coordinates c);
 	
-	void notifyPassage(int id);
+	void notifyPassage(Coordinates c);
 }

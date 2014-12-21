@@ -7,6 +7,8 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -26,6 +28,8 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	private JPanel controlPanel;
 	private JScrollPane scrollControlPanel;
 	private GridBagConstraints cnst;
+	
+	private Map<Coordinates, JLabel> observersMap = new HashMap<>();
 	
 	private int nOfPluggedObservers;
 	
@@ -62,20 +66,21 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	}
 	
 	@Override
-	public void notifyPassage(int id) {
+	public void notifyPassage(Coordinates c) {
 		// TODO Auto-generated method stubS
 	}
 	
 	@Override
 	public void addStreetObserver(Coordinates c) {
-		JLabel controlLabel = new JLabel();
-		controlLabel.setBorder(new TitledBorder("Street Observer" + " " + nOfPluggedObservers));
+		JLabel newLabel = new JLabel();
+		newLabel.setBorder(new TitledBorder("Street Observer" + " " + nOfPluggedObservers));
 		
 		SwingUtilities.invokeLater(() -> {ImageIcon ii = LocationMapsConstructor.getLMC().getMapOf(nOfPluggedObservers, c.getLatitude(), c.getLongitude());
-										  controlLabel.setIcon(ii);
-										  controlPanel.add(controlLabel, cnst);
+										  newLabel.setIcon(ii);
+										  controlPanel.add(newLabel, cnst);
 										  cnst.gridy++;
 										  nOfPluggedObservers++;
+										  this.observersMap.put(c, newLabel);
 		});
 		
 		newPlug(c);
