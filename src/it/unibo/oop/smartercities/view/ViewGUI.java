@@ -2,7 +2,6 @@
 
 import it.unibo.oop.smartercities.control.ControllerInterface;
 import it.unibo.oop.smartercities.datatype.Coordinates;
-import it.unibo.oop.smartercities.datatype.IStreetObserver;
 
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
@@ -65,12 +64,12 @@ public class ViewGUI implements ViewInterface{
 	}
 
 	@Override
-	public void addStreetObserver(IStreetObserver iSo) {
-		this.infoPanel.addStreetObserver(iSo);
+	public void addStreetObserver(Coordinates c) {
+		this.infoPanel.addStreetObserver(c);
 	}
 	
 	@Override
-	public void newPassage(int id) {
+	public void newPassage(Coordinates c) {
 		// TODO
 	}
 }

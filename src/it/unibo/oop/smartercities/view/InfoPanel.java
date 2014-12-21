@@ -1,6 +1,6 @@
 package it.unibo.oop.smartercities.view;
 
-import it.unibo.oop.smartercities.datatype.IStreetObserver;
+import it.unibo.oop.smartercities.datatype.Coordinates;
 import it.unibo.oop.streetObservers.LocationMapsConstructor;
 
 import java.awt.BorderLayout;
@@ -60,10 +60,10 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	}
 	
 	@Override
-	public void addStreetObserver(IStreetObserver so) {
+	public void addStreetObserver(Coordinates c) {
 		JLabel controlLabel = new JLabel();
 		controlLabel.setBorder(new TitledBorder("Street Observer" + " " + nOfPluggedObservers));
-		ImageIcon ii = LocationMapsConstructor.getLMC().getMapOf(nOfPluggedObservers, so.getPosition().getLatitude(), so.getPosition().getLongitude());
+		ImageIcon ii = LocationMapsConstructor.getLMC().getMapOf(nOfPluggedObservers, c.getLatitude(), c.getLongitude());
 		controlLabel.setIcon(ii);
 		controlPanel.add(controlLabel, cnst);
 		cnst.gridy++;

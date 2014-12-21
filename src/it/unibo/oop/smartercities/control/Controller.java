@@ -1,7 +1,6 @@
 package it.unibo.oop.smartercities.control;
 
 import it.unibo.oop.smartercities.datatype.Coordinates;
-import it.unibo.oop.smartercities.datatype.IStreetObserver;
 import it.unibo.oop.smartercities.datatype.NumberPlate;
 import it.unibo.oop.smartercities.model.Model;
 import it.unibo.oop.smartercities.model.ModelInterface;
@@ -21,7 +20,7 @@ public class Controller implements ControllerInterface {
 	@Override
 	public Object getStreetObserverInfo(Coordinates c) {
 		// TODO
-		return scModel.takeInfoOf(c);
+		return scModel.getInfoOf(c);
 	}
 
 	@Override
@@ -32,10 +31,9 @@ public class Controller implements ControllerInterface {
 
 	@Override
 	public void pluginRequest(Coordinates c) {		
-		IStreetObserver so;
-		so = this.scModel.addNewStreetObserver(c);
-		this.scView.newPlug(so.getPosition());
-		this.scView.addStreetObserver(so);
+		this.scModel.addNewStreetObserver(c);
+		this.scView.newPlug(c);
+		this.scView.addStreetObserver(c);
 	}
 
 	@Override

@@ -2,13 +2,13 @@ package it.unibo.oop.smartercities.view;
 
 import javax.swing.JPanel;
 
-import it.unibo.oop.smartercities.datatype.IStreetObserver;
+import it.unibo.oop.smartercities.datatype.Coordinates;
 
 public interface InfoPanelInterface {
 	
 	JPanel getPanel();
 
-	void addStreetObserver(IStreetObserver iSo);
+	void addStreetObserver(Coordinates c);
 	
 	void notifyPassage(int id);
 }
