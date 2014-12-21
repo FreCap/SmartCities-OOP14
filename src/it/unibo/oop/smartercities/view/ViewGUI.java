@@ -46,23 +46,7 @@ public class ViewGUI implements ViewInterface{
 	public void attachViewObserver(final ControllerInterface viewObserver) {
 		this.viewObserver = viewObserver;
 	}
-
-	@Override
-	public void newPlug(Coordinates c) {
-		String msg = new StringBuilder().append("A new Street Observer is been plugged.\n It's positions is: ")
-										.append("\n   - Latitude:  " + c.getLatitude())
-										.append("\n   - Longitude: " + c.getLongitude())
-										.toString();
-		
-		// TODO su differente thread
-		JOptionPane.showOptionDialog(null, 
-									 msg,
-									 "Plug info",
-									 JOptionPane.CLOSED_OPTION, 
-									 JOptionPane.INFORMATION_MESSAGE, 
-									 null, null, null);
-	}
-
+	
 	@Override
 	public void addStreetObserver(Coordinates c) {
 		this.infoPanel.addStreetObserver(c);

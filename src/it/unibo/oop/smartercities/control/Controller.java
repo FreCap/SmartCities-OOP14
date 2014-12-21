@@ -32,7 +32,6 @@ public class Controller implements ControllerInterface {
 	@Override
 	public void pluginRequest(Coordinates c) {		
 		this.scModel.addNewStreetObserver(c);
-		this.scView.newPlug(c);
 		this.scView.addStreetObserver(c);
 	}
 

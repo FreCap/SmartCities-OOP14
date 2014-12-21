@@ -5,8 +5,6 @@ import it.unibo.oop.smartercities.datatype.Coordinates;
 
 public interface ViewInterface {
 	
-	void newPlug(Coordinates c);
-	
 	void addStreetObserver(Coordinates c);
 	
 	// quando si verifica un nuovo passaggio sotto uno street observer, viene segnalato

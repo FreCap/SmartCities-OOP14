@@ -10,9 +10,11 @@ import java.awt.Insets;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 public class InfoPanel extends JPanel implements InfoPanelInterface {
@@ -60,18 +62,37 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	}
 	
 	@Override
+	public void notifyPassage(int id) {
+		// TODO Auto-generated method stubS
+	}
+	
+	@Override
 	public void addStreetObserver(Coordinates c) {
 		JLabel controlLabel = new JLabel();
 		controlLabel.setBorder(new TitledBorder("Street Observer" + " " + nOfPluggedObservers));
-		ImageIcon ii = LocationMapsConstructor.getLMC().getMapOf(nOfPluggedObservers, c.getLatitude(), c.getLongitude());
-		controlLabel.setIcon(ii);
-		controlPanel.add(controlLabel, cnst);
-		cnst.gridy++;
-		nOfPluggedObservers++;
+		
+		SwingUtilities.invokeLater(() -> {ImageIcon ii = LocationMapsConstructor.getLMC().getMapOf(nOfPluggedObservers, c.getLatitude(), c.getLongitude());
+										  controlLabel.setIcon(ii);
+										  controlPanel.add(controlLabel, cnst);
+										  cnst.gridy++;
+										  nOfPluggedObservers++;
+		});
+		
+		newPlug(c);
 	}
-
-	@Override
-	public void notifyPassage(int id) {
-		// TODO Auto-generated method stubS
+	
+	private void newPlug(Coordinates c) {
+		String msg = new StringBuilder().append("A new Street Observer is been plugged.\n It's positions is: ")
+										.append("\n   - Latitude:  " + c.getLatitude())
+										.append("\n   - Longitude: " + c.getLongitude())
+										.toString();
+		
+		SwingUtilities.invokeLater(() -> {JOptionPane.showOptionDialog(null, 
+				 													   msg,
+				 													   "Plug info",
+				 													   JOptionPane.CLOSED_OPTION, 
+				 													   JOptionPane.INFORMATION_MESSAGE, 
+				 													   null, null, null);
+		});
 	}
 }
