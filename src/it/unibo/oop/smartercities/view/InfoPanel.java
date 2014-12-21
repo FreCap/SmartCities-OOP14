@@ -25,6 +25,8 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	private JScrollPane scrollControlPanel;
 	private GridBagConstraints cnst;
 	
+	private int nOfPluggedObservers;
+	
 	public InfoPanel() {
 		super();
 		
@@ -48,6 +50,8 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 		this.setLayout(new BorderLayout());
 		this.add(scrollControlPanel, BorderLayout.CENTER);
 		this.add(infoPanel, BorderLayout.EAST);
+		
+		nOfPluggedObservers = 0;
 	}
 
 	@Override
@@ -58,11 +62,12 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	@Override
 	public void addStreetObserver(IStreetObserver so) {
 		JLabel controlLabel = new JLabel();
-		controlLabel.setBorder(new TitledBorder("Street Observer" + " " + so.getID()));
-		ImageIcon ii = LocationMapsConstructor.getLMC().getMapOf(so.getID(), so.getPosition().getLatitude(), so.getPosition().getLongitude());
+		controlLabel.setBorder(new TitledBorder("Street Observer" + " " + nOfPluggedObservers));
+		ImageIcon ii = LocationMapsConstructor.getLMC().getMapOf(nOfPluggedObservers, so.getPosition().getLatitude(), so.getPosition().getLongitude());
 		controlLabel.setIcon(ii);
 		controlPanel.add(controlLabel, cnst);
 		cnst.gridy++;
+		nOfPluggedObservers++;
 	}
 
 	@Override

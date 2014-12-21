@@ -1,5 +1,6 @@
 package it.unibo.oop.smartercities.control;
 
+import it.unibo.oop.smartercities.datatype.Coordinates;
 import it.unibo.oop.smartercities.datatype.IStreetObserver;
 import it.unibo.oop.smartercities.datatype.NumberPlate;
 import it.unibo.oop.smartercities.model.Model;
@@ -18,9 +19,9 @@ public class Controller implements ControllerInterface {
 	}
 	
 	@Override
-	public Object getStreetObserverInfo(int id) {
+	public Object getStreetObserverInfo(Coordinates c) {
 		// TODO
-		return scModel.takeInfoOf(id);
+		return scModel.takeInfoOf(c);
 	}
 
 	@Override
@@ -30,9 +31,9 @@ public class Controller implements ControllerInterface {
 	}
 
 	@Override
-	public void pluginRequest(Double latitude, Double longitude) {		
+	public void pluginRequest(Coordinates c) {		
 		IStreetObserver so;
-		so = this.scModel.addNewStreetObserver(latitude, longitude);
+		so = this.scModel.addNewStreetObserver(c);
 		this.scView.newPlug(so.getPosition());
 		this.scView.addStreetObserver(so);
 	}
