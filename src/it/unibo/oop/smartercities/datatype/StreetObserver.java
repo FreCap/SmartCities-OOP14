@@ -1,16 +1,23 @@
 package it.unibo.oop.smartercities.datatype;
 
-public class StreetObserver implements IStreetObserver{
-	
-	private final Coordinates coordinates;
-	
-	// TODO si può implementare come classe generica!
+import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
+
+public class StreetObserver implements IStreetObserver {
+
+	private Coordinates coordinates;
+
 	public StreetObserver(Coordinates c) {
 		this.coordinates = c;
 	}
-	
+
 	@Override
-	public Coordinates getPosition() {
-		return new Coordinates(this.coordinates);
+	public Coordinates getCoordinates() {
+
+		return coordinates;
+	}
+
+	@Override
+	public void setCoordinates(Coordinates coordinates) {
+		this.coordinates = coordinates;
 	}
 }

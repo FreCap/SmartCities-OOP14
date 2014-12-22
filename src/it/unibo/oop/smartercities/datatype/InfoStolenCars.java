@@ -1,23 +1,38 @@
 package it.unibo.oop.smartercities.datatype;
 
+import it.unibo.oop.smartercities.datatype.I.IStolenCar;
+
 import java.util.Date;
 
 // TODO
 // pacchetto in informazioni che il database restituisce alla gui quando
 // la gui chiede al database delle info su una determinata targa
-public class InfoStolenCars {
-	
+public class InfoStolenCars implements IStolenCar {
+
 	private LicensePlate licensePlate;
-	private Date dataRubata;
-	
-	public InfoStolenCars(){
-		//TODO
+	private Date dataInserimento;
+
+	public InfoStolenCars() {
+		// TODO
 	}
-	
-	public Date getDataRubata() {
-		return dataRubata;
-	}
+
+	@Override
 	public LicensePlate getLicensePlate() {
 		return licensePlate;
+	}
+
+	@Override
+	public void setLicensePlate(LicensePlate licensePlate) {
+		this.licensePlate = licensePlate;
+	}
+
+	@Override
+	public Date getDataInserimento() {
+		return dataInserimento;
+	}
+
+	@Override
+	public void setDataInserimento(Date dataInserimento) {
+		this.dataInserimento = dataInserimento;
 	}
 }

@@ -1,16 +1,16 @@
 package it.unibo.oop.smartercities.model;
 
-import java.util.AbstractList;
-import java.util.LinkedList;
-import java.util.List;
-
 import it.unibo.oop.smartercities.datatype.Coordinates;
-import it.unibo.oop.smartercities.datatype.IStreetObserver;
 import it.unibo.oop.smartercities.datatype.InfoSighting;
 import it.unibo.oop.smartercities.datatype.InfoStolenCars;
 import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.LicensePlate;
 import it.unibo.oop.smartercities.datatype.StreetObserver;
+import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
+
+import java.util.AbstractList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Model implements ModelInterface {
 	

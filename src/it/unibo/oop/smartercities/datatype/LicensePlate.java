@@ -1,14 +1,18 @@
 package it.unibo.oop.smartercities.datatype;
 
-public class LicensePlate {
+public class LicensePlate implements java.io.Serializable {
 
-	private final String np;
-	
-	public LicensePlate(String np){
-		this.np = np;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1683170909211988083L;
+	private final String licensePlate;
+
+	public LicensePlate(String np) {
+		this.licensePlate = np;
 	}
-	
+
 	String get() {
-		return np;
+		return licensePlate;
 	}
 }

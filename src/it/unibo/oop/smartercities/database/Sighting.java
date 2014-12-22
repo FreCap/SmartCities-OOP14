@@ -1,5 +1,8 @@
 package it.unibo.oop.smartercities.database;
 
+import it.unibo.oop.smartercities.datatype.I.ISighting;
+import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
+
 import java.util.Date;
 
 import com.j256.ormlite.field.DataType;
@@ -7,7 +10,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "Sighting")
-public class Sighting {
+public class Sighting implements ISighting {
 
 	@DatabaseField(generatedId = true)
 	private int id;
@@ -16,7 +19,7 @@ public class Sighting {
 	private StreetObserver streetObserver;
 
 	@DatabaseField(canBeNull = false, dataType = DataType.DATE_LONG)
-	private Date data;
+	private Date date;
 
 	@DatabaseField(canBeNull = false)
 	private String plateLicense;
@@ -43,12 +46,16 @@ public class Sighting {
 		this.streetObserver = streetObserver;
 	}
 
-	public Date getData() {
-		return data;
+	public void setStreetObserver(IStreetObserver streetObserver) {
+		// TODO
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public String getPlateLicense() {
