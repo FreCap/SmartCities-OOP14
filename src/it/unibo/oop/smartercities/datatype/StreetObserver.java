@@ -9,15 +9,13 @@ public class StreetObserver implements IStreetObserver {
 	public StreetObserver(Coordinates c) {
 		this.coordinates = c;
 	}
-
-	@Override
-	public Coordinates getCoordinates() {
-
-		return coordinates;
+	
+	public StreetObserver(IStreetObserver iso) {
+		this(iso.getCoordinates());
 	}
 
 	@Override
-	public void setCoordinates(Coordinates coordinates) {
-		this.coordinates = coordinates;
+	public Coordinates getCoordinates() {
+		return this.coordinates;
 	}
 }
