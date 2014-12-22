@@ -10,32 +10,36 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "StolenCar")
 public class StolenCar implements IStolenCar {
+	
 	public static final String LICENSEPLATE_FIELD_NAME = "licensePlate";
-	public static final String DATAINSERIMENTO_FIELD_NAME = "dataInserimento";
+	public static final String INSERTIONDATE_FIELD_NAME = "insertionDate";
 
     @DatabaseField(columnName = LICENSEPLATE_FIELD_NAME,id = true)
     private LicensePlate licensePlate;
 
-	@DatabaseField(columnName = DATAINSERIMENTO_FIELD_NAME, canBeNull = false)
-	private Date dataInserimento;
+	@DatabaseField(columnName = INSERTIONDATE_FIELD_NAME, canBeNull = false)
+	private Date insertionDate;
 	
     StolenCar() {
     }
 
+    @Override
 	public LicensePlate getLicensePlate() {
 		return licensePlate;
 	}
 
+    @Override
 	public void setLicensePlate(LicensePlate licensePlate) {
 		this.licensePlate = licensePlate;
 	}
 
-	public Date getDataInserimento() {
-		return dataInserimento;
+    @Override
+	public Date getInsertionDate() {
+		return insertionDate;
 	}
 
-	public void setDataInserimento(Date dataInserimento) {
-		this.dataInserimento = dataInserimento;
+    @Override
+	public void setInsertionDate(Date insertionDate) {
+		this.insertionDate = insertionDate;
 	}
-      
 }

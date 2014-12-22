@@ -12,9 +12,9 @@ public interface ISighting {
 
 	public void setDate(Date date);
 
-	public String getPlateLicense();
+	public String getLicensePlate();
 
-	public void setPlateLicense(String plateLicense);
+	public void setLicensePlate(String licensePlate);
 
 	public Float getSpeed();
 

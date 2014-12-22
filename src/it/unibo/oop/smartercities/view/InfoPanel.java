@@ -38,6 +38,7 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 		//creation of infoPanel
 		infoPanel = new JPanel();
 		infoPanel.setBorder(new TitledBorder("Info"));
+		infoPanel.setLayout(new BorderLayout());
 		infoPanel.add(new JTextArea("QUI CI METTIAMO TUTTE LE NOSTRE BELLISSIME INFORMAZIONI"));
 		
 		// creation of controlPanel

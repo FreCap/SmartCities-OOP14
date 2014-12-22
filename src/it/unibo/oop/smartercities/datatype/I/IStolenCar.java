@@ -11,8 +11,8 @@ public interface IStolenCar {
 
 	public void setLicensePlate(LicensePlate licensePlate);
 
-	public Date getDataInserimento();
+	public Date getInsertionDate();
 
-	public void setDataInserimento(Date dataInserimento);
+	public void setInsertionDate(Date insertionDate);
 
 }

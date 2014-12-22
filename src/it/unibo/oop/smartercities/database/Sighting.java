@@ -16,13 +16,13 @@ public class Sighting implements ISighting {
 	private int id;
 
 	@DatabaseField(canBeNull = false, foreign = true)
-	private StreetObserver streetObserver;
+	private IStreetObserver streetObserver;
 
 	@DatabaseField(canBeNull = false, dataType = DataType.DATE_LONG)
 	private Date date;
 
 	@DatabaseField(canBeNull = false)
-	private String plateLicense;
+	private String licensePlate;
 
 	@DatabaseField(canBeNull = false)
 	private Float speed;
@@ -37,41 +37,44 @@ public class Sighting implements ISighting {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public StreetObserver getStreetObserver() {
+	
+	@Override
+	public IStreetObserver getStreetObserver() {
 		return streetObserver;
 	}
 
-	public void setStreetObserver(StreetObserver streetObserver) {
+	@Override
+	public void setStreetObserver(IStreetObserver streetObserver) {
 		this.streetObserver = streetObserver;
 	}
-
-	public void setStreetObserver(IStreetObserver streetObserver) {
-		// TODO
-	}
-
+	
+	@Override
 	public Date getDate() {
 		return date;
 	}
-
+	
+	@Override
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
-	public String getPlateLicense() {
-		return plateLicense;
+	
+	@Override
+	public String getLicensePlate() {
+		return licensePlate;
 	}
-
-	public void setPlateLicense(String plateLicense) {
-		this.plateLicense = plateLicense;
+	
+	@Override
+	public void setLicensePlate(String plateLicense) {
+		this.licensePlate = plateLicense;
 	}
-
+	
+	@Override
 	public Float getSpeed() {
 		return speed;
 	}
-
+	
+	@Override
 	public void setSpeed(Float speed) {
 		this.speed = speed;
 	}
-
 }

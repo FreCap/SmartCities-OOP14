@@ -27,12 +27,12 @@ public class InfoStolenCars implements IStolenCar {
 	}
 
 	@Override
-	public Date getDataInserimento() {
+	public Date getInsertionDate() {
 		return dataInserimento;
 	}
 
 	@Override
-	public void setDataInserimento(Date dataInserimento) {
+	public void setInsertionDate(Date dataInserimento) {
 		this.dataInserimento = dataInserimento;
 	}
 }

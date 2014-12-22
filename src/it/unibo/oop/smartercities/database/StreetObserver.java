@@ -8,6 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "StreetObserver")
 public class StreetObserver implements IStreetObserver{
+	
     @DatabaseField(id = true)
     private Coordinates coordinates;
     
@@ -15,7 +16,7 @@ public class StreetObserver implements IStreetObserver{
     }
 
 	public Coordinates getCoordinates() {
-		return coordinates;
+		return this.coordinates;
 	}
 
 	public void setCoordinates(Coordinates coordinates) {

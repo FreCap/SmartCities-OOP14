@@ -34,11 +34,11 @@ public class InfoSighting implements ISighting {
 		this.date = date;
 	}
 
-	public String getPlateLicense() {
+	public String getLicensePlate() {
 		return plateLicense;
 	}
 
-	public void setPlateLicense(String plateLicense) {
+	public void setLicensePlate(String plateLicense) {
 		this.plateLicense = plateLicense;
 	}
 
