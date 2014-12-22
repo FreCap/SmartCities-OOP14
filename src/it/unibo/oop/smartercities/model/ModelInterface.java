@@ -5,7 +5,7 @@ import java.util.List;
 import it.unibo.oop.smartercities.datatype.Coordinates;
 import it.unibo.oop.smartercities.datatype.InfoStolenCars;
 import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
-import it.unibo.oop.smartercities.datatype.PlateLicense;
+import it.unibo.oop.smartercities.datatype.LicensePlate;
 import it.unibo.oop.smartercities.datatype.InfoSighting;
 
 public interface ModelInterface {
@@ -20,7 +20,7 @@ public interface ModelInterface {
 	InfoStreetObserver getInfoOf(Coordinates c);
 	
 	// verifica se un auto è rubata
-	InfoStolenCars verifyStolenCar(PlateLicense lp);
+	InfoStolenCars verifyStolenCar(LicensePlate lp);
 
 	// resituisce una lista di macchine rubate
 	List<Object> getStolenCarsList();

@@ -1,10 +1,10 @@
 package it.unibo.oop.smartercities.datatype;
 
-public class PlateLicense {
+public class LicensePlate {
 
 	private final String np;
 	
-	public PlateLicense(String np){
+	public LicensePlate(String np){
 		this.np = np;
 	}
 	

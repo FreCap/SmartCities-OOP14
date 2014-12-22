@@ -2,7 +2,7 @@ package it.unibo.oop.smartercities.control;
 
 import it.unibo.oop.smartercities.datatype.Coordinates;
 import it.unibo.oop.smartercities.datatype.InfoSighting;
-import it.unibo.oop.smartercities.datatype.PlateLicense;
+import it.unibo.oop.smartercities.datatype.LicensePlate;
 import it.unibo.oop.smartercities.model.Model;
 import it.unibo.oop.smartercities.model.ModelInterface;
 import it.unibo.oop.smartercities.view.ViewInterface;
@@ -25,7 +25,7 @@ public class Controller implements ControllerInterface {
 	}
 
 	@Override
-	public Object getStolenCarsInfo(PlateLicense np) {
+	public Object getStolenCarsInfo(LicensePlate np) {
 		// TODO
 		return null;
 	}

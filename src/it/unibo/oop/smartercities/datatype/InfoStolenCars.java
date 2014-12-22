@@ -7,7 +7,7 @@ import java.util.Date;
 // la gui chiede al database delle info su una determinata targa
 public class InfoStolenCars {
 	
-	private PlateLicense np;
+	private LicensePlate licensePlate;
 	private Date dataRubata;
 	
 	public InfoStolenCars(){
@@ -17,7 +17,7 @@ public class InfoStolenCars {
 	public Date getDataRubata() {
 		return dataRubata;
 	}
-	public PlateLicense getNp() {
-		return np;
+	public LicensePlate getLicensePlate() {
+		return licensePlate;
 	}
 }

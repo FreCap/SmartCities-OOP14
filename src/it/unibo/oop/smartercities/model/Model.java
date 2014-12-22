@@ -9,7 +9,7 @@ import it.unibo.oop.smartercities.datatype.IStreetObserver;
 import it.unibo.oop.smartercities.datatype.InfoSighting;
 import it.unibo.oop.smartercities.datatype.InfoStolenCars;
 import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
-import it.unibo.oop.smartercities.datatype.PlateLicense;
+import it.unibo.oop.smartercities.datatype.LicensePlate;
 import it.unibo.oop.smartercities.datatype.StreetObserver;
 
 public class Model implements ModelInterface {
@@ -33,7 +33,7 @@ public class Model implements ModelInterface {
 	}
 
 	@Override
-	public InfoStolenCars verifyStolenCar(PlateLicense np) {
+	public InfoStolenCars verifyStolenCar(LicensePlate np) {
 		// TODO Auto-generated method stub
 		return null;
 	}
