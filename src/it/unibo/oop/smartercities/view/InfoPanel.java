@@ -1,7 +1,7 @@
 package it.unibo.oop.smartercities.view;
 
+import it.unibo.oop.googleImages.LocationMapsConstructor;
 import it.unibo.oop.smartercities.datatype.Coordinates;
-import it.unibo.oop.streetObservers.LocationMapsConstructor;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -27,9 +26,9 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	private JPanel infoPanel;
 	private JPanel controlPanel;
 	private JScrollPane scrollControlPanel;
-	private GridBagConstraints cnst;
+	private GridBagConstraints gbc;
 	
-	private Map<Coordinates, JLabel> observersMap = new HashMap<>();
+	private Map<Coordinates, StreetObserverPanel> observersMap = new HashMap<>();
 	
 	private int nOfPluggedObservers;
 	
@@ -48,9 +47,9 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 		scrollControlPanel = new JScrollPane(controlPanel);
 		scrollControlPanel.getVerticalScrollBar().setUnitIncrement(CUSTOM_SCROLLING);
 		// vertical disposition of the element of the controlPanel
-		cnst = new GridBagConstraints() ;
-		cnst.gridy = 0;
-		cnst.insets = new Insets (5 ,5 ,5 ,5);
+		gbc = new GridBagConstraints() ;
+		gbc.gridy = 0;
+		gbc.insets = new Insets (5 ,5 ,5 ,5);
 		
 		// creation of the panel
 		this.setLayout(new BorderLayout());
@@ -59,28 +58,28 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 		
 		nOfPluggedObservers = 0;
 	}
-
-	@Override
-	public JPanel getPanel() {
-		return this;
-	}
 	
 	@Override
 	public void notifyPassage(Coordinates c) {
-		// TODO Auto-generated method stubS
+		if(observersMap.containsKey(c)) {
+			observersMap.get(c).displayPassage();
+			
+		}
+		else {
+			//TODO
+		}
 	}
 	
 	@Override
 	public void addStreetObserver(Coordinates c) {
-		JLabel newLabel = new JLabel();
-		newLabel.setBorder(new TitledBorder("Street Observer" + " " + nOfPluggedObservers));
 		
-		SwingUtilities.invokeLater(() -> {ImageIcon ii = LocationMapsConstructor.getLMC().getMapOf(nOfPluggedObservers, c.getLatitude(), c.getLongitude());
-										  newLabel.setIcon(ii);
-										  controlPanel.add(newLabel, cnst);
-										  cnst.gridy++;
-										  nOfPluggedObservers++;
-										  this.observersMap.put(c, newLabel);
+		SwingUtilities.invokeLater(() -> {
+					ImageIcon ii = LocationMapsConstructor.getLMC().getMapOf(nOfPluggedObservers, c.getLatitude(), c.getLongitude());
+					StreetObserverPanel p = new StreetObserverPanel(ii, nOfPluggedObservers);
+					controlPanel.add(p, gbc);
+					gbc.gridy++;
+					nOfPluggedObservers++;
+					this.observersMap.put(c, p);
 		});
 		
 		newPlug(c);
@@ -99,5 +98,10 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 				 													   JOptionPane.INFORMATION_MESSAGE, 
 				 													   null, null, null);
 		});
+	}
+
+	@Override
+	public JPanel getPanel() {
+		return this;
 	}
 }

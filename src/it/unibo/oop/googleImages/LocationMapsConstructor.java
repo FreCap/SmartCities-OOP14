@@ -1,4 +1,4 @@
-package it.unibo.oop.streetObservers;
+package it.unibo.oop.googleImages;
 
 import java.net.URL;
 import java.util.Optional;

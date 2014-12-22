@@ -1,7 +1,8 @@
 package it.unibo.oop.smartercities.control;
 
 import it.unibo.oop.smartercities.datatype.Coordinates;
-import it.unibo.oop.smartercities.datatype.NumberPlate;
+import it.unibo.oop.smartercities.datatype.InfoSighting;
+import it.unibo.oop.smartercities.datatype.PlateLicense;
 import it.unibo.oop.smartercities.model.Model;
 import it.unibo.oop.smartercities.model.ModelInterface;
 import it.unibo.oop.smartercities.view.ViewInterface;
@@ -24,7 +25,7 @@ public class Controller implements ControllerInterface {
 	}
 
 	@Override
-	public Object getStolenCarsInfo(NumberPlate np) {
+	public Object getStolenCarsInfo(PlateLicense np) {
 		// TODO
 		return null;
 	}
@@ -36,7 +37,8 @@ public class Controller implements ControllerInterface {
 	}
 
 	@Override
-	public void newPassage(int id, Object informations) {
-		// TODO	
+	public void newPassage(Coordinates c, InfoSighting is) {
+		this.scView.newPassage(c);
+		this.scModel.newPassage(c, is);
 	}
 }

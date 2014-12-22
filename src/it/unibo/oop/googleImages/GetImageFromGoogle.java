@@ -1,4 +1,4 @@
-package it.unibo.oop.streetObservers;
+package it.unibo.oop.googleImages;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

@@ -6,9 +6,10 @@ import java.util.List;
 
 import it.unibo.oop.smartercities.datatype.Coordinates;
 import it.unibo.oop.smartercities.datatype.IStreetObserver;
+import it.unibo.oop.smartercities.datatype.InfoSighting;
 import it.unibo.oop.smartercities.datatype.InfoStolenCars;
 import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
-import it.unibo.oop.smartercities.datatype.NumberPlate;
+import it.unibo.oop.smartercities.datatype.PlateLicense;
 import it.unibo.oop.smartercities.datatype.StreetObserver;
 
 public class Model implements ModelInterface {
@@ -32,7 +33,7 @@ public class Model implements ModelInterface {
 	}
 
 	@Override
-	public InfoStolenCars verifyStolenCar(NumberPlate np) {
+	public InfoStolenCars verifyStolenCar(PlateLicense np) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -41,6 +42,12 @@ public class Model implements ModelInterface {
 	public List<Object> getStolenCarsList() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void newPassage(Coordinates c, InfoSighting s) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	//TODO override di equals e hash

@@ -23,6 +23,14 @@ public class ViewGUI implements ViewInterface{
 
 	public ViewGUI() {
 		
+		//LOOK AND FEEL DEL SISTEMA OPERATIVO OSPITANTE
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} 
+		catch(ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
+		
 		// creation of mainFrame
 		mainFrame = new JFrame("Smarter Cities");
 		mainFrame.setLayout(new BorderLayout());
@@ -54,6 +62,6 @@ public class ViewGUI implements ViewInterface{
 	
 	@Override
 	public void newPassage(Coordinates c) {
-		// TODO
+		this.infoPanel.notifyPassage(c);
 	}
 }
