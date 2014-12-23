@@ -1,7 +1,7 @@
 package it.unibo.oop.smartercities.control;
 
 import it.unibo.oop.smartercities.datatype.Coordinates;
-import it.unibo.oop.smartercities.datatype.InfoSighting;
+import it.unibo.oop.smartercities.datatype.Sighting;
 import it.unibo.oop.smartercities.datatype.LicensePlate;
 import it.unibo.oop.smartercities.model.Model;
 import it.unibo.oop.smartercities.model.ModelInterface;
@@ -37,7 +37,7 @@ public class Controller implements ControllerInterface {
 	}
 
 	@Override
-	public void newPassage(Coordinates c, InfoSighting is) {
+	public void newPassage(Coordinates c, Sighting is) {
 		this.scView.newPassage(c);
 		this.scModel.newPassage(c, is);
 	}

@@ -1,6 +1,8 @@
 package it.unibo.oop.smartercities.database;
 
-import it.unibo.oop.smartercities.datatype.I.ISighting;
+import it.unibo.oop.smartercities.datatype.InfoSighting;
+import it.unibo.oop.smartercities.datatype.LicensePlate;
+import it.unibo.oop.smartercities.datatype.Sighting;
 import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
 import java.util.Date;
@@ -10,24 +12,31 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "Sighting")
-public class Sighting implements ISighting {
+public class SightingRow extends Sighting {
 
 	@DatabaseField(generatedId = true)
 	private int id;
 
 	@DatabaseField(canBeNull = false, foreign = true)
-	private StreetObserver streetObserver;
+	private StreetObserverRow streetObserver;
 
 	@DatabaseField(canBeNull = false, dataType = DataType.DATE_LONG)
 	private Date date;
 
 	@DatabaseField(canBeNull = false)
-	private String plateLicense;
+	private LicensePlate licensePlate;
 
 	@DatabaseField(canBeNull = false)
 	private Float speed;
 
-	Sighting() {
+	SightingRow() {
+	}
+
+	SightingRow(InfoSighting infoSighting) {
+		//TODO mettere lo streetObserver
+		this.setDate(infoSighting.getDate());
+		this.setLicensePlate(new LicensePlate(infoSighting.getLicensePlate()));
+		this.speed = infoSighting.getSpeed();
 	}
 
 	public int getId() {
@@ -38,11 +47,11 @@ public class Sighting implements ISighting {
 		this.id = id;
 	}
 
-	public StreetObserver getStreetObserver() {
+	public StreetObserverRow getStreetObserver() {
 		return streetObserver;
 	}
 
-	public void setStreetObserver(StreetObserver streetObserver) {
+	public void setStreetObserver(StreetObserverRow streetObserver) {
 		this.streetObserver = streetObserver;
 	}
 
@@ -58,12 +67,12 @@ public class Sighting implements ISighting {
 		this.date = date;
 	}
 
-	public String getPlateLicense() {
-		return plateLicense;
+	public LicensePlate getLicensePlate() {
+		return licensePlate;
 	}
 
-	public void setPlateLicense(String plateLicense) {
-		this.plateLicense = plateLicense;
+	public void setLicensePlate(LicensePlate licensePlate) {
+		this.licensePlate = licensePlate;
 	}
 
 	public Float getSpeed() {

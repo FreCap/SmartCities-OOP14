@@ -1,5 +1,7 @@
 package it.unibo.oop.smartercities.datatype.I;
 
+import it.unibo.oop.smartercities.datatype.LicensePlate;
+
 import java.util.Date;
 
 public interface ISighting {
@@ -12,9 +14,9 @@ public interface ISighting {
 
 	public void setDate(Date date);
 
-	public String getPlateLicense();
+	public LicensePlate getLicensePlate();
 
-	public void setPlateLicense(String plateLicense);
+	public void setLicensePlate(LicensePlate plateLicense);
 
 	public Float getSpeed();
 

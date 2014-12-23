@@ -6,7 +6,7 @@ import it.unibo.oop.smartercities.datatype.Coordinates;
 import it.unibo.oop.smartercities.datatype.InfoStolenCars;
 import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.LicensePlate;
-import it.unibo.oop.smartercities.datatype.InfoSighting;
+import it.unibo.oop.smartercities.datatype.Sighting;
 
 public interface ModelInterface {
 	
@@ -14,7 +14,7 @@ public interface ModelInterface {
 	void addNewStreetObserver(Coordinates c);
 	
 	// notifica di un passaggio
-	void newPassage(Coordinates c, InfoSighting s);
+	void newPassage(Coordinates c, Sighting s);
 	
 	// restituisce le info di uno street observer
 	InfoStreetObserver getInfoOf(Coordinates c);
