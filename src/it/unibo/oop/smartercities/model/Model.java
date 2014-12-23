@@ -1,7 +1,7 @@
 package it.unibo.oop.smartercities.model;
 
 import it.unibo.oop.smartercities.datatype.Coordinates;
-import it.unibo.oop.smartercities.datatype.InfoSighting;
+import it.unibo.oop.smartercities.datatype.Sighting;
 import it.unibo.oop.smartercities.datatype.InfoStolenCars;
 import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.LicensePlate;
@@ -45,7 +45,7 @@ public class Model implements ModelInterface {
 	}
 
 	@Override
-	public void newPassage(Coordinates c, InfoSighting s) {
+	public void newPassage(Coordinates c, Sighting s) {
 		// TODO Auto-generated method stub
 		
 	}

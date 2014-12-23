@@ -1,7 +1,7 @@
 package it.unibo.oop.smartercities.control;
 
 import it.unibo.oop.smartercities.datatype.Coordinates;
-import it.unibo.oop.smartercities.datatype.InfoSighting;
+import it.unibo.oop.smartercities.datatype.Sighting;
 import it.unibo.oop.smartercities.datatype.LicensePlate;
 
 public interface ControllerInterface {
@@ -17,5 +17,5 @@ public interface ControllerInterface {
 	void pluginRequest(Coordinates c);
 	
 	// quando si verifica un nuovo passaggio sotto uno street observer, invia info
-	void newPassage(Coordinates c, InfoSighting is);
+	void newPassage(Coordinates c, Sighting is);
 }

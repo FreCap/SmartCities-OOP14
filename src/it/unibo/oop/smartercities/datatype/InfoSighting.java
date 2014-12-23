@@ -1,30 +1,21 @@
 package it.unibo.oop.smartercities.datatype;
 
-import it.unibo.oop.smartercities.database.StreetObserver;
-import it.unibo.oop.smartercities.datatype.I.ISighting;
-import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
-
 import java.util.Date;
 
-// TODO
-// oggetto che viene spedito dal client verso il server, contenente tutte le info rilevate
-public class InfoSighting implements ISighting {
+/**
+ * Classe di scambio, prima di essere tradotto in Sighting
+ * @author fre
+ *
+ */
+public class InfoSighting {
 
-	private StreetObserver streetObserver;
+	private Coordinates coordinates;
 
 	private Date date;
 
-	private String plateLicense;
+	private String licensePlate;
 
 	private Float speed;
-
-	public IStreetObserver getStreetObserver() {
-		return streetObserver;
-	}
-
-	public void setStreetObserver(IStreetObserver streetObserver) {
-		this.streetObserver = (StreetObserver) streetObserver;
-	}
 
 	public Date getDate() {
 		return date;
@@ -35,11 +26,11 @@ public class InfoSighting implements ISighting {
 	}
 
 	public String getLicensePlate() {
-		return plateLicense;
+		return licensePlate;
 	}
 
-	public void setLicensePlate(String plateLicense) {
-		this.plateLicense = plateLicense;
+	public void setLicensePlate(String licensePlate) {
+		this.licensePlate = licensePlate;
 	}
 
 	public Float getSpeed() {
@@ -48,6 +39,14 @@ public class InfoSighting implements ISighting {
 
 	public void setSpeed(Float speed) {
 		this.speed = speed;
+	}
+
+	public Coordinates getCoordinates() {
+		return coordinates;
+	}
+
+	public void setCoordinates(Coordinates coordinates) {
+		this.coordinates = coordinates;
 	}
 
 }
