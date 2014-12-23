@@ -7,7 +7,7 @@ import java.util.Date;
  * @author fre
  *
  */
-public class InfoSighting {
+public class NetSighting {
 
 	private Coordinates coordinates;
 

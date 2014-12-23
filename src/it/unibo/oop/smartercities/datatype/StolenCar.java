@@ -7,12 +7,12 @@ import java.util.Date;
 // TODO
 // pacchetto in informazioni che il database restituisce alla gui quando
 // la gui chiede al database delle info su una determinata targa
-public class InfoStolenCars implements IStolenCar {
+public class StolenCar implements IStolenCar {
 
 	private LicensePlate licensePlate;
 	private Date dataInserimento;
 
-	public InfoStolenCars() {
+	public StolenCar() {
 		// TODO
 	}
 

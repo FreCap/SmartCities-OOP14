@@ -1,6 +1,6 @@
 package it.unibo.oop.smartercities.database;
 
-import it.unibo.oop.smartercities.datatype.InfoStolenCars;
+import it.unibo.oop.smartercities.datatype.StolenCar;
 import it.unibo.oop.smartercities.datatype.LicensePlate;
 
 import java.util.Date;
@@ -9,7 +9,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "StolenCar")
-public class StolenCarRow extends InfoStolenCars {
+public class StolenCarRow extends StolenCar {
 	public static final String LICENSEPLATE_FIELD_NAME = "licensePlate";
 	public static final String DATAINSERIMENTO_FIELD_NAME = "dataInserimento";
 

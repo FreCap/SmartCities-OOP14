@@ -1,6 +1,6 @@
 package it.unibo.oop.smartercities.database;
 
-import it.unibo.oop.smartercities.datatype.InfoSighting;
+import it.unibo.oop.smartercities.datatype.NetSighting;
 import it.unibo.oop.smartercities.datatype.LicensePlate;
 import it.unibo.oop.smartercities.datatype.Sighting;
 import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
@@ -32,7 +32,7 @@ public class SightingRow extends Sighting {
 	SightingRow() {
 	}
 
-	SightingRow(InfoSighting infoSighting) {
+	SightingRow(NetSighting infoSighting) {
 		//TODO mettere lo streetObserver
 		this.setDate(infoSighting.getDate());
 		this.setLicensePlate(new LicensePlate(infoSighting.getLicensePlate()));

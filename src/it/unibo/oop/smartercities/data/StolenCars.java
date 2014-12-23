@@ -3,6 +3,7 @@ package it.unibo.oop.smartercities.data;
 import it.unibo.oop.smartercities.data.I.IStolenCars;
 import it.unibo.oop.smartercities.database.Connection;
 import it.unibo.oop.smartercities.database.StolenCarRow;
+import it.unibo.oop.smartercities.datatype.StolenCar;
 import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.LicensePlate;
 
@@ -16,21 +17,21 @@ import com.j256.ormlite.stmt.QueryBuilder;
 public class StolenCars implements IStolenCars {
 
 	@Override
-	public List<InfoStreetObserver> getStolenCarsList() {
-
+	public List<StolenCar> getStolenCarsList() {
+		List<StolenCarRow> stolenCars = null;
 		Dao<StolenCarRow, Integer> stolenCarDao = Connection.getInstance()
 				.getStolenCarDao();
 		QueryBuilder<StolenCarRow, Integer> statementBuilder = stolenCarDao
 				.queryBuilder();
 		try {
-			List<StolenCarRow> stolenCars = stolenCarDao.query(statementBuilder
+			stolenCars = stolenCarDao.query(statementBuilder
 					.prepare());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// List<InfoStreetObserver> a = stolenCars;
-		// return stolenCars;
-		return null;
+		List<StolenCar> stolen = (List<StolenCar>)(List<?>)stolenCars;
+		return stolen;
+		
 	}
 
 	@Override

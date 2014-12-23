@@ -2,7 +2,7 @@ package it.unibo.oop.smartercities.model;
 
 import it.unibo.oop.smartercities.datatype.Coordinates;
 import it.unibo.oop.smartercities.datatype.Sighting;
-import it.unibo.oop.smartercities.datatype.InfoStolenCars;
+import it.unibo.oop.smartercities.datatype.StolenCar;
 import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.LicensePlate;
 import it.unibo.oop.smartercities.datatype.StreetObserver;
@@ -33,7 +33,7 @@ public class Model implements ModelInterface {
 	}
 
 	@Override
-	public InfoStolenCars verifyStolenCar(LicensePlate np) {
+	public StolenCar verifyStolenCar(LicensePlate np) {
 		// TODO Auto-generated method stub
 		return null;
 	}
