@@ -3,9 +3,8 @@ package it.unibo.oop.smartercities.data;
 import it.unibo.oop.smartercities.data.I.IStolenCars;
 import it.unibo.oop.smartercities.database.Connection;
 import it.unibo.oop.smartercities.database.StolenCarRow;
-import it.unibo.oop.smartercities.datatype.StolenCar;
-import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.LicensePlate;
+import it.unibo.oop.smartercities.datatype.StolenCar;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,17 +20,14 @@ public class StolenCars implements IStolenCars {
 		List<StolenCarRow> stolenCars = null;
 		Dao<StolenCarRow, Integer> stolenCarDao = Connection.getInstance()
 				.getStolenCarDao();
-		QueryBuilder<StolenCarRow, Integer> statementBuilder = stolenCarDao
-				.queryBuilder();
 		try {
-			stolenCars = stolenCarDao.query(statementBuilder
-					.prepare());
+			stolenCars = stolenCarDao.queryForAll();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		List<StolenCar> stolen = (List<StolenCar>)(List<?>)stolenCars;
+		List<StolenCar> stolen = (List<StolenCar>) (List<?>) stolenCars;
 		return stolen;
-		
+
 	}
 
 	@Override

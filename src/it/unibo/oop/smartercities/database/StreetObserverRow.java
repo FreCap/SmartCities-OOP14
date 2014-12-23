@@ -1,13 +1,13 @@
 package it.unibo.oop.smartercities.database;
 
 import it.unibo.oop.smartercities.datatype.Coordinates;
+import it.unibo.oop.smartercities.datatype.StreetObserver;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "StreetObserver")
-public class StreetObserverRow extends
-		it.unibo.oop.smartercities.datatype.StreetObserver {
+public class StreetObserverRow extends StreetObserver {
 
 	public StreetObserverRow(Coordinates c) {
 		super(c);

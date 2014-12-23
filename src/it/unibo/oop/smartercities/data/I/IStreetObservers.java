@@ -1,7 +1,7 @@
 package it.unibo.oop.smartercities.data.I;
 
 import it.unibo.oop.smartercities.datatype.Coordinates;
-import it.unibo.oop.smartercities.datatype.NetSighting;
+import it.unibo.oop.smartercities.datatype.PlainSighting;
 import it.unibo.oop.smartercities.datatype.Sighting;
 import it.unibo.oop.smartercities.datatype.StreetObserver;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public interface IStreetObservers {
 	public StreetObserver add(Coordinates coordinate) throws Exception;
 
-	public StreetObserver sighting(NetSighting sighting);
+	public StreetObserver sighting(PlainSighting sighting);
 
 	public List<Sighting> getSighting(StreetObserver streetObserver);
 
