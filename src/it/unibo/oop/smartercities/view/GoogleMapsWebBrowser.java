@@ -20,7 +20,8 @@ public class GoogleMapsWebBrowser extends JFXPanel {
 	private void googleMapsScene() {
 		webView = new WebView();
 		webEngine = webView.getEngine();
-		webEngine.load("https://www.google.it/maps");
+		//TODO guarda http://econym.org.uk/gmap
+		webEngine.load("http://econym.org.uk/gmap/example_plotpoints.htm?q=Cesena1@44.139625,12.235225&q=Cesena%2@44.131771,12.268767");
 		
 		Scene scene = new Scene(webView);
 		setScene(scene);
