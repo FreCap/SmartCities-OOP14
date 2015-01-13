@@ -23,6 +23,7 @@ public class ViewGUI implements ViewInterface{
 
 	public ViewGUI() {
 		
+		/*
 		//LOOK AND FEEL DEL SISTEMA OPERATIVO OSPITANTE
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -30,6 +31,7 @@ public class ViewGUI implements ViewInterface{
 		catch(ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
+		*/
 		
 		// creation of mainFrame
 		mainFrame = new JFrame("Smarter Cities");

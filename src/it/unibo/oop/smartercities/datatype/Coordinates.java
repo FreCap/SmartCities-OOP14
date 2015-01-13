@@ -1,46 +1,46 @@
 package it.unibo.oop.smartercities.datatype;
 
-public class Coordinates {
+public class Coordinates <X extends Number>{
 	
-	private final double latitude;
-	private final double longitude;
+	private final X latitude;
+	private final X longitude;
 	
-	public Coordinates(double latitude, double longitude) {
-		this.latitude = latitude;
-		this.longitude = longitude;
+	public Coordinates(X number, X number2) {
+		this.latitude = number;
+		this.longitude = number2;
 	}
 	
-	public Coordinates(Coordinates coord) {
+	public Coordinates(Coordinates<X> coord) {
 		this(coord.getLatitude(), coord.getLongitude());
 	}
 
-	public double getLongitude() {
+	public X getLongitude() {
 		return longitude;
 	}
 
-	public double getLatitude() {
+	public X getLatitude() {
 		return latitude;
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if(o instanceof Coordinates) {
-			return this.getLatitude() == ((Coordinates)o).getLatitude() && this.getLongitude() == ((Coordinates)o).getLongitude();
-		}
-		else {
-			return false;
-		}
-	}
-	
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(latitude);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(longitude);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result
+				+ ((latitude == null) ? 0 : latitude.hashCode());
+		result = prime * result
+				+ ((longitude == null) ? 0 : longitude.hashCode());
 		return result;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Coordinates<?>){
+			Coordinates<?> other = (Coordinates<?>)obj;
+			return this.latitude == other.getLongitude() && 
+					this.longitude == other.getLongitude();
+		}
+		return false;
+	}
+
 }

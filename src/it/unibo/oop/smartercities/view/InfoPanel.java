@@ -28,7 +28,7 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	private JScrollPane scrollControlPanel;
 	private GridBagConstraints gbc;
 	
-	private Map<Coordinates, StreetObserverPanel> observersMap = new HashMap<>();
+	private Map<Coordinates<Double>, StreetObserverPanel> observersMap = new HashMap<>();
 	
 	private int nOfPluggedObservers;
 	
@@ -61,7 +61,7 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	}
 	
 	@Override
-	public void notifyPassage(Coordinates c) {
+	public void notifyPassage(Coordinates<Double> c) {
 		if(observersMap.containsKey(c)) {
 			observersMap.get(c).displayPassage();
 			
@@ -72,7 +72,7 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	}
 	
 	@Override
-	public void addStreetObserver(Coordinates c) {
+	public void addStreetObserver(Coordinates<Double> c) {
 		
 		SwingUtilities.invokeLater(() -> {
 					ImageIcon ii = LocationMapsConstructor.getLMC().getMapOf(nOfPluggedObservers, c.getLatitude(), c.getLongitude());
@@ -86,7 +86,7 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 		newPlug(c);
 	}
 	
-	private void newPlug(Coordinates c) {
+	private void newPlug(Coordinates<Double> c) {
 		String msg = new StringBuilder().append("A new Street Observer is been plugged.\n It's positions is: ")
 										.append("\n   - Latitude:  " + c.getLatitude())
 										.append("\n   - Longitude: " + c.getLongitude())

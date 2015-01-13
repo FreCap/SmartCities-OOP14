@@ -8,7 +8,7 @@ public interface InfoPanelInterface {
 	
 	JPanel getPanel();
 
-	void addStreetObserver(Coordinates c);
+	void addStreetObserver(Coordinates<Double> c);
 	
-	void notifyPassage(Coordinates c);
+	void notifyPassage(Coordinates<Double> c);
 }
