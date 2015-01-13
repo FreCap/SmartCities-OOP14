@@ -1,5 +1,7 @@
 package it.unibo.oop.smartercities.view;
 
+import it.unibo.oop.smartercities.datatype.Coordinates;
+
 import java.awt.BorderLayout;
 
 import javax.swing.ImageIcon;
@@ -19,15 +21,16 @@ public class StreetObserverPanel extends JPanel{
 	private final JLabel mapLabel;
 	private final JLabel passageLabel;
 	
-	public StreetObserverPanel(ImageIcon ii, int n) {
+	public StreetObserverPanel(Coordinates<Double> c, int id) {
 		this.setLayout(new BorderLayout());
-		this.setBorder(new TitledBorder("Street Observer" + " " + n));
+		this.setBorder(new TitledBorder("Street Observer" + " " + id));
 		
-		mapLabel = new JLabel();
-		mapLabel.setIcon(ii);
+		this.mapLabel = new JLabel();
+		ImageIcon ii = LocationMapsConstructor.getLMC().getMapOf(id, c.getLatitude(), c.getLongitude());
+		this.mapLabel.setIcon(ii);
 		
-		passageLabel = new JLabel();
-		setButtonOff();
+		this.passageLabel = new JLabel();
+		this.setButtonOff();
 		
 		this.add(mapLabel);
 		this.add(passageLabel, BorderLayout.EAST);

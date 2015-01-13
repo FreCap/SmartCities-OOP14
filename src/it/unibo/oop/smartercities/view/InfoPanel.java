@@ -1,6 +1,5 @@
 package it.unibo.oop.smartercities.view;
 
-import it.unibo.oop.googleImages.LocationMapsConstructor;
 import it.unibo.oop.smartercities.datatype.Coordinates;
 
 import java.awt.BorderLayout;
@@ -10,7 +9,6 @@ import java.awt.Insets;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -20,10 +18,10 @@ import javax.swing.border.TitledBorder;
 
 public class InfoPanel extends JPanel implements InfoPanelInterface {
 	
-	private static final long serialVersionUID = 165416518416215L;
+	private static final long serialVersionUID = -5219662861548416920L;
 	private static final int CUSTOM_SCROLLING = 30;
 	
-	private JPanel infoPanel;
+	private JPanel informationsPanel;
 	private JPanel controlPanel;
 	private JScrollPane scrollControlPanel;
 	private GridBagConstraints gbc;
@@ -36,10 +34,10 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 		super();
 		
 		//creation of infoPanel
-		infoPanel = new JPanel();
-		infoPanel.setBorder(new TitledBorder("Info"));
-		infoPanel.setLayout(new BorderLayout());
-		infoPanel.add(new JTextArea("QUI CI METTIAMO TUTTE LE NOSTRE BELLISSIME INFORMAZIONI"));
+		informationsPanel = new JPanel();
+		informationsPanel.setBorder(new TitledBorder("Info"));
+		informationsPanel.setLayout(new BorderLayout());
+		informationsPanel.add(new JTextArea("QUI CI METTIAMO TUTTE LE NOSTRE BELLISSIME INFORMAZIONI"));
 		
 		// creation of controlPanel
 		controlPanel = new JPanel();
@@ -55,7 +53,7 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 		// creation of the panel
 		this.setLayout(new BorderLayout());
 		this.add(scrollControlPanel, BorderLayout.CENTER);
-		this.add(infoPanel, BorderLayout.EAST);
+		this.add(informationsPanel, BorderLayout.EAST);
 		
 		nOfPluggedObservers = 0;
 	}
@@ -75,15 +73,13 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	public void addStreetObserver(Coordinates<Double> c) {
 		
 		SwingUtilities.invokeLater(() -> {
-					ImageIcon ii = LocationMapsConstructor.getLMC().getMapOf(nOfPluggedObservers, c.getLatitude(), c.getLongitude());
-					StreetObserverPanel p = new StreetObserverPanel(ii, nOfPluggedObservers);
-					controlPanel.add(p, gbc);
-					gbc.gridy++;
-					nOfPluggedObservers++;
+					StreetObserverPanel p = new StreetObserverPanel(c, ++nOfPluggedObservers);
+					this.controlPanel.add(p, gbc);
+					this.gbc.gridy++;
 					this.observersMap.put(c, p);
 		});
 		
-		newPlug(c);
+		this.newPlug(c);
 	}
 	
 	private void newPlug(Coordinates<Double> c) {
@@ -105,4 +101,5 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	public JPanel getPanel() {
 		return this;
 	}
+	
 }

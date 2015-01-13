@@ -1,4 +1,4 @@
-package it.unibo.oop.googleImages;
+package it.unibo.oop.smartercities.view;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -10,9 +10,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public final class GetImageFromGoogle {
+public final class GoogleStaticMaps {
 	
-	private GetImageFromGoogle(){
+	private GoogleStaticMaps(){
 	}
 	
 	public static final Optional<ImageIcon> get(URL mapUrl) {

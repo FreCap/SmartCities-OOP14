@@ -1,4 +1,4 @@
-package it.unibo.oop.googleImages;
+package it.unibo.oop.smartercities.view;
 
 import java.net.MalformedURLException;
 import java.net.URL;

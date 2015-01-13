@@ -20,7 +20,9 @@ public class ViewGUI extends JFrame implements ViewInterface{
 	
 	private final JTabbedPane tabbedPane;
 	private final InfoPanelInterface infoPanel;
+	//TODO make interfaces!!!
 	private final GoogleMapsWebBrowser locationPanel;
+	private final StolenCarsPanel stolenCarsPanel;
 
 	public ViewGUI(){
 		
@@ -42,11 +44,13 @@ public class ViewGUI extends JFrame implements ViewInterface{
 		this.setLocationRelativeTo(null);
 		
 		// creation of tabbedPanel
-		tabbedPane = new JTabbedPane();
-		infoPanel = new InfoPanel();
-		tabbedPane.add(" Informations ", infoPanel.getPanel());
-		locationPanel = new GoogleMapsWebBrowser();
-		tabbedPane.add(" Locations ", locationPanel);
+		this.tabbedPane = new JTabbedPane();
+		this.infoPanel = new InfoPanel();
+		this.tabbedPane.add(" Informations ", infoPanel.getPanel());
+		this.locationPanel = new GoogleMapsWebBrowser();
+		this.tabbedPane.add(" Locations ", locationPanel);
+		this.stolenCarsPanel = new StolenCarsPanel();
+		this.tabbedPane.addTab(" Stolen Cars ", stolenCarsPanel);
 		
 		// join with mainframe
 		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);

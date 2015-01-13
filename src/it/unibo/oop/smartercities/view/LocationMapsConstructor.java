@@ -1,4 +1,4 @@
-package it.unibo.oop.googleImages;
+package it.unibo.oop.smartercities.view;
 
 import java.net.URL;
 import java.util.Optional;
@@ -32,7 +32,7 @@ public class LocationMapsConstructor extends Thread{
 	
 	public ImageIcon getMapOf(int id, Double lat, Double lng){
 		URL url = new URLencoder().getURLfor(id, lat, lng);
-		controlIcon = GetImageFromGoogle.get(url);
+		controlIcon = GoogleStaticMaps.get(url);
 		if(controlIcon.isPresent()){
 			return controlIcon.get();
 		}
