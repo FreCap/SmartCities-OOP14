@@ -3,6 +3,8 @@ package it.unibo.oop.smartercities.view;
 import it.unibo.oop.smartercities.datatype.Coordinates;
 
 import java.awt.BorderLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -34,6 +36,25 @@ public class StreetObserverPanel extends JPanel{
 		
 		this.add(mapLabel);
 		this.add(passageLabel, BorderLayout.EAST);
+		
+		this.addMouseListener(new MouseListener(){
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println(c + " is clicked ");
+			}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+			}
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+			}
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+			}
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+			}
+		});
 	}
 	
 	private void setButtonOn() {

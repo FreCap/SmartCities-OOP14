@@ -1,7 +1,7 @@
 package it.unibo.oop.smartercities.datatype;
 
 public class Coordinates <X extends Number>{
-	
+
 	private final X latitude;
 	private final X longitude;
 	
@@ -41,6 +41,12 @@ public class Coordinates <X extends Number>{
 					this.longitude == other.getLongitude();
 		}
 		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return "Coordinates [latitude = " + latitude + ", longitude = " + longitude
+				+ "]";
 	}
 
 }
