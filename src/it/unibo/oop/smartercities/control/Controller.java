@@ -15,7 +15,7 @@ public class Controller implements ControllerInterface {
 	public Controller(final ViewInterface scView) {
 		this.scModel = new Model();
 		this.scView = scView;
-		this.scView.attachViewObserver(this);
+		//TODO attaccare alla view i due listener di azioni
 	}
 	
 	@Override

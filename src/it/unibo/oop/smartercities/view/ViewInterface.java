@@ -1,7 +1,8 @@
 package it.unibo.oop.smartercities.view;
 
-import it.unibo.oop.smartercities.control.ControllerInterface;
 import it.unibo.oop.smartercities.datatype.Coordinates;
+import it.unibo.oop.smartercities.listeners.IInfoObserverListener;
+import it.unibo.oop.smartercities.listeners.IStolenCarsListener;
 
 public interface ViewInterface {
 	
@@ -11,6 +12,7 @@ public interface ViewInterface {
 	// all'osservetore con corrispettivo id
 	void newPassage(Coordinates<Double> c);
 	
-	// aggiunge un osservatore(controller)
-	void attachViewObserver(final ControllerInterface controller);
+	//attacca i due listener della gui
+	void attachInfoSOListener(IInfoObserverListener ioL);
+	void attachStolenCarsListener(IStolenCarsListener scL);
 }
