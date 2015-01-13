@@ -58,12 +58,12 @@ public class ViewGUI implements ViewInterface{
 	}
 	
 	@Override
-	public void addStreetObserver(Coordinates c) {
+	public void addStreetObserver(Coordinates<Double> c) {
 		this.infoPanel.addStreetObserver(c);
 	}
 	
 	@Override
-	public void newPassage(Coordinates c) {
+	public void newPassage(Coordinates<Double> c) {
 		this.infoPanel.notifyPassage(c);
 	}
 }

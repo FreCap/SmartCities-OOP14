@@ -14,9 +14,9 @@ public class SmarterCitiesApplication {
 		
 		final ControllerInterface controller = new Controller(new ViewGUI());
 		
-		Coordinates c1 = new Coordinates(44.139625, 12.235225);
-		Coordinates c2 = new Coordinates(44.131771, 12.268767);
-		Coordinates c3 = new Coordinates(21.306944, -157.858333);
+		Coordinates<Double> c1 = new Coordinates<>(44.139625, 12.235225);
+		Coordinates<Double> c2 = new Coordinates<>(44.131771, 12.268767);
+		Coordinates<Double> c3 = new Coordinates<>(21.306944, -157.858333);
 		
 		controller.pluginRequest(c1);
 		controller.pluginRequest(c2);

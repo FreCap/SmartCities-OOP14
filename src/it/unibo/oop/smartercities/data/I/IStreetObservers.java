@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface IStreetObservers {
-	public StreetObserver add(Coordinates coordinate) throws Exception;
+	public StreetObserver add(Coordinates<Double> coordinate) throws Exception;
 
 	public StreetObserver sighting(PlainSighting sighting);
 

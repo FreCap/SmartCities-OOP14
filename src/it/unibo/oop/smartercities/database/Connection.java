@@ -29,7 +29,7 @@ public class Connection {
 		}
 	}
 
-	public static Connection getInstance() {
+	public static synchronized Connection getInstance() {
 		if (instance != null)
 			return instance;
 		instance = new Connection();
@@ -41,13 +41,11 @@ public class Connection {
 	 * @param connectionSource
 	 * @throws Exception
 	 */
-	private void setupDatabase(ConnectionSource connectionSource)
-			throws Exception {
+	private void setupDatabase(ConnectionSource connectionSource) throws Exception {
 
 		sightingDao = DaoManager.createDao(connectionSource, SightingRow.class);
 		stolenCarDao = DaoManager.createDao(connectionSource, StolenCarRow.class);
-		streetObserverDao = DaoManager.createDao(connectionSource,
-				StreetObserverRow.class);
+		streetObserverDao = DaoManager.createDao(connectionSource, StreetObserverRow.class);
 
 		TableUtils.createTable(connectionSource, SightingRow.class);
 		TableUtils.createTable(connectionSource, StolenCarRow.class);
@@ -66,7 +64,6 @@ public class Connection {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	public Dao<SightingRow, Integer> getSightingDao() {

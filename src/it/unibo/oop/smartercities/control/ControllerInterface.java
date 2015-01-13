@@ -7,15 +7,15 @@ import it.unibo.oop.smartercities.datatype.LicensePlate;
 public interface ControllerInterface {
 	
 	// richiesta della view di avere info su un osservatore(id)
-	Object getStreetObserverInfo(Coordinates c);
+	Object getStreetObserverInfo(Coordinates<Double> c);
 	
 	// richiesta della view di info su una targa
 	Object getStolenCarsInfo(LicensePlate np);
 	
 	// funzione per la richiesta di plugin di un nuovo street observer
 	// valore di ritorno: true se è stato accettato, false altrimenti
-	void pluginRequest(Coordinates c);
+	void pluginRequest(Coordinates<Double> c);
 	
 	// quando si verifica un nuovo passaggio sotto uno street observer, invia info
-	void newPassage(Coordinates c, Sighting is);
+	void newPassage(Coordinates<Double> c, Sighting is);
 }

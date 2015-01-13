@@ -4,9 +4,9 @@ import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
 public class StreetObserver implements IStreetObserver {
 
-	private Coordinates coordinates;
+	private Coordinates<Double> coordinates;
 
-	public StreetObserver(Coordinates c) {
+	public StreetObserver(Coordinates<Double> c) {
 		this.coordinates = c;
 	}
 	
@@ -15,7 +15,7 @@ public class StreetObserver implements IStreetObserver {
 	}
 
 	@Override
-	public Coordinates getCoordinates() {
+	public Coordinates<Double> getCoordinates() {
 		return this.coordinates;
 	}
 }

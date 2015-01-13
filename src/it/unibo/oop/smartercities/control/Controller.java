@@ -19,7 +19,7 @@ public class Controller implements ControllerInterface {
 	}
 	
 	@Override
-	public Object getStreetObserverInfo(Coordinates c) {
+	public Object getStreetObserverInfo(Coordinates<Double> c) {
 		// TODO
 		return scModel.getInfoOf(c);
 	}
@@ -31,13 +31,13 @@ public class Controller implements ControllerInterface {
 	}
 
 	@Override
-	public void pluginRequest(Coordinates c) {		
+	public void pluginRequest(Coordinates<Double> c) {		
 		this.scModel.addNewStreetObserver(c);
 		this.scView.addStreetObserver(c);
 	}
 
 	@Override
-	public void newPassage(Coordinates c, Sighting is) {
+	public void newPassage(Coordinates<Double> c, Sighting is) {
 		this.scView.newPassage(c);
 		this.scModel.newPassage(c, is);
 	}

@@ -11,13 +11,13 @@ import it.unibo.oop.smartercities.datatype.Sighting;
 public interface ModelInterface {
 	
 	// aggiunta di un nuovo street observer
-	void addNewStreetObserver(Coordinates c);
+	void addNewStreetObserver(Coordinates<Double> c);
 	
 	// notifica di un passaggio
-	void newPassage(Coordinates c, Sighting s);
+	void newPassage(Coordinates<Double> c, Sighting s);
 	
 	// restituisce le info di uno street observer
-	InfoStreetObserver getInfoOf(Coordinates c);
+	InfoStreetObserver getInfoOf(Coordinates<Double> c);
 	
 	// verifica se un auto è rubata
 	StolenCar verifyStolenCar(LicensePlate lp);

@@ -9,19 +9,19 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "StreetObserver")
 public class StreetObserverRow extends StreetObserver {
 
-	public StreetObserverRow(Coordinates c) {
+	public StreetObserverRow(Coordinates<Double> c) {
 		super(c);
 		coordinates = c;
 	}
 
 	@DatabaseField(id = true)
-	private Coordinates coordinates;
+	private Coordinates<Double> coordinates;
 
-	public Coordinates getCoordinates() {
+	public Coordinates<Double> getCoordinates() {
 		return coordinates;
 	}
 
-	public void setCoordinates(Coordinates coordinates) {
+	public void setCoordinates(Coordinates<Double> coordinates) {
 		this.coordinates = coordinates;
 	}
 

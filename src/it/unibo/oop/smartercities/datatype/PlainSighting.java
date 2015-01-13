@@ -9,10 +9,8 @@ import java.util.Date;
  */
 public class PlainSighting {
 
-	private Coordinates coordinates;
-
+	private Coordinates<Double> coordinates;
 	private Date date;
-
 	private String licensePlate;
 
 	private Float speed;
@@ -41,11 +39,11 @@ public class PlainSighting {
 		this.speed = speed;
 	}
 
-	public Coordinates getCoordinates() {
+	public Coordinates<Double> getCoordinates() {
 		return coordinates;
 	}
 
-	public void setCoordinates(Coordinates coordinates) {
+	public void setCoordinates(Coordinates<Double> coordinates) {
 		this.coordinates = coordinates;
 	}
 

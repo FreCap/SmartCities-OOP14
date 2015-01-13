@@ -19,7 +19,7 @@ public class StreetObservers implements IStreetObservers {
 		return Connection.getInstance().getStreetObserverDao();
 	}
 
-	private StreetObserver getStreetObserver(Coordinates coordinate) {
+	private StreetObserver getStreetObserver(Coordinates<Double> coordinate) {
 		Dao<StreetObserverRow, Integer> streetObserverDao = getStreetObserverDao();
 //		StreetObserverRow delivery2 = streetObserverDao.queryForId(coordinate);
 
@@ -28,7 +28,7 @@ public class StreetObservers implements IStreetObservers {
 	}
 
 	@Override
-	public StreetObserver add(Coordinates coordinate) throws Exception {
+	public StreetObserver add(Coordinates<Double> coordinate) throws Exception {
 		StreetObserverRow streetObserver = new StreetObserverRow(coordinate);
 		Dao<StreetObserverRow, Integer> streetObserverDao = getStreetObserverDao();
 		streetObserverDao.create(streetObserver);

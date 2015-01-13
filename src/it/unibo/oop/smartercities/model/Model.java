@@ -21,13 +21,13 @@ public class Model implements ModelInterface {
 	}
 	
 	@Override
-	public void addNewStreetObserver(Coordinates c) {
+	public void addNewStreetObserver(Coordinates<Double> c) {
 		IStreetObserver iSo = new StreetObserver(c);
 		soList.add(iSo);
 	}
 
 	@Override
-	public InfoStreetObserver getInfoOf(Coordinates c) {
+	public InfoStreetObserver getInfoOf(Coordinates<Double> c) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -45,7 +45,7 @@ public class Model implements ModelInterface {
 	}
 
 	@Override
-	public void newPassage(Coordinates c, Sighting s) {
+	public void newPassage(Coordinates<Double> c, Sighting s) {
 		// TODO Auto-generated method stub
 		
 	}
