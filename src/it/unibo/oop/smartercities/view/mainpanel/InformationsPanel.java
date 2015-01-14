@@ -23,9 +23,7 @@ public class InformationsPanel extends JPanel implements IInformationsPanel {
 
 	@Override
 	public void showInformations(IInfoStreetObserver iso) {
-		System.out.println("I recieved some info to show: " + iso);
-		// TODO Auto-generated method stub
-
+		this.currentInfo.setText(iso.toString());
 	}
 
 	@Override
