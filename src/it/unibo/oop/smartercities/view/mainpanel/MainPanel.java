@@ -1,7 +1,7 @@
 package it.unibo.oop.smartercities.view.mainpanel;
 
-import it.unibo.oop.smartercities.controller.IStolenCarsObserver;
 import it.unibo.oop.smartercities.controller.IStreetObserverObserver;
+import it.unibo.oop.smartercities.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
 import java.awt.BorderLayout;
@@ -51,7 +51,12 @@ public class MainPanel extends JPanel implements IMainPanel {
 	public void addStreetObserver(IStreetObserver streetObserver) {
 		
 		SwingUtilities.invokeLater(() -> {
-					StreetObserverPanel p = new StreetObserverPanel(streetObserver, this.observersMap.size());
+					StreetObserverPanel p = new StreetObserverPanel(streetObserver,
+																	this.observersMap.size(),
+																	(t) -> {
+																		IInfoStreetObserver info = this.soo.getStreetObserverInfo(t);
+																		this.informationsPanel.showInformations(info);
+																	});
 					this.controlPanel.addStreetObserver(p);
 					this.observersMap.put(streetObserver, p);
 		});

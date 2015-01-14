@@ -5,6 +5,7 @@ import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.function.Consumer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -23,7 +24,7 @@ public class StreetObserverPanel extends JPanel{
 	private final JLabel mapLabel;
 	private final JLabel passageLabel;
 	
-	public StreetObserverPanel(IStreetObserver streetObserver, int id) {
+	public StreetObserverPanel(IStreetObserver streetObserver, int id, Consumer<IStreetObserver> consumer) {
 		this.setLayout(new BorderLayout());
 		this.setBorder(new TitledBorder("Street Observer" + " " + id));
 		
@@ -44,7 +45,7 @@ public class StreetObserverPanel extends JPanel{
 		this.addMouseListener(new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				System.out.println(streetObserver + " is clicked ");
+				consumer.accept(streetObserver);
 			}
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
