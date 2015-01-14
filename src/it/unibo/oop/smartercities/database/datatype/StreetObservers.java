@@ -34,7 +34,7 @@ public class StreetObservers implements IStreetObservers {
 	// raccoglie dati di uno streetObserver, e restituisce un pacchetto InfoStreetObserver
 	public IInfoStreetObserver getDataGathered(StreetObserver streetObserver){
 		//TODO
-		IInfoStreetObserver iso = new InfoStreetObserver();
+		IInfoStreetObserver iso = new InfoStreetObserver.Builder().build();
 		
 		return iso;
 		

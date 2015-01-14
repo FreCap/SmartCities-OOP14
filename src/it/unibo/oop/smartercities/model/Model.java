@@ -1,5 +1,6 @@
 package it.unibo.oop.smartercities.model;
 
+import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smartercities.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.I.ISighting;
@@ -26,7 +27,15 @@ public class Model implements IModel {
 	// TODO questo metodo deve far tornare un pacchetto IInfoStreetObserver dello streetObserver richiesto
 	@Override
 	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) {
-		return null;
+		
+		//////// QUESTO LO FACCIO SOLO PER ESEMPIO! BISOGNERA' POI IMPLEMENTARLO IN MODO CHE SI INTERFACCI CON IL DB
+		return new InfoStreetObserver.Builder().averageSpeedLastMonth(20)
+											   .averageSpeedLastWeek(50)
+											   .averageSpeedToday(90)
+											   .maxCarRateToday(70)
+											   .streetObserver(streetObserver)
+											   .nOfSightToday(200000)
+											   .build();
 	}
 
 	// TODO questo metodo deve far tornare un pacchetto IInfoStolenCarr della stolenCar richiesta
