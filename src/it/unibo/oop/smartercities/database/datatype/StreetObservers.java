@@ -1,8 +1,8 @@
-package it.unibo.oop.smartercities.data;
+package it.unibo.oop.smartercities.database.datatype;
 
-import it.unibo.oop.smartercities.data.I.IStreetObservers;
 import it.unibo.oop.smartercities.database.Connection;
 import it.unibo.oop.smartercities.database.StreetObserverRow;
+import it.unibo.oop.smartercities.database.datatype.I.IStreetObservers;
 import it.unibo.oop.smartercities.datatype.Coordinates;
 import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.PlainSighting;

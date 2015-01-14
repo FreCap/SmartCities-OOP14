@@ -1,8 +1,8 @@
-package it.unibo.oop.smartercities.data;
+package it.unibo.oop.smartercities.database.datatype;
 
-import it.unibo.oop.smartercities.data.I.IStolenCars;
 import it.unibo.oop.smartercities.database.Connection;
 import it.unibo.oop.smartercities.database.StolenCarRow;
+import it.unibo.oop.smartercities.database.datatype.I.IStolenCars;
 import it.unibo.oop.smartercities.datatype.LicensePlate;
 import it.unibo.oop.smartercities.datatype.StolenCar;
 
