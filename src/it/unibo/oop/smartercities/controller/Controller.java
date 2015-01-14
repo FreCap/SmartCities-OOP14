@@ -10,18 +10,19 @@ import it.unibo.oop.smartercities.view.IViewGUI;
 
 public class Controller implements IController {
 
-	private final IViewGUI scView;
-	private final IModel scModel;
+	private final IViewGUI view;
+	private final IModel model;
 	
-	public Controller(final IViewGUI scView) {
-		this.scModel = new Model();
-		this.scView = scView;
-		//TODO attaccare alla view i due listener di azioni
+	public Controller(IViewGUI view) {
+		this.model = new Model();
+		this.view = view;
+		this.view.attachStreetObserverObserver(this);
+		this.view.attachStolenCarsObserver(this);
 	}
 
 	@Override
 	public IStreetObserverObserver getStreetObserverInfo(IStreetObserver streetObserver) {
-		// TODO Auto-generated method stub
+		//TODO
 		return null;
 	}
 
@@ -33,14 +34,14 @@ public class Controller implements IController {
 
 	@Override
 	public void addStreetObserver(IStreetObserver streetObserver) {
-		this.scView.addStreetObserver(streetObserver);
-		this.scModel.addNewStreetObserver(streetObserver);
+		this.view.addStreetObserver(streetObserver);
+		this.model.addNewStreetObserver(streetObserver);
 	}
 
 	@Override
 	public void newPassage(IStreetObserver streetObserver, ISighting is) {
-		this.scView.newPassage(streetObserver);
-		this.scModel.newPassage(streetObserver, is);
+		this.view.newPassage(streetObserver);
+		this.model.newPassage(streetObserver, is);
 	}
 
 }

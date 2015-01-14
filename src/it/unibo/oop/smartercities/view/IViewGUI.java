@@ -13,6 +13,6 @@ public interface IViewGUI {
 	void newPassage(IStreetObserver streetObserver);
 	
 	//attacca i due listener della gui
-	void attachInfoSOListener(IStreetObserverObserver ioL);
-	void attachStolenCarsListener(IStolenCarsObserver scL);
+	void attachStreetObserverObserver(IStreetObserverObserver ioL);
+	void attachStolenCarsObserver(IStolenCarsObserver scL);
 }

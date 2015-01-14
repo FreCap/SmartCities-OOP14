@@ -68,12 +68,12 @@ public class ViewGUI extends JFrame implements IViewGUI{
 	}
 
 	@Override
-	public void attachInfoSOListener(IStreetObserverObserver ioL) {
+	public void attachStreetObserverObserver(IStreetObserverObserver ioL) {
 		this.ioL = ioL;
 	}
 
 	@Override
-	public void attachStolenCarsListener(IStolenCarsObserver scL) {
+	public void attachStolenCarsObserver(IStolenCarsObserver scL) {
 		this.scL = scL;		
 	}
 
