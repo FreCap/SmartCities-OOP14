@@ -7,7 +7,7 @@ import java.net.URL;
 // estendi da qualche classe URL encored, per fare di questo un oggetto speciale di encoder
 // UTILIZZALO COME PATTERN SINGLETON!!
 
-public class URLencoder {
+public class GoogleURLencoder {
 	
 	private static final String STATIC_MAP_REQUEST_PREFIX = "https://maps.googleapis.com/maps/api/staticmap";
 	private static final int DEFAULT_ZOOM = 13;
@@ -23,7 +23,7 @@ public class URLencoder {
 	private String markerColor;
 	
 	// TODO fallo privato tanto è inutile
-	public URLencoder () {
+	public GoogleURLencoder () {
 		this.zoom = DEFAULT_ZOOM;
 		this.sizeWidth = DEFAULT_WIDTH;
 		this.sizeHeight = DEFAULT_HEIGHT;

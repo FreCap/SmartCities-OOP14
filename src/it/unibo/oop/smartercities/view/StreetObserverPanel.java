@@ -16,8 +16,8 @@ public class StreetObserverPanel extends JPanel{
 	
 	private static final long serialVersionUID = 984911465198419L;
 	private static final String DEFAULT_PATH = "/images/";
-	private static final ImageIcon PASSAGE_ACTIVE_ICON = new ImageIcon(InfoPanel.class.getResource(DEFAULT_PATH + "activeButton.png"));
-	private static final ImageIcon PASSAGE_INACTIVE_ICON = new ImageIcon(InfoPanel.class.getResource(DEFAULT_PATH + "inactiveButton.png"));
+	private static final ImageIcon PASSAGE_ACTIVE_ICON = new ImageIcon(MainPanel.class.getResource(DEFAULT_PATH + "activeButton.png"));
+	private static final ImageIcon PASSAGE_INACTIVE_ICON = new ImageIcon(MainPanel.class.getResource(DEFAULT_PATH + "inactiveButton.png"));
 	private static final int DELAY = 150;
 	
 	private final JLabel mapLabel;
@@ -28,7 +28,7 @@ public class StreetObserverPanel extends JPanel{
 		this.setBorder(new TitledBorder("Street Observer" + " " + id));
 		
 		this.mapLabel = new JLabel();
-		ImageIcon ii = LocationMapsConstructor.getLMC().getMapOf(id, c.getLatitude(), c.getLongitude());
+		ImageIcon ii = GoogleStaticMapsConstructor.getLMC().getMapOf(id, c.getLatitude(), c.getLongitude());
 		this.mapLabel.setIcon(ii);
 		
 		this.passageLabel = new JLabel();

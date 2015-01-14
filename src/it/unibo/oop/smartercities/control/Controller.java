@@ -5,14 +5,14 @@ import it.unibo.oop.smartercities.datatype.Sighting;
 import it.unibo.oop.smartercities.datatype.LicensePlate;
 import it.unibo.oop.smartercities.model.Model;
 import it.unibo.oop.smartercities.model.ModelInterface;
-import it.unibo.oop.smartercities.view.ViewInterface;
+import it.unibo.oop.smartercities.view.IViewGUI;
 
 public class Controller implements ControllerInterface {
 
-	private final ViewInterface scView;
+	private final IViewGUI scView;
 	private final ModelInterface scModel;
 	
-	public Controller(final ViewInterface scView) {
+	public Controller(final IViewGUI scView) {
 		this.scModel = new Model();
 		this.scView = scView;
 		//TODO attaccare alla view i due listener di azioni

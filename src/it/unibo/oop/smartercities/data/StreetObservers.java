@@ -4,6 +4,7 @@ import it.unibo.oop.smartercities.data.I.IStreetObservers;
 import it.unibo.oop.smartercities.database.Connection;
 import it.unibo.oop.smartercities.database.StreetObserverRow;
 import it.unibo.oop.smartercities.datatype.Coordinates;
+import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.PlainSighting;
 import it.unibo.oop.smartercities.datatype.Sighting;
 import it.unibo.oop.smartercities.datatype.StreetObserver;
@@ -13,6 +14,8 @@ import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
 
+// classe di utilità, che richiede i dati al DB, li elabora e attraverso il metodo getDataGathered()
+// torna una InfoStreetObserver
 public class StreetObservers implements IStreetObservers {
 
 	private Dao<StreetObserverRow, Integer> getStreetObserverDao() {
@@ -25,6 +28,15 @@ public class StreetObservers implements IStreetObservers {
 
 		return null;
 
+	}
+	
+	// raccoglie dati di uno streetObserver, e restituisce un pacchetto InfoStreetObserver
+	public InfoStreetObserver getDataGathered(StreetObserver streetObserver){
+		//TODO
+		InfoStreetObserver iso = new InfoStreetObserver();
+		
+		return iso;
+		
 	}
 
 	@Override

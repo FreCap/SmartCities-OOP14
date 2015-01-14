@@ -4,7 +4,7 @@ import it.unibo.oop.smartercities.datatype.Coordinates;
 import it.unibo.oop.smartercities.listeners.IInfoObserverListener;
 import it.unibo.oop.smartercities.listeners.IStolenCarsListener;
 
-public interface ViewInterface {
+public interface IViewGUI {
 	
 	void addStreetObserver(Coordinates<Double> c);
 	

@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
-public class GoogleMapsWebBrowser extends JFXPanel {
+public class GoogleMapsWebBrowser extends JFXPanel implements ILocationPanel{
 	
 	private static final long serialVersionUID = 6541846132164168451L;
 	private WebView webView;

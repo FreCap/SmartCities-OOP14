@@ -9,7 +9,7 @@ import java.awt.Toolkit;
 
 import javax.swing.*;
 
-public class ViewGUI extends JFrame implements ViewInterface{
+public class ViewGUI extends JFrame implements IViewGUI{
 
 	private static final long serialVersionUID = 6107931182231615768L;
 	private static final int DEFAULT_WIDTH = (Toolkit.getDefaultToolkit().getScreenSize().width/3)*2;
@@ -18,11 +18,11 @@ public class ViewGUI extends JFrame implements ViewInterface{
 	private IInfoObserverListener ioL;
 	private IStolenCarsListener scL;
 	
-	private final JTabbedPane tabbedPane;
-	private final InfoPanelInterface infoPanel;
+	private final JTabbedPane tabbedPane = new JTabbedPane();
+	private final IMainPanel mainPanel = new MainPanel();
 	//TODO make interfaces!!!
-	private final GoogleMapsWebBrowser locationPanel;
-	private final StolenCarsPanel stolenCarsPanel;
+	private final GoogleMapsWebBrowser locationPanel = new GoogleMapsWebBrowser();
+	private final StolenCarsPanel stolenCarsPanel = new StolenCarsPanel();
 
 	public ViewGUI(){
 		
@@ -30,8 +30,7 @@ public class ViewGUI extends JFrame implements ViewInterface{
 		//LOOK AND FEEL DEL SISTEMA OPERATIVO OSPITANTE
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} 
-		catch(ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		*/
@@ -44,15 +43,10 @@ public class ViewGUI extends JFrame implements ViewInterface{
 		this.setLocationRelativeTo(null);
 		
 		// creation of tabbedPanel
-		this.tabbedPane = new JTabbedPane();
-		this.infoPanel = new InfoPanel();
-		this.tabbedPane.add(" Informations ", infoPanel.getPanel());
-		this.locationPanel = new GoogleMapsWebBrowser();
+		this.tabbedPane.add(" Informations ", mainPanel.getPanel());
 		this.tabbedPane.add(" Locations ", locationPanel);
-		this.stolenCarsPanel = new StolenCarsPanel();
 		this.tabbedPane.addTab(" Stolen Cars ", stolenCarsPanel);
 		
-		// join with mainframe
 		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		//this.add(tabbedPane, BorderLayout.CENTER);
 		this.setVisible(true);
@@ -60,12 +54,12 @@ public class ViewGUI extends JFrame implements ViewInterface{
 	
 	@Override
 	public void newPassage(Coordinates<Double> c) {
-		this.infoPanel.notifyPassage(c);
+		this.mainPanel.notifyPassage(c);
 	}
 	
 	@Override
 	public void addStreetObserver(Coordinates<Double> c) {
-		this.infoPanel.addStreetObserver(c);
+		this.mainPanel.addStreetObserver(c);
 	}
 
 	@Override

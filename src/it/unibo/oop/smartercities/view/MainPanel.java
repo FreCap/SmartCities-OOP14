@@ -9,35 +9,36 @@ import java.awt.Insets;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
-public class InfoPanel extends JPanel implements InfoPanelInterface {
+public class MainPanel extends JPanel implements IMainPanel {
 	
 	private static final long serialVersionUID = -5219662861548416920L;
 	private static final int CUSTOM_SCROLLING = 30;
 	
-	private JPanel informationsPanel;
-	private JPanel controlPanel;
-	private JScrollPane scrollControlPanel;
-	private GridBagConstraints gbc;
+	// TODO mettici interfacce!
+	private final JPanel informationsPanel;
+	private final JPanel controlPanel;
+	private final JScrollPane scrollControlPanel;
+	private final GridBagConstraints gbc;
 	
-	private Map<Coordinates<Double>, StreetObserverPanel> observersMap = new HashMap<>();
+	private final Map<Coordinates<Double>, StreetObserverPanel> observersMap = new HashMap<>();
 	
 	private int nOfPluggedObservers;
 	
-	public InfoPanel() {
+	public MainPanel() {
 		super();
 		
 		//creation of infoPanel
 		informationsPanel = new JPanel();
 		informationsPanel.setBorder(new TitledBorder("Info"));
 		informationsPanel.setLayout(new BorderLayout());
-		informationsPanel.add(new JTextArea("QUI CI METTIAMO TUTTE LE NOSTRE BELLISSIME INFORMAZIONI"));
+		informationsPanel.add(new JLabel("QUI CI METTIAMO TUTTE LE NOSTRE BELLISSIME INFORMAZIONI"));
 		
 		// creation of controlPanel
 		controlPanel = new JPanel();
@@ -62,10 +63,9 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	public void notifyPassage(Coordinates<Double> c) {
 		if(observersMap.containsKey(c)) {
 			observersMap.get(c).displayPassage();
-			
-		}
-		else {
-			//TODO
+		} else {
+			// TODO in this case throw an exception
+			//throw new Exception();
 		}
 	}
 	
@@ -83,7 +83,7 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	}
 	
 	private void newPlug(Coordinates<Double> c) {
-		String msg = new StringBuilder().append("A new Street Observer is been plugged.\n It's positions is: ")
+		String msg = new StringBuilder().append("New Street Observer is been plugged.\n The positions is: ")
 										.append("\n   - Latitude:  " + c.getLatitude())
 										.append("\n   - Longitude: " + c.getLongitude())
 										.toString();
@@ -101,5 +101,4 @@ public class InfoPanel extends JPanel implements InfoPanelInterface {
 	public JPanel getPanel() {
 		return this;
 	}
-	
 }

@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 import it.unibo.oop.smartercities.datatype.Coordinates;
 
-public interface InfoPanelInterface {
+public interface IMainPanel {
 	
 	// torna il panel
 	JPanel getPanel();
