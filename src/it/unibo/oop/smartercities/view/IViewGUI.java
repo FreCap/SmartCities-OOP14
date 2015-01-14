@@ -1,19 +1,18 @@
 package it.unibo.oop.smartercities.view;
 
-import it.unibo.oop.smartercities.datatype.Coordinates;
-import it.unibo.oop.smartercities.listeners.IInfoObserverListener;
-import it.unibo.oop.smartercities.listeners.IStolenCarsListener;
+import it.unibo.oop.smartercities.controller.IStolenCarsObserver;
+import it.unibo.oop.smartercities.controller.IStreetObserverObserver;
+import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
 public interface IViewGUI {
 	
 	// aggiunge uno streetObserver alla gui
-	void addStreetObserver(Coordinates<Double> c);
+	void addStreetObserver(IStreetObserver streetObserver);
 	
 	// quando si verifica un nuovo passaggio sotto uno street observer, viene segnalato
-	// all'osservetore con corrispettivo id
-	void newPassage(Coordinates<Double> c);
+	void newPassage(IStreetObserver streetObserver);
 	
 	//attacca i due listener della gui
-	void attachInfoSOListener(IInfoObserverListener ioL);
-	void attachStolenCarsListener(IStolenCarsListener scL);
+	void attachInfoSOListener(IStreetObserverObserver ioL);
+	void attachStolenCarsListener(IStolenCarsObserver scL);
 }

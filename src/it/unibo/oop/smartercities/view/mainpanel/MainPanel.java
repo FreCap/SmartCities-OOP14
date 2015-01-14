@@ -1,6 +1,6 @@
 package it.unibo.oop.smartercities.view.mainpanel;
 
-import it.unibo.oop.smartercities.datatype.Coordinates;
+import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
 import java.awt.BorderLayout;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class MainPanel extends JPanel implements IMainPanel {
 	private final IControlPanel controlPanel = new ControlPanel();
 	private final JScrollPane scrollControlPanel;
 	
-	private final Map<Coordinates<Double>, StreetObserverPanel> observersMap = new HashMap<>();
+	private final Map<IStreetObserver, StreetObserverPanel> observersMap = new HashMap<>();
 	
 	public MainPanel() {
 		super();
@@ -34,9 +34,9 @@ public class MainPanel extends JPanel implements IMainPanel {
 	}
 	
 	@Override
-	public void notifyPassage(Coordinates<Double> c) {
-		if(observersMap.containsKey(c)) {
-			observersMap.get(c).displayPassage();
+	public void notifyPassage(IStreetObserver streetObserver) {
+		if(observersMap.containsKey(streetObserver)) {
+			observersMap.get(streetObserver).displayPassage();
 		} else {
 			// TODO in this case throw an exception
 			//throw new Exception();
@@ -44,21 +44,21 @@ public class MainPanel extends JPanel implements IMainPanel {
 	}
 	
 	@Override
-	public void addStreetObserver(Coordinates<Double> c) {
+	public void addStreetObserver(IStreetObserver streetObserver) {
 		
 		SwingUtilities.invokeLater(() -> {
-					StreetObserverPanel p = new StreetObserverPanel(c, this.observersMap.size());
+					StreetObserverPanel p = new StreetObserverPanel(streetObserver, this.observersMap.size());
 					this.controlPanel.addStreetObserver(p);
-					this.observersMap.put(c, p);
+					this.observersMap.put(streetObserver, p);
 		});
 		
-		this.newPlug(c);
+		this.newPlug(streetObserver);
 	}
 	
-	private void newPlug(Coordinates<Double> c) {
+	private void newPlug(IStreetObserver streetObserver) {
 		String msg = new StringBuilder().append("New Street Observer is been plugged.\n The positions is: ")
-										.append("\n   - Latitude:  " + c.getLatitude())
-										.append("\n   - Longitude: " + c.getLongitude())
+										.append("\n   - Latitude:  " + streetObserver.getCoordinates().getLatitude())
+										.append("\n   - Longitude: " + streetObserver.getCoordinates().getLongitude())
 										.toString();
 		
 		SwingUtilities.invokeLater(() -> {JOptionPane.showOptionDialog(null, 
@@ -74,4 +74,5 @@ public class MainPanel extends JPanel implements IMainPanel {
 	public JPanel getPanel() {
 		return this;
 	}
+
 }

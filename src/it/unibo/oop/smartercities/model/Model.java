@@ -1,54 +1,43 @@
 package it.unibo.oop.smartercities.model;
 
-import it.unibo.oop.smartercities.datatype.Coordinates;
-import it.unibo.oop.smartercities.datatype.Sighting;
 import it.unibo.oop.smartercities.datatype.StolenCar;
 import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
-import it.unibo.oop.smartercities.datatype.LicensePlate;
-import it.unibo.oop.smartercities.datatype.StreetObserver;
+import it.unibo.oop.smartercities.datatype.I.ISighting;
+import it.unibo.oop.smartercities.datatype.I.IStolenCar;
 import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
-import java.util.AbstractList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Model implements ModelInterface {
+public class Model implements IModel {
 	
-	private AbstractList<IStreetObserver> soList = new LinkedList<>();
+	private List<IStreetObserver> streetObserversList = new LinkedList<>();
 
 	public Model() {
 		super();
 	}
 	
+
 	@Override
-	public void addNewStreetObserver(Coordinates<Double> c) {
-		IStreetObserver iSo = new StreetObserver(c);
-		soList.add(iSo);
+	public void addNewStreetObserver(IStreetObserver streetObserver) {
+		this.streetObserversList.add(streetObserver);
 	}
 
 	@Override
-	public InfoStreetObserver getInfoOf(Coordinates<Double> c) {
+	public void newPassage(IStreetObserver streetObserver, ISighting s) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public InfoStreetObserver getInfoOf(IStreetObserver streetObserver) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public StolenCar verifyStolenCar(LicensePlate np) {
+	public StolenCar verifyStolenCar(IStolenCar stolenCar) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public List<Object> getStolenCarsList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void newPassage(Coordinates<Double> c, Sighting s) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	//TODO override di equals e hash
 }

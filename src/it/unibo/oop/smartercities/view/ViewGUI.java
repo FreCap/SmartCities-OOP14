@@ -1,8 +1,9 @@
 ﻿package it.unibo.oop.smartercities.view;
 
+import it.unibo.oop.smartercities.controller.IStolenCarsObserver;
+import it.unibo.oop.smartercities.controller.IStreetObserverObserver;
 import it.unibo.oop.smartercities.datatype.Coordinates;
-import it.unibo.oop.smartercities.listeners.IInfoObserverListener;
-import it.unibo.oop.smartercities.listeners.IStolenCarsListener;
+import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 import it.unibo.oop.smartercities.view.locationpanel.GoogleMapsWebBrowser;
 import it.unibo.oop.smartercities.view.locationpanel.ILocationPanel;
 import it.unibo.oop.smartercities.view.mainpanel.IMainPanel;
@@ -21,8 +22,8 @@ public class ViewGUI extends JFrame implements IViewGUI{
 	private static final int DEFAULT_WIDTH = (Toolkit.getDefaultToolkit().getScreenSize().width/3)*2;
 	private static final int DEFAULT_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().width/2;
 	
-	private IInfoObserverListener ioL;
-	private IStolenCarsListener scL;
+	private IStreetObserverObserver ioL;
+	private IStolenCarsObserver scL;
 	
 	private final JTabbedPane tabbedPane = new JTabbedPane();
 	private final IMainPanel mainPanel = new MainPanel();
@@ -57,22 +58,22 @@ public class ViewGUI extends JFrame implements IViewGUI{
 	}
 	
 	@Override
-	public void newPassage(Coordinates<Double> c) {
-		this.mainPanel.notifyPassage(c);
+	public void newPassage(IStreetObserver streetObserver) {
+		this.mainPanel.notifyPassage(streetObserver);
 	}
 	
 	@Override
-	public void addStreetObserver(Coordinates<Double> c) {
-		this.mainPanel.addStreetObserver(c);
+	public void addStreetObserver(IStreetObserver streetObserver) {
+		this.mainPanel.addStreetObserver(streetObserver);
 	}
 
 	@Override
-	public void attachInfoSOListener(IInfoObserverListener ioL) {
+	public void attachInfoSOListener(IStreetObserverObserver ioL) {
 		this.ioL = ioL;
 	}
 
 	@Override
-	public void attachStolenCarsListener(IStolenCarsListener scL) {
+	public void attachStolenCarsListener(IStolenCarsObserver scL) {
 		this.scL = scL;		
 	}
 

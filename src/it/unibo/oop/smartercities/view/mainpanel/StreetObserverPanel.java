@@ -1,6 +1,6 @@
 package it.unibo.oop.smartercities.view.mainpanel;
 
-import it.unibo.oop.smartercities.datatype.Coordinates;
+import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
 import java.awt.BorderLayout;
 import java.awt.event.MouseEvent;
@@ -23,12 +23,16 @@ public class StreetObserverPanel extends JPanel{
 	private final JLabel mapLabel;
 	private final JLabel passageLabel;
 	
-	public StreetObserverPanel(Coordinates<Double> c, int id) {
+	public StreetObserverPanel(IStreetObserver streetObserver, int id) {
 		this.setLayout(new BorderLayout());
 		this.setBorder(new TitledBorder("Street Observer" + " " + id));
 		
 		this.mapLabel = new JLabel();
-		ImageIcon ii = GoogleStaticMapsConstructor.getLMC().getMapOf(id, c.getLatitude(), c.getLongitude());
+		ImageIcon ii = GoogleStaticMapsConstructor.getLMC()
+												  .getMapOf(id, 
+															streetObserver.getCoordinates().getLatitude(), 
+															streetObserver.getCoordinates().getLongitude()
+													);
 		this.mapLabel.setIcon(ii);
 		
 		this.passageLabel = new JLabel();
@@ -40,7 +44,7 @@ public class StreetObserverPanel extends JPanel{
 		this.addMouseListener(new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				System.out.println(c + " is clicked ");
+				System.out.println(streetObserver + " is clicked ");
 			}
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
