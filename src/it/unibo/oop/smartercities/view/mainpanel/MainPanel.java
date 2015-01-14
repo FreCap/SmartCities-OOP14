@@ -1,4 +1,4 @@
-package it.unibo.oop.smartercities.view;
+package it.unibo.oop.smartercities.view.mainpanel;
 
 import it.unibo.oop.smartercities.datatype.Coordinates;
 

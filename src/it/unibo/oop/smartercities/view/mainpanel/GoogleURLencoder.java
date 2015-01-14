@@ -1,4 +1,4 @@
-package it.unibo.oop.smartercities.view;
+package it.unibo.oop.smartercities.view.mainpanel;
 
 import java.net.MalformedURLException;
 import java.net.URL;

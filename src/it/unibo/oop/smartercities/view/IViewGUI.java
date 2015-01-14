@@ -6,6 +6,7 @@ import it.unibo.oop.smartercities.listeners.IStolenCarsListener;
 
 public interface IViewGUI {
 	
+	// aggiunge uno streetObserver alla gui
 	void addStreetObserver(Coordinates<Double> c);
 	
 	// quando si verifica un nuovo passaggio sotto uno street observer, viene segnalato

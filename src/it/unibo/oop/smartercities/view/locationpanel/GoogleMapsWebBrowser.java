@@ -1,4 +1,4 @@
-package it.unibo.oop.smartercities.view;
+package it.unibo.oop.smartercities.view.locationpanel;
 
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
@@ -25,6 +25,11 @@ public class GoogleMapsWebBrowser extends JFXPanel implements ILocationPanel{
 		
 		Scene scene = new Scene(webView);
 		setScene(scene);
+	}
+
+	@Override
+	public JFXPanel getPanel() {
+		return this;
 	}
 }
 

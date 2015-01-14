@@ -1,4 +1,4 @@
-package it.unibo.oop.smartercities.view;
+package it.unibo.oop.smartercities.view.mainpanel;
 
 import java.net.URL;
 import java.util.Optional;

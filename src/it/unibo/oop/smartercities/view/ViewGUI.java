@@ -3,6 +3,12 @@
 import it.unibo.oop.smartercities.datatype.Coordinates;
 import it.unibo.oop.smartercities.listeners.IInfoObserverListener;
 import it.unibo.oop.smartercities.listeners.IStolenCarsListener;
+import it.unibo.oop.smartercities.view.locationpanel.GoogleMapsWebBrowser;
+import it.unibo.oop.smartercities.view.locationpanel.ILocationPanel;
+import it.unibo.oop.smartercities.view.mainpanel.IMainPanel;
+import it.unibo.oop.smartercities.view.mainpanel.MainPanel;
+import it.unibo.oop.smartercities.view.stolencarspanel.IStolenCarsPanel;
+import it.unibo.oop.smartercities.view.stolencarspanel.StolenCarsPanel;
 
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
@@ -21,8 +27,8 @@ public class ViewGUI extends JFrame implements IViewGUI{
 	private final JTabbedPane tabbedPane = new JTabbedPane();
 	private final IMainPanel mainPanel = new MainPanel();
 	//TODO make interfaces!!!
-	private final GoogleMapsWebBrowser locationPanel = new GoogleMapsWebBrowser();
-	private final StolenCarsPanel stolenCarsPanel = new StolenCarsPanel();
+	private final ILocationPanel locationPanel = new GoogleMapsWebBrowser();
+	private final IStolenCarsPanel stolenCarsPanel = new StolenCarsPanel();
 
 	public ViewGUI(){
 		
@@ -43,12 +49,11 @@ public class ViewGUI extends JFrame implements IViewGUI{
 		this.setLocationRelativeTo(null);
 		
 		// creation of tabbedPanel
-		this.tabbedPane.add(" Informations ", mainPanel.getPanel());
-		this.tabbedPane.add(" Locations ", locationPanel);
-		this.tabbedPane.addTab(" Stolen Cars ", stolenCarsPanel);
+		this.tabbedPane.addTab(" Informations ", mainPanel.getPanel());
+		this.tabbedPane.addTab(" Locations ", locationPanel.getPanel());
+		this.tabbedPane.addTab(" Stolen Cars ", stolenCarsPanel.getPanel());
 		
 		this.getContentPane().add(tabbedPane, BorderLayout.CENTER);
-		//this.add(tabbedPane, BorderLayout.CENTER);
 		this.setVisible(true);
 	}
 	

@@ -1,4 +1,4 @@
-package it.unibo.oop.smartercities.view;
+package it.unibo.oop.smartercities.view.stolencarspanel;
 
 import it.unibo.oop.smartercities.datatype.I.IStolenCar;
 
@@ -18,6 +18,11 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel{
 	public void showInfo(IStolenCar sc) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public JPanel getPanel() {
+		return this;
 	}
 
 }
