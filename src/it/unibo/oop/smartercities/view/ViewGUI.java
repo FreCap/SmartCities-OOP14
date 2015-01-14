@@ -2,7 +2,6 @@
 
 import it.unibo.oop.smartercities.controller.IStolenCarsObserver;
 import it.unibo.oop.smartercities.controller.IStreetObserverObserver;
-import it.unibo.oop.smartercities.datatype.Coordinates;
 import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 import it.unibo.oop.smartercities.view.locationpanel.GoogleMapsWebBrowser;
 import it.unibo.oop.smartercities.view.locationpanel.ILocationPanel;
@@ -21,9 +20,6 @@ public class ViewGUI extends JFrame implements IViewGUI{
 	private static final long serialVersionUID = 6107931182231615768L;
 	private static final int DEFAULT_WIDTH = (Toolkit.getDefaultToolkit().getScreenSize().width/3)*2;
 	private static final int DEFAULT_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().width/2;
-	
-	private IStreetObserverObserver ioL;
-	private IStolenCarsObserver scL;
 	
 	private final JTabbedPane tabbedPane = new JTabbedPane();
 	private final IMainPanel mainPanel = new MainPanel();
@@ -68,13 +64,13 @@ public class ViewGUI extends JFrame implements IViewGUI{
 	}
 
 	@Override
-	public void attachStreetObserverObserver(IStreetObserverObserver ioL) {
-		this.ioL = ioL;
+	public void attachStreetObserverObserver(IStreetObserverObserver soo) {
+		this.mainPanel.attachStreetObserverObserver(soo);
 	}
 
 	@Override
-	public void attachStolenCarsObserver(IStolenCarsObserver scL) {
-		this.scL = scL;		
+	public void attachStolenCarsObserver(IStolenCarsObserver sco) {
+		this.stolenCarsPanel.attachStolenCarsObserver(sco);		
 	}
 
 }

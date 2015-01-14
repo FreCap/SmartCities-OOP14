@@ -1,5 +1,7 @@
 package it.unibo.oop.smartercities.view.mainpanel;
 
+import it.unibo.oop.smartercities.controller.IStolenCarsObserver;
+import it.unibo.oop.smartercities.controller.IStreetObserverObserver;
 import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
 import java.awt.BorderLayout;
@@ -19,6 +21,8 @@ public class MainPanel extends JPanel implements IMainPanel {
 	private final IInformationsPanel informationsPanel = new InformationsPanel();
 	private final IControlPanel controlPanel = new ControlPanel();
 	private final JScrollPane scrollControlPanel;
+	
+	private IStreetObserverObserver soo;
 	
 	private final Map<IStreetObserver, StreetObserverPanel> observersMap = new HashMap<>();
 	
@@ -52,10 +56,10 @@ public class MainPanel extends JPanel implements IMainPanel {
 					this.observersMap.put(streetObserver, p);
 		});
 		
-		this.newPlug(streetObserver);
+		this.newPlugMsg(streetObserver);
 	}
 	
-	private void newPlug(IStreetObserver streetObserver) {
+	private void newPlugMsg(IStreetObserver streetObserver) {
 		String msg = new StringBuilder().append("New Street Observer is been plugged.\n The positions is: ")
 										.append("\n   - Latitude:  " + streetObserver.getCoordinates().getLatitude())
 										.append("\n   - Longitude: " + streetObserver.getCoordinates().getLongitude())
@@ -70,6 +74,11 @@ public class MainPanel extends JPanel implements IMainPanel {
 		});
 	}
 
+	@Override
+	public void attachStreetObserverObserver(IStreetObserverObserver soo) {
+		this.soo = soo;
+	}
+	
 	@Override
 	public JPanel getPanel() {
 		return this;

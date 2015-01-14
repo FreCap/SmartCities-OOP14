@@ -61,14 +61,6 @@ public class StreetObserverPanel extends JPanel{
 		});
 	}
 	
-	private void setButtonOn() {
-		this.passageLabel.setIcon(PASSAGE_ACTIVE_ICON);
-	}
-	
-	private void setButtonOff() {
-		this.passageLabel.setIcon(PASSAGE_INACTIVE_ICON);
-	}
-	
 	public void displayPassage() {
 		SwingUtilities.invokeLater(() -> { setButtonOn(); });
 		
@@ -80,4 +72,13 @@ public class StreetObserverPanel extends JPanel{
 		
 		SwingUtilities.invokeLater(() -> { setButtonOff(); });
 	}
+	
+	private void setButtonOn() {
+		this.passageLabel.setIcon(PASSAGE_ACTIVE_ICON);
+	}
+	
+	private void setButtonOff() {
+		this.passageLabel.setIcon(PASSAGE_INACTIVE_ICON);
+	}
+
 }

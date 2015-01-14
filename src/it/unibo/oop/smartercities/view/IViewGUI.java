@@ -12,7 +12,9 @@ public interface IViewGUI {
 	// quando si verifica un nuovo passaggio sotto uno street observer, viene segnalato
 	void newPassage(IStreetObserver streetObserver);
 	
-	//attacca i due listener della gui
-	void attachStreetObserverObserver(IStreetObserverObserver ioL);
-	void attachStolenCarsObserver(IStolenCarsObserver scL);
+	// attacco degli observers
+	void attachStreetObserverObserver(IStreetObserverObserver soo);
+		
+	// attacco degli observers
+	void attachStolenCarsObserver(IStolenCarsObserver sco);
 }
