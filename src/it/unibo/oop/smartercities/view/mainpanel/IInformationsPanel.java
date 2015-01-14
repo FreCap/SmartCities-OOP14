@@ -1,13 +1,13 @@
 package it.unibo.oop.smartercities.view.mainpanel;
 
-import javax.swing.JPanel;
+import it.unibo.oop.smartercities.datatype.I.IInfoStreetObserver;
 
-import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
+import javax.swing.JPanel;
 
 public interface IInformationsPanel {
 
 	// mostra le info passate 
-	void showInformations(InfoStreetObserver iso);
+	void showInformations(IInfoStreetObserver iso);
 	
 	// torna il panel
 	JPanel getPanel();

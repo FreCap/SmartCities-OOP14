@@ -1,8 +1,8 @@
 package it.unibo.oop.smartercities.view.mainpanel;
 
-import java.awt.BorderLayout;
+import it.unibo.oop.smartercities.datatype.I.IInfoStreetObserver;
 
-import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
+import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,7 +22,7 @@ public class InformationsPanel extends JPanel implements IInformationsPanel {
 	}
 
 	@Override
-	public void showInformations(InfoStreetObserver iso) {
+	public void showInformations(IInfoStreetObserver iso) {
 		// TODO Auto-generated method stub
 
 	}

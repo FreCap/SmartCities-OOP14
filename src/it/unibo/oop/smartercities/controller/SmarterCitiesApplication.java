@@ -23,7 +23,7 @@ public class SmarterCitiesApplication {
 		controller.addStreetObserver(so2);
 		controller.addStreetObserver(so3);
 		
-		//Thread.sleep(2000);
+		Thread.sleep(2000);
 		
 		Random r = new Random();
 		while(true){

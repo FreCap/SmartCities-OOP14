@@ -1,6 +1,7 @@
 package it.unibo.oop.smartercities.controller;
 
 import it.unibo.oop.smartercities.datatype.I.IInfoStolenCar;
+import it.unibo.oop.smartercities.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.I.ISighting;
 import it.unibo.oop.smartercities.datatype.I.IStolenCar;
 import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
@@ -21,15 +22,13 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public IStreetObserverObserver getStreetObserverInfo(IStreetObserver streetObserver) {
-		//TODO
-		return null;
+	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) {
+		return this.model.getStreetObserverInfo(streetObserver);
 	}
 
 	@Override
 	public IInfoStolenCar getStolenCarsInfo(IStolenCar stolenCar) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.model.getStolenCarInfo(stolenCar);
 	}
 
 	@Override

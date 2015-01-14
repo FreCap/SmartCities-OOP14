@@ -1,42 +1,37 @@
 package it.unibo.oop.smartercities.model;
 
-import it.unibo.oop.smartercities.datatype.StolenCar;
-import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
+import it.unibo.oop.smartercities.datatype.I.IInfoStolenCar;
+import it.unibo.oop.smartercities.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.I.ISighting;
 import it.unibo.oop.smartercities.datatype.I.IStolenCar;
 import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class Model implements IModel {
-	
-	private List<IStreetObserver> streetObserversList = new LinkedList<>();
 
 	public Model() {
 		super();
 	}
 	
-
+	// TODO questo metodo deve aggiungere un nuovo streetObserver al DATABASE
 	@Override
 	public void addNewStreetObserver(IStreetObserver streetObserver) {
-		this.streetObserversList.add(streetObserver);
 	}
 
+	// TODO questo metodo deve aggiungere il pacchetto di informazioni "s" al database.
+	// s è il pacchetto di info inviato da "streetObserver"
 	@Override
 	public void newPassage(IStreetObserver streetObserver, ISighting s) {
-		// TODO Auto-generated method stub
 	}
 
+	// TODO questo metodo deve far tornare un pacchetto IInfoStreetObserver dello streetObserver richiesto
 	@Override
-	public InfoStreetObserver getInfoOf(IStreetObserver streetObserver) {
-		// TODO Auto-generated method stub
+	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) {
 		return null;
 	}
 
+	// TODO questo metodo deve far tornare un pacchetto IInfoStolenCarr della stolenCar richiesta
 	@Override
-	public StolenCar verifyStolenCar(IStolenCar stolenCar) {
-		// TODO Auto-generated method stub
+	public IInfoStolenCar getStolenCarInfo(IStolenCar stolenCar) {
 		return null;
 	}
 

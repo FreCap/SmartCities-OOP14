@@ -1,13 +1,13 @@
 package it.unibo.oop.smartercities.database.datatype.I;
 
-import it.unibo.oop.smartercities.datatype.StolenCar;
 import it.unibo.oop.smartercities.datatype.LicensePlate;
+import it.unibo.oop.smartercities.datatype.I.IInfoStolenCar;
 
 import java.util.List;
 
 public interface IStolenCars {
 
-	public List<StolenCar> getStolenCarsList();
+	public List<IInfoStolenCar> getStolenCarsList();
 
 	public Boolean verifyStolenCars(LicensePlate licensePlate);
 	

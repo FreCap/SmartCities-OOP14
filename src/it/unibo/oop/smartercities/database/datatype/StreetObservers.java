@@ -8,6 +8,7 @@ import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.PlainSighting;
 import it.unibo.oop.smartercities.datatype.Sighting;
 import it.unibo.oop.smartercities.datatype.StreetObserver;
+import it.unibo.oop.smartercities.datatype.I.IInfoStreetObserver;
 
 import java.util.Date;
 import java.util.List;
@@ -31,9 +32,9 @@ public class StreetObservers implements IStreetObservers {
 	}
 	
 	// raccoglie dati di uno streetObserver, e restituisce un pacchetto InfoStreetObserver
-	public InfoStreetObserver getDataGathered(StreetObserver streetObserver){
+	public IInfoStreetObserver getDataGathered(StreetObserver streetObserver){
 		//TODO
-		InfoStreetObserver iso = new InfoStreetObserver();
+		IInfoStreetObserver iso = new InfoStreetObserver();
 		
 		return iso;
 		

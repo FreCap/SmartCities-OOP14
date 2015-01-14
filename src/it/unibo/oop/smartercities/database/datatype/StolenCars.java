@@ -4,7 +4,7 @@ import it.unibo.oop.smartercities.database.Connection;
 import it.unibo.oop.smartercities.database.StolenCarRow;
 import it.unibo.oop.smartercities.database.datatype.I.IStolenCars;
 import it.unibo.oop.smartercities.datatype.LicensePlate;
-import it.unibo.oop.smartercities.datatype.StolenCar;
+import it.unibo.oop.smartercities.datatype.I.IInfoStolenCar;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import com.j256.ormlite.stmt.QueryBuilder;
 public class StolenCars implements IStolenCars {
 
 	@Override
-	public List<StolenCar> getStolenCarsList() {
+	public List<IInfoStolenCar> getStolenCarsList() {
 		List<StolenCarRow> stolenCars = null;
 		Dao<StolenCarRow, Integer> stolenCarDao = Connection.getInstance()
 				.getStolenCarDao();
@@ -25,7 +25,7 @@ public class StolenCars implements IStolenCars {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		List<StolenCar> stolen = (List<StolenCar>) (List<?>) stolenCars;
+		List<IInfoStolenCar> stolen = (List<IInfoStolenCar>) (List<?>) stolenCars;
 		return stolen;
 
 	}
