@@ -2,12 +2,12 @@ package it.unibo.oop.smartercities.view.stolencarspanel;
 
 import javax.swing.JPanel;
 
-import it.unibo.oop.smartercities.datatype.I.IStolenCar;
+import it.unibo.oop.smartercities.datatype.I.IInfoStolenCar;
 
 public interface IStolenCarsPanel {
 	
 	// mostra le informazioni su di una determinata auto
-	void showInfo(IStolenCar sc);
+	void showInfo(IInfoStolenCar isc);
 	
 	// torna il panel
 	JPanel getPanel();

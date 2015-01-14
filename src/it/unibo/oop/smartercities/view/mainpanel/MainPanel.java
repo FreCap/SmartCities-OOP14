@@ -3,60 +3,34 @@ package it.unibo.oop.smartercities.view.mainpanel;
 import it.unibo.oop.smartercities.datatype.Coordinates;
 
 import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
-import javax.swing.border.TitledBorder;
 
 public class MainPanel extends JPanel implements IMainPanel {
 	
 	private static final long serialVersionUID = -5219662861548416920L;
 	private static final int CUSTOM_SCROLLING = 30;
 	
-	// TODO mettici interfacce!
-	private final JPanel informationsPanel;
-	private final JPanel controlPanel;
+	private final IInformationsPanel informationsPanel = new InformationsPanel();
+	private final IControlPanel controlPanel = new ControlPanel();
 	private final JScrollPane scrollControlPanel;
-	private final GridBagConstraints gbc;
 	
 	private final Map<Coordinates<Double>, StreetObserverPanel> observersMap = new HashMap<>();
-	
-	private int nOfPluggedObservers;
 	
 	public MainPanel() {
 		super();
 		
-		//creation of infoPanel
-		informationsPanel = new JPanel();
-		informationsPanel.setBorder(new TitledBorder("Info"));
-		informationsPanel.setLayout(new BorderLayout());
-		informationsPanel.add(new JLabel("QUI CI METTIAMO TUTTE LE NOSTRE BELLISSIME INFORMAZIONI"));
-		
-		// creation of controlPanel
-		controlPanel = new JPanel();
-		controlPanel.setBorder(new TitledBorder("Controllers"));
-		controlPanel.setLayout(new GridBagLayout());
-		scrollControlPanel = new JScrollPane(controlPanel);
+		scrollControlPanel = new JScrollPane(controlPanel.getPanel());
 		scrollControlPanel.getVerticalScrollBar().setUnitIncrement(CUSTOM_SCROLLING);
-		// vertical disposition of the element of the controlPanel
-		gbc = new GridBagConstraints() ;
-		gbc.gridy = 0;
-		gbc.insets = new Insets (5 ,5 ,5 ,5);
 		
-		// creation of the panel
 		this.setLayout(new BorderLayout());
 		this.add(scrollControlPanel, BorderLayout.CENTER);
-		this.add(informationsPanel, BorderLayout.EAST);
-		
-		nOfPluggedObservers = 0;
+		this.add(informationsPanel.getPanel(), BorderLayout.EAST);
 	}
 	
 	@Override
@@ -73,9 +47,8 @@ public class MainPanel extends JPanel implements IMainPanel {
 	public void addStreetObserver(Coordinates<Double> c) {
 		
 		SwingUtilities.invokeLater(() -> {
-					StreetObserverPanel p = new StreetObserverPanel(c, ++nOfPluggedObservers);
-					this.controlPanel.add(p, gbc);
-					this.gbc.gridy++;
+					StreetObserverPanel p = new StreetObserverPanel(c, this.observersMap.size());
+					this.controlPanel.addStreetObserver(p);
 					this.observersMap.put(c, p);
 		});
 		

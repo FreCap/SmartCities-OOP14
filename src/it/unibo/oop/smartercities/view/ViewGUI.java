@@ -26,7 +26,6 @@ public class ViewGUI extends JFrame implements IViewGUI{
 	
 	private final JTabbedPane tabbedPane = new JTabbedPane();
 	private final IMainPanel mainPanel = new MainPanel();
-	//TODO make interfaces!!!
 	private final ILocationPanel locationPanel = new GoogleMapsWebBrowser();
 	private final IStolenCarsPanel stolenCarsPanel = new StolenCarsPanel();
 
