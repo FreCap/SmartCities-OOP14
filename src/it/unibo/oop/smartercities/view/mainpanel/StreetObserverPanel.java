@@ -24,13 +24,13 @@ public class StreetObserverPanel extends JPanel{
 	private final JLabel mapLabel;
 	private final JLabel passageLabel;
 	
-	public StreetObserverPanel(IStreetObserver streetObserver, int id, Consumer<IStreetObserver> consumer) {
+	public StreetObserverPanel(IStreetObserver streetObserver, Consumer<IStreetObserver> consumer) {
 		this.setLayout(new BorderLayout());
-		this.setBorder(new TitledBorder("Street Observer" + " " + id));
+		this.setBorder(new TitledBorder("Street Observer" + " " + streetObserver.getID()));
 		
 		this.mapLabel = new JLabel();
 		ImageIcon ii = GoogleStaticMapsConstructor.getLMC()
-												  .getMapOf(id, 
+												  .getMapOf(streetObserver.getID(), 
 															streetObserver.getCoordinates().getLatitude(), 
 															streetObserver.getCoordinates().getLongitude()
 													);

@@ -52,7 +52,6 @@ public class MainPanel extends JPanel implements IMainPanel {
 		
 		SwingUtilities.invokeLater(() -> {
 			StreetObserverPanel p = new StreetObserverPanel(streetObserver,
-															this.observersMap.size(),
 															(t) -> {
 																IInfoStreetObserver info = this.soo.getStreetObserverInfo(t);
 																this.informationsPanel.showInformations(info);
