@@ -1,5 +1,7 @@
 package it.unibo.oop.smartercities.model;
 
+import java.util.Random;
+
 import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smartercities.datatype.I.IInfoStreetObserver;
@@ -29,7 +31,14 @@ public class Model implements IModel {
 	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) {
 		
 		//////// QUESTO LO FACCIO SOLO PER ESEMPIO! BISOGNERA' POI IMPLEMENTARLO IN MODO CHE SI INTERFACCI CON IL DB
-		return new InfoStreetObserver.Builder().maxCarRateToday(5)
+		Random r = new Random();
+		return new InfoStreetObserver.Builder().streetObserver(streetObserver)
+											   .maxCarRateToday(r.nextInt(100))
+											   .averageSpeedLastMonth(r.nextInt(100))
+											   .averageSpeedLastWeek(r.nextInt(100))
+											   .maxSpeedToday(r.nextInt(100))
+											   .nOfSightLastWeek(r.nextInt(100))
+											   .nOfSightToday(r.nextInt(100))
 											   .build();
 	}
 

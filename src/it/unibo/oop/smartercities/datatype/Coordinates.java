@@ -2,6 +2,8 @@ package it.unibo.oop.smartercities.datatype;
 
 public class Coordinates <X extends Number>{
 
+	private static final int DECIMAL_PRECISION = 6;
+	
 	private final X latitude;
 	private final X longitude;
 	
@@ -45,8 +47,10 @@ public class Coordinates <X extends Number>{
 	
 	@Override
 	public String toString() {
-		return "Coordinates [latitude = " + latitude + ", longitude = " + longitude
-				+ "]";
+		return "Latitude = " + 
+				latitude.toString().substring(0, latitude.toString().indexOf('.') + DECIMAL_PRECISION) + 
+				", Longitude = " + 
+				longitude.toString().substring(0, longitude.toString().indexOf('.') + DECIMAL_PRECISION);
 	}
 
 }

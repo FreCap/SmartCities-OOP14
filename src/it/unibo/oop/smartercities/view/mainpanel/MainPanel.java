@@ -24,6 +24,7 @@ public class MainPanel extends JPanel implements IMainPanel {
 	
 	private IStreetObserverObserver soo;
 	
+	// TODO qual'è l utilità di questa mappa nella GUI? boh..
 	private final Map<IStreetObserver, StreetObserverPanel> observersMap = new HashMap<>();
 	
 	public MainPanel() {
@@ -51,11 +52,12 @@ public class MainPanel extends JPanel implements IMainPanel {
 	public void addStreetObserver(IStreetObserver streetObserver) {
 		
 		SwingUtilities.invokeLater(() -> {
-			StreetObserverPanel p = new StreetObserverPanel(streetObserver,
-															(t) -> {
-																IInfoStreetObserver info = this.soo.getStreetObserverInfo(t);
-																this.informationsPanel.showInformations(info);
-															});
+			StreetObserverPanel p = new StreetObserverPanel(
+					streetObserver,
+					(t) -> {
+							IInfoStreetObserver info = this.soo.getStreetObserverInfo(t);
+							this.informationsPanel.showInformations(info);
+					});
 			this.controlPanel.addStreetObserver(p);
 			this.observersMap.put(streetObserver, p);
 		});

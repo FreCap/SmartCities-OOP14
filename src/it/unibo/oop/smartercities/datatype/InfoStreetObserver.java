@@ -1,17 +1,17 @@
 package it.unibo.oop.smartercities.datatype;
 
-import java.util.Optional;
-
 import it.unibo.oop.smartercities.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
+import java.util.Optional;
+
 // UTILIZZATO IL PATTERN BUILDER!!!
 
-// pacchetto di info che il database restituisce alla gui quando la gui richiede di avere
+// pacchetto di info che il data restituisce alla gui quando la gui richiede di avere
 // delle info su di uno street observer dal database
 public class InfoStreetObserver implements IInfoStreetObserver{
 	
-	private static final String EMPTY_STRING = " - ";
+	private static final String EMPTY_STRING = "  -  ";
 	
 	private final Optional<IStreetObserver> streetObserver;
 	private final Optional<Integer> nOfSightLastHour;
@@ -59,8 +59,24 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	}
 
 	@Override
-	public String getStreetObserver() {
-		return this.stringOutputUtility(this.streetObserver);
+	public String getStreetObserverLocation() {
+		if(this.streetObserver.isPresent()){
+			return this.streetObserver.get().getCoordinates().toString();
+		}
+		else{
+			// TODO better throwing new exception?
+			return EMPTY_STRING;
+		}
+	}
+	
+	@Override
+	public String getStreetObserverID() {
+		if(this.streetObserver.isPresent()){
+			return String.valueOf(this.streetObserver.get().getID());
+		}
+		else{
+			return EMPTY_STRING;
+		}
 	}
 
 	@Override
@@ -79,7 +95,7 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	}
 
 	@Override
-	public String getnOfSightLaatMonth() {
+	public String getnOfSightLastMonth() {
 		return this.stringOutputUtility(this.nOfSightLaatMonth);
 	}
 
@@ -120,11 +136,12 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	
 	@Override
 	public String toString(){
-		return new StringBuilder().append(" streetObserver=" + this.getStreetObserver())
+		return new StringBuilder().append(" streetObserverLocation=" + this.getStreetObserverLocation())
+								  .append(" streetObserverID=" + this.getStreetObserverID())
 								  .append(" nOfSightLastHour=" + this.getnOfSightLastHour())
 								  .append(" nOfSightToday=" + this.getnOfSightToday())
 								  .append(" nOfSightLastWeek=" + this.getnOfSightLastWeek())
-								  .append(" nOfSightLaatMonth=" + this.getnOfSightLaatMonth())
+								  .append(" nOfSightLaatMonth=" + this.getnOfSightLastMonth())
 								  .append(" totalNOfSight=" + this.getTotalNOfSight())
 								  .append(" speedLimit=" + this.getSpeedLimit())
 								  .append(" averageSpeedToday=" + this.getAverageSpeedToday())

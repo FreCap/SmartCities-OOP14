@@ -2,7 +2,9 @@ package it.unibo.oop.smartercities.datatype.I;
 
 public interface IInfoStreetObserver {
 
-	String getStreetObserver();
+	String getStreetObserverLocation();
+	
+	String getStreetObserverID();
 	
 	String getnOfSightLastHour();
 
@@ -10,7 +12,7 @@ public interface IInfoStreetObserver {
 
 	String getnOfSightLastWeek();
 
-	String getnOfSightLaatMonth();
+	String getnOfSightLastMonth();
 
 	String getTotalNOfSight();
 
