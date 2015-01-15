@@ -29,12 +29,7 @@ public class Model implements IModel {
 	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) {
 		
 		//////// QUESTO LO FACCIO SOLO PER ESEMPIO! BISOGNERA' POI IMPLEMENTARLO IN MODO CHE SI INTERFACCI CON IL DB
-		return new InfoStreetObserver.Builder().averageSpeedLastMonth(20)
-											   .averageSpeedLastWeek(50)
-											   .averageSpeedToday(90)
-											   .maxCarRateToday(70)
-											   .streetObserver(streetObserver)
-											   .nOfSightToday(200000)
+		return new InfoStreetObserver.Builder().maxCarRateToday(5)
 											   .build();
 	}
 

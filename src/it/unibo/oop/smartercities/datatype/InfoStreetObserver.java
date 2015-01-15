@@ -11,7 +11,8 @@ import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 // delle info su di uno street observer dal database
 public class InfoStreetObserver implements IInfoStreetObserver{
 	
-	// TODO trasforma i campi in Optional
+	private static final String EMPTY_STRING = " - ";
+	
 	private final Optional<IStreetObserver> streetObserver;
 	private final Optional<Integer> nOfSightLastHour;
 	private final Optional<Integer> nOfSightToday;
@@ -26,17 +27,17 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	private final Optional<Double> maxCarRateToday;
 	
 	private InfoStreetObserver(IStreetObserver streetObserver,
-			int nOfSightLastHour,
-			int nOfSightToday,
-			int nOfSightLastWeek,
-			int nOfSightLaatMonth,
-			int totalNOfSight,
-			double speedLimit,
-			double averageSpeedToday,
-			double averageSpeedLastWeek,
-			double averageSpeedLastMonth,
-			double maxSpeedToday, 
-			double maxCarRateToday) {
+			Integer nOfSightLastHour,
+			Integer nOfSightToday,
+			Integer nOfSightLastWeek,
+			Integer nOfSightLaatMonth,
+			Integer totalNOfSight,
+			Double speedLimit,
+			Double averageSpeedToday,
+			Double averageSpeedLastWeek,
+			Double averageSpeedLastMonth,
+			Double maxSpeedToday, 
+			Double maxCarRateToday) {
 		
 		super();
 		this.streetObserver = Optional.ofNullable(streetObserver);
@@ -53,92 +54,84 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		this.maxCarRateToday = Optional.ofNullable(maxCarRateToday);
 	}
 	
-
-	@Override
-	public Optional<IStreetObserver> getStreetObserver() {
-		return this.streetObserver;
+	private String stringOutputUtility(Optional<?> o){
+		return o.orElseGet(() -> {return EMPTY_STRING;}).toString();
 	}
 
-
 	@Override
-	public Optional<Integer> getnOfSightLastHour() {
-		return this.nOfSightLastHour;
+	public String getStreetObserver() {
+		return this.stringOutputUtility(this.streetObserver);
 	}
 
-
 	@Override
-	public Optional<Integer> getnOfSightToday() {
-		return this.nOfSightToday;
+	public String getnOfSightLastHour() {
+		return this.stringOutputUtility(this.nOfSightLastHour);
 	}
 
-
 	@Override
-	public Optional<Integer> getnOfSightLastWeek() {
-		return this.nOfSightLastWeek;
+	public String getnOfSightToday() {
+		return this.stringOutputUtility(this.nOfSightToday);
 	}
 
-
 	@Override
-	public Optional<Integer> getnOfSightLaatMonth() {
-		return this.nOfSightLaatMonth;
+	public String getnOfSightLastWeek() {
+		return this.stringOutputUtility(this.nOfSightLastWeek);
 	}
 
-
 	@Override
-	public Optional<Integer> getTotalNOfSight() {
-		return this.totalNOfSight;
+	public String getnOfSightLaatMonth() {
+		return this.stringOutputUtility(this.nOfSightLaatMonth);
 	}
 
-
 	@Override
-	public Optional<Double> getSpeedLimit() {
-		return this.speedLimit;
+	public String getTotalNOfSight() {
+		return this.stringOutputUtility(this.totalNOfSight);
 	}
 
-
 	@Override
-	public Optional<Double> getAverageSpeedToday() {
-		return this.averageSpeedToday;
+	public String getSpeedLimit() {
+		return this.stringOutputUtility(this.speedLimit);
 	}
 
-
 	@Override
-	public Optional<Double> getAverageSpeedLastWeek() {
-		return this.averageSpeedLastWeek;
+	public String getAverageSpeedToday() {
+		return this.stringOutputUtility(this.averageSpeedToday);
 	}
 
-
 	@Override
-	public Optional<Double> getAverageSpeedLastMonth() {
-		return this.averageSpeedLastMonth;
+	public String getAverageSpeedLastWeek() {
+		return this.stringOutputUtility(this.averageSpeedLastWeek);
 	}
 
-
 	@Override
-	public Optional<Double> getMaxSpeedToday() {
-		return this.maxSpeedToday;
+	public String getAverageSpeedLastMonth() {
+		return this.stringOutputUtility(this.averageSpeedLastMonth);
 	}
 
+	@Override
+	public String getMaxSpeedToday() {
+		return this.stringOutputUtility(this.maxSpeedToday);
+	}
 
 	@Override
-	public Optional<Double> getMaxCarRateToday() {
-		return this.maxCarRateToday;
+	public String getMaxCarRateToday() {
+		return this.stringOutputUtility(this.maxCarRateToday);
 	}
 	
 	@Override
 	public String toString(){
-		return new StringBuilder().append(" streetObserver=" + streetObserver)
-								  .append(" nOfSightLastHour=" + nOfSightLastHour)
-								  .append(" nOfSightToday=" + nOfSightToday)
-								  .append(" nOfSightLastWeek=" + nOfSightLastWeek)
-								  .append(" nOfSightLaatMonth=" + nOfSightLaatMonth)
-								  .append(" totalNOfSight=" + totalNOfSight)
-								  .append(" speedLimit=" + speedLimit)
-								  .append(" averageSpeedToday=" + averageSpeedToday)
-								  .append(" averageSpeedLastWeek=" + averageSpeedLastWeek)
-								  .append(" averageSpeedLastMonth=" + averageSpeedLastMonth)
-								  .append(" maxSpeedToday=" + maxSpeedToday)
-								  .append(" maxCarRateToday=" + maxCarRateToday)
+		return new StringBuilder().append(" streetObserver=" + this.getStreetObserver())
+								  .append(" nOfSightLastHour=" + this.getnOfSightLastHour())
+								  .append(" nOfSightToday=" + this.getnOfSightToday())
+								  .append(" nOfSightLastWeek=" + this.getnOfSightLastWeek())
+								  .append(" nOfSightLaatMonth=" + this.getnOfSightLaatMonth())
+								  .append(" totalNOfSight=" + this.getTotalNOfSight())
+								  .append(" speedLimit=" + this.getSpeedLimit())
+								  .append(" averageSpeedToday=" + this.getAverageSpeedToday())
+								  .append(" averageSpeedLastWeek=" + this.getAverageSpeedLastWeek())
+								  .append(" averageSpeedLastMonth=" + this.getAverageSpeedLastMonth())
+								  .append(" maxSpeedToday=" + this.getMaxSpeedToday())
+								  .append(" maxCarRateToday=" + this.getMaxCarRateToday())
 								  .toString();
 	}
 
@@ -148,17 +141,17 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	// builder for this class
 	public static class Builder{
 		private IStreetObserver streetObserver;
-		private int nOfSightLastHour;
-		private int nOfSightToday;
-		private int nOfSightLastWeek;
-		private int nOfSightLaatMonth;
-		private int totalNOfSight;
-		private double speedLimit;
-		private double averageSpeedToday;
-		private double averageSpeedLastWeek;
-		private double averageSpeedLastMonth;
-		private double maxSpeedToday;
-		private double maxCarRateToday;
+		private Integer nOfSightLastHour;
+		private Integer nOfSightToday;
+		private Integer nOfSightLastWeek;
+		private Integer nOfSightLaatMonth;
+		private Integer totalNOfSight;
+		private Double speedLimit;
+		private Double averageSpeedToday;
+		private Double averageSpeedLastWeek;
+		private Double averageSpeedLastMonth;
+		private Double maxSpeedToday;
+		private Double maxCarRateToday;
 		
 		public Builder streetObserver(IStreetObserver streetObserver){
 			this.streetObserver = streetObserver;

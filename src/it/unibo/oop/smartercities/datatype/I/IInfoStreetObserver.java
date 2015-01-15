@@ -1,30 +1,29 @@
 package it.unibo.oop.smartercities.datatype.I;
 
-import java.util.Optional;
-
 public interface IInfoStreetObserver {
 
-	public Optional<IStreetObserver> getStreetObserver();
+	String getStreetObserver();
 	
-	public Optional<Integer> getnOfSightLastHour();
+	String getnOfSightLastHour();
 
-	public Optional<Integer> getnOfSightToday();
+	String getnOfSightToday();
 
-	public Optional<Integer> getnOfSightLastWeek();
+	String getnOfSightLastWeek();
 
-	public Optional<Integer> getnOfSightLaatMonth();
+	String getnOfSightLaatMonth();
 
-	public Optional<Integer> getTotalNOfSight();
+	String getTotalNOfSight();
 
-	public Optional<Double> getSpeedLimit();
+	String getSpeedLimit();
 
-	public Optional<Double> getAverageSpeedToday();
+	String getAverageSpeedToday();
 
-	public Optional<Double> getAverageSpeedLastWeek();
+	String getAverageSpeedLastWeek();
 
-	public Optional<Double> getAverageSpeedLastMonth();
+	String getAverageSpeedLastMonth();
 
-	public Optional<Double> getMaxSpeedToday();
+	String getMaxSpeedToday();
 
-	public Optional<Double> getMaxCarRateToday();
+	String getMaxCarRateToday();
+
 }
