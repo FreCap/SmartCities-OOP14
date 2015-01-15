@@ -4,6 +4,9 @@ import it.unibo.oop.smartercities.datatype.Coordinates;
 
 public interface IStreetObserver {
 
-	public Coordinates<Double> getCoordinates();
+	// TODO è giusto mettere qui Double come generico, o è meglio rendere generica anche StreetObserver?
+	Coordinates<Double> getCoordinates();
 	
+	int getID();
+
 }

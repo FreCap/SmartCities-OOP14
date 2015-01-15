@@ -9,6 +9,7 @@ import it.unibo.oop.smartercities.datatype.PlainSighting;
 import it.unibo.oop.smartercities.datatype.Sighting;
 import it.unibo.oop.smartercities.datatype.StreetObserver;
 import it.unibo.oop.smartercities.datatype.I.IInfoStreetObserver;
+import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
 import java.util.Date;
 import java.util.List;
@@ -41,8 +42,8 @@ public class StreetObservers implements IStreetObservers {
 	}
 
 	@Override
-	public StreetObserver add(Coordinates<Double> coordinate) throws Exception {
-		StreetObserverRow streetObserver = new StreetObserverRow(coordinate);
+	public StreetObserver add(IStreetObserver iso) throws Exception {
+		StreetObserverRow streetObserver = new StreetObserverRow(iso);
 		Dao<StreetObserverRow, Integer> streetObserverDao = getStreetObserverDao();
 		streetObserverDao.create(streetObserver);
 		return streetObserver;
@@ -55,26 +56,26 @@ public class StreetObservers implements IStreetObservers {
 	}
 
 	@Override
-	public List<Sighting> getSighting(StreetObserver streetObserver) {
+	public List<Sighting> getSighting(IStreetObserver streetObserver) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Sighting> getSighting(StreetObserver streetObserver, Date from,
+	public List<Sighting> getSighting(IStreetObserver streetObserver, Date from,
 			Date to) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Sighting> getMediaVelocita(StreetObserver streetObserver) {
+	public List<Sighting> getMediaVelocita(IStreetObserver streetObserver) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Sighting> getMediaVelocita(StreetObserver streetObserver,
+	public List<Sighting> getMediaVelocita(IStreetObserver streetObserver,
 			Date from, Date to) {
 		// TODO Auto-generated method stub
 		return null;

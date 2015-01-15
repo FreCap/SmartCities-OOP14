@@ -4,19 +4,26 @@ import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
 public class StreetObserver implements IStreetObserver {
 
-	private Coordinates<Double> coordinates;
+	private final Coordinates<Double> coordinates;
+	private final int id;
 
-	public StreetObserver(Coordinates<Double> c) {
+	public StreetObserver(Coordinates<Double> c, int id) {
 		this.coordinates = c;
+		this.id = id;
 	}
 	
 	public StreetObserver(IStreetObserver iso) {
-		this(iso.getCoordinates());
+		this(iso.getCoordinates(), iso.getID());
 	}
 
 	@Override
 	public Coordinates<Double> getCoordinates() {
-		return this.coordinates;
+		return new Coordinates<>(this.coordinates);
+	}
+	
+	@Override
+	public int getID() {
+		return this.id;
 	}
 
 	@Override
@@ -40,4 +47,5 @@ public class StreetObserver implements IStreetObserver {
 	public String toString() {
 		return "StreetObserver [coordinates=" + coordinates + "]";
 	}
+
 }
