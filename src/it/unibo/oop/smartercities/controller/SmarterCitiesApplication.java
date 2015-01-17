@@ -17,7 +17,7 @@ public class SmarterCitiesApplication {
 		
 		StreetObserver so1 =  new StreetObserver(new Coordinates<>(44.139625, 12.235225), 0);
 		StreetObserver so2 =  new StreetObserver(new Coordinates<>(44.131771, 12.268767), 1);
-		StreetObserver so3 =  new StreetObserver(new Coordinates<>(21.306944, -157.858333), 2);
+		StreetObserver so3 =  new StreetObserver(new Coordinates<>(44.14464, 12.24114), 2);
 		
 		controller.addStreetObserver(so1);
 		controller.addStreetObserver(so2);
