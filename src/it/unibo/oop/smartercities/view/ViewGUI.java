@@ -3,8 +3,8 @@
 import it.unibo.oop.smartercities.controller.IStolenCarsObserver;
 import it.unibo.oop.smartercities.controller.IStreetObserverObserver;
 import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
-import it.unibo.oop.smartercities.view.locationpanel.GoogleMapsWebBrowser;
 import it.unibo.oop.smartercities.view.locationpanel.ILocationPanel;
+import it.unibo.oop.smartercities.view.locationpanel.OpenStreetMapPanel;
 import it.unibo.oop.smartercities.view.mainpanel.IMainPanel;
 import it.unibo.oop.smartercities.view.mainpanel.MainPanel;
 import it.unibo.oop.smartercities.view.stolencarspanel.IStolenCarsPanel;
@@ -23,7 +23,7 @@ public class ViewGUI extends JFrame implements IViewGUI{
 	
 	private final JTabbedPane tabbedPane = new JTabbedPane();
 	private final IMainPanel mainPanel = new MainPanel();
-	private final ILocationPanel locationPanel = new GoogleMapsWebBrowser();
+	private final ILocationPanel locationPanel = new OpenStreetMapPanel();
 	private final IStolenCarsPanel stolenCarsPanel = new StolenCarsPanel();
 
 	public ViewGUI(){
