@@ -1,6 +1,10 @@
 package it.unibo.oop.smartercities.datatype;
 
-public class Coordinates <X extends Number>{
+import java.io.Serializable;
+
+public class Coordinates <X extends Number> implements Serializable{
+
+	private static final long serialVersionUID = 6127098657709069219L;
 
 	private static final int DECIMAL_PRECISION = 6;
 	

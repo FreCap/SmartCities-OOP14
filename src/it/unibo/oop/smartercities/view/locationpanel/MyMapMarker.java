@@ -16,6 +16,13 @@ import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.MapObjectImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
+/**
+ * 
+ * Questa classe implementa un MapMarker personalizzato da utilizzare in una {@link JMapViewer}
+ * 
+ * @author Federico Bellini
+ * 
+ */
 public class MyMapMarker extends MapObjectImpl implements MapMarker {
 
 	private static final String DEFAULT_PATH = "/images/";
@@ -34,7 +41,7 @@ public class MyMapMarker extends MapObjectImpl implements MapMarker {
 		}
 		
 		public static String getRandomPin() {
-			int c = r.nextInt(10000);
+			int c = r.nextInt(1000);
 			switch(c% (PinColor.values().length)){
 				case 0: return PinColor.bluePin.toString();
 				case 1: return PinColor.greenPin.toString();

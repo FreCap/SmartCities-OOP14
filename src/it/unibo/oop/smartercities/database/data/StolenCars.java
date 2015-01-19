@@ -16,10 +16,9 @@ import com.j256.ormlite.stmt.QueryBuilder;
 public class StolenCars implements IStolenCars {
 
 	@Override
-	public List<IInfoStolenCar> getStolenCarsList() {
+	public List<IInfoStolenCar> getStolenCarsInfoList() {
 		List<StolenCarRow> stolenCars = null;
-		Dao<StolenCarRow, Integer> stolenCarDao = Connection.getInstance()
-				.getStolenCarDao();
+		Dao<StolenCarRow, Integer> stolenCarDao = Connection.getInstance().getStolenCarDao();
 		try {
 			stolenCars = stolenCarDao.queryForAll();
 		} catch (SQLException e) {

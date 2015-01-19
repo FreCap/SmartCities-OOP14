@@ -74,7 +74,6 @@ public class Connection {
 		return stolenCarDao;
 	}
 
-
 	public Dao<StreetObserverRow, Integer> getStreetObserverDao() {
 		return streetObserverDao;
 	}

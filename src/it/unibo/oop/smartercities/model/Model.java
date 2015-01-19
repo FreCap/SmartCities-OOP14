@@ -2,6 +2,7 @@ package it.unibo.oop.smartercities.model;
 
 import java.util.Random;
 
+import it.unibo.oop.smartercities.database.Connection;
 import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smartercities.datatype.I.IInfoStreetObserver;
@@ -29,6 +30,8 @@ public class Model implements IModel {
 	// TODO questo metodo deve far tornare un pacchetto IInfoStreetObserver dello streetObserver richiesto
 	@Override
 	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) {
+		
+		Connection.getInstance();
 		
 		//////// QUESTO LO FACCIO SOLO PER ESEMPIO! BISOGNERA' POI IMPLEMENTARLO IN MODO CHE SI INTERFACCI CON IL DB
 		Random r = new Random();

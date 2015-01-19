@@ -23,7 +23,7 @@ public class SightingRow extends Sighting {
 	@DatabaseField(canBeNull = false, dataType = DataType.DATE_LONG)
 	private Date date;
 
-	@DatabaseField(canBeNull = false)
+	@DatabaseField(canBeNull = false, dataType=DataType.SERIALIZABLE)
 	private LicensePlate licensePlate;
 
 	@DatabaseField(canBeNull = false)

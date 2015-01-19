@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IStolenCars {
 
-	public List<IInfoStolenCar> getStolenCarsList();
+	public List<IInfoStolenCar> getStolenCarsInfoList();
 
 	public Boolean verifyStolenCars(LicensePlate licensePlate);
 	

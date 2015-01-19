@@ -1,7 +1,10 @@
 package it.unibo.oop.smartercities.datatype;
 
-public class LicensePlate {
+import java.io.Serializable;
 
+public class LicensePlate implements Serializable {
+
+	private static final long serialVersionUID = -194344929770325193L;
 	private final String licensePlate;	
 	
 	public LicensePlate(String licensePlate) {

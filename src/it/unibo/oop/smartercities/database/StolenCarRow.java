@@ -5,6 +5,7 @@ import it.unibo.oop.smartercities.datatype.I.IInfoStolenCar;
 
 import java.util.Date;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -12,8 +13,11 @@ import com.j256.ormlite.table.DatabaseTable;
 public class StolenCarRow implements IInfoStolenCar {
 	public static final String LICENSEPLATE_FIELD_NAME = "licensePlate";
 	public static final String DATAINSERIMENTO_FIELD_NAME = "dataInserimento";
+	
+	@DatabaseField(generatedId = true)
+	private int id;
 
-	@DatabaseField(columnName = LICENSEPLATE_FIELD_NAME, id = true)
+	@DatabaseField(columnName = LICENSEPLATE_FIELD_NAME, dataType=DataType.SERIALIZABLE)
 	private LicensePlate licensePlate;
 
 	@DatabaseField(columnName = DATAINSERIMENTO_FIELD_NAME, canBeNull = false)
