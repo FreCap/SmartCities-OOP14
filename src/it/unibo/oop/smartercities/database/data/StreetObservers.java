@@ -26,7 +26,7 @@ public class StreetObservers implements IStreetObservers {
 
 	private StreetObserver getStreetObserver(Coordinates<Double> coordinate) {
 		Dao<StreetObserverRow, Integer> streetObserverDao = getStreetObserverDao();
-//		StreetObserverRow delivery2 = streetObserverDao.queryForId(coordinate);
+//		StreetObserverRow delivery2 = streetObserverDao.queryForId(arg0);
 
 		return null;
 

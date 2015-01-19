@@ -3,6 +3,8 @@ package it.unibo.oop.smartercities.model;
 import java.util.Random;
 
 import it.unibo.oop.smartercities.database.Connection;
+import it.unibo.oop.smartercities.database.data.StreetObservers;
+import it.unibo.oop.smartercities.database.data.I.IStreetObservers;
 import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smartercities.datatype.I.IInfoStreetObserver;
@@ -12,6 +14,8 @@ import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
 public class Model implements IModel {
 
+	IStreetObservers streetObserverDB = new StreetObservers();
+	
 	public Model() {
 		super();
 	}
@@ -31,9 +35,8 @@ public class Model implements IModel {
 	@Override
 	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) {
 		
-		Connection.getInstance();
-		
-		//////// QUESTO LO FACCIO SOLO PER ESEMPIO! BISOGNERA' POI IMPLEMENTARLO IN MODO CHE SI INTERFACCI CON IL DB
+		//////// QUESTO LO FACCIO SOLO PER ESEMPIO! BISOGNERA' POI IMPLEMENTARLO IN MODO CHE 
+		//////// I DATI PROVENGANO DAL DB!
 		Random r = new Random();
 		return new InfoStreetObserver.Builder().streetObserver(streetObserver)
 											   .maxCarRateToday(r.nextInt(100))
