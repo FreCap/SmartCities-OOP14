@@ -32,7 +32,7 @@ public class SightingRow extends Sighting {
 	SightingRow() {
 	}
 
-	SightingRow(PlainSighting plainSighting, StreetObserverRow streetObserverRow) {
+	public SightingRow(PlainSighting plainSighting, StreetObserverRow streetObserverRow) {
 		this.setStreetObserver(streetObserverRow);
 		this.setDate(plainSighting.getDate());
 		this.setLicensePlate(new LicensePlate(plainSighting.getLicensePlate()));

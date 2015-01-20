@@ -1,5 +1,7 @@
 package it.unibo.oop.smartercities.database;
 
+import it.unibo.oop.smartercities.datatype.Coordinates;
+
 import java.sql.SQLException;
 
 import com.j256.ormlite.dao.Dao;
@@ -13,7 +15,7 @@ public class Connection {
 	private static Connection instance;
 	private Dao<SightingRow, Integer> sightingDao;
 	private Dao<StolenCarRow, Integer> stolenCarDao;
-	private Dao<StreetObserverRow, Integer> streetObserverDao;
+	private Dao<StreetObserverRow, Coordinates<Double>> streetObserverDao;
 	private JdbcConnectionSource connectionSource = null;
 
 	private final static String DATABASE_URL = "jdbc:h2:mem:account";
@@ -74,7 +76,7 @@ public class Connection {
 		return stolenCarDao;
 	}
 
-	public Dao<StreetObserverRow, Integer> getStreetObserverDao() {
+	public Dao<StreetObserverRow, Coordinates<Double>> getStreetObserverDao() {
 		return streetObserverDao;
 	}
 
