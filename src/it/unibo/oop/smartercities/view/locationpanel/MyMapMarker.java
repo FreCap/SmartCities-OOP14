@@ -23,7 +23,7 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
  * @author Federico Bellini
  */
 public class MyMapMarker extends MapObjectImpl implements MapMarker {
-
+	
 	private static final String DEFAULT_PATH = "/images/";
 	private static final STYLE style = STYLE.VARIABLE;
 	
