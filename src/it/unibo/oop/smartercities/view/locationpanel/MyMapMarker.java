@@ -17,11 +17,10 @@ import org.openstreetmap.gui.jmapviewer.MapObjectImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 /**
- * 
- * Questa classe implementa un MapMarker personalizzato da utilizzare in una {@link JMapViewer}
+ * Questa classe implementa un MapMarker personalizzato da utilizzare in una 
+ * {@link org.openstreetmap.gui.jmapviewer.JMapViewer}
  * 
  * @author Federico Bellini
- * 
  */
 public class MyMapMarker extends MapObjectImpl implements MapMarker {
 
@@ -62,9 +61,10 @@ public class MyMapMarker extends MapObjectImpl implements MapMarker {
 	}
 
 	/**
-	 *  This operation is unsupported
+	 *  Questa operazione non è supportata
 	 *  
-	 *  @throws UnsupportedOperationException
+	 *  @throws java.lang.UnsupportedOperationException Questa eccezione viene lanciata
+	 *  		quando viene utilizzato questo metodo.
 	 */
 	@Override
 	public void setLat(double arg0) {
@@ -72,9 +72,10 @@ public class MyMapMarker extends MapObjectImpl implements MapMarker {
 	}
 
 	/**
-	 *  This operation is unsupported
+	 *  Questa operazione non è supportata
 	 *  
-	 *  @throws UnsupportedOperationException
+	 *  @throws java.lang.UnsupportedOperationException Questa eccezione viene lanciata
+	 *  		quando viene utilizzato questo metodo.
 	 */
 	@Override
 	public void setLon(double arg0) {

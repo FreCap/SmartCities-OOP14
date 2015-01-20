@@ -7,14 +7,14 @@ import it.unibo.oop.smartercities.datatype.I.IStolenCar;
 import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 import it.unibo.oop.smartercities.model.Model;
 import it.unibo.oop.smartercities.model.IModel;
-import it.unibo.oop.smartercities.view.IViewGUI;
+import it.unibo.oop.smartercities.view.IView;
 
 public class Controller implements IController {
 
-	private final IViewGUI view;
+	private final IView view;
 	private final IModel model;
 	
-	public Controller(IViewGUI view) {
+	public Controller(IView view) {
 		this.model = new Model();
 		this.view = view;
 		this.view.attachStreetObserverObserver(this);

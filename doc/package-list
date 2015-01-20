@@ -1,0 +1,11 @@
+it.unibo.oop.smartercities.controller
+it.unibo.oop.smartercities.database
+it.unibo.oop.smartercities.database.data
+it.unibo.oop.smartercities.database.data.I
+it.unibo.oop.smartercities.datatype
+it.unibo.oop.smartercities.datatype.I
+it.unibo.oop.smartercities.model
+it.unibo.oop.smartercities.view
+it.unibo.oop.smartercities.view.locationpanel
+it.unibo.oop.smartercities.view.mainpanel
+it.unibo.oop.smartercities.view.stolencarspanel

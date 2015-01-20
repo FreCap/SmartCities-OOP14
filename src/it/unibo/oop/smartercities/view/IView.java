@@ -4,7 +4,12 @@ import it.unibo.oop.smartercities.controller.IStolenCarsObserver;
 import it.unibo.oop.smartercities.controller.IStreetObserverObserver;
 import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
-public interface IViewGUI {
+/**
+ * Interfaccia realizzata per la gestione della parte di view del programma
+ * 
+ * @author Federico Bellini
+ */
+public interface IView {
 	
 	// aggiunge uno streetObserver alla gui
 	void addStreetObserver(IStreetObserver streetObserver);
