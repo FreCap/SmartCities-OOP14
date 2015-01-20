@@ -10,6 +10,10 @@ import java.util.Date;
 import java.util.List;
 
 public interface IStreetObservers {
+	public static IStreetObserver getInstance() {
+		return null;
+	}
+	
 	public StreetObserver add(IStreetObserver streetObserver) throws Exception;
 
 	public StreetObserver sighting(PlainSighting sighting) throws Exception;

@@ -14,7 +14,7 @@ import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
 public class Model implements IModel {
 
-	IStreetObservers streetObserverDB = new StreetObservers();
+	IStreetObservers streetObserverDB = StreetObservers.getInstance();
 	
 	public Model() {
 		super();

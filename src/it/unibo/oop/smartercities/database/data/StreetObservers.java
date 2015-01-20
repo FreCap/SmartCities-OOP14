@@ -11,6 +11,7 @@ import it.unibo.oop.smartercities.datatype.PlainSighting;
 import it.unibo.oop.smartercities.datatype.StreetObserver;
 import it.unibo.oop.smartercities.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
+import it.unibo.oop.smartercities.network.Dispatcher;
 
 import java.util.Date;
 
@@ -19,7 +20,19 @@ import com.j256.ormlite.dao.Dao;
 // classe di utilità, che richiede i dati al DB, li elabora e attraverso il metodo getDataGathered()
 // torna una InfoStreetObserver
 public class StreetObservers implements IStreetObservers {
-
+	
+	private static StreetObservers instance;
+	private StreetObservers(){
+		
+	};
+	
+	public static synchronized StreetObservers getInstance() {
+		if (instance != null)
+			return instance;
+		instance = new StreetObservers();
+		return instance;
+	}
+	
 	private Dao<StreetObserverRow, Coordinates<Double>> getStreetObserverDao() {
 		return Connection.getInstance().getStreetObserverDao();
 	}

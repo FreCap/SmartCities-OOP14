@@ -14,7 +14,17 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 public class StolenCars implements IStolenCars {
-
+	private static StolenCars instance;
+	private StolenCars(){
+		
+	};
+	
+	public static synchronized StolenCars getInstance() {
+		if (instance != null)
+			return instance;
+		instance = new StolenCars();
+		return instance;
+	}
 	@Override
 	public List<IInfoStolenCar> getStolenCarsInfoList() {
 		List<StolenCarRow> stolenCars = null;
@@ -30,7 +40,7 @@ public class StolenCars implements IStolenCars {
 	}
 
 	@Override
-	public Boolean verifyStolenCars(LicensePlate licensePlate) {
+	public Boolean checkStolenPlate(LicensePlate licensePlate) {
 		Dao<StolenCarRow, Integer> stolenCarDao = Connection.getInstance()
 				.getStolenCarDao();
 		QueryBuilder<StolenCarRow, Integer> statementBuilder = stolenCarDao
