@@ -70,7 +70,9 @@ public class StreetObserverRow extends StreetObserver {
 
 	public StreetObserverRow(IStreetObserver iso) {
 		super(iso);
-		coordinates = iso.getCoordinates();
+	}
+	public StreetObserverRow(Coordinates<Double> coordinate) {
+		super(coordinate);
 	}
 
 	public Coordinates<Double> getCoordinates() {

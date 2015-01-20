@@ -20,19 +20,20 @@ import com.j256.ormlite.dao.Dao;
 // classe di utilità, che richiede i dati al DB, li elabora e attraverso il metodo getDataGathered()
 // torna una InfoStreetObserver
 public class StreetObservers implements IStreetObservers {
-	
+
 	private static StreetObservers instance;
-	private StreetObservers(){
-		
+
+	private StreetObservers() {
+
 	};
-	
+
 	public static synchronized StreetObservers getInstance() {
 		if (instance != null)
 			return instance;
 		instance = new StreetObservers();
 		return instance;
 	}
-	
+
 	private Dao<StreetObserverRow, Coordinates<Double>> getStreetObserverDao() {
 		return Connection.getInstance().getStreetObserverDao();
 	}
@@ -41,7 +42,7 @@ public class StreetObservers implements IStreetObservers {
 		return Connection.getInstance().getSightingDao();
 	}
 
-	private StreetObserverRow getStreetObserver(Coordinates<Double> coordinate)
+	public StreetObserverRow getStreetObserver(Coordinates<Double> coordinate)
 			throws Exception {
 		Dao<StreetObserverRow, Coordinates<Double>> streetObserverDao = getStreetObserverDao();
 		StreetObserverRow row = streetObserverDao.queryForId(coordinate);
@@ -54,37 +55,45 @@ public class StreetObservers implements IStreetObservers {
 
 	// raccoglie dati di uno streetObserver, e restituisce un pacchetto
 	// InfoStreetObserver
-	public IInfoStreetObserver getDataGathered(StreetObserver streetObserver) throws Exception {
-		
+	public IInfoStreetObserver getDataGathered(StreetObserver streetObserver)
+			throws Exception {
+
 		StreetObserverRow streetObserverRow = getStreetObserver(streetObserver
 				.getCoordinates());
-		
-		Date now = new Date();
-		Date hourAgo = new Date(now.getTime()-(1000*3600));
-		Date today = new Date(now.getTime()-(1000*3600*24));
-		Date weekAgo = new Date(now.getTime()-(1000*3600*24*7));
-		Date monthAgo = new Date(now.getTime()-(1000*3600*24*30));
-		
-		Builder builder = new InfoStreetObserver.Builder();
-		
-		builder.averageSpeedToday(streetObserverRow.getMediaVelocita(new Date(), today));
-		builder.averageSpeedLastWeek(streetObserverRow.getMediaVelocita(new Date(), weekAgo));
-		builder.averageSpeedLastMonth(streetObserverRow.getMediaVelocita(new Date(), monthAgo));
 
-		builder.nOfSightLastHour(streetObserverRow.getSightings(new Date(), hourAgo).size());
-		builder.nOfSightToday(streetObserverRow.getSightings(new Date(), today).size());
-		builder.nOfSightLastWeek(streetObserverRow.getSightings(new Date(), weekAgo).size());
-		builder.nOfSightLaatMonth(streetObserverRow.getSightings(new Date(), monthAgo).size());
-		
+		Date now = new Date();
+		Date hourAgo = new Date(now.getTime() - (1000 * 3600));
+		Date today = new Date(now.getTime() - (1000 * 3600 * 24));
+		Date weekAgo = new Date(now.getTime() - (1000 * 3600 * 24 * 7));
+		Date monthAgo = new Date(now.getTime() - (1000 * 3600 * 24 * 30));
+
+		Builder builder = new InfoStreetObserver.Builder();
+
+		builder.averageSpeedToday(streetObserverRow.getMediaVelocita(
+				new Date(), today));
+		builder.averageSpeedLastWeek(streetObserverRow.getMediaVelocita(
+				new Date(), weekAgo));
+		builder.averageSpeedLastMonth(streetObserverRow.getMediaVelocita(
+				new Date(), monthAgo));
+
+		builder.nOfSightLastHour(streetObserverRow.getSightings(new Date(),
+				hourAgo).size());
+		builder.nOfSightToday(streetObserverRow.getSightings(new Date(), today)
+				.size());
+		builder.nOfSightLastWeek(streetObserverRow.getSightings(new Date(),
+				weekAgo).size());
+		builder.nOfSightLaatMonth(streetObserverRow.getSightings(new Date(),
+				monthAgo).size());
+
 		builder.totalNOfSight(streetObserverRow.getSightings().size());
-		
-		return  builder.build();
+
+		return builder.build();
 
 	}
 
 	@Override
-	public StreetObserver add(IStreetObserver iso) throws Exception {
-		StreetObserverRow streetObserver = new StreetObserverRow(iso);
+	public StreetObserver add(Coordinates<Double> coordinate) throws Exception {
+		StreetObserverRow streetObserver = new StreetObserverRow(coordinate);
 		Dao<StreetObserverRow, Coordinates<Double>> streetObserverDao = getStreetObserverDao();
 		streetObserverDao.create(streetObserver);
 		return streetObserver;
@@ -103,6 +112,5 @@ public class StreetObservers implements IStreetObservers {
 		sightingDao.create(row);
 		return null;
 	}
-
 
 }

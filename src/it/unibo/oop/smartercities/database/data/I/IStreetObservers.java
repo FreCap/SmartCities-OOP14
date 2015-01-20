@@ -1,5 +1,7 @@
 package it.unibo.oop.smartercities.database.data.I;
 
+import it.unibo.oop.smartercities.database.StreetObserverRow;
+import it.unibo.oop.smartercities.datatype.Coordinates;
 import it.unibo.oop.smartercities.datatype.PlainSighting;
 import it.unibo.oop.smartercities.datatype.Sighting;
 import it.unibo.oop.smartercities.datatype.StreetObserver;
@@ -14,8 +16,10 @@ public interface IStreetObservers {
 		return null;
 	}
 	
-	public StreetObserver add(IStreetObserver streetObserver) throws Exception;
+	public StreetObserver add(Coordinates<Double> streetObserver) throws Exception;
 
 	public StreetObserver sighting(PlainSighting sighting) throws Exception;
+
+	public StreetObserver getStreetObserver(Coordinates<Double> coordinate) throws Exception;
 
 }

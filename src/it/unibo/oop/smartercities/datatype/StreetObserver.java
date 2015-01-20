@@ -5,25 +5,22 @@ import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 public class StreetObserver implements IStreetObserver {
 
 	private final Coordinates<Double> coordinates;
-	private final int id;
 
 	public StreetObserver(Coordinates<Double> c, int id) {
 		this.coordinates = c;
-		this.id = id;
 	}
-	
+
 	public StreetObserver(IStreetObserver iso) {
-		this(iso.getCoordinates(), iso.getID());
+		this(iso.getCoordinates());
+	}
+
+	public StreetObserver(Coordinates<Double> coordinate) {
+		this.coordinates = coordinate;
 	}
 
 	@Override
 	public Coordinates<Double> getCoordinates() {
 		return new Coordinates<>(this.coordinates);
-	}
-	
-	@Override
-	public int getID() {
-		return this.id;
 	}
 
 	@Override
@@ -37,8 +34,9 @@ public class StreetObserver implements IStreetObserver {
 
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof StreetObserver){
-			return this.coordinates.equals(((StreetObserver) obj).getCoordinates());
+		if (obj instanceof StreetObserver) {
+			return this.coordinates.equals(((StreetObserver) obj)
+					.getCoordinates());
 		}
 		return false;
 	}

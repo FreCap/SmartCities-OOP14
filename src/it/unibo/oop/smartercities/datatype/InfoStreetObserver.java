@@ -72,7 +72,7 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	@Override
 	public String getStreetObserverID() {
 		if(this.streetObserver.isPresent()){
-			return String.valueOf(this.streetObserver.get().getID());
+			return String.valueOf(this.streetObserver.get().hashCode());
 		}
 		else{
 			return EMPTY_STRING;

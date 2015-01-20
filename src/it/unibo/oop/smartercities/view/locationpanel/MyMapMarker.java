@@ -51,7 +51,7 @@ public class MyMapMarker extends MapObjectImpl implements MapMarker {
 	}
 	
 	public MyMapMarker(IStreetObserver streetObserver) {
-		super(String.valueOf(streetObserver.getID()));
+		super(String.valueOf(streetObserver.getCoordinates().hashCode()));
 		Coordinates<Double> c = streetObserver.getCoordinates();
 		this.coordinate = new Coordinate(c.getLatitude(),c.getLongitude());
 		try {

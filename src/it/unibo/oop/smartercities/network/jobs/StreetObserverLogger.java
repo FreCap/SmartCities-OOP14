@@ -13,9 +13,15 @@ public class StreetObserverLogger implements Observer{
 		if(arg instanceof PlainSighting){
 			PlainSighting sighting = (PlainSighting) arg;
 			try {
-				StreetObservers.getInstance().sighting(sighting);
+				StreetObservers streetObserverData = StreetObservers.getInstance();
+				try{
+					streetObserverData.getStreetObserver(sighting.getCoordinates());
+				}catch(Exception notFound){
+					//TODO change exception
+					streetObserverData.add(sighting.getCoordinates());
+				}
+				streetObserverData.sighting(sighting);
 			} catch (Exception e) {
-				// errore nell'inserimento
 				e.printStackTrace();
 			}
 		}
