@@ -1,12 +1,15 @@
 package it.unibo.oop.smartercities.datatype;
 
+import it.unibo.oop.smartercities.utils.RandomStringGenerator;
+
 import java.io.Serializable;
+import java.util.Random;
 
 public class LicensePlate implements Serializable {
 
 	private static final long serialVersionUID = -194344929770325193L;
-	private final String licensePlate;	
-	
+	private final String licensePlate;
+
 	public LicensePlate(String licensePlate) {
 		this.licensePlate = licensePlate;
 	}
@@ -22,7 +25,7 @@ public class LicensePlate implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof LicensePlate){
+		if (obj instanceof LicensePlate) {
 			return this.toString().equals(obj.toString());
 		}
 		return false;
@@ -30,7 +33,19 @@ public class LicensePlate implements Serializable {
 
 	@Override
 	public String toString() {
-		return "LicensePlate = " + licensePlate;
+		return licensePlate;
 	}
-	
+
+	public static LicensePlate generate() {
+		LicensePlate licensePlate = new LicensePlate(
+				RandomStringGenerator.generateRandomString(2,
+						RandomStringGenerator.Mode.ALPHA)
+						+ RandomStringGenerator.generateRandomString(3,
+								RandomStringGenerator.Mode.NUMERIC)
+						+ RandomStringGenerator.generateRandomString(2,
+								RandomStringGenerator.Mode.ALPHA));
+		return licensePlate;
+
+	}
+
 }

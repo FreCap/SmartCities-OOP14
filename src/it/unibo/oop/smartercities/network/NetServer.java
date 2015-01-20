@@ -15,17 +15,32 @@ import it.unibo.oop.smartercities.network.jobs.StreetObserverLogger;
 
 public final class NetServer {
 
-	static final int PORT = Integer
+	public static final int PORT = Integer
 			.parseInt(System.getProperty("port", "8007"));
+
+	public static void initJobs() {
+		Dispatcher.getInstance().addObserver(new StreetObserverLogger());
+		Dispatcher.getInstance().addObserver(new StolenCarsChecker());
+
+	}
+
+	public static ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
+		@Override
+		public void initChannel(SocketChannel ch) throws Exception {
+			ChannelPipeline p = ch.pipeline();
+
+			p.addLast(new ObjectEncoder(),
+					new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
+					new ServerHandler());
+		}
+	};
 
 	public static void run() {
 		new Thread(new Runnable() {
-			
 			@Override
 			public void run() {
-				Dispatcher.getInstance().addObserver(new StreetObserverLogger());
-				Dispatcher.getInstance().addObserver(new StolenCarsChecker());
-
+				initJobs();
+				
 				// nuovi workers
 				EventLoopGroup bossGroup = new NioEventLoopGroup(1);
 				EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -33,33 +48,21 @@ public final class NetServer {
 					ServerBootstrap b = new ServerBootstrap();
 					b.group(bossGroup, workerGroup)
 							.channel(NioServerSocketChannel.class)
-							.childHandler(new ChannelInitializer<SocketChannel>() {
-								@Override
-								public void initChannel(SocketChannel ch)
-										throws Exception {
-									ChannelPipeline p = ch.pipeline();
-
-									p.addLast(new ObjectEncoder(), new ObjectDecoder(
-											ClassResolvers.cacheDisabled(null)),
-											new ServerHandler());
-								}
-							});
+							.childHandler(channelInitializer);
 
 					// Starto il server e accetto le connessioni
 					b.bind(PORT).sync().channel().closeFuture().sync();
-				}catch (Exception e) {
+				} catch (Exception e) {
 					// server terminato in modo anomalo
 					e.printStackTrace();
-					
+
 				} finally {
 					bossGroup.shutdownGracefully();
 					workerGroup.shutdownGracefully();
 				}
 			}
 		});
-		
-		
+
 	}
-	
-	
+
 }
