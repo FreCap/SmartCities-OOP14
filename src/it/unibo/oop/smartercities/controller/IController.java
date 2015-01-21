@@ -7,6 +7,10 @@ public interface IController extends IStreetObserverObserver, IStolenCarsObserve
 	
 	// TODO mettere questi ultimi due metodi in un'interfaccia che stabilisce il contratto tra
 	// client e server
+	// una volta fatto ciò, implementare il Controller che inizialmente implementa solo IStreetObsObs e
+	// l'altra interfaccia per la rete, e poi farne una Decorazione(pattern) che implementa anche la
+	// interfaccia IStolenCarsObserver
+	
 	
 	// metodo che aggiunge un nuovo streetObserver(invocato dal client)
 	void addStreetObserver(IStreetObserver streetObserver);
