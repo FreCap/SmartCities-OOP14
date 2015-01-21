@@ -5,6 +5,10 @@ it.unibo.oop.smartercities.database.data.I
 it.unibo.oop.smartercities.datatype
 it.unibo.oop.smartercities.datatype.I
 it.unibo.oop.smartercities.model
+it.unibo.oop.smartercities.network
+it.unibo.oop.smartercities.network.jobs
+it.unibo.oop.smartercities.test.client
+it.unibo.oop.smartercities.utils
 it.unibo.oop.smartercities.view
 it.unibo.oop.smartercities.view.locationpanel
 it.unibo.oop.smartercities.view.mainpanel
