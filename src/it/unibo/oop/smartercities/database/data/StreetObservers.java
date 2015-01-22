@@ -10,7 +10,9 @@ import it.unibo.oop.smartercities.datatype.InfoStreetObserver.Builder;
 import it.unibo.oop.smartercities.datatype.PlainSighting;
 import it.unibo.oop.smartercities.datatype.StreetObserver;
 import it.unibo.oop.smartercities.datatype.I.IInfoStreetObserver;
+import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
+import java.sql.SQLException;
 import java.util.Date;
 
 import com.j256.ormlite.dao.Dao;
@@ -21,6 +23,9 @@ public class StreetObservers implements IStreetObservers {
 
 	private static StreetObservers instance;
 
+	/**
+	 * Costruttore privato della classe. Utilizzato pattern Singleton
+	 */
 	private StreetObservers() {
 	}
 
@@ -31,29 +36,68 @@ public class StreetObservers implements IStreetObservers {
 		return instance;
 	}
 
-	private Dao<StreetObserverRow, Coordinates<Double>> getStreetObserverDao() {
-		return Connection.getInstance().getStreetObserverDao();
-	}
-
-	private Dao<SightingRow, Integer> getSightingDao() {
-		return Connection.getInstance().getSightingDao();
-	}
-
-	public StreetObserverRow getStreetObserver(Coordinates<Double> coordinate) throws Exception {
-		Dao<StreetObserverRow, Coordinates<Double>> streetObserverDao = this.getStreetObserverDao();
-		StreetObserverRow row = streetObserverDao.queryForId(coordinate);
-		if (row == null) {
-			throw new Exception();//TODO not found
+	public StreetObserverRow getStreetObserver(Coordinates<Double> coordinate) 
+			throws IllegalArgumentException {
+		Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
+		StreetObserverRow row = null;
+		try {
+			row = streetObserverDao.queryForId(coordinate.toString());
+		} catch (SQLException e) {
+			throw new IllegalArgumentException("Problems occured in the database");
 		}
 		return row;
+	}
+	
+	/**
+	 * Inserisce nel database un nuovo {@link IStreetObserver}.
+	 * 
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} da inserire.
+	 * @throws SQLException
+	 * 			Nel caso in cui l'inserimento non abbia successo.
+	 */
+	@Override
+	public void add(IStreetObserver streetObserver) throws SQLException {
+		this.add(streetObserver.getCoordinates());
+	}
+	
+	/**
+	 * Inserisce nel database un nuovo {@link IStreetObserver} attraverso le sue coordinate.
+	 * 
+	 * @param coordinates
+	 * 			Le {@link Coordinates} dell'{@link IStreetObserver} da inserire.
+	 * @throws SQLException
+	 * 			Nel caso in cui l'inserimento non abbia successo.
+	 */
+	@Override
+	public void add(Coordinates<Double> coordinates) throws SQLException {
+		StreetObserverRow streetObserverRow = new StreetObserverRow(coordinates);
+		Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
+		streetObserverDao.createIfNotExists(streetObserverRow);
+		
+		///////////
+		System.out.println("Esiste: " + streetObserverDao.idExists(coordinates.toString().substring(0, 5)));
+		System.out.println("Il suo valore è: " + streetObserverDao.queryForId(coordinates.toString().substring(0, 5)));
+	}
 
+	@Override
+	public StreetObserver sighting(PlainSighting sighting) throws Exception {
+		StreetObserverRow streetObserver = getStreetObserver(sighting.getCoordinates());
+		if (streetObserver == null) {
+			// TODO better throw
+			throw new Exception();
+		}
+		SightingRow row = new SightingRow(sighting, streetObserver);
+		Dao<SightingRow, Integer> sightingDao = this.getSightingDao();
+		sightingDao.create(row);
+		return null;
 	}
 
 	// raccoglie dati di uno streetObserver, e restituisce un pacchetto
 	// InfoStreetObserver
-	public IInfoStreetObserver getDataGathered(StreetObserver streetObserver) throws Exception {
+	public IInfoStreetObserver getDataGathered(IStreetObserver streetObserver) throws Exception {
 
-		StreetObserverRow streetObserverRow = getStreetObserver(streetObserver.getCoordinates());
+		StreetObserverRow streetObserverRow = this.getStreetObserver(streetObserver.getCoordinates());
 
 		Date now = new Date();
 		Date hourAgo = new Date(now.getTime() - (1000 * 3600));
@@ -74,26 +118,13 @@ public class StreetObservers implements IStreetObservers {
 
 		return builder.build();
 	}
-
-	@Override
-	public StreetObserver add(Coordinates<Double> coordinate) throws Exception {
-		StreetObserverRow streetObserver = new StreetObserverRow(coordinate);
-		Dao<StreetObserverRow, Coordinates<Double>> streetObserverDao = getStreetObserverDao();
-		streetObserverDao.create(streetObserver);
-		return streetObserver;
+	
+	private Dao<StreetObserverRow, String> getStreetObserverDao() {
+		return Connection.getInstance().getStreetObserverDao();
 	}
 
-	@Override
-	public StreetObserver sighting(PlainSighting sighting) throws Exception {
-		StreetObserverRow streetObserver = getStreetObserver(sighting.getCoordinates());
-		if (streetObserver == null) {
-			// TODO better throw
-			throw new Exception();
-		}
-		SightingRow row = new SightingRow(sighting, streetObserver);
-		Dao<SightingRow, Integer> sightingDao = getSightingDao();
-		sightingDao.create(row);
-		return null;
+	private Dao<SightingRow, Integer> getSightingDao() {
+		return Connection.getInstance().getSightingDao();
 	}
 
 }

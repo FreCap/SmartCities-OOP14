@@ -22,6 +22,10 @@ public class StreetObserver implements IStreetObserver {
 	public Coordinates<Double> getCoordinates() {
 		return new Coordinates<>(this.coordinates);
 	}
+	
+	public double getID() {
+		return coordinates.getLatitude()*1000;  
+	}
 
 	@Override
 	public int hashCode() {

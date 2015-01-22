@@ -22,23 +22,28 @@ public class StreetObserverRow extends StreetObserver {
 	private Coordinates<Double> coordinates;
 	
 	@DatabaseField(id = true, canBeNull = false)
-	private String id = this.coordinates.toString();
+	private String id;
 	
 	@ForeignCollectionField(eager = false)
     ForeignCollection<SightingRow> sightings;
 	
+	// costruttori
 	public StreetObserverRow() {
-		super(new Coordinates<Double>(0.0,0.0), 0);
+		this(new Coordinates<Double>(0.0, 0.0));
 	}
 	
 	public StreetObserverRow(IStreetObserver iso) {
-		super(iso);
+		this(iso.getCoordinates());
 	}
 	
 	public StreetObserverRow(Coordinates<Double> coordinate) {
 		super(coordinate);
+		this.coordinates = coordinate;
+		this.id = coordinate.toString().substring(0, 5);
 	}
 	
+	
+	// getters
 	public Float getMediaVelocita() throws Exception {
 		ForeignCollection<SightingRow> sightings = this.getSightings();
 		Float sum = (float) 0;

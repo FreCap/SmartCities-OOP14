@@ -13,7 +13,7 @@ import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
 public class Model implements IModel {
 
-	/**
+	/*
 	 * Classe di utility con cui ricevere le info su uno StreetObserver dal database
 	 */
 	private IStreetObservers streetObserverDB = StreetObservers.getInstance();
@@ -22,15 +22,22 @@ public class Model implements IModel {
 		super();
 	}
 	
-	// TODO questo metodo deve aggiungere un nuovo streetObserver al DATABASE
+	/**
+	 * Questo metodo aggiunge un nuovo campo al database contenente tutte le informazioni
+	 * relative ad un nuovo {@link IStreetObserver}.
+	 * 
+	 * @param streetObserver
+	 * 			il nuovo {@link IStreetObserver} da aggiungere al database.
+	 */
 	@Override
 	public void addNewStreetObserver(IStreetObserver streetObserver) {
 		try {
-			streetObserverDB.add(streetObserver.getCoordinates());
+			streetObserverDB.add(streetObserver);
 		} catch (Exception e) {
-			// TODO fa qualcosa nel caso in cui non possa essere accettato
 			e.printStackTrace();
 		}
+		
+		//System.out.println(streetObserverDB.getStreetObserver(streetObserver.getCoordinates()));
 	}
 
 	// TODO questo metodo deve aggiungere il pacchetto di informazioni "s" al database.
