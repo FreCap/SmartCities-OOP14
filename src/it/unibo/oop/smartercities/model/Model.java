@@ -36,8 +36,6 @@ public class Model implements IModel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		//System.out.println(streetObserverDB.getStreetObserver(streetObserver.getCoordinates()));
 	}
 
 	// TODO questo metodo deve aggiungere il pacchetto di informazioni "s" al database.

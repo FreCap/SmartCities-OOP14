@@ -13,7 +13,7 @@ public class Connection {
 	private static Connection instance;
 	private Dao<SightingRow, Integer> sightingDao;
 	private Dao<StolenCarRow, Integer> stolenCarDao;
-	private Dao<StreetObserverRow, String> streetObserverDao;
+	private Dao<StreetObserverRow, Double> streetObserverDao;
 	private JdbcConnectionSource connectionSource;
 
 	private final static String DATABASE_URL = "jdbc:h2:mem:account";
@@ -75,7 +75,7 @@ public class Connection {
 		return stolenCarDao;
 	}
 
-	public Dao<StreetObserverRow, String> getStreetObserverDao() {
+	public Dao<StreetObserverRow, Double> getStreetObserverDao() {
 		return streetObserverDao;
 	}
 

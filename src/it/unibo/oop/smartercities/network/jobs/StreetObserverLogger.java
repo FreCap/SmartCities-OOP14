@@ -10,7 +10,7 @@ import java.util.Observer;
 public class StreetObserverLogger implements Observer{
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(Observable o, Object arg) {/*
 		if(arg instanceof PlainSighting){
 			PlainSighting sighting = (PlainSighting) arg;
 			try {
@@ -19,13 +19,13 @@ public class StreetObserverLogger implements Observer{
 					streetObserverData.getStreetObserver(sighting.getCoordinates());
 				}catch(Exception notFound){
 					//TODO change exception
-					streetObserverData.add(sighting.getCoordinates());
+					//streetObserverData.add(sighting.getCoordinates());
 				}
 				streetObserverData.sighting(sighting);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		}*/
 	}
 
 }

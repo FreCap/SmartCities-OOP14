@@ -47,8 +47,8 @@ public class SightingRow extends Sighting {
 		this.id = id;
 	}
 
-	public StreetObserverRow getStreetObserver() {
-		return streetObserver;
+	public IStreetObserver getStreetObserver() {
+		return null;//streetObserver;
 	}
 
 	public void setStreetObserver(StreetObserverRow streetObserver) {

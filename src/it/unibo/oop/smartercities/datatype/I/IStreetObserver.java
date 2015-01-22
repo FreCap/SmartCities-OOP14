@@ -8,4 +8,5 @@ public interface IStreetObserver {
 	// generica anche StreetObserver?
 	Coordinates<Double> getCoordinates();
 
+	public double getID();
 }

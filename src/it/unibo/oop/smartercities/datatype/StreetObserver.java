@@ -24,6 +24,7 @@ public class StreetObserver implements IStreetObserver {
 	}
 	
 	public double getID() {
+		// TODO genera un ID serio
 		return coordinates.getLatitude()*1000;  
 	}
 

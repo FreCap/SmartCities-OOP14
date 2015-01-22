@@ -19,7 +19,7 @@ public class Sighting implements ISighting {
 	private Float speed;
 
 	public IStreetObserver getStreetObserver() {
-		return streetObserver;
+		return null; //streetObserver;
 	}
 
 	public void setStreetObserver(IStreetObserver streetObserver) {

@@ -16,30 +16,33 @@ import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "StreetObserver")
-public class StreetObserverRow extends StreetObserver {
+public class StreetObserverRow {
 	
 	@DatabaseField(canBeNull = false, dataType=DataType.SERIALIZABLE)
 	private Coordinates<Double> coordinates;
 	
 	@DatabaseField(id = true, canBeNull = false)
-	private String id;
+	private double id;
 	
 	@ForeignCollectionField(eager = false)
     ForeignCollection<SightingRow> sightings;
 	
 	// costruttori
 	public StreetObserverRow() {
-		this(new Coordinates<Double>(0.0, 0.0));
+		this(new StreetObserver(new Coordinates<Double>(0.0,0.0)));
 	}
 	
 	public StreetObserverRow(IStreetObserver iso) {
-		this(iso.getCoordinates());
+		this.coordinates = iso.getCoordinates();
+		this.id = iso.getID();
+		//this.sightings = 
 	}
 	
 	public StreetObserverRow(Coordinates<Double> coordinate) {
-		super(coordinate);
+		System.exit(0);
+		/*
 		this.coordinates = coordinate;
-		this.id = coordinate.toString().substring(0, 5);
+		this.id = coordinate.toString().substring(0, 5);*/
 	}
 	
 	
@@ -90,6 +93,14 @@ public class StreetObserverRow extends StreetObserver {
 
 	public void setCoordinates(Coordinates<Double> coordinates) {
 		this.coordinates = coordinates;
+	}
+	
+	@Override
+	public String toString() {
+		return "StreetObserverRow = " + 
+				"[ID : " + this.id +
+				this.coordinates +
+				this.sightings + "]";
 	}
 
 }

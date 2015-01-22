@@ -3,7 +3,6 @@ package it.unibo.oop.smartercities.datatype;
 import it.unibo.oop.smartercities.utils.RandomStringGenerator;
 
 import java.io.Serializable;
-import java.util.Random;
 
 public class LicensePlate implements Serializable {
 
