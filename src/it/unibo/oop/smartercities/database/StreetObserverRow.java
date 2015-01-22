@@ -22,7 +22,7 @@ public class StreetObserverRow {
 	private Coordinates<Double> coordinates;
 	
 	@DatabaseField(id = true, canBeNull = false)
-	private double id;
+	private String id;
 	
 	@ForeignCollectionField(eager = false)
     ForeignCollection<SightingRow> sightings;
@@ -99,8 +99,8 @@ public class StreetObserverRow {
 	public String toString() {
 		return "StreetObserverRow = " + 
 				"[ID : " + this.id +
-				this.coordinates +
-				this.sightings + "]";
+				"; " + this.coordinates +
+				"; " + this.sightings + "]";
 	}
 
 }

@@ -23,9 +23,10 @@ public class StreetObserver implements IStreetObserver {
 		return new Coordinates<>(this.coordinates);
 	}
 	
-	public double getID() {
-		// TODO genera un ID serio
-		return coordinates.getLatitude()*1000;  
+	@Override
+	public String getID() {
+		return this.coordinates.getLatitude().toString() + 
+				this.coordinates.getLongitude().toString();
 	}
 
 	@Override

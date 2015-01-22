@@ -38,7 +38,7 @@ public class StreetObservers implements IStreetObservers {
 
 	public StreetObserverRow getStreetObserver(IStreetObserver streetObserver) 
 			throws IllegalArgumentException {
-		Dao<StreetObserverRow, Double> streetObserverDao = this.getStreetObserverDao();
+		Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
 		StreetObserverRow row = null;
 		try {
 			row = streetObserverDao.queryForId(streetObserver.getID());
@@ -59,7 +59,7 @@ public class StreetObservers implements IStreetObservers {
 	@Override
 	public void add(IStreetObserver streetObserver) throws SQLException {
 		StreetObserverRow streetObserverRow = new StreetObserverRow(streetObserver);
-		Dao<StreetObserverRow, Double> streetObserverDao = this.getStreetObserverDao();
+		Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
 		streetObserverDao.createIfNotExists(streetObserverRow);
 		
 		System.out.println("Leggo il dato che è appena stato aggiunto: " + streetObserverDao.queryForId(streetObserver.getID()));
@@ -104,7 +104,7 @@ public class StreetObservers implements IStreetObservers {
 		return builder.build();
 	}
 	
-	private Dao<StreetObserverRow, Double> getStreetObserverDao() {
+	private Dao<StreetObserverRow, String> getStreetObserverDao() {
 		return Connection.getInstance().getStreetObserverDao();
 	}
 
