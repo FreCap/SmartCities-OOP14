@@ -18,8 +18,11 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "StreetObserver")
 public class StreetObserverRow extends StreetObserver {
 	
-	@DatabaseField(id = true, canBeNull = false, dataType=DataType.SERIALIZABLE)
+	@DatabaseField(canBeNull = false, dataType=DataType.SERIALIZABLE)
 	private Coordinates<Double> coordinates;
+	
+	@DatabaseField(id = true, canBeNull = false)
+	private String id = this.coordinates.toString();
 	
 	@ForeignCollectionField(eager = false)
     ForeignCollection<SightingRow> sightings;
@@ -28,8 +31,16 @@ public class StreetObserverRow extends StreetObserver {
 		super(new Coordinates<Double>(0.0,0.0), 0);
 	}
 	
+	public StreetObserverRow(IStreetObserver iso) {
+		super(iso);
+	}
+	
+	public StreetObserverRow(Coordinates<Double> coordinate) {
+		super(coordinate);
+	}
+	
 	public Float getMediaVelocita() throws Exception {
-		ForeignCollection<SightingRow> sightings = getSightings();
+		ForeignCollection<SightingRow> sightings = this.getSightings();
 		Float sum = (float) 0;
 		for(SightingRow s:sightings){
 			sum += s.getSpeed();
@@ -66,13 +77,6 @@ public class StreetObserverRow extends StreetObserver {
 
 	public void setSightings(ForeignCollection<SightingRow> sightings) {
 		this.sightings = sightings;
-	}
-
-	public StreetObserverRow(IStreetObserver iso) {
-		super(iso);
-	}
-	public StreetObserverRow(Coordinates<Double> coordinate) {
-		super(coordinate);
 	}
 
 	public Coordinates<Double> getCoordinates() {

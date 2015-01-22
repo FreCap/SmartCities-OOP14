@@ -22,13 +22,12 @@ public class StreetObservers implements IStreetObservers {
 	private static StreetObservers instance;
 
 	private StreetObservers() {
+	}
 
-	};
-
-	public static synchronized StreetObservers getInstance() {
-		if (instance != null)
-			return instance;
-		instance = new StreetObservers();
+	public static synchronized IStreetObservers getInstance() {
+		if(instance == null){
+			instance = new StreetObservers();
+		}
 		return instance;
 	}
 
@@ -41,7 +40,7 @@ public class StreetObservers implements IStreetObservers {
 	}
 
 	public StreetObserverRow getStreetObserver(Coordinates<Double> coordinate) throws Exception {
-		Dao<StreetObserverRow, Coordinates<Double>> streetObserverDao = getStreetObserverDao();
+		Dao<StreetObserverRow, Coordinates<Double>> streetObserverDao = this.getStreetObserverDao();
 		StreetObserverRow row = streetObserverDao.queryForId(coordinate);
 		if (row == null) {
 			throw new Exception();//TODO not found
@@ -52,8 +51,7 @@ public class StreetObservers implements IStreetObservers {
 
 	// raccoglie dati di uno streetObserver, e restituisce un pacchetto
 	// InfoStreetObserver
-	public IInfoStreetObserver getDataGathered(StreetObserver streetObserver)
-			throws Exception {
+	public IInfoStreetObserver getDataGathered(StreetObserver streetObserver) throws Exception {
 
 		StreetObserverRow streetObserverRow = getStreetObserver(streetObserver.getCoordinates());
 
@@ -75,7 +73,6 @@ public class StreetObservers implements IStreetObservers {
 		builder.totalNOfSight(streetObserverRow.getSightings().size());
 
 		return builder.build();
-
 	}
 
 	@Override

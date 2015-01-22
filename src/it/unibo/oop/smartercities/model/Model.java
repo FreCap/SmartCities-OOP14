@@ -2,7 +2,6 @@ package it.unibo.oop.smartercities.model;
 
 import java.util.Random;
 
-import it.unibo.oop.smartercities.database.Connection;
 import it.unibo.oop.smartercities.database.data.StreetObservers;
 import it.unibo.oop.smartercities.database.data.I.IStreetObservers;
 import it.unibo.oop.smartercities.datatype.InfoStreetObserver;
@@ -14,7 +13,10 @@ import it.unibo.oop.smartercities.datatype.I.IStreetObserver;
 
 public class Model implements IModel {
 
-	IStreetObservers streetObserverDB = StreetObservers.getInstance();
+	/**
+	 * Classe di utility con cui ricevere le info su uno StreetObserver dal database
+	 */
+	private IStreetObservers streetObserverDB = StreetObservers.getInstance();
 	
 	public Model() {
 		super();
@@ -23,6 +25,12 @@ public class Model implements IModel {
 	// TODO questo metodo deve aggiungere un nuovo streetObserver al DATABASE
 	@Override
 	public void addNewStreetObserver(IStreetObserver streetObserver) {
+		try {
+			streetObserverDB.add(streetObserver.getCoordinates());
+		} catch (Exception e) {
+			// TODO fa qualcosa nel caso in cui non possa essere accettato
+			e.printStackTrace();
+		}
 	}
 
 	// TODO questo metodo deve aggiungere il pacchetto di informazioni "s" al database.
@@ -46,6 +54,11 @@ public class Model implements IModel {
 											   .nOfSightLastWeek(r.nextInt(100))
 											   .nOfSightToday(r.nextInt(100))
 											   .build();
+		
+		
+		
+		
+		
 	}
 
 	// TODO questo metodo deve far tornare un pacchetto IInfoStolenCarr della stolenCar richiesta

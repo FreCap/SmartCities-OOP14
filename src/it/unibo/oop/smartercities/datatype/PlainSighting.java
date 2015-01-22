@@ -4,7 +4,8 @@ import java.util.Date;
 
 /**
  * Classe di scambio, prima di essere tradotto in Sighting
- * @author fre
+ * 
+ * @author Francesco Capponi
  *
  */
 public class PlainSighting {

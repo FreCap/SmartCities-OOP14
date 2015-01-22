@@ -1,6 +1,7 @@
 package it.unibo.oop.smartercities.network.jobs;
 
 import it.unibo.oop.smartercities.database.data.StreetObservers;
+import it.unibo.oop.smartercities.database.data.I.IStreetObservers;
 import it.unibo.oop.smartercities.datatype.PlainSighting;
 
 import java.util.Observable;
@@ -13,7 +14,7 @@ public class StreetObserverLogger implements Observer{
 		if(arg instanceof PlainSighting){
 			PlainSighting sighting = (PlainSighting) arg;
 			try {
-				StreetObservers streetObserverData = StreetObservers.getInstance();
+				IStreetObservers streetObserverData = StreetObservers.getInstance();
 				try{
 					streetObserverData.getStreetObserver(sighting.getCoordinates());
 				}catch(Exception notFound){
