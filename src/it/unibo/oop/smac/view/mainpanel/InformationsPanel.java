@@ -88,6 +88,8 @@ public class InformationsPanel extends JPanel implements IInformationsPanel {
 				  .append(TAB + "Number of sight (last week): " + this.currentInfo.getnOfSightLastWeek())
 				  .append(NEW_LINE)
 				  .append(TAB + "Number of sight (last month): " + this.currentInfo.getnOfSightLastMonth())
+				  .append(NEW_LINE)
+				  .append(TAB + "Total number of sight: " + this.currentInfo.getTotalNOfSight())
 				  .toString();
 		this.sightInfo.setText(s);
 	}

@@ -1,6 +1,7 @@
 package it.unibo.oop.smac.database;
 
 import it.unibo.oop.smac.datatype.LicensePlate;
+import it.unibo.oop.smac.datatype.Sighting;
 import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
@@ -17,7 +18,7 @@ public class SightingDB implements ISighting {
 	private int id;
 
 	@DatabaseField(canBeNull = false, foreign = true)
-	private final StreetObserverDB streetObserverRow;
+	private final StreetObserverDB streetObserverDB;
 
 	@DatabaseField(canBeNull = false, dataType = DataType.DATE_LONG)
 	private final Date date;
@@ -29,11 +30,11 @@ public class SightingDB implements ISighting {
 	private final Float speed;
 
 	SightingDB(){
-		this(null,null);
+		this(new Sighting.Builder().build(), new StreetObserverDB());
 	}
 
-	public SightingDB(ISighting sighting, StreetObserverDB streetObserverRow) {
-		this.streetObserverRow = streetObserverRow;
+	public SightingDB(ISighting sighting, StreetObserverDB streetObserverDB) {
+		this.streetObserverDB = streetObserverDB;
 		this.date = sighting.getDate();
 		this.licensePlate = sighting.getLicensePlate();
 		this.speed = sighting.getSpeed();
@@ -44,7 +45,7 @@ public class SightingDB implements ISighting {
 	}
 
 	public IStreetObserver getStreetObserver() {
-		return streetObserverRow;
+		return streetObserverDB;
 	}
 
 	public Date getDate() {
@@ -62,7 +63,7 @@ public class SightingDB implements ISighting {
 	@Override
 	public String toString() {
 		return "SightingRow [id=" + id + ", streetObserverRow="
-				+ streetObserverRow + ", date=" + date + ", licensePlate="
+				+ streetObserverDB + ", date=" + date + ", licensePlate="
 				+ licensePlate + ", speed=" + speed + "]";
 	}
 	

@@ -40,18 +40,19 @@ public class StreetObserverDB implements IStreetObserver{
 		System.out.println("Just added new sighting: " + sighting);
 	}
 	
-	public List<SightingDB> getSightings() {
-		return new ArrayList<SightingDB>();
+	// getters
+	public List<SightingDB> getSightingsList() {
+		return new ArrayList<SightingDB>(this.sightings); //defensive copy
 	}
 
 	@Override
 	public Coordinates<Double> getCoordinates() {
-		return coordinates;
+		return new Coordinates<>(this.coordinates); //defensive copy
 	}
 	
 	@Override
 	public String getID() {
-		return this.id;
+		return new String(this.id);
 	}
 	
 	@Override

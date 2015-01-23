@@ -54,10 +54,10 @@ public class Model implements IModel {
 	 */
 	@Override
 	public void addNewStreetObserver(IStreetObserver streetObserver) {
-		StreetObserverDB streetObserverRow = new StreetObserverDB(streetObserver);
+		StreetObserverDB streetObserverDB = new StreetObserverDB(streetObserver);
 		Dao<StreetObserverDB, String> streetObserverDao = this.getStreetObserverDao();
 		try {
-			streetObserverDao.createIfNotExists(streetObserverRow);
+			streetObserverDao.createIfNotExists(streetObserverDB);
 			System.out.println("Reading datas just added: " + 
 					streetObserverDao.queryForId(streetObserver.getID()));
 		} catch(SQLException e) {
@@ -74,10 +74,9 @@ public class Model implements IModel {
 	 */
 	@Override
 	public void addSighting(ISighting sighting) {
-		StreetObserverDB streetObserverRow = getStreetObserverDB(sighting.getStreetObserver());
-		SightingDB sightingRow = new SightingDB(sighting, streetObserverRow);
-		
-		streetObserverRow.addSightings(sightingRow);
+		StreetObserverDB streetObserverDB = getStreetObserverDB(sighting.getStreetObserver());
+		SightingDB sightingDB = new SightingDB(sighting, streetObserverDB);
+		streetObserverDB.addSightings(sightingDB);
 	}
 
 	/**
@@ -94,11 +93,12 @@ public class Model implements IModel {
 	@Override
 	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) {
 
-		StreetObserverDB streetObserverRow = this.getStreetObserverDB(streetObserver);
-		List<SightingDB> sightingList = streetObserverRow.getSightings();
+		//TODO raccogli ed elabora tutti i dati!!
+		StreetObserverDB streetObserverDB = this.getStreetObserverDB(streetObserver);
+		List<SightingDB> sightingList = streetObserverDB.getSightingsList();
 		
 		return new InfoStreetObserver.Builder()
-						.streetObserver(streetObserverRow)
+						.streetObserver(streetObserverDB)
 						.totalNOfSight(sightingList.size()).build();
 	}
 	
@@ -135,13 +135,13 @@ public class Model implements IModel {
 	private StreetObserverDB getStreetObserverDB(IStreetObserver streetObserver) 
 			throws IllegalArgumentException {
 		Dao<StreetObserverDB, String> streetObserverDao = this.getStreetObserverDao();
-		StreetObserverDB row = null;
+		StreetObserverDB streetObserverDB = null;
 		try {
-			row = streetObserverDao.queryForId(streetObserver.getID());
+			streetObserverDB = streetObserverDao.queryForId(streetObserver.getID());
 		} catch (SQLException e) {
 			throw new IllegalArgumentException("Problems occured in the database");
 		}
-		return row;
+		return streetObserverDB;
 	}
 	
 	/**
