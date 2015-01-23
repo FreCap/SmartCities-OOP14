@@ -11,13 +11,13 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "Sighting")
-public class SightingRow implements ISighting {
+public class SightingDB implements ISighting {
 
 	@DatabaseField(generatedId = true)
 	private int id;
 
 	@DatabaseField(canBeNull = false, foreign = true)
-	private final StreetObserverRow streetObserverRow;
+	private final StreetObserverDB streetObserverRow;
 
 	@DatabaseField(canBeNull = false, dataType = DataType.DATE_LONG)
 	private final Date date;
@@ -28,11 +28,11 @@ public class SightingRow implements ISighting {
 	@DatabaseField(canBeNull = false)
 	private final Float speed;
 
-	SightingRow(){
+	SightingDB(){
 		this(null,null);
 	}
 
-	public SightingRow(ISighting sighting, StreetObserverRow streetObserverRow) {
+	public SightingDB(ISighting sighting, StreetObserverDB streetObserverRow) {
 		this.streetObserverRow = streetObserverRow;
 		this.date = sighting.getDate();
 		this.licensePlate = sighting.getLicensePlate();

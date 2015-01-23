@@ -10,7 +10,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "StolenCar")
-public class StolenCarRow implements IInfoStolenCar {
+public class StolenCarDB implements IInfoStolenCar {
 	public static final String LICENSEPLATE_FIELD_NAME = "licensePlate";
 	public static final String DATAINSERIMENTO_FIELD_NAME = "dataInserimento";
 	
@@ -23,7 +23,7 @@ public class StolenCarRow implements IInfoStolenCar {
 	@DatabaseField(columnName = DATAINSERIMENTO_FIELD_NAME, canBeNull = false)
 	private Date dataInserimento;
 
-	StolenCarRow() {
+	StolenCarDB() {
 	}
 
 	public LicensePlate getLicensePlate() {

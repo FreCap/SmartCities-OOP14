@@ -11,9 +11,9 @@ import com.j256.ormlite.table.TableUtils;
 public class Connection {
 
 	private static Connection instance;
-	private Dao<SightingRow, Integer> sightingDao;
-	private Dao<StolenCarRow, Integer> stolenCarDao;
-	private Dao<StreetObserverRow, String> streetObserverDao;
+	private Dao<SightingDB, Integer> sightingDao;
+	private Dao<StolenCarDB, Integer> stolenCarDao;
+	private Dao<StreetObserverDB, String> streetObserverDao;
 	private JdbcConnectionSource connectionSource;
 
 	private final static String DATABASE_URL = "jdbc:h2:mem:account";
@@ -44,13 +44,13 @@ public class Connection {
 	 */
 	private void setupDatabase(ConnectionSource connectionSource) throws Exception {
 
-		this.sightingDao = DaoManager.createDao(connectionSource, SightingRow.class);
-		this.stolenCarDao = DaoManager.createDao(connectionSource, StolenCarRow.class);
-		this.streetObserverDao = DaoManager.createDao(connectionSource, StreetObserverRow.class);
+		this.sightingDao = DaoManager.createDao(connectionSource, SightingDB.class);
+		this.stolenCarDao = DaoManager.createDao(connectionSource, StolenCarDB.class);
+		this.streetObserverDao = DaoManager.createDao(connectionSource, StreetObserverDB.class);
 
-		TableUtils.createTable(connectionSource, SightingRow.class);
-		TableUtils.createTable(connectionSource, StolenCarRow.class);
-		TableUtils.createTable(connectionSource, StreetObserverRow.class);
+		TableUtils.createTable(connectionSource, SightingDB.class);
+		TableUtils.createTable(connectionSource, StolenCarDB.class);
+		TableUtils.createTable(connectionSource, StreetObserverDB.class);
 	}
 
 	/**
@@ -67,15 +67,15 @@ public class Connection {
 		}
 	}
 
-	public Dao<SightingRow, Integer> getSightingDao() {
+	public Dao<SightingDB, Integer> getSightingDao() {
 		return sightingDao;
 	}
 
-	public Dao<StolenCarRow, Integer> getStolenCarDao() {
+	public Dao<StolenCarDB, Integer> getStolenCarDao() {
 		return stolenCarDao;
 	}
 
-	public Dao<StreetObserverRow, String> getStreetObserverDao() {
+	public Dao<StreetObserverDB, String> getStreetObserverDao() {
 		return streetObserverDao;
 	}
 

@@ -1,8 +1,8 @@
 package it.unibo.oop.smac.model;
 
 import it.unibo.oop.smac.database.Connection;
-import it.unibo.oop.smac.database.SightingRow;
-import it.unibo.oop.smac.database.StreetObserverRow;
+import it.unibo.oop.smac.database.SightingDB;
+import it.unibo.oop.smac.database.StreetObserverDB;
 import it.unibo.oop.smac.datatype.InfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
@@ -54,15 +54,15 @@ public class Model implements IModel {
 	 */
 	@Override
 	public void addNewStreetObserver(IStreetObserver streetObserver) {
-		StreetObserverRow streetObserverRow = new StreetObserverRow(streetObserver);
-		Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
+		StreetObserverDB streetObserverRow = new StreetObserverDB(streetObserver);
+		Dao<StreetObserverDB, String> streetObserverDao = this.getStreetObserverDao();
 		try {
 			streetObserverDao.createIfNotExists(streetObserverRow);
-			System.out.println("Reading of data just added:  " + 
+			System.out.println("Reading datas just added: " + 
 					streetObserverDao.queryForId(streetObserver.getID()));
 		} catch(SQLException e) {
-			// caso in cui la creazione non è avvenuta correttamente
-			e.printStackTrace();
+			System.err.println("The creation on database of the new SteetObserver " + 
+							   streetObserver + " is failed!");
 		}
 	}
 
@@ -74,8 +74,8 @@ public class Model implements IModel {
 	 */
 	@Override
 	public void addSighting(ISighting sighting) {
-		StreetObserverRow streetObserverRow = getStreetObserverRow(sighting.getStreetObserver());
-		SightingRow sightingRow = new SightingRow(sighting, streetObserverRow);
+		StreetObserverDB streetObserverRow = getStreetObserverDB(sighting.getStreetObserver());
+		SightingDB sightingRow = new SightingDB(sighting, streetObserverRow);
 		
 		streetObserverRow.addSightings(sightingRow);
 	}
@@ -94,8 +94,8 @@ public class Model implements IModel {
 	@Override
 	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) {
 
-		StreetObserverRow streetObserverRow = this.getStreetObserverRow(streetObserver);
-		List<SightingRow> sightingList = streetObserverRow.getSightings();
+		StreetObserverDB streetObserverRow = this.getStreetObserverDB(streetObserver);
+		List<SightingDB> sightingList = streetObserverRow.getSightings();
 		
 		return new InfoStreetObserver.Builder()
 						.streetObserver(streetObserverRow)
@@ -119,10 +119,23 @@ public class Model implements IModel {
 		return null;
 	}
 	
-	private StreetObserverRow getStreetObserverRow(IStreetObserver streetObserver) 
+	/**
+	 * Restituisce lo {@link StreetObserverDB} corrispondente all'{@link IStreetObserver}
+	 * passato come argomento.
+	 * 
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} da cercare.
+	 * @return
+	 * 			Un oggetto {@link StreetObserverDB} corrispondente all'
+	 * 			{@link IStreetObserver} passato.
+	 * 
+	 * @throws IllegalArgumentException
+	 * 			Quando l'{@link IStreetObserver} passato non viene trovato nel database.
+	 */
+	private StreetObserverDB getStreetObserverDB(IStreetObserver streetObserver) 
 			throws IllegalArgumentException {
-		Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
-		StreetObserverRow row = null;
+		Dao<StreetObserverDB, String> streetObserverDao = this.getStreetObserverDao();
+		StreetObserverDB row = null;
 		try {
 			row = streetObserverDao.queryForId(streetObserver.getID());
 		} catch (SQLException e) {
@@ -131,7 +144,12 @@ public class Model implements IModel {
 		return row;
 	}
 	
-	private Dao<StreetObserverRow, String> getStreetObserverDao() {
+	/**
+	 * Restituisce il Dao<> degli streetObserver della classe Connection
+	 * @return
+	 * 			il Dao<> richiesto.
+	 */
+	private Dao<StreetObserverDB, String> getStreetObserverDao() {
 		return Connection.getInstance().getStreetObserverDao();
 	}
 
