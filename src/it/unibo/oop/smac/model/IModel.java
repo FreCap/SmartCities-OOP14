@@ -12,7 +12,7 @@ public interface IModel {
 	void addNewStreetObserver(IStreetObserver streetObserver);
 	
 	// questo metodo deve aggiungere il pacchetto di informazioni "s" al database.
-	void newPassage(ISighting s);
+	void addSighting(ISighting sighting);
 	
 	// questo metodo deve far tornare un pacchetto IInfoStreetObserver dello streetObserver richiesto
 	IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver);

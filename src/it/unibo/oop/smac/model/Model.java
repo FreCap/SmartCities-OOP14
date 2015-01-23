@@ -1,7 +1,8 @@
 package it.unibo.oop.smac.model;
 
-import it.unibo.oop.smac.database.data.DBStreetObserver;
-import it.unibo.oop.smac.database.data.I.IDBStreetObservers;
+import it.unibo.oop.smac.database.Connection;
+import it.unibo.oop.smac.database.SightingRow;
+import it.unibo.oop.smac.database.StreetObserverRow;
 import it.unibo.oop.smac.datatype.InfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
@@ -9,73 +10,102 @@ import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
+import java.sql.SQLException;
+import java.util.List;
+
+import com.j256.ormlite.dao.Dao;
+
 /**
- * Questa classe implementa il Model dell'applicazione.
+ * Implementazione del Model dell'applicazione. Questa classe riceve le richieste di lettura
+ * e scrittura di informazioni su degli oggetti.
+ * Questa classe è realizzata utilizzando il pattern Singleton.
  * 
  * @author Federico Bellini
  *
  */
 public class Model implements IModel {
 
-	/**
-	 * Classe di utility con cui leggere/scrivere delle informazioni dal/sul database
-	 */
-	private IDBStreetObservers streetObserverDB = DBStreetObserver.getInstance();
-	
-	public Model() {
-		super();
+	private static Model instance;
+
+	private Model() {
+	}
+
+	public static synchronized Model getInstance() {
+		if(instance == null){
+			instance = new Model();
+		}
+		return instance;
 	}
 	
 	/**
-	 * Questo metodo aggiunge un nuovo campo al database contenente tutte le informazioni
-	 * relative ad un nuovo {@link IStreetObserver}.
+	 * Inserisce nel database un nuovo {@link IStreetObserver}.
 	 * 
 	 * @param streetObserver
-	 * 			Il nuovo {@link IStreetObserver} da aggiungere al database.
+	 * 			L'{@link IStreetObserver} da inserire.
+	 * 
 	 */
 	@Override
 	public void addNewStreetObserver(IStreetObserver streetObserver) {
+		StreetObserverRow streetObserverRow = new StreetObserverRow(streetObserver);
+		Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
 		try {
-			this.streetObserverDB.addStreetObserver(streetObserver);
-		} catch (Exception e) {
+			streetObserverDao.createIfNotExists(streetObserverRow);
+			System.out.println("Reading of data just added:  " + 
+					streetObserverDao.queryForId(streetObserver.getID()));
+		} catch(SQLException e) {
+			// caso in cui la creazione non è avvenuta correttamente
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * Questo metodo aggiunge le informazioni appena ricevute da un {@link IStreetObserver}
-	 * al database.
+	 * Inserisce nel database un nuovo {@link ISighting}.
 	 * 
 	 * @param sighting
-	 * 			Le {@link ISighting} appena ricevute.
+	 * 			L'{@link ISighting} da inserire.
+	 * 
 	 */
 	@Override
-	public void newPassage(ISighting sighting) {
-		try {
-			this.streetObserverDB.addSighting(sighting);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void addSighting(ISighting sighting) {
+		StreetObserverRow streetObserverRow = getStreetObserverRow(sighting.getStreetObserver());
+		SightingRow sightingRow = new SightingRow(sighting, streetObserverRow);
+		
+		streetObserverRow.addSightings(sightingRow);
 	}
 
-	// TODO questo metodo deve far tornare un pacchetto IInfoStreetObserver dello streetObserver richiesto
+	// raccoglie dati di uno streetObserver, e restituisce un pacchetto
+	// InfoStreetObserver
 	@Override
 	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) {
-		IInfoStreetObserver info;
-		try {
-			info = streetObserverDB.getDataGathered(streetObserver);
-		} catch(Exception e) {
-			e.printStackTrace();
-			info = new InfoStreetObserver.Builder().build();
-		}
-		return info;
-	}
 
-	// TODO questo metodo deve far tornare un pacchetto IInfoStolenCarr della stolenCar richiesta
+		StreetObserverRow streetObserverRow = this.getStreetObserverRow(streetObserver);
+		List<SightingRow> sightingList = streetObserverRow.getSightings();
+		
+		return new InfoStreetObserver.Builder()
+						.streetObserver(streetObserverRow)
+						.totalNOfSight(sightingList.size()).build();
+	}
+	
 	@Override
 	public IInfoStolenCar getStolenCarInfo(IStolenCar stolenCar) {
+		// TODO
 		return null;
+	}
+	
+	private StreetObserverRow getStreetObserverRow(IStreetObserver streetObserver) 
+			throws IllegalArgumentException {
+		Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
+		StreetObserverRow row = null;
+		try {
+			row = streetObserverDao.queryForId(streetObserver.getID());
+		} catch (SQLException e) {
+			throw new IllegalArgumentException("Problems occured in the database");
+		}
+		return row;
+	}
+	
+	private Dao<StreetObserverRow, String> getStreetObserverDao() {
+		return Connection.getInstance().getStreetObserverDao();
 	}
 
 }

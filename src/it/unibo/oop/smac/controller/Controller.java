@@ -15,7 +15,7 @@ public class Controller implements IController {
 	private final IModel model;
 	
 	public Controller(IView view) {
-		this.model = new Model();
+		this.model = Model.getInstance();
 		this.view = view;
 		this.view.attachStreetObserverObserver(this);
 		this.view.attachStolenCarsObserver(this);
@@ -40,7 +40,7 @@ public class Controller implements IController {
 	@Override
 	public void newPassage(IStreetObserver streetObserver, ISighting is) {
 		this.view.newPassage(streetObserver);
-		this.model.newPassage(is);
+		this.model.addSighting(is);
 	}
 
 }
