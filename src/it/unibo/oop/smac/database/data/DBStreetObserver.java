@@ -3,12 +3,10 @@ package it.unibo.oop.smac.database.data;
 import it.unibo.oop.smac.database.Connection;
 import it.unibo.oop.smac.database.SightingRow;
 import it.unibo.oop.smac.database.StreetObserverRow;
-import it.unibo.oop.smac.database.data.I.IStreetObservers;
-import it.unibo.oop.smac.datatype.Coordinates;
+import it.unibo.oop.smac.database.data.I.IDBStreetObservers;
 import it.unibo.oop.smac.datatype.InfoStreetObserver;
-import it.unibo.oop.smac.datatype.PlainSighting;
-import it.unibo.oop.smac.datatype.StreetObserver;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
+import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 import it.unibo.oop.smac.datatype.InfoStreetObserver.Builder;
 
@@ -19,19 +17,26 @@ import com.j256.ormlite.dao.Dao;
 
 // classe di utilità, che richiede i dati al DB, li elabora e attraverso il metodo getDataGathered()
 // torna una InfoStreetObserver
-public class StreetObservers implements IStreetObservers {
+/**
+ * 
+ * Classe di utilità,
+ * 
+ * @author Federico Bellini
+ *
+ */
+public class DBStreetObserver implements IDBStreetObservers {
 
-	private static StreetObservers instance;
+	private static DBStreetObserver instance;
 
 	/**
 	 * Costruttore privato della classe. Utilizzato pattern Singleton
 	 */
-	private StreetObservers() {
+	private DBStreetObserver() {
 	}
 
-	public static synchronized IStreetObservers getInstance() {
+	public static synchronized IDBStreetObservers getInstance() {
 		if(instance == null){
-			instance = new StreetObservers();
+			instance = new DBStreetObserver();
 		}
 		return instance;
 	}
@@ -57,7 +62,7 @@ public class StreetObservers implements IStreetObservers {
 	 * 			Nel caso in cui l'inserimento non abbia successo.
 	 */
 	@Override
-	public void add(IStreetObserver streetObserver) throws SQLException {
+	public void addStreetObserver(IStreetObserver streetObserver) throws SQLException {
 		StreetObserverRow streetObserverRow = new StreetObserverRow(streetObserver);
 		Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
 		streetObserverDao.createIfNotExists(streetObserverRow);
@@ -66,7 +71,7 @@ public class StreetObservers implements IStreetObservers {
 	}
 
 	@Override
-	public StreetObserver sighting(PlainSighting sighting) throws Exception {/*
+	public void addSighting(ISighting sighting) throws Exception {/*
 		StreetObserverRow streetObserver = getStreetObserver(sighting.getCoordinates());
 		if (streetObserver == null) {
 			// TODO better throw
@@ -75,7 +80,6 @@ public class StreetObservers implements IStreetObservers {
 		SightingRow row = new SightingRow(sighting, streetObserver);
 		Dao<SightingRow, Integer> sightingDao = this.getSightingDao();
 		sightingDao.create(row);*/
-		return null;
 	}
 
 	// raccoglie dati di uno streetObserver, e restituisce un pacchetto

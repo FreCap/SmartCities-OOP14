@@ -7,6 +7,7 @@ import java.util.List;
 import it.unibo.oop.smac.datatype.Coordinates;
 import it.unibo.oop.smac.datatype.Sighting;
 import it.unibo.oop.smac.datatype.StreetObserver;
+import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
 import com.j256.ormlite.dao.ForeignCollection;
@@ -16,7 +17,7 @@ import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "StreetObserver")
-public class StreetObserverRow {
+public class StreetObserverRow implements IStreetObserver{
 	
 	@DatabaseField(canBeNull = false, dataType=DataType.SERIALIZABLE)
 	private Coordinates<Double> coordinates;
@@ -60,7 +61,7 @@ public class StreetObserverRow {
 	public Float getMediaVelocita(Date from, Date to) throws Exception {
 		List<SightingRow> sightings = getSightings(from, to);
 		Float sum = (float) 0;
-		for(Sighting s:sightings){
+		for(ISighting s : sightings){
 			sum += s.getSpeed();
 		}
 		Float response = sum/=sightings.size();
@@ -101,6 +102,12 @@ public class StreetObserverRow {
 				"[ID : " + this.id +
 				"; " + this.coordinates +
 				"; " + this.sightings + "]";
+	}
+
+	@Override
+	public String getID() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

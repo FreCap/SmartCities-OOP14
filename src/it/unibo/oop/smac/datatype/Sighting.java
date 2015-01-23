@@ -1,54 +1,80 @@
 package it.unibo.oop.smac.datatype;
 
-import it.unibo.oop.smac.database.StreetObserverRow;
 import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
 import java.util.Date;
 
-// TODO
-// oggetto che viene spedito dal client verso il server, contenente tutte le info rilevate
+/**
+ * Classe che viene spedita dai Client verso il Server contenente tutte le informazioni rilevate.
+ * Questa classe è costruita utilizzando il pattern Builder.
+ * 
+ * @author Federico Bellini
+ *
+ */
 public class Sighting implements ISighting {
 
-	private StreetObserverRow streetObserver;
+	private final IStreetObserver streetObserver;
+	private final Date date;
+	private final LicensePlate licensePlate;
+	private final Float speed;
 
-	private Date date;
-
-	private LicensePlate licensePlate;
-
-	private Float speed;
-
-	public IStreetObserver getStreetObserver() {
-		return null; //streetObserver;
-	}
-
-	public void setStreetObserver(IStreetObserver streetObserver) {
-		this.streetObserver = (StreetObserverRow) streetObserver;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
+	private Sighting(IStreetObserver streetObserver, Date date, LicensePlate licensePlate, Float speed) {
+		this.streetObserver = streetObserver;
 		this.date = date;
-	}
-
-	public LicensePlate getLicensePlate() {
-		return licensePlate;
-	}
-
-	public void setLicensePlate(LicensePlate licensePlate) {
 		this.licensePlate = licensePlate;
-	}
-
-	public Float getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(Float speed) {
 		this.speed = speed;
 	}
 
+	@Override
+	public IStreetObserver getStreetObserver() {
+		return this.streetObserver;
+	}
+	
+	@Override
+	public Date getDate() {
+		return this.date;
+	}
+
+	@Override
+	public LicensePlate getLicensePlate() {
+		return this.licensePlate;
+	}
+
+	@Override
+	public Float getSpeed() {
+		return this.speed;
+	}
+	
+	public static class Builder{
+		private IStreetObserver streetObserver;
+		private Date date;
+		private LicensePlate licensePlate;
+		private Float speed;
+		
+		public Builder streetObserver(IStreetObserver streetObserver){
+			this.streetObserver = streetObserver;
+			return this;
+		}
+		
+		public Builder streetObserver(Date date){
+			this.date = date;
+			return this;
+		}
+		
+		public Builder streetObserver(LicensePlate licensePlate){
+			this.licensePlate = licensePlate;
+			return this;
+		}
+		
+		public Builder streetObserver(Float speed){
+			this.speed = speed;
+			return this;
+		}
+		
+		public Sighting build(){
+			return new Sighting(this.streetObserver, this.date, this.licensePlate, this.speed);
+		}
+	}
 
 }

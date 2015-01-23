@@ -1,8 +1,7 @@
 package it.unibo.oop.smac.network.jobs;
 
-import it.unibo.oop.smac.database.data.StreetObservers;
-import it.unibo.oop.smac.database.data.I.IStreetObservers;
-import it.unibo.oop.smac.datatype.PlainSighting;
+import it.unibo.oop.smac.database.data.DBStreetObserver;
+import it.unibo.oop.smac.database.data.I.IDBStreetObservers;
 
 import java.util.Observable;
 import java.util.Observer;

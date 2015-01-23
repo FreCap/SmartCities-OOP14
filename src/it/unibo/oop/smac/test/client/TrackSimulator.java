@@ -1,7 +1,7 @@
 package it.unibo.oop.smac.test.client;
 
 import it.unibo.oop.smac.datatype.LicensePlate;
-import it.unibo.oop.smac.datatype.PlainSighting;
+import it.unibo.oop.smac.datatype.Sighting;
 
 import java.util.Date;
 import java.util.Random;
@@ -17,7 +17,7 @@ public class TrackSimulator {
 	public Integer currentIndex = 0;
 	public final LicensePlate licensePlate;
 
-	public PlainSighting next() {
+	public Sighting next() {/*
 		TrackCommand current = track.getTrackCommands().get(currentIndex);
 		try {
 			Thread.sleep(1000 * current.getSleep());
@@ -35,7 +35,7 @@ public class TrackSimulator {
 		// avanzo il contatore
 		currentIndex = currentIndex++ % track.getTrackCommands().size();
 
-		return response;
+		return response;*/return null;
 	}
 
 	public TrackSimulator(LicensePlate licensePlate, Integer nTrack) {

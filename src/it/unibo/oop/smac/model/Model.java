@@ -2,8 +2,8 @@ package it.unibo.oop.smac.model;
 
 import java.util.Random;
 
-import it.unibo.oop.smac.database.data.StreetObservers;
-import it.unibo.oop.smac.database.data.I.IStreetObservers;
+import it.unibo.oop.smac.database.data.DBStreetObserver;
+import it.unibo.oop.smac.database.data.I.IDBStreetObservers;
 import it.unibo.oop.smac.datatype.InfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
@@ -16,7 +16,7 @@ public class Model implements IModel {
 	/*
 	 * Classe di utility con cui ricevere le info su uno StreetObserver dal database
 	 */
-	private IStreetObservers streetObserverDB = StreetObservers.getInstance();
+	private IDBStreetObservers streetObserverDB = DBStreetObserver.getInstance();
 	
 	public Model() {
 		super();
@@ -32,7 +32,7 @@ public class Model implements IModel {
 	@Override
 	public void addNewStreetObserver(IStreetObserver streetObserver) {
 		try {
-			streetObserverDB.add(streetObserver);
+			streetObserverDB.addStreetObserver(streetObserver);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

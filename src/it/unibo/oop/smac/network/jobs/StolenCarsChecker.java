@@ -2,7 +2,6 @@ package it.unibo.oop.smac.network.jobs;
 
 import it.unibo.oop.smac.database.data.StolenCars;
 import it.unibo.oop.smac.datatype.LicensePlate;
-import it.unibo.oop.smac.datatype.PlainSighting;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -10,7 +9,7 @@ import java.util.Observer;
 public class StolenCarsChecker implements Observer {
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(Observable o, Object arg) {/*
 		if (arg instanceof PlainSighting) {
 			PlainSighting sighting = (PlainSighting) arg;
 
@@ -20,7 +19,7 @@ public class StolenCarsChecker implements Observer {
 				// TODO crea alarm!! macchina fottuta
 			}
 
-		}
+		}*/
 
 	}
 

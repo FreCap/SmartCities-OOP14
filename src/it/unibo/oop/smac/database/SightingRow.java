@@ -1,8 +1,7 @@
 package it.unibo.oop.smac.database;
 
 import it.unibo.oop.smac.datatype.LicensePlate;
-import it.unibo.oop.smac.datatype.PlainSighting;
-import it.unibo.oop.smac.datatype.Sighting;
+import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
 import java.util.Date;
@@ -12,13 +11,13 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "Sighting")
-public class SightingRow extends Sighting {
+public class SightingRow implements ISighting {
 
 	@DatabaseField(generatedId = true)
 	private int id;
 
 	@DatabaseField(canBeNull = false, foreign = true)
-	private StreetObserverRow streetObserver;
+	private StreetObserverRow streetObserverRow;
 
 	@DatabaseField(canBeNull = false, dataType = DataType.DATE_LONG)
 	private Date date;
@@ -32,11 +31,11 @@ public class SightingRow extends Sighting {
 	SightingRow() {
 	}
 
-	public SightingRow(PlainSighting plainSighting, StreetObserverRow streetObserverRow) {
+	public SightingRow(ISighting sighting, StreetObserverRow streetObserverRow) {
 		this.setStreetObserver(streetObserverRow);
-		this.setDate(plainSighting.getDate());
-		this.setLicensePlate(new LicensePlate(plainSighting.getLicensePlate()));
-		this.speed = plainSighting.getSpeed();
+		this.setDate(sighting.getDate());
+		this.setLicensePlate(sighting.getLicensePlate());
+		this.speed = sighting.getSpeed();
 	}
 
 	public int getId() {
@@ -48,15 +47,11 @@ public class SightingRow extends Sighting {
 	}
 
 	public IStreetObserver getStreetObserver() {
-		return null;//streetObserver;
+		return streetObserverRow;
 	}
 
-	public void setStreetObserver(StreetObserverRow streetObserver) {
-		this.streetObserver = streetObserver;
-	}
-
-	public void setStreetObserver(IStreetObserver streetObserver) {
-		// TODO
+	public void setStreetObserver(StreetObserverRow streetObserverRow) {
+		this.streetObserverRow = streetObserverRow;
 	}
 
 	public Date getDate() {
