@@ -6,17 +6,53 @@ import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
+/**
+ * Interfaccia del Model dell'applicazione.
+ * 
+ * @author Federico Bellini
+ *
+ */
 public interface IModel {
 	
-	// questo metodo deve aggiungere un nuovo streetObserver al DATABASE
+	/**
+	 * Questo metodo deve aggiungere un nuovo {@link IStreetObserver} a quelli già
+	 * salvati nel Model. 
+	 * 
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} da aggiungere.
+	 */
 	void addNewStreetObserver(IStreetObserver streetObserver);
 	
-	// questo metodo deve aggiungere il pacchetto di informazioni "s" al database.
+	/**
+	 * Questo metodo deve aggiungere un nuovo {@link ISighting} a quelli già
+	 * salvati nel Model. 
+	 * 
+	 * @param sighting
+	 * 			L'{@link ISighting} da aggiungere.
+	 */
 	void addSighting(ISighting sighting);
 	
-	// questo metodo deve far tornare un pacchetto IInfoStreetObserver dello streetObserver richiesto
+	/**
+	 * Questo metodo deve restituire un oggetto del tipo {@link IInfoStreetObserver} 
+	 * contenente i dati dell'{@link IStreetObserver} richiesto.
+	 * 
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} di cui si vogliono le informazioni.
+	 * @return
+	 * 			Un {@link IInfoStreetObserver} contenente le informazioni sull'
+	 * 			{@link IStreetObserver} richiesto.
+	 */
 	IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver);
 	
-	// questo metodo deve far tornare un pacchetto IInfoStolenCarr della stolenCar richiesta
+	/**
+	 * Questo metodo deve restituire un oggetto del tipo {@link IInfoStolenCar} 
+	 * contenente i dati dell'{@link IStolenCar} richiesto.
+	 * 
+	 * @param stolenCar
+	 * 			L'{@link IStolenCar} di cui si vogliono le informazioni.
+	 * @return
+	 * 			Un {@link IInfoStolenCar} contenente le informazioni sull'
+	 * 			{@link IStolenCar} richiesto.
+	 */
 	IInfoStolenCar getStolenCarInfo(IStolenCar stolenCar);
 }

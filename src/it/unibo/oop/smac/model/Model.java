@@ -27,9 +27,18 @@ public class Model implements IModel {
 
 	private static Model instance;
 
+	/**
+	 * Costruttore privato della classe.
+	 */
 	private Model() {
 	}
 
+	/**
+	 * Metodo getInstance per realizzare pattern Singleton
+	 * 
+	 * @return
+	 * 			Un istanza della classe {@link Model}
+	 */
 	public static synchronized Model getInstance() {
 		if(instance == null){
 			instance = new Model();
@@ -42,7 +51,6 @@ public class Model implements IModel {
 	 * 
 	 * @param streetObserver
 	 * 			L'{@link IStreetObserver} da inserire.
-	 * 
 	 */
 	@Override
 	public void addNewStreetObserver(IStreetObserver streetObserver) {
@@ -63,7 +71,6 @@ public class Model implements IModel {
 	 * 
 	 * @param sighting
 	 * 			L'{@link ISighting} da inserire.
-	 * 
 	 */
 	@Override
 	public void addSighting(ISighting sighting) {
@@ -73,8 +80,17 @@ public class Model implements IModel {
 		streetObserverRow.addSightings(sightingRow);
 	}
 
-	// raccoglie dati di uno streetObserver, e restituisce un pacchetto
-	// InfoStreetObserver
+	/**
+	 * Questo metodo raccoglie i dati su di un {@link IStreetObserver}, e li organizza
+	 * restituendo al chiamante un {@link IInfoStreetObserver} contenente i dati
+	 * sull'osservstore richiesto.
+	 * 
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} di cui si vogliono conoscere le informazioni.
+	 * @return
+	 * 			Un oggetto del tipo {@link IInfoStreetObserver} contenente le informazioni
+	 * 			sull'{@link IStreetObserver} richiesto.
+	 */
 	@Override
 	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) {
 
@@ -86,6 +102,17 @@ public class Model implements IModel {
 						.totalNOfSight(sightingList.size()).build();
 	}
 	
+	/**
+	 * Questo metodo raccoglie i dati su di un {@link IStolenCar}, e li organizza
+	 * restituendo al chiamante un {@link IInfoStolenCar} contenente i dati
+	 * sull'osservstore richiesto.
+	 * 
+	 * @param stolenCar
+	 * 			L'{@link IStolenCar} di cui si vogliono conoscere le informazioni.
+	 * @return
+	 * 			Un oggetto del tipo {@link IInfoStolenCar} contenente le informazioni
+	 * 			sull'{@link IStolenCar} richiesto.
+	 */
 	@Override
 	public IInfoStolenCar getStolenCarInfo(IStolenCar stolenCar) {
 		// TODO

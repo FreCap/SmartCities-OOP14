@@ -1,6 +1,5 @@
 package it.unibo.oop.smac.network.jobs;
 
-import it.unibo.oop.smac.database.data.StolenCars;
 import it.unibo.oop.smac.datatype.LicensePlate;
 
 import java.util.Observable;
