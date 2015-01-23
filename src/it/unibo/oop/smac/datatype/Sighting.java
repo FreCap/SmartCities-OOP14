@@ -57,17 +57,17 @@ public class Sighting implements ISighting {
 			return this;
 		}
 		
-		public Builder streetObserver(Date date){
+		public Builder date(Date date){
 			this.date = date;
 			return this;
 		}
 		
-		public Builder streetObserver(LicensePlate licensePlate){
+		public Builder licensePlate(LicensePlate licensePlate){
 			this.licensePlate = licensePlate;
 			return this;
 		}
 		
-		public Builder streetObserver(Float speed){
+		public Builder speed(Float speed){
 			this.speed = speed;
 			return this;
 		}

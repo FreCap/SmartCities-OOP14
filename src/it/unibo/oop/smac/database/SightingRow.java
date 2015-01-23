@@ -17,24 +17,25 @@ public class SightingRow implements ISighting {
 	private int id;
 
 	@DatabaseField(canBeNull = false, foreign = true)
-	private StreetObserverRow streetObserverRow;
+	private final StreetObserverRow streetObserverRow;
 
 	@DatabaseField(canBeNull = false, dataType = DataType.DATE_LONG)
-	private Date date;
+	private final Date date;
 
 	@DatabaseField(canBeNull = false, dataType=DataType.SERIALIZABLE)
-	private LicensePlate licensePlate;
+	private final LicensePlate licensePlate;
 
 	@DatabaseField(canBeNull = false)
-	private Float speed;
+	private final Float speed;
 
-	SightingRow() {
+	SightingRow(){
+		this(null,null);
 	}
 
 	public SightingRow(ISighting sighting, StreetObserverRow streetObserverRow) {
-		this.setStreetObserver(streetObserverRow);
-		this.setDate(sighting.getDate());
-		this.setLicensePlate(sighting.getLicensePlate());
+		this.streetObserverRow = streetObserverRow;
+		this.date = sighting.getDate();
+		this.licensePlate = sighting.getLicensePlate();
 		this.speed = sighting.getSpeed();
 	}
 
@@ -42,40 +43,31 @@ public class SightingRow implements ISighting {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public IStreetObserver getStreetObserver() {
 		return streetObserverRow;
-	}
-
-	public void setStreetObserver(StreetObserverRow streetObserverRow) {
-		this.streetObserverRow = streetObserverRow;
 	}
 
 	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
 	public LicensePlate getLicensePlate() {
 		return licensePlate;
-	}
-
-	public void setLicensePlate(LicensePlate licensePlate) {
-		this.licensePlate = licensePlate;
 	}
 
 	public Float getSpeed() {
 		return speed;
 	}
 
-	public void setSpeed(Float speed) {
-		this.speed = speed;
+	@Override
+	public String toString() {
+		return "SightingRow [id=" + id + ", streetObserverRow="
+				+ streetObserverRow + ", date=" + date + ", licensePlate="
+				+ licensePlate + ", speed=" + speed + "]";
 	}
+	
+	// TODO hashcode e equals
+	
+	
 
 }

@@ -1,7 +1,5 @@
 package it.unibo.oop.smac.model;
 
-import java.util.Random;
-
 import it.unibo.oop.smac.database.data.DBStreetObserver;
 import it.unibo.oop.smac.database.data.I.IDBStreetObservers;
 import it.unibo.oop.smac.datatype.InfoStreetObserver;
@@ -11,10 +9,16 @@ import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
+/**
+ * Questa classe implementa il Model dell'applicazione.
+ * 
+ * @author Federico Bellini
+ *
+ */
 public class Model implements IModel {
 
-	/*
-	 * Classe di utility con cui ricevere le info su uno StreetObserver dal database
+	/**
+	 * Classe di utility con cui leggere/scrivere delle informazioni dal/sul database
 	 */
 	private IDBStreetObservers streetObserverDB = DBStreetObserver.getInstance();
 	
@@ -27,43 +31,45 @@ public class Model implements IModel {
 	 * relative ad un nuovo {@link IStreetObserver}.
 	 * 
 	 * @param streetObserver
-	 * 			il nuovo {@link IStreetObserver} da aggiungere al database.
+	 * 			Il nuovo {@link IStreetObserver} da aggiungere al database.
 	 */
 	@Override
 	public void addNewStreetObserver(IStreetObserver streetObserver) {
 		try {
-			streetObserverDB.addStreetObserver(streetObserver);
+			this.streetObserverDB.addStreetObserver(streetObserver);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	// TODO questo metodo deve aggiungere il pacchetto di informazioni "s" al database.
-	// s è il pacchetto di info inviato da "streetObserver"
+	/**
+	 * Questo metodo aggiunge le informazioni appena ricevute da un {@link IStreetObserver}
+	 * al database.
+	 * 
+	 * @param sighting
+	 * 			Le {@link ISighting} appena ricevute.
+	 */
 	@Override
-	public void newPassage(IStreetObserver streetObserver, ISighting s) {
+	public void newPassage(ISighting sighting) {
+		try {
+			this.streetObserverDB.addSighting(sighting);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// TODO questo metodo deve far tornare un pacchetto IInfoStreetObserver dello streetObserver richiesto
 	@Override
 	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) {
-		
-		//////// QUESTO LO FACCIO SOLO PER ESEMPIO! BISOGNERA' POI IMPLEMENTARLO IN MODO CHE 
-		//////// I DATI PROVENGANO DAL DB!
-		Random r = new Random();
-		return new InfoStreetObserver.Builder().streetObserver(streetObserver)
-											   .maxCarRateToday(r.nextInt(100))
-											   .averageSpeedLastMonth(r.nextInt(100))
-											   .averageSpeedLastWeek(r.nextInt(100))
-											   .maxSpeedToday(r.nextInt(100))
-											   .nOfSightLastWeek(r.nextInt(100))
-											   .nOfSightToday(r.nextInt(100))
-											   .build();
-		
-		
-		
-		
-		
+		IInfoStreetObserver info;
+		try {
+			info = streetObserverDB.getDataGathered(streetObserver);
+		} catch(Exception e) {
+			e.printStackTrace();
+			info = new InfoStreetObserver.Builder().build();
+		}
+		return info;
 	}
 
 	// TODO questo metodo deve far tornare un pacchetto IInfoStolenCarr della stolenCar richiesta

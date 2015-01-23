@@ -17,9 +17,9 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	private final Optional<Integer> nOfSightLastHour;
 	private final Optional<Integer> nOfSightToday;
 	private final Optional<Integer> nOfSightLastWeek;
-	private final Optional<Integer>  nOfSightLaatMonth;
-	private final Optional<Integer>  totalNOfSight;
-	private final Optional<Double>  speedLimit;
+	private final Optional<Integer> nOfSightLaatMonth;
+	private final Optional<Integer> totalNOfSight;
+	private final Optional<Double> speedLimit;
 	private final Optional<Double> averageSpeedToday;
 	private final Optional<Double> averageSpeedLastWeek;
 	private final Optional<Double> averageSpeedLastMonth;
@@ -72,7 +72,7 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	@Override
 	public String getStreetObserverID() {
 		if(this.streetObserver.isPresent()){
-			return String.valueOf(this.streetObserver.get().hashCode());
+			return String.valueOf(this.streetObserver.get().getID());
 		}
 		else{
 			return EMPTY_STRING;

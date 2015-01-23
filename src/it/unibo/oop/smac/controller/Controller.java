@@ -40,7 +40,7 @@ public class Controller implements IController {
 	@Override
 	public void newPassage(IStreetObserver streetObserver, ISighting is) {
 		this.view.newPassage(streetObserver);
-		this.model.newPassage(streetObserver, is);
+		this.model.newPassage(is);
 	}
 
 }
