@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
+/// PATTERN OBSERVER!
 public class MainPanel extends JPanel implements IMainPanel {
 	
 	private static final long serialVersionUID = -5219662861548416920L;
