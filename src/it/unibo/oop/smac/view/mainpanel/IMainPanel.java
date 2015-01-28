@@ -5,17 +5,43 @@ import javax.swing.JPanel;
 import it.unibo.oop.smac.controller.IStreetObserverObserver;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
+/**
+ * Interfaccia del JPanel contenente le informazioni raccolte dagli
+ * {@link IStreetObserver}.
+ * 
+ * @author Federico Bellini
+ */
 public interface IMainPanel {
 
-	// aggiunge uno street observer nella GUI
+	/**
+	 * Aggiunge un'{@link IStreetObserver} nella GUI.
+	 * 
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} da aggiungere.
+	 */
 	void addStreetObserver(IStreetObserver streetObserver);
 	
-	// la gui mostra che c'è stato un passaggio(sono stati ricevuti dei dati)
+	/**
+	 * Mostra che un'{@link IStreetObserver} ha rilevato dei dati.
+	 * 
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} che ha rilevato dei dati.
+	 */
 	void notifyPassage(IStreetObserver streetObserver);
 	
-	// attacco degli observers
+	/**
+	 * Attacca un Observer degli StreetObserver.
+	 * 
+	 * @param soo
+	 * 			L'{@link IStreetObserverObserver} da attaccare.
+	 */
 	void attachStreetObserverObserver(IStreetObserverObserver soo);
 	
-	// torna il panel
+	/**
+	 * Restituisce il JPanel.
+	 * 
+	 * @return
+	 * 		Il JPanel.
+	 */
 	JPanel getPanel();
 }

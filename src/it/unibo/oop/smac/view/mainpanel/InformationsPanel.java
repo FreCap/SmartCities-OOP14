@@ -8,7 +8,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
-public class InformationsPanel extends JPanel implements IInformationsPanel {
+/**
+ * Classe che implementa un pannello da aggiungere alla GUI che mostra le informazioni
+ * relative ad uno street Observer.
+ * 
+ * @author Federico Bellini
+ */
+public class InformationsPanel extends JPanel {
 
 	private static final long serialVersionUID = -3058034776743041502L;
 	private static final String NEW_LINE = System.lineSeparator();
@@ -21,6 +27,9 @@ public class InformationsPanel extends JPanel implements IInformationsPanel {
 	
 	private IInfoStreetObserver currentInfo;
 	
+	/**
+	 * Costruttore della classe.
+	 */
 	public InformationsPanel(){
 		super();
 		this.setBorder(new TitledBorder("Informations"));
@@ -41,17 +50,31 @@ public class InformationsPanel extends JPanel implements IInformationsPanel {
 		this.updateInfo();
 	}
 
-	@Override
+	/**
+	 * Questo metodo fa cambiare le informazioni visualizzate da questo JPanel con le
+	 * informazioni passate come parametro.
+	 * 
+	 * @param iso
+	 * 			Le informazioni da visualizzare.
+	 */
 	public void showInformations(IInfoStreetObserver iso) {
 		this.currentInfo = iso;
 		this.updateInfo();
 	}
 
-	@Override
+	/**
+	 * Restituisce questo JPanel.
+	 * 
+	 * @return
+	 * 			Questo JPanel.
+	 */
 	public JPanel getPanel() {
 		return this;
 	}
 	
+	/**
+	 * Metodo privato utile per aggiornare tutte le informazioni contenute nel JPanel.
+	 */
 	private void updateInfo() {
 		showStreetObserverInfo();
 		showCarRateInfo();
@@ -59,6 +82,9 @@ public class InformationsPanel extends JPanel implements IInformationsPanel {
 		showSpeedInfo();
 	}
 	
+	/**
+	 * Aggiorna le informazioni sugli StreetObserver.
+	 */
 	private void showStreetObserverInfo() {
 		String s = new StringBuilder().append("   STREET OBSERVER\t\t\t")
 									  .append(NEW_LINE)
@@ -70,6 +96,9 @@ public class InformationsPanel extends JPanel implements IInformationsPanel {
 		
 	}
 	
+	/**
+	 * Aggiorna le informazioni sul car rate.
+	 */
 	private void showCarRateInfo() {
 		String s = new StringBuilder().append("   CAR RATE")
 				  .append(NEW_LINE)
@@ -78,6 +107,9 @@ public class InformationsPanel extends JPanel implements IInformationsPanel {
 		this.carRateInfo.setText(s);
 	}
 	
+	/**
+	 * Aggiorna le informazioni sugli avvistamenti.
+	 */
 	private void showSightingInfo() {
 		String s = new StringBuilder().append("   SIGHT DATA")
 				  .append(NEW_LINE)
@@ -94,6 +126,9 @@ public class InformationsPanel extends JPanel implements IInformationsPanel {
 		this.sightInfo.setText(s);
 	}
 
+	/**
+	 * Aggiorna le informazioni sulle velocità rilevate.
+	 */
 	private void showSpeedInfo() {
 		String s = new StringBuilder().append("   SPEED DATA")
 				  .append(NEW_LINE)

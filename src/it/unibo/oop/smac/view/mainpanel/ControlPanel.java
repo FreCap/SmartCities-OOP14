@@ -8,11 +8,20 @@ import java.awt.Insets;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-public class ControlPanel extends JPanel implements IControlPanel {
+/**
+ * Questa classe implementa un JPanel contenente una lista di {@link StreetObserverPanel}
+ * per poter essere visualizzati.
+ * 
+ * @author Federico Bellini
+ */
+public class ControlPanel extends JPanel {
 
 	private static final long serialVersionUID = -6541769613294971397L;
 	private final GridBagConstraints gbc = new GridBagConstraints();;
 	
+	/**
+	 * Costruttore della classe.
+	 */
 	public ControlPanel(){
 		super();
 		this.setBorder(new TitledBorder("Controllers"));
@@ -22,14 +31,23 @@ public class ControlPanel extends JPanel implements IControlPanel {
 		this.gbc.insets = new Insets (5 ,5 ,5 ,5);
 	}
 	
-	@Override
+	/**
+	 * Aggiunge un nuovo {@link Component} al JPanel.
+	 * 
+	 * @param comp
+	 * 			Il componente da aggiungere.
+	 */
 	public void addStreetObserver(Component comp){
 		this.add(comp, this.gbc);
 		this.gbc.gridy++;
-		
 	}
 	
-	@Override
+	/**
+	 * Restituisce il JPanel.
+	 * 
+	 * @return
+	 * 		Restituisce il JPanel.
+	 */
 	public JPanel getPanel() {
 		return this;
 	}
