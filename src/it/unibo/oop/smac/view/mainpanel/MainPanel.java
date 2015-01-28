@@ -55,7 +55,13 @@ public class MainPanel extends JPanel implements IMainPanel {
 			StreetObserverPanel p = new StreetObserverPanel(
 					streetObserver,
 					(t) -> {
-							IInfoStreetObserver info = this.soo.getStreetObserverInfo(t);
+							IInfoStreetObserver info = null;
+							try {
+								info = this.soo.getStreetObserverInfo(t);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 							this.informationsPanel.showInformations(info);
 					});
 			this.controlPanel.addStreetObserver(p);

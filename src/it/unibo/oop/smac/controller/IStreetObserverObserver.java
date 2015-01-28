@@ -2,6 +2,7 @@ package it.unibo.oop.smac.controller;
 
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
+import it.unibo.oop.smac.model.exception.NotFound;
 
 
 /**
@@ -25,6 +26,8 @@ public interface IStreetObserverObserver{
 	 * 			L'{@link IStreetObserver} di cui si richiedono informazioni.
 	 * @return 
 	 * 			Un oggetto {@link IStreetObserver} con le informazioni richieste.
+	 * @throws NotFound 
+	 * @throws IllegalArgumentException 
 	 */
-	IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver);
+	IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) throws IllegalArgumentException, NotFound;
 }

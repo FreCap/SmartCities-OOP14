@@ -10,37 +10,38 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
-import it.unibo.oop.smac.network.jobs.StolenCarsChecker;
-import it.unibo.oop.smac.network.jobs.StreetObserverLogger;
+import it.unibo.oop.smac.controller.Controller;
+import it.unibo.oop.smac.controller.IController;
+import it.unibo.oop.smac.network.jobs.ControllerSightingSender;
 
-public final class NetServer {
+public class NetServer {
 
-	public static final int PORT = Integer
-			.parseInt(System.getProperty("port", "8007"));
+	public static final int PORT = Integer.parseInt(System.getProperty("port",
+			"8007"));
+	private final Dispatcher dispatcher;
 
-	public static void initJobs() {
-		Dispatcher.getInstance().addObserver(new StreetObserverLogger());
-		Dispatcher.getInstance().addObserver(new StolenCarsChecker());
-
+	public NetServer(IController controller) {
+		this.dispatcher = new Dispatcher(controller);
+		dispatcher.addObserver(new ControllerSightingSender());
+		run();
 	}
 
-	public static ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
+	public ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
 		@Override
 		public void initChannel(SocketChannel ch) throws Exception {
 			ChannelPipeline p = ch.pipeline();
 
 			p.addLast(new ObjectEncoder(),
 					new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
-					new ServerHandler());
+					new ServerHandler(dispatcher));
 		}
 	};
 
-	public static void run() {
+	public void run() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				initJobs();
-				
+
 				// nuovi workers
 				EventLoopGroup bossGroup = new NioEventLoopGroup(1);
 				EventLoopGroup workerGroup = new NioEventLoopGroup();
@@ -61,8 +62,7 @@ public final class NetServer {
 					workerGroup.shutdownGracefully();
 				}
 			}
-		});
-
+		}).start();
 	}
 
 }

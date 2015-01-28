@@ -4,13 +4,18 @@ import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 
 public class ServerHandler extends ChannelHandlerAdapter {
-	
+
+	private final Dispatcher dispatcher;
+
+	ServerHandler(Dispatcher dispatcher) {
+		this.dispatcher = dispatcher;
+	}
+
 	public void channelRead(ChannelHandlerContext ctx, Object msg) {
-		Dispatcher.getInstance().notifyObservers(msg);
+		dispatcher.notifyObservers(msg);
 	}
 
 	public void channelReadComplete(ChannelHandlerContext ctx) {
-		
 		ctx.flush();
 	}
 
@@ -19,5 +24,5 @@ public class ServerHandler extends ChannelHandlerAdapter {
 		cause.printStackTrace();
 		ctx.close();
 	}
-	
+
 }

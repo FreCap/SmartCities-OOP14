@@ -8,6 +8,7 @@ import it.unibo.oop.smac.datatype.LicensePlate;
 import it.unibo.oop.smac.datatype.Sighting;
 import it.unibo.oop.smac.datatype.StreetObserver;
 import it.unibo.oop.smac.datatype.I.ISighting;
+import it.unibo.oop.smac.network.NetServer;
 import it.unibo.oop.smac.view.ViewGUI;
 
 public class SmarterCitiesApplication {
@@ -18,6 +19,7 @@ public class SmarterCitiesApplication {
 	public static void main(String[] args) throws InterruptedException {
 		
 		final IController controller = new Controller(new ViewGUI());
+		final NetServer netServer = new NetServer(controller);
 		
 		StreetObserver<Coordinates> so1 =  new StreetObserver<>(new Coordinates(44.139625f, 12.235225f));
 		StreetObserver<Coordinates> so2 =  new StreetObserver<>(new Coordinates(44.131771f, 12.268767f));
