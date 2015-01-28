@@ -12,10 +12,7 @@ public class RandomStringGenerator {
 		String characters = "";
 		switch(mode){
 		case ALPHA:
-			characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-			break;
-		case ALPHANUMERIC:
-			characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+			characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 			break;
 		case NUMERIC:
 			characters = "1234567890";
