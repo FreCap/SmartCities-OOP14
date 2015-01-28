@@ -8,7 +8,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.io.IOException;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -24,38 +23,18 @@ import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
  */
 public class MyMapMarker extends MapObjectImpl implements MapMarker {
 	
-	private static final String DEFAULT_PATH = "/images/";
+	private static final String DEFAULT_PATH = "/images/redPin.png";
 	private static final STYLE style = STYLE.VARIABLE;
 	
-	private final String actualPath = DEFAULT_PATH + PinColor.getRandomPin() + ".png";
 	private final Coordinate coordinate;
 	private Image locationImage = null;
 	
-	private static enum PinColor{
-		redPin(), bluePin(), greenPin(), pinkPin();
-		
-		private static Random r = new Random();
-		
-		private PinColor(){
-		}
-		
-		public static String getRandomPin() {
-			int c = r.nextInt(1000);
-			switch(c% (PinColor.values().length)){
-				case 0: return PinColor.bluePin.toString();
-				case 1: return PinColor.greenPin.toString();
-				case 2: return PinColor.pinkPin.toString();
-				default: return PinColor.redPin.toString();
-			}
-		}
-	}
-	
 	public MyMapMarker(IStreetObserver streetObserver) {
-		super(String.valueOf(streetObserver.getCoordinates().hashCode()));
+		super(streetObserver.getID());
 		Coordinates<Double> c = streetObserver.getCoordinates();
 		this.coordinate = new Coordinate(c.getLatitude(),c.getLongitude());
 		try {
-			this.locationImage = ImageIO.read(MainPanel.class.getResource(actualPath));
+			this.locationImage = ImageIO.read(MainPanel.class.getResource(DEFAULT_PATH));
 		} catch (IOException e) {
 		}
 	}
@@ -108,11 +87,14 @@ public class MyMapMarker extends MapObjectImpl implements MapMarker {
 	}
 
 	/**
-	 *  Paint over the Graphics the image at the position p
+	 * Disegna sul {@link Graphics} l'immagine alla posizione p
 	 *  
-	 *  @param g the {@link Graphics}
-	 *  @param p the point where to paint the image
-	 *  @param radio unused
+	 *  @param g 
+	 *  		Il {@link Graphics}
+	 *  @param p 
+	 *  		Il {@link Point} dove disegnare l'immagine
+	 *  @param radio
+	 *  		Inutilizzato
 	 */
 	@Override
 	public void paint(Graphics g, Point p, int radio) {
