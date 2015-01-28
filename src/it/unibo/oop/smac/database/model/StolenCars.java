@@ -49,8 +49,8 @@ public class StolenCars implements IStolenCars {
 		try {
 			List<StolenCarDB> stolenCars = stolenCarDao.query(statementBuilder
 					.prepare());
-			statementBuilder.where().like(StolenCarDB.LICENSEPLATE_FIELD_NAME,
-					licensePlate);
+			statementBuilder.where().eq(StolenCarDB.LICENSEPLATE_FIELD_NAME,
+					licensePlate.toString());
 
 			exist = stolenCarDao.query(statementBuilder.prepare());
 

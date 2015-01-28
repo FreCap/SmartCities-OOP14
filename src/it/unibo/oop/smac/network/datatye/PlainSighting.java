@@ -2,6 +2,7 @@ package it.unibo.oop.smac.network.datatye;
 
 import it.unibo.oop.smac.datatype.Coordinates;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,8 +11,12 @@ import java.util.Date;
  * @author Francesco Capponi
  *
  */
-public class PlainSighting {
+public class PlainSighting implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6098237635297318104L;
 	private Coordinates coordinates;
 	private Date date;
 	private String licensePlate;

@@ -1,9 +1,9 @@
 package it.unibo.oop.smac.network;
 
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class ServerHandler extends ChannelHandlerAdapter {
+public class ServerHandler extends  ChannelInboundHandlerAdapter  {
 
 	private final Dispatcher dispatcher;
 

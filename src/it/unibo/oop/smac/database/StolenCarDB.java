@@ -13,12 +13,12 @@ import com.j256.ormlite.table.DatabaseTable;
 public class StolenCarDB implements IInfoStolenCar {
 	public static final String LICENSEPLATE_FIELD_NAME = "licensePlate";
 	public static final String DATAINSERIMENTO_FIELD_NAME = "dataInserimento";
-	
+
 	@DatabaseField(generatedId = true)
 	private int id;
 
-	@DatabaseField(columnName = LICENSEPLATE_FIELD_NAME, dataType=DataType.SERIALIZABLE)
-	private LicensePlate licensePlate;
+	@DatabaseField(columnName = LICENSEPLATE_FIELD_NAME, dataType = DataType.STRING)
+	private String licensePlate;
 
 	@DatabaseField(columnName = DATAINSERIMENTO_FIELD_NAME, canBeNull = false)
 	private Date dataInserimento;
@@ -27,11 +27,11 @@ public class StolenCarDB implements IInfoStolenCar {
 	}
 
 	public LicensePlate getLicensePlate() {
-		return licensePlate;
+		return new LicensePlate(licensePlate);
 	}
 
 	public void setLicensePlate(LicensePlate licensePlate) {
-		this.licensePlate = licensePlate;
+		this.licensePlate = licensePlate.toString();
 	}
 
 	public Date getDataInserimento() {

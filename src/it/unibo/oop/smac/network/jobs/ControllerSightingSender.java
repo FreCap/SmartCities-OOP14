@@ -1,6 +1,5 @@
 package it.unibo.oop.smac.network.jobs;
 
-import it.unibo.oop.smac.datatype.Coordinates;
 import it.unibo.oop.smac.datatype.LicensePlate;
 import it.unibo.oop.smac.datatype.Sighting;
 import it.unibo.oop.smac.datatype.StreetObserver;

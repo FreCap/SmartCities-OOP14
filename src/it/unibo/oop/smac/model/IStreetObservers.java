@@ -5,6 +5,7 @@ import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
+import it.unibo.oop.smac.model.exception.DuplicateFound;
 import it.unibo.oop.smac.model.exception.NotFound;
 
 /**
@@ -21,8 +22,10 @@ public interface IStreetObservers {
 	 * 
 	 * @param streetObserver
 	 *            L'{@link IStreetObserver} da aggiungere.
+	 * @throws DuplicateFound
 	 */
-	void addNewStreetObserver(IStreetObserver streetObserver);
+	void addNewStreetObserver(IStreetObserver streetObserver)
+			throws DuplicateFound;
 
 	/**
 	 * Questo metodo deve aggiungere un nuovo {@link ISighting} a quelli già
@@ -30,8 +33,8 @@ public interface IStreetObservers {
 	 * 
 	 * @param sighting
 	 *            L'{@link ISighting} da aggiungere.
-	 * @throws NotFound 
-	 * @throws IllegalArgumentException 
+	 * @throws NotFound
+	 * @throws IllegalArgumentException
 	 */
 	void addSighting(ISighting sighting) throws IllegalArgumentException;
 
@@ -44,10 +47,11 @@ public interface IStreetObservers {
 	 *            L'{@link IStreetObserver} di cui si vogliono le informazioni.
 	 * @return Un {@link IInfoStreetObserver} contenente le informazioni sull'
 	 *         {@link IStreetObserver} richiesto.
-	 * @throws NotFound 
-	 * @throws IllegalArgumentException 
+	 * @throws NotFound
+	 * @throws IllegalArgumentException
 	 */
-	IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) throws IllegalArgumentException, NotFound;
+	IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver)
+			throws IllegalArgumentException, NotFound;
 
 	/**
 	 * Questo metodo deve restituire un oggetto del tipo {@link IInfoStolenCar}

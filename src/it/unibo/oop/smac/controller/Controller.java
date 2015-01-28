@@ -1,5 +1,6 @@
 package it.unibo.oop.smac.controller;
 
+import it.unibo.oop.smac.datatype.LicensePlate;
 import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.ISighting;
@@ -9,7 +10,9 @@ import it.unibo.oop.smac.model.IStolenCars;
 import it.unibo.oop.smac.model.IStreetObservers;
 import it.unibo.oop.smac.model.Model;
 import it.unibo.oop.smac.model.ModelStolenCars;
+import it.unibo.oop.smac.model.exception.DuplicateFound;
 import it.unibo.oop.smac.model.exception.NotFound;
+import it.unibo.oop.smac.test.client.TrackSimulator;
 import it.unibo.oop.smac.view.IView;
 
 public class Controller implements IController {
@@ -17,6 +20,8 @@ public class Controller implements IController {
 	private final IView view;
 	private final IStreetObservers model;
 	private final IStolenCars modelStolenCars;
+	public final TrackSimulator trackSimulator = new TrackSimulator(
+			LicensePlate.generate());
 
 	public Controller(IView view) {
 		model = Model.getInstance();
@@ -42,8 +47,14 @@ public class Controller implements IController {
 	public void addStreetObserver(IStreetObserver streetObserver) {
 		// check se da aggiungere
 
-		model.addNewStreetObserver(streetObserver);
-		view.addStreetObserver(streetObserver);
+		try {
+			model.addNewStreetObserver(streetObserver);
+			view.addStreetObserver(streetObserver);
+
+		} catch (DuplicateFound e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -57,15 +68,15 @@ public class Controller implements IController {
 		}
 		// aggiungo il sighting al model
 		model.addSighting(is);
-		
+
 		// controllo che non si tratti di una rubata
-				;
+		;
 		if (modelStolenCars.checkStolenPlate(is.getLicensePlate())) {
 			// TODO crea alarm!! macchina fottuta
 		}
-		
+
 		// notifico la view
 		view.newPassage(streetObserver);
 	}
-	
+
 }

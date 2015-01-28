@@ -1,8 +1,9 @@
 package it.unibo.oop.smac.test.client;
 
 import it.unibo.oop.smac.datatype.LicensePlate;
-import it.unibo.oop.smac.datatype.Sighting;
+import it.unibo.oop.smac.network.datatye.PlainSighting;
 
+import java.io.InputStream;
 import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
@@ -11,13 +12,11 @@ import com.google.gson.Gson;
 
 public class TrackSimulator {
 
-	public static final String fileName = "tracks.json";
-
 	public Track track;
 	public Integer currentIndex = 0;
 	public final LicensePlate licensePlate;
 
-	public Sighting next() {/*
+	public PlainSighting next() {
 		TrackCommand current = track.getTrackCommands().get(currentIndex);
 		try {
 			Thread.sleep(1000 * current.getSleep());
@@ -31,11 +30,12 @@ public class TrackSimulator {
 		response.setDate(new Date());
 		response.setLicensePlate(licensePlate.toString());
 		response.setSpeed(new Float(new Random().nextInt(50) + 30));
-
+		
+		int size = track.getTrackCommands().size();
 		// avanzo il contatore
-		currentIndex = currentIndex++ % track.getTrackCommands().size();
+		currentIndex = (currentIndex+1) % size;
 
-		return response;*/return null;
+		return response;
 	}
 
 	public TrackSimulator(LicensePlate licensePlate, Integer nTrack) {
@@ -58,9 +58,12 @@ public class TrackSimulator {
 		return gson.fromJson(rawJSON, Track[].class);
 	}
 
+	public static final String fileName = "tracks/tracks.json";
+
 	private String readFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-		return new Scanner(classLoader.getResourceAsStream(fileName), "UTF-8")
+		InputStream stream = classLoader.getResourceAsStream(fileName);
+		return new Scanner(stream, "UTF-8")
 				.useDelimiter("\\A").next();
 	}
 

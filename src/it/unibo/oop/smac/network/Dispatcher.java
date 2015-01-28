@@ -26,4 +26,10 @@ public class Dispatcher extends Observable {
 		return controller;
 	}
 
+	@Override
+	public void notifyObservers(Object arg) {
+		setChanged();
+		super.notifyObservers(arg);
+	}
+
 }

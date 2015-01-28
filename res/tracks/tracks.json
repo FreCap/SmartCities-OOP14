@@ -1,0 +1,51 @@
+[{
+    trackCommands: [{
+        sleep: 1,
+        coordinate: {
+            longitude: 44.139521,
+            latitude: 12.246623
+        }
+    }, {
+        sleep: 2,
+        coordinate: {
+            longitude: 44.138628,
+            latitude: 12.247996
+        }
+    }, {
+        sleep: 3,
+        coordinate: {
+            longitude:44.141600,
+            latitude: 12.250013
+        }
+    }, {
+        sleep: 1,
+        coordinate: {
+            longitude:44.143909,
+            latitude: 12.251301
+        }
+    }, {
+        sleep: 2,
+        coordinate: {
+            longitude:44.145249,
+            latitude: 12.248404
+        }
+    }, {
+        sleep: 3,
+        coordinate: {
+            longitude:44.142816,
+            latitude: 12.246816
+        }
+    }, {
+        sleep: 1,
+        coordinate: {
+            longitude:44.143078,
+            latitude: 12.245743
+        }
+    }, {
+        sleep: 2,
+        coordinate: {
+            longitude:44.141245,
+            latitude: 12.244692
+        }
+    }]
+}]

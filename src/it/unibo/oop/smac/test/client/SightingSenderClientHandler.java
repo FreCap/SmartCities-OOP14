@@ -1,9 +1,9 @@
 package it.unibo.oop.smac.test.client;
 
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class SightingSenderClientHandler extends ChannelHandlerAdapter {
+public class SightingSenderClientHandler extends ChannelInboundHandlerAdapter {
 
 	public TrackSimulator trackSimulator;
 
@@ -12,6 +12,7 @@ public class SightingSenderClientHandler extends ChannelHandlerAdapter {
 	}
 
 	public void channelActive(ChannelHandlerContext ctx) {
+
 		while (true) {
 			ctx.writeAndFlush(trackSimulator.next());
 		}

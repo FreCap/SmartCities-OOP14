@@ -12,6 +12,7 @@ import it.unibo.oop.smac.datatype.I.IStolenCar;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 import it.unibo.oop.smac.model.IStreetObservers;
 import it.unibo.oop.smac.model.Model;
+import it.unibo.oop.smac.model.exception.DuplicateFound;
 import it.unibo.oop.smac.model.exception.NotFound;
 
 import java.sql.SQLException;
@@ -52,9 +53,10 @@ public class StreetObservers implements IStreetObservers {
 	 * 
 	 * @param streetObserver
 	 *            L'{@link IStreetObserver} da inserire.
+	 * @throws DuplicateFound 
 	 */
 	@Override
-	public void addNewStreetObserver(IStreetObserver streetObserver) {
+	public synchronized void  addNewStreetObserver(IStreetObserver streetObserver) throws DuplicateFound {
 		// TODO sarebbe meglio aggiungere anche alla classe streetObserverDB la
 		// genericità
 		StreetObserverDB streetObserverDB = new StreetObserverDB(
@@ -62,9 +64,19 @@ public class StreetObservers implements IStreetObservers {
 		Dao<StreetObserverDB, String> streetObserverDao = this
 				.getStreetObserverDao();
 		try {
-			streetObserverDao.createIfNotExists(streetObserverDB);
-			System.out.println("Reading datas just added: "
-					+ streetObserverDao.queryForId(streetObserver.getID()));
+			try {
+				if(getStreetObserverDB(streetObserverDB)!= null){
+					throw new DuplicateFound();
+				}
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NotFound e) {
+				streetObserverDao.createIfNotExists(streetObserverDB);
+				System.out.println("Reading datas just added: "
+						+ streetObserverDao.queryForId(streetObserver.getID()));
+			}
+			
 		} catch (SQLException e) {
 			System.err
 					.println("The creation on database of the new SteetObserver "
@@ -82,7 +94,11 @@ public class StreetObservers implements IStreetObservers {
 	 */
 	@Override
 	public void addSighting(ISighting sighting) throws IllegalArgumentException {
-		addNewStreetObserver(sighting.getStreetObserver());
+		try {
+			addNewStreetObserver(sighting.getStreetObserver());
+		} catch (DuplicateFound e1) {
+			//del tutto normale
+		}
 		StreetObserverDB streetObserverDB = null;
 		try {
 			streetObserverDB = getStreetObserverDB(sighting.getStreetObserver());
