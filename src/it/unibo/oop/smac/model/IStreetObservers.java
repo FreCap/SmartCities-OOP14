@@ -22,7 +22,7 @@ public interface IStreetObservers {
 	 * @param streetObserver
 	 *            L'{@link IStreetObserver} da aggiungere.
 	 */
-	void addNewStreetObserver(IStreetObserver<?> streetObserver);
+	void addNewStreetObserver(IStreetObserver streetObserver);
 
 	/**
 	 * Questo metodo deve aggiungere un nuovo {@link ISighting} a quelli già
@@ -47,7 +47,7 @@ public interface IStreetObservers {
 	 * @throws NotFound 
 	 * @throws IllegalArgumentException 
 	 */
-	IInfoStreetObserver getStreetObserverInfo(IStreetObserver<?> streetObserver) throws IllegalArgumentException, NotFound;
+	IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) throws IllegalArgumentException, NotFound;
 
 	/**
 	 * Questo metodo deve restituire un oggetto del tipo {@link IInfoStolenCar}

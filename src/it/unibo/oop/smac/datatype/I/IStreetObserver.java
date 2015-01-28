@@ -1,11 +1,13 @@
 package it.unibo.oop.smac.datatype.I;
 
-public interface IStreetObserver <X extends ICoordinates> {
+import it.unibo.oop.smac.datatype.Coordinates;
 
-	X getCoordinates();
-	
+public interface IStreetObserver {
+
+	Coordinates getCoordinates();
+
 	Float getLatitude();
-	
+
 	Float getLongitude();
 
 	public String getID();

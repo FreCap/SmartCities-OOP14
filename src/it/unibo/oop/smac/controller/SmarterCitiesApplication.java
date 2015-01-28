@@ -21,9 +21,9 @@ public class SmarterCitiesApplication {
 		final IController controller = new Controller(new ViewGUI());
 		final NetServer netServer = new NetServer(controller);
 		
-		StreetObserver<Coordinates> so1 =  new StreetObserver<>(new Coordinates(44.139625f, 12.235225f));
-		StreetObserver<Coordinates> so2 =  new StreetObserver<>(new Coordinates(44.131771f, 12.268767f));
-		StreetObserver<Coordinates> so3 =  new StreetObserver<>(new Coordinates(44.14464f, 12.24114f));
+		StreetObserver so1 =  new StreetObserver(new Coordinates(44.139625f, 12.235225f));
+		StreetObserver so2 =  new StreetObserver(new Coordinates(44.131771f, 12.268767f));
+		StreetObserver so3 =  new StreetObserver(new Coordinates(44.14464f, 12.24114f));
 		
 		controller.addStreetObserver(so1);
 		controller.addStreetObserver(so2);

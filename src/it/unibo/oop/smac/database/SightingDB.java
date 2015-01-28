@@ -44,7 +44,7 @@ public class SightingDB implements ISighting {
 		return id;
 	}
 
-	public IStreetObserver<?> getStreetObserver() {
+	public IStreetObserver getStreetObserver() {
 		return streetObserverDB;
 	}
 

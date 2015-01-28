@@ -12,10 +12,10 @@ import it.unibo.oop.smac.datatype.I.IStreetObserver;
 public interface IView {
 	
 	// aggiunge uno streetObserver alla gui
-	void addStreetObserver(IStreetObserver<?> streetObserver);
+	void addStreetObserver(IStreetObserver streetObserver);
 	
 	// quando si verifica un nuovo passaggio sotto uno street observer, viene segnalato
-	void newPassage(IStreetObserver<?> streetObserver);
+	void newPassage(IStreetObserver streetObserver);
 	
 	// attacco degli observers
 	void attachStreetObserverObserver(IStreetObserverObserver soo);

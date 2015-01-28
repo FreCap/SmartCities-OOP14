@@ -17,7 +17,7 @@ public class ControllerSightingSender implements Observer {
 	public void update(Observable o, Object arg) {
 		if (arg instanceof PlainSighting) {
 			PlainSighting sighting = (PlainSighting) arg;
-			StreetObserver<Coordinates> streetObserver = new StreetObserver<>(
+			StreetObserver streetObserver = new StreetObserver(
 					sighting.getCoordinates());
 
 			ISighting s = new Sighting.Builder().date(sighting.getDate())

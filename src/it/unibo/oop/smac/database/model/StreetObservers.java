@@ -54,11 +54,11 @@ public class StreetObservers implements IStreetObservers {
 	 *            L'{@link IStreetObserver} da inserire.
 	 */
 	@Override
-	public void addNewStreetObserver(IStreetObserver<?> streetObserver) {
+	public void addNewStreetObserver(IStreetObserver streetObserver) {
 		// TODO sarebbe meglio aggiungere anche alla classe streetObserverDB la
 		// genericità
 		StreetObserverDB streetObserverDB = new StreetObserverDB(
-				(IStreetObserver<Coordinates>) streetObserver);
+				(IStreetObserver) streetObserver);
 		Dao<StreetObserverDB, String> streetObserverDao = this
 				.getStreetObserverDao();
 		try {
@@ -108,7 +108,7 @@ public class StreetObservers implements IStreetObservers {
 	 */
 	@Override
 	public IInfoStreetObserver getStreetObserverInfo(
-			IStreetObserver<?> streetObserver) throws IllegalArgumentException,
+			IStreetObserver streetObserver) throws IllegalArgumentException,
 			NotFound {
 
 		// TODO raccogli ed elabora tutti i dati!!
@@ -152,7 +152,7 @@ public class StreetObservers implements IStreetObservers {
 	 * @throws NotFound
 	 */
 	private StreetObserverDB getStreetObserverDB(
-			IStreetObserver<?> streetObserver) throws IllegalArgumentException,
+			IStreetObserver streetObserver) throws IllegalArgumentException,
 			NotFound {
 		Dao<StreetObserverDB, String> streetObserverDao = this
 				.getStreetObserverDao();

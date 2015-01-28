@@ -14,7 +14,7 @@ import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "StreetObserver")
-public class StreetObserverDB implements IStreetObserver<Coordinates>{
+public class StreetObserverDB implements IStreetObserver{
 	
 	@DatabaseField(id = true, canBeNull = false)
 	private String id;
@@ -27,10 +27,10 @@ public class StreetObserverDB implements IStreetObserver<Coordinates>{
 	
 	// costruttori
 	public StreetObserverDB() {
-		this(new StreetObserver<>(new Coordinates(0f,0f)));
+		this(new StreetObserver(new Coordinates(0f,0f)));
 	}
 	
-	public StreetObserverDB(IStreetObserver<Coordinates> streetObserver) {
+	public StreetObserverDB(IStreetObserver streetObserver) {
 		this.coordinates = streetObserver.getCoordinates();
 		this.id = streetObserver.getID();
 	}

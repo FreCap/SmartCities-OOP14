@@ -1,22 +1,21 @@
 package it.unibo.oop.smac.datatype;
 
-import it.unibo.oop.smac.datatype.I.ICoordinates;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
-public class StreetObserver<X extends ICoordinates> implements IStreetObserver<X>{
+public class StreetObserver implements IStreetObserver{
 
-	private final X coordinates;
+	private final Coordinates coordinates;
 
-	public StreetObserver(IStreetObserver<X> iso) {
+	public StreetObserver(IStreetObserver iso) {
 		this(iso.getCoordinates());
 	}
 
-	public StreetObserver(X coordinates) {
+	public StreetObserver(Coordinates coordinates) {
 		this.coordinates = coordinates;
 	}
 	
 	@Override
-	public X getCoordinates() {
+	public Coordinates getCoordinates() {
 		return this.coordinates;
 	}
 
@@ -45,8 +44,8 @@ public class StreetObserver<X extends ICoordinates> implements IStreetObserver<X
 
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof IStreetObserver<?>) {
-			return this.coordinates.equals(((IStreetObserver<?>)obj).getCoordinates());
+		if(obj instanceof IStreetObserver) {
+			return this.coordinates.equals(((IStreetObserver)obj).getCoordinates());
 		}
 		return false;
 	}

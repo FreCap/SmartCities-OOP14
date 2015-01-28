@@ -14,12 +14,12 @@ import java.util.Date;
  */
 public class Sighting implements ISighting {
 
-	private final IStreetObserver<?> streetObserver;
+	private final IStreetObserver streetObserver;
 	private final Date date;
 	private final LicensePlate licensePlate;
 	private final Float speed;
 
-	private Sighting(IStreetObserver<?> streetObserver, Date date, LicensePlate licensePlate, Float speed) {
+	private Sighting(IStreetObserver streetObserver, Date date, LicensePlate licensePlate, Float speed) {
 		this.streetObserver = streetObserver;
 		this.date = date;
 		this.licensePlate = licensePlate;
@@ -27,7 +27,7 @@ public class Sighting implements ISighting {
 	}
 
 	@Override
-	public IStreetObserver<?> getStreetObserver() {
+	public IStreetObserver getStreetObserver() {
 		return this.streetObserver;
 	}
 	
@@ -47,12 +47,12 @@ public class Sighting implements ISighting {
 	}
 	
 	public static class Builder{
-		private IStreetObserver<?> streetObserver;
+		private IStreetObserver streetObserver;
 		private Date date;
 		private LicensePlate licensePlate;
 		private Float speed;
 		
-		public Builder streetObserver(IStreetObserver<?> streetObserver){
+		public Builder streetObserver(IStreetObserver streetObserver){
 			this.streetObserver = streetObserver;
 			return this;
 		}

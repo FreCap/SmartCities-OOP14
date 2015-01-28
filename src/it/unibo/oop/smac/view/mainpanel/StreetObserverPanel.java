@@ -24,7 +24,7 @@ public class StreetObserverPanel extends JPanel{
 	private final JLabel mapLabel;
 	private final JLabel passageLabel;
 	
-	public StreetObserverPanel(IStreetObserver<?> streetObserver, Consumer<IStreetObserver<?>> consumer) {
+	public StreetObserverPanel(IStreetObserver streetObserver, Consumer<IStreetObserver> consumer) {
 		this.setLayout(new BorderLayout());
 		this.setBorder(new TitledBorder("Street Observer" ));
 		

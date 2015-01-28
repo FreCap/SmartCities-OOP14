@@ -28,7 +28,7 @@ public class MyMapMarker extends MapObjectImpl implements MapMarker {
 	private final Coordinate coordinate;
 	private Image locationImage = null;
 	
-	public MyMapMarker(IStreetObserver<?> streetObserver) {
+	public MyMapMarker(IStreetObserver streetObserver) {
 		super(streetObserver.getID());
 		this.coordinate = new Coordinate(streetObserver.getLatitude(), streetObserver.getLongitude());
 		try {
