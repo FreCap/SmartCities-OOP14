@@ -8,7 +8,7 @@ import java.awt.Insets;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-public class ControlPanel extends JPanel implements IControlPanel {
+public class ControlPanel extends JPanel {
 
 	private static final long serialVersionUID = -6541769613294971397L;
 	private final GridBagConstraints gbc = new GridBagConstraints();;
@@ -22,13 +22,11 @@ public class ControlPanel extends JPanel implements IControlPanel {
 		this.gbc.insets = new Insets (5 ,5 ,5 ,5);
 	}
 	
-	@Override
 	public void addStreetObserver(Component comp){
 		this.add(comp, this.gbc);
 		this.gbc.gridy++;
 	}
 	
-	@Override
 	public JPanel getPanel() {
 		return this;
 	}

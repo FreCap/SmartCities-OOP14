@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
-public class InformationsPanel extends JPanel implements IInformationsPanel {
+public class InformationsPanel extends JPanel {
 
 	private static final long serialVersionUID = -3058034776743041502L;
 	private static final String NEW_LINE = System.lineSeparator();
@@ -41,13 +41,11 @@ public class InformationsPanel extends JPanel implements IInformationsPanel {
 		this.updateInfo();
 	}
 
-	@Override
 	public void showInformations(IInfoStreetObserver iso) {
 		this.currentInfo = iso;
 		this.updateInfo();
 	}
 
-	@Override
 	public JPanel getPanel() {
 		return this;
 	}
