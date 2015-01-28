@@ -25,4 +25,25 @@ public class OpenStreetMapPanel extends JMapViewer implements ILocationPanel{
 		return this;
 	}
 
+	@Override
+	public void notifyPassage(IStreetObserver streetObserver) {
+		removeStreetObserver(streetObserver);
+		
+		GreenMapMarker g = new GreenMapMarker(streetObserver);
+		this.addMapMarker(g);
+		try {
+			Thread.sleep(300);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		this.removeMapMarker(g);
+		
+		this.addMapMarker(new MyMapMarker(streetObserver));
+		
+	}
+	
+	private void removeStreetObserver(IStreetObserver streetObserver){
+		this.removeMapMarker(new MyMapMarker(streetObserver));
+	}
+
 }

@@ -14,21 +14,16 @@ import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.MapObjectImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
-/**
- * Questa classe implementa un MapMarker personalizzato da utilizzare in una 
- * {@link org.openstreetmap.gui.jmapviewer.JMapViewer}
- * 
- * @author Federico Bellini
- */
-public class MyMapMarker extends MapObjectImpl implements MapMarker {
+// TODO fallo per bene!! questo è un copia e incolla
+public class GreenMapMarker extends MapObjectImpl implements MapMarker {
 	
-	private static final String DEFAULT_PATH = "/images/redPin.png";
+	private static final String DEFAULT_PATH = "/images/greenPin.png";
 	private static final STYLE style = STYLE.VARIABLE;
 	
 	private final Coordinate coordinate;
 	private Image locationImage = null;
 	
-	public MyMapMarker(IStreetObserver streetObserver) {
+	public GreenMapMarker(IStreetObserver streetObserver) {
 		super(streetObserver.getID());
 		this.coordinate = new Coordinate(streetObserver.getLatitude(), streetObserver.getLongitude());
 		try {

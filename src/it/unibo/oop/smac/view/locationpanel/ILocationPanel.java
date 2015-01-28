@@ -8,6 +8,8 @@ public interface ILocationPanel {
 	
 	// aggiunge un nuovo street observer alla mappa
 	void addStreetObserver(IStreetObserver streetObserver);
+	
+	void notifyPassage(IStreetObserver streetObserver);
 
 	// torna il panel
 	JPanel getPanel();
