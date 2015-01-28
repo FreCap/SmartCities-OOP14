@@ -18,8 +18,10 @@ import javax.swing.*;
 public class ViewGUI extends JFrame implements IView{
 
 	private static final long serialVersionUID = 6107931182231615768L;
-	private static final int DEFAULT_WIDTH = (Toolkit.getDefaultToolkit().getScreenSize().width/3)*2;
-	private static final int DEFAULT_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().width/2;
+	private static final int DEFAULT_WIDTH =
+			(Toolkit.getDefaultToolkit().getScreenSize().width/3)*2;
+	private static final int DEFAULT_HEIGHT =
+			Toolkit.getDefaultToolkit().getScreenSize().width/2;
 	
 	private final JTabbedPane tabbedPane = new JTabbedPane();
 	private final IMainPanel mainPanel = new MainPanel();

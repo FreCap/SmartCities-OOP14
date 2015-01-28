@@ -26,7 +26,6 @@ public class ControlPanel extends JPanel implements IControlPanel {
 	public void addStreetObserver(Component comp){
 		this.add(comp, this.gbc);
 		this.gbc.gridy++;
-		
 	}
 	
 	@Override
