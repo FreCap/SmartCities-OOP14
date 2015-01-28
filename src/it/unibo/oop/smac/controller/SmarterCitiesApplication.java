@@ -19,9 +19,9 @@ public class SmarterCitiesApplication {
 		
 		final IController controller = new Controller(new ViewGUI());
 		
-		StreetObserver so1 =  new StreetObserver(new Coordinates<>(44.139625, 12.235225), 0);
-		StreetObserver so2 =  new StreetObserver(new Coordinates<>(44.131771, 12.268767), 1);
-		StreetObserver so3 =  new StreetObserver(new Coordinates<>(44.14464, 12.24114), 2);
+		StreetObserver<Coordinates> so1 =  new StreetObserver<>(new Coordinates(44.139625f, 12.235225f));
+		StreetObserver<Coordinates> so2 =  new StreetObserver<>(new Coordinates(44.131771f, 12.268767f));
+		StreetObserver<Coordinates> so3 =  new StreetObserver<>(new Coordinates(44.14464f, 12.24114f));
 		
 		controller.addStreetObserver(so1);
 		controller.addStreetObserver(so2);

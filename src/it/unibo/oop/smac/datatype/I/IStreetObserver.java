@@ -1,12 +1,13 @@
 package it.unibo.oop.smac.datatype.I;
 
-import it.unibo.oop.smac.datatype.Coordinates;
+public interface IStreetObserver <X extends ICoordinates> {
 
-public interface IStreetObserver {
-
-	// TODO è giusto mettere qui Double come generico, o è meglio rendere
-	// generica anche StreetObserver?
-	Coordinates<Double> getCoordinates();
+	X getCoordinates();
+	
+	Float getLatitude();
+	
+	Float getLongitude();
 
 	public String getID();
+
 }

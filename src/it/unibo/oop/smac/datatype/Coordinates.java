@@ -1,31 +1,51 @@
 package it.unibo.oop.smac.datatype;
 
-import java.io.Serializable;
+import it.unibo.oop.smac.datatype.I.ICoordinates;
 
-public class Coordinates <X extends Number> implements Serializable{
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+public class Coordinates implements ICoordinates, Serializable{
 
 	private static final long serialVersionUID = 6127098657709069219L;
 
 	private static final int DECIMAL_PRECISION = 6;
 	
-	private final X latitude;
-	private final X longitude;
+	private final Float latitude;
+	private final Float longitude;
 	
-	public Coordinates(X number, X number2) {
-		this.latitude = number;
-		this.longitude = number2;
+	public Coordinates(Float latitude, Float longitude) {
+		this.latitude = decimalRound(latitude);
+		this.longitude = decimalRound(longitude);
 	}
 	
-	public Coordinates(Coordinates<X> coord) {
-		this(coord.getLatitude(), coord.getLongitude());
+	public Coordinates(ICoordinates coordinates) {
+		this(coordinates.getLatitude(), coordinates.getLongitude());
 	}
 
-	public X getLongitude() {
-		return longitude;
+	/**
+	 * Metodo privato utilizzato per troncare i numeri Float fino ad una certa cifra
+	 * decimale, stabilita da DECIMAL_PRECISION.
+	 * 
+	 * @param number
+	 * 			Il numero da modificare.
+	 * @return
+	 * 			Il numero modificato.
+	 */
+	private static Float decimalRound(Float number) {
+        BigDecimal bigDecimal = new BigDecimal(Float.toString(number));
+        bigDecimal = bigDecimal.setScale(DECIMAL_PRECISION, BigDecimal.ROUND_HALF_UP);
+        return bigDecimal.floatValue();
+    }
+	
+	@Override
+	public Float getLongitude() {
+		return new Float(this.longitude);  //defensive copy
 	}
 
-	public X getLatitude() {
-		return latitude;
+	@Override
+	public Float getLatitude() {
+		return new Float(this.latitude);   //defensive copy
 	}
 
 	@Override
@@ -41,20 +61,17 @@ public class Coordinates <X extends Number> implements Serializable{
 	
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Coordinates<?>){
-			Coordinates<?> other = (Coordinates<?>)obj;
-			return this.latitude == other.getLongitude() && 
-					this.longitude == other.getLongitude();
+		if(obj instanceof ICoordinates){
+			return this.latitude.equals(((ICoordinates) obj).getLatitude())
+					&& this.longitude.equals(((ICoordinates) obj).getLongitude());
 		}
 		return false;
 	}
 	
 	@Override
 	public String toString() {
-		return "Latitude = " + 
-				latitude.toString().substring(0, latitude.toString().indexOf('.') + DECIMAL_PRECISION) + 
-				", Longitude = " + 
-				longitude.toString().substring(0, longitude.toString().indexOf('.') + DECIMAL_PRECISION);
+		return "Latitude = " + latitude.toString() + 
+				", Longitude = " + longitude.toString();
 	}
 
 }

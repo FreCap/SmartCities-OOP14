@@ -1,6 +1,5 @@
 package it.unibo.oop.smac.view.locationpanel;
 
-import it.unibo.oop.smac.datatype.Coordinates;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 import it.unibo.oop.smac.view.mainpanel.MainPanel;
 
@@ -29,10 +28,9 @@ public class MyMapMarker extends MapObjectImpl implements MapMarker {
 	private final Coordinate coordinate;
 	private Image locationImage = null;
 	
-	public MyMapMarker(IStreetObserver streetObserver) {
+	public MyMapMarker(IStreetObserver<?> streetObserver) {
 		super(streetObserver.getID());
-		Coordinates<Double> c = streetObserver.getCoordinates();
-		this.coordinate = new Coordinate(c.getLatitude(),c.getLongitude());
+		this.coordinate = new Coordinate(streetObserver.getLatitude(), streetObserver.getLongitude());
 		try {
 			this.locationImage = ImageIO.read(MainPanel.class.getResource(DEFAULT_PATH));
 		} catch (IOException e) {

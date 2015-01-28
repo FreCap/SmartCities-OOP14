@@ -15,7 +15,7 @@ public class OpenStreetMapPanel extends JMapViewer implements ILocationPanel{
 	}
 
 	@Override
-	public void addStreetObserver(IStreetObserver streetObserver) {
+	public void addStreetObserver(IStreetObserver<?> streetObserver) {
 		this.addMapMarker(new MyMapMarker(streetObserver));
 		this.setDisplayToFitMapMarkers();
 	}

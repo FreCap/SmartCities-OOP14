@@ -3,6 +3,7 @@ package it.unibo.oop.smac.model;
 import it.unibo.oop.smac.database.Connection;
 import it.unibo.oop.smac.database.SightingDB;
 import it.unibo.oop.smac.database.StreetObserverDB;
+import it.unibo.oop.smac.datatype.Coordinates;
 import it.unibo.oop.smac.datatype.InfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
@@ -53,8 +54,10 @@ public class Model implements IModel {
 	 * 			L'{@link IStreetObserver} da inserire.
 	 */
 	@Override
-	public void addNewStreetObserver(IStreetObserver streetObserver) {
-		StreetObserverDB streetObserverDB = new StreetObserverDB(streetObserver);
+	public void addNewStreetObserver(IStreetObserver<?> streetObserver) {
+		// TODO sarebbe meglio aggiungere anche alla classe streetObserverDB la genericità
+		StreetObserverDB streetObserverDB = 
+				new StreetObserverDB((IStreetObserver<Coordinates>)streetObserver);
 		Dao<StreetObserverDB, String> streetObserverDao = this.getStreetObserverDao();
 		try {
 			streetObserverDao.createIfNotExists(streetObserverDB);
@@ -91,7 +94,7 @@ public class Model implements IModel {
 	 * 			sull'{@link IStreetObserver} richiesto.
 	 */
 	@Override
-	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) {
+	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver<?> streetObserver) {
 
 		//TODO raccogli ed elabora tutti i dati!!
 		StreetObserverDB streetObserverDB = this.getStreetObserverDB(streetObserver);
@@ -132,7 +135,7 @@ public class Model implements IModel {
 	 * @throws IllegalArgumentException
 	 * 			Quando l'{@link IStreetObserver} passato non viene trovato nel database.
 	 */
-	private StreetObserverDB getStreetObserverDB(IStreetObserver streetObserver) 
+	private StreetObserverDB getStreetObserverDB(IStreetObserver<?> streetObserver) 
 			throws IllegalArgumentException {
 		Dao<StreetObserverDB, String> streetObserverDao = this.getStreetObserverDao();
 		StreetObserverDB streetObserverDB = null;

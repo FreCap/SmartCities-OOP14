@@ -6,7 +6,7 @@ import java.util.Date;
 
 public interface ISighting {
 
-	public IStreetObserver getStreetObserver();
+	public IStreetObserver<?> getStreetObserver();
 
 	public Date getDate();
 

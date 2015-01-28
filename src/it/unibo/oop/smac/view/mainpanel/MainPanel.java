@@ -25,7 +25,7 @@ public class MainPanel extends JPanel implements IMainPanel {
 	private IStreetObserverObserver soo;
 	
 	// TODO qual'è l utilità di questa mappa nella GUI? boh..
-	private final Map<IStreetObserver, StreetObserverPanel> observersMap = new HashMap<>();
+	private final Map<IStreetObserver<?>, StreetObserverPanel> observersMap = new HashMap<>();
 	
 	public MainPanel() {
 		super();
@@ -39,7 +39,7 @@ public class MainPanel extends JPanel implements IMainPanel {
 	}
 	
 	@Override
-	public void notifyPassage(IStreetObserver streetObserver) {
+	public void notifyPassage(IStreetObserver<?> streetObserver) {
 		if(observersMap.containsKey(streetObserver)) {
 			observersMap.get(streetObserver).displayPassage();
 		} else {
@@ -49,7 +49,7 @@ public class MainPanel extends JPanel implements IMainPanel {
 	}
 	
 	@Override
-	public void addStreetObserver(IStreetObserver streetObserver) {
+	public void addStreetObserver(IStreetObserver<?> streetObserver) {
 		
 		SwingUtilities.invokeLater(() -> {
 			StreetObserverPanel p = new StreetObserverPanel(
@@ -65,7 +65,7 @@ public class MainPanel extends JPanel implements IMainPanel {
 		this.newPlugMsg(streetObserver);
 	}
 	
-	private void newPlugMsg(IStreetObserver streetObserver) {
+	private void newPlugMsg(IStreetObserver<?> streetObserver) {
 		String msg = new StringBuilder().append("New Street Observer is been plugged.\n The positions is: ")
 										.append("\n   - Latitude:  " + streetObserver.getCoordinates().getLatitude())
 										.append("\n   - Longitude: " + streetObserver.getCoordinates().getLongitude())

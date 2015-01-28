@@ -13,7 +13,7 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	
 	private static final String EMPTY_STRING = "  -  ";
 	
-	private final Optional<IStreetObserver> streetObserver;
+	private final Optional<IStreetObserver<?>> streetObserver;
 	private final Optional<Integer> nOfSightLastHour;
 	private final Optional<Integer> nOfSightToday;
 	private final Optional<Integer> nOfSightLastWeek;
@@ -26,7 +26,7 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	private final Optional<Double> maxSpeedToday;
 	private final Optional<Double> maxCarRateToday;
 	
-	private InfoStreetObserver(IStreetObserver streetObserver,
+	private InfoStreetObserver(IStreetObserver<?> streetObserver,
 			Integer nOfSightLastHour,
 			Integer nOfSightToday,
 			Integer nOfSightLastWeek,
@@ -157,7 +157,7 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 
 	// builder for this class
 	public static class Builder{
-		private IStreetObserver streetObserver;
+		private IStreetObserver<?> streetObserver;
 		private Integer nOfSightLastHour;
 		private Integer nOfSightToday;
 		private Integer nOfSightLastWeek;
@@ -170,7 +170,7 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		private Double maxSpeedToday;
 		private Double maxCarRateToday;
 		
-		public Builder streetObserver(IStreetObserver streetObserver){
+		public Builder streetObserver(IStreetObserver<?> streetObserver){
 			this.streetObserver = streetObserver;
 			return this;
 		}

@@ -54,13 +54,13 @@ public class ViewGUI extends JFrame implements IView{
 	}
 	
 	@Override
-	public void addStreetObserver(IStreetObserver streetObserver) {
+	public void addStreetObserver(IStreetObserver<?> streetObserver) {
 		this.mainPanel.addStreetObserver(streetObserver);
 		this.locationPanel.addStreetObserver(streetObserver);
 	}
 	
 	@Override
-	public void newPassage(IStreetObserver streetObserver) {
+	public void newPassage(IStreetObserver<?> streetObserver) {
 		this.mainPanel.notifyPassage(streetObserver);
 	}
 

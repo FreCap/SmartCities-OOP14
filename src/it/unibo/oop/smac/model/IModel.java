@@ -21,7 +21,7 @@ public interface IModel {
 	 * @param streetObserver
 	 * 			L'{@link IStreetObserver} da aggiungere.
 	 */
-	void addNewStreetObserver(IStreetObserver streetObserver);
+	void addNewStreetObserver(IStreetObserver<?> streetObserver);
 	
 	/**
 	 * Questo metodo deve aggiungere un nuovo {@link ISighting} a quelli già
@@ -42,7 +42,7 @@ public interface IModel {
 	 * 			Un {@link IInfoStreetObserver} contenente le informazioni sull'
 	 * 			{@link IStreetObserver} richiesto.
 	 */
-	IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver);
+	IInfoStreetObserver getStreetObserverInfo(IStreetObserver<?> streetObserver);
 	
 	/**
 	 * Questo metodo deve restituire un oggetto del tipo {@link IInfoStolenCar} 
