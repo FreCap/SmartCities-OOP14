@@ -4,13 +4,36 @@ import javax.swing.JPanel;
 
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
+/**
+ * Interfaccia del LocationPanel. Chi implementa questa interfaccia ha il compito
+ * di far vedere su di una mappa le posizioni degli {@link IStreetObserver}.
+ * 
+ * @author Federico Bellini
+ */
 public interface ILocationPanel {
 	
-	// aggiunge un nuovo street observer alla mappa
+	/**
+	 * Aggiunge un nuovo {@link IStreetObserver} alla mappa.
+	 * 
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} da aggiungere.
+	 */
 	void addStreetObserver(IStreetObserver streetObserver);
 	
+	/**
+	 * Interagisce con la mappa mostrando in qualche modo un avvenuto passaggio sotto
+	 * di un {@link IStreetObserver}.
+	 * 
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} che ha rilevato un passaggio.
+	 */
 	void notifyPassage(IStreetObserver streetObserver);
 
-	// torna il panel
+	/**
+	 * Restituisce il JPanel.
+	 * 
+	 * @return
+	 * 			Il JPanel.
+	 */
 	JPanel getPanel();
 }

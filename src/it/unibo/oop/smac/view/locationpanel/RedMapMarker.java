@@ -11,13 +11,13 @@ import it.unibo.oop.smac.view.mainpanel.MainPanel;
 /**
  * Implementazione concreta di un {@link MyMapMarker}.
  * Questa implementazione restituisce come immagine per il MapMarker un pin 
- * di colore verde.
+ * di colore rosso.
  * Implementazione secondo il pattern Template Method.
  * 
  * @author Federico Bellini
  */
-public class GreenMapMarker extends MyMapMarker {
-	private static final String DEFAULT_GREEN_PATH = "/images/greenPin.png";
+public class RedMapMarker extends MyMapMarker {
+	private static final String DEFAULT_RED_PATH = "/images/redPin.png";
 	
 	/**
 	 * Costruttore pubblico.
@@ -27,13 +27,13 @@ public class GreenMapMarker extends MyMapMarker {
 	 * @param coordinates
 	 * 			Coordinate di posizione del MapMarker.
 	 */
-	public GreenMapMarker(String id, ICoordinates coordinates) {
+	public RedMapMarker(String id, ICoordinates coordinates) {
 		super(id, coordinates);
 	}
 	
 	/**
 	 * Restituisce un'immagine contenente il tipo di MapMarker che si vuole utilizzare.
-	 * In questo caso e' un pin di colore verde.
+	 * In questo caso e' un pin di colore rosso.
 	 * 
 	 * @return
 	 * 			I'Image contenente il MapMarker desiderato.
@@ -42,7 +42,7 @@ public class GreenMapMarker extends MyMapMarker {
 	protected Image getImageForMarker() {
 		Image image = null;
 		try {
-			image = ImageIO.read(MainPanel.class.getResource(DEFAULT_GREEN_PATH));
+			image = ImageIO.read(MainPanel.class.getResource(DEFAULT_RED_PATH));
 		} catch (IOException e) {
 		}
 		return image;
