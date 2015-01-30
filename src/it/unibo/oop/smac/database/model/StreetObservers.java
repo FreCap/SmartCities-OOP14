@@ -3,7 +3,6 @@ package it.unibo.oop.smac.database.model;
 import it.unibo.oop.smac.database.Connection;
 import it.unibo.oop.smac.database.SightingDB;
 import it.unibo.oop.smac.database.StreetObserverDB;
-import it.unibo.oop.smac.datatype.Coordinates;
 import it.unibo.oop.smac.datatype.InfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
@@ -16,6 +15,7 @@ import it.unibo.oop.smac.model.exception.DuplicateFound;
 import it.unibo.oop.smac.model.exception.NotFound;
 
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
@@ -123,17 +123,66 @@ public class StreetObservers implements IStreetObservers {
 	 * @throws IllegalArgumentException
 	 */
 	@Override
-	public IInfoStreetObserver getStreetObserverInfo(
-			IStreetObserver streetObserver) throws IllegalArgumentException,
-			NotFound {
-
-		// TODO raccogli ed elabora tutti i dati!!
+	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver)
+			throws IllegalArgumentException, NotFound {
+		
 		StreetObserverDB streetObserverDB = getStreetObserverDB(streetObserver);
 		List<SightingDB> sightingList = streetObserverDB.getSightingsList();
+		
+		Calendar lastHour = Calendar.getInstance();
+		lastHour.add(Calendar.HOUR, -1);
+		Calendar today = Calendar.getInstance();
+		today.set(Calendar.HOUR, 0);
+		today.set(Calendar.MINUTE, 0);
+		today.set(Calendar.SECOND, 0);
+		today.set(Calendar.AM_PM, Calendar.AM);
+		Calendar lastWeek = Calendar.getInstance();
+		lastWeek.add(Calendar.DATE, -7);
+		Calendar lastMonth = Calendar.getInstance();
+		lastMonth.add(Calendar.MONTH, -1);
+		
+		int sightLastHour = 0;
+		int sightToday = 0;
+		int sightLastWeek = 0;
+		int sightLastMonth = 0;
+		float totalSpeedToday = 0;
+		float totalSpeedLastWeek = 0;
+		float totalSpeedLastMonth = 0;
+		float maxSpeedToday = 0;
+		
+		for(SightingDB s : sightingList){
+			if(s.getDate().after(lastMonth.getTime())){
+				sightLastMonth ++;
+				totalSpeedLastMonth += s.getSpeed();
+				if(s.getDate().after(lastWeek.getTime())){
+					sightLastWeek++;
+					totalSpeedLastWeek += s.getSpeed();
+					if(s.getDate().after(today.getTime())){
+						sightToday++;
+						totalSpeedToday += s.getSpeed();
+						if(s.getSpeed() > maxSpeedToday){
+							maxSpeedToday = s.getSpeed();
+						}
+						if(s.getDate().after(lastHour.getTime())){
+							sightLastHour++;
+						}
+					}
+				}
+			}
+		}
 
 		return new InfoStreetObserver.Builder()
 				.streetObserver(streetObserverDB)
-				.totalNOfSight(sightingList.size()).build();
+				.totalNOfSight(sightingList.size())
+				.nOfSightLastHour(sightLastHour)
+				.nOfSightToday(sightToday)
+				.nOfSightLastWeek(sightLastWeek)
+				.nOfSightLastMonth(sightLastMonth)
+				.averageSpeedToday(totalSpeedToday/sightToday)
+				.averageSpeedLastWeek(totalSpeedLastWeek/sightLastWeek)
+				.averageSpeedLastMonth(totalSpeedLastMonth/sightLastMonth)
+				.maxSpeedToday(maxSpeedToday)
+				.build();
 	}
 
 	/**

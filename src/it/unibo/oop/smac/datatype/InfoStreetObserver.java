@@ -19,12 +19,12 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	private final Optional<Integer> nOfSightLastWeek;
 	private final Optional<Integer> nOfSightLaatMonth;
 	private final Optional<Integer> totalNOfSight;
-	private final Optional<Double> speedLimit;
-	private final Optional<Double> averageSpeedToday;
-	private final Optional<Double> averageSpeedLastWeek;
-	private final Optional<Double> averageSpeedLastMonth;
-	private final Optional<Double> maxSpeedToday;
-	private final Optional<Double> maxCarRateToday;
+	private final Optional<Float> speedLimit;
+	private final Optional<Float> averageSpeedToday;
+	private final Optional<Float> averageSpeedLastWeek;
+	private final Optional<Float> averageSpeedLastMonth;
+	private final Optional<Float> maxSpeedToday;
+	private final Optional<Float> maxCarRateToday;
 	
 	private InfoStreetObserver(IStreetObserver streetObserver,
 			Integer nOfSightLastHour,
@@ -32,12 +32,12 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 			Integer nOfSightLastWeek,
 			Integer nOfSightLaatMonth,
 			Integer totalNOfSight,
-			Double speedLimit,
-			Double averageSpeedToday,
-			Double averageSpeedLastWeek,
-			Double averageSpeedLastMonth,
-			Double maxSpeedToday, 
-			Double maxCarRateToday) {
+			Float speedLimit,
+			Float averageSpeedToday,
+			Float averageSpeedLastWeek,
+			Float averageSpeedLastMonth,
+			Float maxSpeedToday, 
+			Float maxCarRateToday) {
 		
 		super();
 		this.streetObserver = Optional.ofNullable(streetObserver);
@@ -55,7 +55,15 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	}
 	
 	private String stringOutputUtility(Optional<?> o){
-		return o.orElseGet(() -> {return EMPTY_STRING;}).toString();
+		if(o.isPresent()){
+			String out = o.get().toString();
+			if(o.get().getClass().equals(Float.class)){
+				return out.substring(0, out.indexOf(".") + 2);
+			}
+			return out;
+		} else{
+			return EMPTY_STRING;
+		}
 	}
 
 	@Override
@@ -163,12 +171,12 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		private Integer nOfSightLastWeek;
 		private Integer nOfSightLaatMonth;
 		private Integer totalNOfSight;
-		private Double speedLimit;
-		private Double averageSpeedToday;
-		private Double averageSpeedLastWeek;
-		private Double averageSpeedLastMonth;
-		private Double maxSpeedToday;
-		private Double maxCarRateToday;
+		private Float speedLimit;
+		private Float averageSpeedToday;
+		private Float averageSpeedLastWeek;
+		private Float averageSpeedLastMonth;
+		private Float maxSpeedToday;
+		private Float maxCarRateToday;
 		
 		public Builder streetObserver(IStreetObserver streetObserver){
 			this.streetObserver = streetObserver;
@@ -190,7 +198,7 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 			return this;
 		}
 		
-		public Builder nOfSightLaatMonth(int nOfSightLaatMonth){
+		public Builder nOfSightLastMonth(int nOfSightLaatMonth){
 			this.nOfSightLaatMonth = nOfSightLaatMonth;
 			return this;
 		}
@@ -200,32 +208,32 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 			return this;
 		}
 		
-		public Builder speedLimit(double speedLimit){
+		public Builder speedLimit(float speedLimit){
 			this.speedLimit = speedLimit;
 			return this;
 		}
 		
-		public Builder averageSpeedToday(double averageSpeedToday){
+		public Builder averageSpeedToday(float averageSpeedToday){
 			this.averageSpeedToday = averageSpeedToday;
 			return this;
 		}
 		
-		public Builder averageSpeedLastWeek(double averageSpeedLastWeek){
+		public Builder averageSpeedLastWeek(float averageSpeedLastWeek){
 			this.averageSpeedLastWeek = averageSpeedLastWeek;
 			return this;
 		}
 		
-		public Builder averageSpeedLastMonth(double averageSpeedLastMonth){
+		public Builder averageSpeedLastMonth(float averageSpeedLastMonth){
 			this.averageSpeedLastMonth = averageSpeedLastMonth;
 			return this;
 		}
 		
-		public Builder maxSpeedToday(double maxSpeedToday){
+		public Builder maxSpeedToday(float maxSpeedToday){
 			this.maxSpeedToday = maxSpeedToday;
 			return this;
 		}
 		
-		public Builder maxCarRateToday(double maxCarRateToday){
+		public Builder maxCarRateToday(float maxCarRateToday){
 			this.maxCarRateToday = maxCarRateToday;
 			return this;
 		}
