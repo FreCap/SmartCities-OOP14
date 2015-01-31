@@ -4,8 +4,7 @@ import it.unibo.oop.smac.datatype.I.IStolenCar;
 
 import java.util.Date;
 
-// classe che rappresenta un oggetto di tipo stolenCars
-// (ma serve davvero? non è un oggetto che solo il DB deve conoscere?)
+// TODO per fra
 public class StolenCar implements IStolenCar {
 
 	private LicensePlate licensePlate;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import it.unibo.oop.smac.datatype.Coordinates;
 import it.unibo.oop.smac.datatype.StreetObserver;
+import it.unibo.oop.smac.datatype.I.ICoordinates;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
 import com.j256.ormlite.dao.ForeignCollection;
@@ -31,7 +32,7 @@ public class StreetObserverDB implements IStreetObserver{
 	}
 	
 	public StreetObserverDB(IStreetObserver streetObserver) {
-		this.coordinates = streetObserver.getCoordinates();
+		this.coordinates = (Coordinates)streetObserver.getCoordinates();
 		this.id = streetObserver.getID();
 	}
 	
@@ -46,7 +47,7 @@ public class StreetObserverDB implements IStreetObserver{
 	}
 
 	@Override
-	public Coordinates getCoordinates() {
+	public ICoordinates getCoordinates() {
 		return new Coordinates(this.coordinates); //defensive copy
 	}
 	

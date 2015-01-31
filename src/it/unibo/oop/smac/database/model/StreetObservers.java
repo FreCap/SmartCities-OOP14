@@ -53,7 +53,8 @@ public class StreetObservers implements IStreetObservers {
 	 * 
 	 * @param streetObserver
 	 *            L'{@link IStreetObserver} da inserire.
-	 * @throws DuplicateFound 
+	 * @throws DuplicateFound
+	 * 			//TODO
 	 */
 	@Override
 	public synchronized void  addNewStreetObserver(IStreetObserver streetObserver) throws DuplicateFound {
@@ -89,8 +90,8 @@ public class StreetObservers implements IStreetObservers {
 	 * 
 	 * @param sighting
 	 *            L'{@link ISighting} da inserire.
-	 * @throws NotFound
 	 * @throws IllegalArgumentException
+	 * 			//TODO
 	 */
 	@Override
 	public void addSighting(ISighting sighting) throws IllegalArgumentException {
@@ -120,7 +121,9 @@ public class StreetObservers implements IStreetObservers {
 	 * @return Un oggetto del tipo {@link IInfoStreetObserver} contenente le
 	 *         informazioni sull'{@link IStreetObserver} richiesto.
 	 * @throws NotFound
+	 * 			//TODO
 	 * @throws IllegalArgumentException
+	 * 			//TODO
 	 */
 	@Override
 	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver)
@@ -215,6 +218,7 @@ public class StreetObservers implements IStreetObservers {
 	 *             Quando l'{@link IStreetObserver} passato non viene trovato
 	 *             nel database.
 	 * @throws NotFound
+	 * 			//TODO
 	 */
 	private StreetObserverDB getStreetObserverDB(
 			IStreetObserver streetObserver) throws IllegalArgumentException,

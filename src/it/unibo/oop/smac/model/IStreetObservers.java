@@ -23,6 +23,7 @@ public interface IStreetObservers {
 	 * @param streetObserver
 	 *            L'{@link IStreetObserver} da aggiungere.
 	 * @throws DuplicateFound
+	 * 			//TODO
 	 */
 	void addNewStreetObserver(IStreetObserver streetObserver)
 			throws DuplicateFound;
@@ -33,8 +34,8 @@ public interface IStreetObservers {
 	 * 
 	 * @param sighting
 	 *            L'{@link ISighting} da aggiungere.
-	 * @throws NotFound
 	 * @throws IllegalArgumentException
+	 * 			//TODO
 	 */
 	void addSighting(ISighting sighting) throws IllegalArgumentException;
 
@@ -48,7 +49,9 @@ public interface IStreetObservers {
 	 * @return Un {@link IInfoStreetObserver} contenente le informazioni sull'
 	 *         {@link IStreetObserver} richiesto.
 	 * @throws NotFound
+	 * 			//TODO
 	 * @throws IllegalArgumentException
+	 * 			//TODO
 	 */
 	IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver)
 			throws IllegalArgumentException, NotFound;

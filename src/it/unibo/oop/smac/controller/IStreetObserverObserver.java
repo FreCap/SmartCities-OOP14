@@ -26,8 +26,10 @@ public interface IStreetObserverObserver{
 	 * 			L'{@link IStreetObserver} di cui si richiedono informazioni.
 	 * @return 
 	 * 			Un oggetto {@link IStreetObserver} con le informazioni richieste.
-	 * @throws NotFound 
-	 * @throws IllegalArgumentException 
+	 * @throws NotFound
+	 * 			//TODO
+	 * @throws IllegalArgumentException
+	 * 			//TODO
 	 */
 	IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver) throws IllegalArgumentException, NotFound;
 }

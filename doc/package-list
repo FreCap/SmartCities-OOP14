@@ -1,9 +1,12 @@
 it.unibo.oop.smac.controller
 it.unibo.oop.smac.database
+it.unibo.oop.smac.database.model
 it.unibo.oop.smac.datatype
 it.unibo.oop.smac.datatype.I
 it.unibo.oop.smac.model
+it.unibo.oop.smac.model.exception
 it.unibo.oop.smac.network
+it.unibo.oop.smac.network.datatye
 it.unibo.oop.smac.network.jobs
 it.unibo.oop.smac.test.client
 it.unibo.oop.smac.utils

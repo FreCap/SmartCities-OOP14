@@ -4,13 +4,45 @@ import it.unibo.oop.smac.utils.RandomStringGenerator;
 
 import java.io.Serializable;
 
+/**
+ * Classe che implementa la struttura della targa di un mezzo.
+ * 
+ * @author Federico Bellini
+ */
 public class LicensePlate implements Serializable {
 
 	private static final long serialVersionUID = -194344929770325193L;
 	private final String licensePlate;
-
+	
+	/**
+	 * Costruttore che crea una nuova LicensePlate, copia di quella passata come parametro.
+	 * 
+	 * @param licensePlate
+	 * 			La LicensePlate di cui creare una copia.
+	 */
+	public LicensePlate(LicensePlate licensePlate){
+		this(licensePlate.getPlate());
+	}
+	
+	/**
+	 * Coostruttore che crea una nuova LicensePlate impostando la stringa passata come
+	 * parametro come targa del mezzo.
+	 * 
+	 * @param licensePlate
+	 * 			La targa che si vuole impostare.
+	 */
 	public LicensePlate(String licensePlate) {
 		this.licensePlate = licensePlate;
+	}
+	
+	/**
+	 * Restituisce una stringa contenente la targa del mezzo.
+	 * 
+	 * @return
+	 * 			La targa del mezzo.
+	 */
+	public String getPlate(){
+		return new String(this.licensePlate);  //defensive copy
 	}
 
 	@Override
@@ -25,14 +57,14 @@ public class LicensePlate implements Serializable {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof LicensePlate) {
-			return this.toString().equals(obj.toString());
+			return this.getPlate().equals(((LicensePlate)obj).getPlate());
 		}
 		return false;
 	}
 
 	@Override
 	public String toString() {
-		return licensePlate;
+		return this.getPlate();
 	}
 
 	// TODO questo metodo ha senso al di fuori della progettazione del server..
