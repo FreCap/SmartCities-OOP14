@@ -9,10 +9,6 @@ public interface IStolenCar {
 
 	public LicensePlate getLicensePlate();
 
-	public void setLicensePlate(LicensePlate licensePlate);
-
 	public Date getInsertionDate();
-
-	public void setInsertionDate(Date insertionDate);
 
 }

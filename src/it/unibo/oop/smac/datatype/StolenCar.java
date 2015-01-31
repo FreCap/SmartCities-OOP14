@@ -4,16 +4,16 @@ import it.unibo.oop.smac.datatype.I.IStolenCar;
 
 import java.util.Date;
 
-// TODO
-// pacchetto in informazioni che il database restituisce alla gui quando
-// la gui chiede al database delle info su una determinata targa
+// classe che rappresenta un oggetto di tipo stolenCars
+// (ma serve davvero? non è un oggetto che solo il DB deve conoscere?)
 public class StolenCar implements IStolenCar {
 
 	private LicensePlate licensePlate;
-	private Date dataInserimento;
+	private Date insertionDate;
 
-	public StolenCar() {
-		// TODO
+	public StolenCar(LicensePlate licensePlate, Date insertionDate) {
+		this.licensePlate = licensePlate;
+		this.insertionDate = insertionDate;
 	}
 
 	@Override
@@ -22,17 +22,8 @@ public class StolenCar implements IStolenCar {
 	}
 
 	@Override
-	public void setLicensePlate(LicensePlate licensePlate) {
-		this.licensePlate = licensePlate;
-	}
-
-	@Override
 	public Date getInsertionDate() {
-		return dataInserimento;
+		return insertionDate;
 	}
 
-	@Override
-	public void setInsertionDate(Date dataInserimento) {
-		this.dataInserimento = dataInserimento;
-	}
 }
