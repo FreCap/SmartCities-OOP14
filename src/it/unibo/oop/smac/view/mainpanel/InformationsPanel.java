@@ -132,8 +132,6 @@ public class InformationsPanel extends JPanel {
 	private void showSpeedInfo() {
 		String s = new StringBuilder().append("   SPEED DATA")
 				  .append(NEW_LINE)
-				  .append(TAB + "Speed limit in this road is: " + this.currentInfo.getSpeedLimit())
-				  .append(NEW_LINE)
 				  .append(TAB + "Average speed limit (today): " + this.currentInfo.getAverageSpeedToday())
 				  .append(NEW_LINE)
 				  .append(TAB + "Average speed limit (last week): " + this.currentInfo.getAverageSpeedLastWeek())

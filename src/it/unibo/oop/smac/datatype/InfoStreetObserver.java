@@ -19,7 +19,6 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	private final Optional<Integer> nOfSightLastWeek;
 	private final Optional<Integer> nOfSightLaatMonth;
 	private final Optional<Integer> totalNOfSight;
-	private final Optional<Float> speedLimit;
 	private final Optional<Float> averageSpeedToday;
 	private final Optional<Float> averageSpeedLastWeek;
 	private final Optional<Float> averageSpeedLastMonth;
@@ -32,7 +31,6 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 			Integer nOfSightLastWeek,
 			Integer nOfSightLaatMonth,
 			Integer totalNOfSight,
-			Float speedLimit,
 			Float averageSpeedToday,
 			Float averageSpeedLastWeek,
 			Float averageSpeedLastMonth,
@@ -46,7 +44,6 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		this.nOfSightLastWeek = Optional.ofNullable(nOfSightLastWeek);
 		this.nOfSightLaatMonth = Optional.ofNullable(nOfSightLaatMonth);
 		this.totalNOfSight = Optional.ofNullable(totalNOfSight);
-		this.speedLimit = Optional.ofNullable(speedLimit);
 		this.averageSpeedToday = Optional.ofNullable(averageSpeedToday);
 		this.averageSpeedLastWeek = Optional.ofNullable(averageSpeedLastWeek);
 		this.averageSpeedLastMonth = Optional.ofNullable(averageSpeedLastMonth);
@@ -113,11 +110,6 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	}
 
 	@Override
-	public String getSpeedLimit() {
-		return this.stringOutputUtility(this.speedLimit);
-	}
-
-	@Override
 	public String getAverageSpeedToday() {
 		return this.stringOutputUtility(this.averageSpeedToday);
 	}
@@ -151,7 +143,6 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 								  .append(" nOfSightLastWeek=" + this.getnOfSightLastWeek())
 								  .append(" nOfSightLaatMonth=" + this.getnOfSightLastMonth())
 								  .append(" totalNOfSight=" + this.getTotalNOfSight())
-								  .append(" speedLimit=" + this.getSpeedLimit())
 								  .append(" averageSpeedToday=" + this.getAverageSpeedToday())
 								  .append(" averageSpeedLastWeek=" + this.getAverageSpeedLastWeek())
 								  .append(" averageSpeedLastMonth=" + this.getAverageSpeedLastMonth())
@@ -171,7 +162,6 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		private Integer nOfSightLastWeek;
 		private Integer nOfSightLaatMonth;
 		private Integer totalNOfSight;
-		private Float speedLimit;
 		private Float averageSpeedToday;
 		private Float averageSpeedLastWeek;
 		private Float averageSpeedLastMonth;
@@ -208,11 +198,6 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 			return this;
 		}
 		
-		public Builder speedLimit(float speedLimit){
-			this.speedLimit = speedLimit;
-			return this;
-		}
-		
 		public Builder averageSpeedToday(float averageSpeedToday){
 			this.averageSpeedToday = averageSpeedToday;
 			return this;
@@ -245,7 +230,6 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 					this.nOfSightLastWeek,
 					this.nOfSightLaatMonth,
 					this.totalNOfSight,
-					this.speedLimit,
 					this.averageSpeedToday,
 					this.averageSpeedLastWeek,
 					this.averageSpeedLastMonth,

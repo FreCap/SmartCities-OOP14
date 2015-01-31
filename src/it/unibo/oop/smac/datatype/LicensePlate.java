@@ -35,6 +35,9 @@ public class LicensePlate implements Serializable {
 		return licensePlate;
 	}
 
+	// TODO questo metodo ha senso al di fuori della progettazione del server..
+	// dovrebbe essere un metodo che esiste solo nella parte di generazione casuale
+	// di eventi..
 	public static LicensePlate generate() {
 		LicensePlate licensePlate = new LicensePlate(
 				RandomStringGenerator.generateRandomString(2,

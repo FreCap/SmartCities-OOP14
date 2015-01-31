@@ -16,8 +16,6 @@ public interface IInfoStreetObserver {
 
 	String getTotalNOfSight();
 
-	String getSpeedLimit();
-
 	String getAverageSpeedToday();
 
 	String getAverageSpeedLastWeek();
