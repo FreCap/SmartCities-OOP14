@@ -1,6 +1,7 @@
 package it.unibo.oop.smac.view.locationpanel;
 
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 
@@ -31,7 +32,9 @@ public class OpenStreetMapPanel extends JMapViewer implements ILocationPanel{
 	@Override
 	public void addStreetObserver(IStreetObserver streetObserver) {
 		this.addRedMapMarker(streetObserver.getID(), streetObserver.getCoordinates());
-		this.setDisplayToFitMapMarkers();
+		SwingUtilities.invokeLater(() -> {
+				this.setDisplayToFitMapMarkers();
+		});
 	}
 
 	/**
@@ -75,7 +78,9 @@ public class OpenStreetMapPanel extends JMapViewer implements ILocationPanel{
 	 * 			Le coodinate del {@link MyMapMarker}.
 	 */
 	private void addRedMapMarker(String id, ICoordinates coordinates){
-		this.addMapMarker(new RedMapMarker(id, coordinates));
+		SwingUtilities.invokeLater(() -> 
+				this.addMapMarker(new RedMapMarker(id, coordinates))
+		);
 	}
 	
 	/**
@@ -87,7 +92,9 @@ public class OpenStreetMapPanel extends JMapViewer implements ILocationPanel{
 	 * 			Le coodinate del {@link MyMapMarker}.
 	 */
 	private void addGreenMapMarker(String id, ICoordinates coordinates){
-		this.addMapMarker(new GreenMapMarker(id, coordinates));
+		SwingUtilities.invokeLater(() -> 
+				this.addMapMarker(new GreenMapMarker(id, coordinates))
+		);		
 	}
 
 	/**
@@ -100,10 +107,12 @@ public class OpenStreetMapPanel extends JMapViewer implements ILocationPanel{
 	 */
 	private void removeMapMarker(String id, ICoordinates coordinates){
 		/* nota che non c'è differenza tra rimuovere un RedMapMarker o un GreenMapMarker,
-		poichè quando il metodo removeMapMarker richiama la funziona equals cercare il
+		poichè quando il metodo removeMapMarker richiama la funziona equals, e cerca il
 		giusto MapMarker da rimuovere, essa non fa differenza tra red o green, ma si basa
 		esclusivamente sulla posizione dei MapMarker per verificarne l'uguaglianza */
-		this.removeMapMarker(new RedMapMarker(id, coordinates));
+		SwingUtilities.invokeLater(() -> 
+				this.removeMapMarker(new RedMapMarker(id, coordinates))
+		);
 	}
 
 }

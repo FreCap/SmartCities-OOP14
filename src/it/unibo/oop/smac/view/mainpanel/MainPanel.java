@@ -1,6 +1,7 @@
 package it.unibo.oop.smac.view.mainpanel;
 
 import it.unibo.oop.smac.controller.IStreetObserverObserver;
+import it.unibo.oop.smac.datatype.InfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
@@ -10,18 +11,14 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 /// PATTERN OBSERVER!
 public class MainPanel extends JPanel implements IMainPanel {
 	
 	private static final long serialVersionUID = -5219662861548416920L;
-	private static final int CUSTOM_SCROLLING = 30;
-	
 	private final InformationsPanel informationsPanel = new InformationsPanel();
 	private final ControlPanel controlPanel = new ControlPanel();
-	private final JScrollPane scrollControlPanel;
 	
 	private IStreetObserverObserver soo;
 	
@@ -30,12 +27,8 @@ public class MainPanel extends JPanel implements IMainPanel {
 	
 	public MainPanel() {
 		super();
-		
-		scrollControlPanel = new JScrollPane(controlPanel.getPanel());
-		scrollControlPanel.getVerticalScrollBar().setUnitIncrement(CUSTOM_SCROLLING);
-		
 		this.setLayout(new BorderLayout());
-		this.add(scrollControlPanel, BorderLayout.CENTER);
+		this.add(controlPanel, BorderLayout.CENTER);
 		this.add(informationsPanel.getPanel(), BorderLayout.EAST);
 	}
 	
@@ -52,19 +45,20 @@ public class MainPanel extends JPanel implements IMainPanel {
 	@Override
 	public void addStreetObserver(IStreetObserver streetObserver) {
 		
-		SwingUtilities.invokeLater(() -> {
-			StreetObserverPanel p = new StreetObserverPanel(
-					streetObserver,
-					(t) -> {
-							IInfoStreetObserver info = null;
-							try {
-								info = this.soo.getStreetObserverInfo(t);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							this.informationsPanel.showInformations(info);
-					});
+		StreetObserverPanel p = new StreetObserverPanel(
+				// TODO ma quello non è l'observer??????
+				streetObserver,
+				(t) -> {
+						IInfoStreetObserver info = null;
+						try {
+							info = this.soo.getStreetObserverInfo(t);
+						} catch (Exception e) {
+							info = new InfoStreetObserver.Builder().build();
+						}
+						this.informationsPanel.showInformations(info);
+		});
+		
+		SwingUtilities.invokeLater(() -> {	
 			this.controlPanel.addStreetObserver(p);
 			this.observersMap.put(streetObserver, p);
 		});

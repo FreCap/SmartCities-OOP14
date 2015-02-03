@@ -1,23 +1,23 @@
 package it.unibo.oop.smac.view.mainpanel;
 
 import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 /**
- * Questa classe implementa un JPanel contenente una lista di {@link StreetObserverPanel}
- * per poter essere visualizzati.
+ * Questa classe implementa un JScrollPane che deve mostrare lista di {@link StreetObserverPanel}
  * 
  * @author Federico Bellini
  */
-public class ControlPanel extends JPanel {
+public class ControlPanel extends JScrollPane {
 
 	private static final long serialVersionUID = -6541769613294971397L;
-	private final GridBagConstraints gbc = new GridBagConstraints();;
+	private static final int CUSTOM_SCROLLING = 30;
+	private final JPanel panel = new JPanel();
 	
 	/**
 	 * Costruttore della classe.
@@ -25,10 +25,9 @@ public class ControlPanel extends JPanel {
 	public ControlPanel(){
 		super();
 		this.setBorder(new TitledBorder("Controllers"));
-		this.setLayout(new GridBagLayout());
-		
-		this.gbc.gridy = 0;
-		this.gbc.insets = new Insets (5 ,5 ,5 ,5);
+		this.panel.setLayout(new BoxLayout(this.panel ,BoxLayout.Y_AXIS));
+		this.getViewport().add(panel);
+		this.getVerticalScrollBar().setUnitIncrement(CUSTOM_SCROLLING);
 	}
 	
 	/**
@@ -37,19 +36,8 @@ public class ControlPanel extends JPanel {
 	 * @param comp
 	 * 			Il componente da aggiungere.
 	 */
-	public void addStreetObserver(Component comp){
-		this.add(comp, this.gbc);
-		this.gbc.gridy++;
-	}
-	
-	/**
-	 * Restituisce il JPanel.
-	 * 
-	 * @return
-	 * 		Restituisce il JPanel.
-	 */
-	public JPanel getPanel() {
-		return this;
+	public void addStreetObserver(JPanel streetObserverPanel){
+		SwingUtilities.invokeLater(() -> this.panel.add(streetObserverPanel));
 	}
 
 }

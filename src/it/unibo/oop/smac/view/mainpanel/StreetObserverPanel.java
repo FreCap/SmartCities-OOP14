@@ -14,38 +14,58 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
+/**
+ * Questa classe implementa un JPanel contenente una static map che mostra la posizione 
+ * dell'osservatore, e un icona verde/rossa a seconda se sta avvenendo un passaggio al di
+ * sotto dell'osservatore.
+ * 
+ * @author Federico Bellini
+ */
 public class StreetObserverPanel extends JPanel{
 	
 	private static final long serialVersionUID = 984911465198419L;
-	private static final int DELAY = 150;
+	
+	// icone di passaggio
 	private static final ImageIcon PASSAGE_ACTIVE_ICON = 
 			new ImageIcon(MainPanel.class.getResource("/images/activeButton.png"));
 	private static final ImageIcon PASSAGE_INACTIVE_ICON = 
 			new ImageIcon(MainPanel.class.getResource("/images/inactiveButton.png"));
 	
+	// tempo in millisecondi in cui l'icona di passaggio "accesa"
+	private static final int DELAY = 150;
+	
+	// colore di sfondo di default
 	private final Color DEFAUTLT_COLOR_BACKGROUND;
-	private final JLabel mapLabel;
+	
+	// label contenente l'icona che segnala il passaggio rilevato dall'osservatore
 	private final JLabel passageLabel;
 	
+	/**
+	 * Costruttore pubblico della classe. Costruisce un JPanel contenente una mappa relativa
+	 * alla posizione dello StreetObserver passato, al quale attacca il consumer(Observer)
+	 * passato come secondo argomento.
+	 * 
+	 * @param streetObserver
+	 * 			Lo streetObserver soggetto della mappa.
+	 * @param consumer
+	 * 			L'Observer da attaccargli.
+	 */
 	public StreetObserverPanel(IStreetObserver streetObserver, Consumer<IStreetObserver> consumer) {
 		super();
 		this.setLayout(new BorderLayout());
 		this.setBorder(new TitledBorder("Street Observer  " + streetObserver.getID()));
 		this.DEFAUTLT_COLOR_BACKGROUND = this.getBackground();
 		
-		this.mapLabel = new JLabel();
-		ImageIcon ii = OSMStaticMapConstructor.getInstance().getStaticMap(
-				streetObserver.getLatitude(),
-				streetObserver.getLongitude()
-		);
-		
-		this.mapLabel.setIcon(ii);
-		
 		this.passageLabel = new JLabel();
 		this.setButtonOff();
-		
-		this.add(mapLabel);
 		this.add(passageLabel, BorderLayout.EAST);
+		
+		JLabel mapLabel = new JLabel();
+		mapLabel.setIcon(OSMStaticMapConstructor.getInstance().getStaticMap(
+				streetObserver.getLatitude(),
+				streetObserver.getLongitude()
+		));
+		this.add(mapLabel, BorderLayout.CENTER);
 		
 		this.addMouseListener(new MouseListener(){
 				@Override
