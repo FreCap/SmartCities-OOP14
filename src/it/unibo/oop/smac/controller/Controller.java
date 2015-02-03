@@ -1,5 +1,6 @@
 package it.unibo.oop.smac.controller;
 
+import it.unibo.oop.smac.datatype.InfoStreetObserver;
 import it.unibo.oop.smac.datatype.LicensePlate;
 import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
@@ -32,10 +33,16 @@ public class Controller implements IController {
 	}
 
 	@Override
-	public IInfoStreetObserver getStreetObserverInfo(
-			IStreetObserver streetObserver) throws IllegalArgumentException,
-			NotFound {
-		return model.getStreetObserverInfo(streetObserver);
+	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver){
+		IInfoStreetObserver info;
+		try {
+			info = model.getStreetObserverInfo(streetObserver);
+		} catch (IllegalArgumentException | NotFound e) {
+			e.printStackTrace();
+			// in caso di malfunzionamenti restituisco un info vuota
+			info = new InfoStreetObserver.Builder().build();
+		}
+		return info;
 	}
 
 	@Override

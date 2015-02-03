@@ -1,7 +1,6 @@
 package it.unibo.oop.smac.view.mainpanel;
 
 import it.unibo.oop.smac.controller.IStreetObserverObserver;
-import it.unibo.oop.smac.datatype.InfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
@@ -44,40 +43,39 @@ public class MainPanel extends JPanel implements IMainPanel {
 	
 	@Override
 	public void addStreetObserver(IStreetObserver streetObserver) {
-		
 		StreetObserverPanel p = new StreetObserverPanel(
-				// TODO ma quello non è l'observer??????
 				streetObserver,
 				(t) -> {
-						IInfoStreetObserver info = null;
-						try {
-							info = this.soo.getStreetObserverInfo(t);
-						} catch (Exception e) {
-							info = new InfoStreetObserver.Builder().build();
-						}
+						IInfoStreetObserver info = this.soo.getStreetObserverInfo(t);
 						this.informationsPanel.showInformations(info);
 		});
+		
+		this.plugMsg(streetObserver);
 		
 		SwingUtilities.invokeLater(() -> {	
 			this.controlPanel.addStreetObserver(p);
 			this.observersMap.put(streetObserver, p);
 		});
-		
-		this.newPlugMsg(streetObserver);
 	}
 	
-	private void newPlugMsg(IStreetObserver streetObserver) {
-		String msg = new StringBuilder().append("New Street Observer is been plugged.\n The positions is: ")
-										.append("\n   - Latitude:  " + streetObserver.getCoordinates().getLatitude())
-										.append("\n   - Longitude: " + streetObserver.getCoordinates().getLongitude())
-										.toString();
+	private void plugMsg(IStreetObserver streetObserver) {
+		String msg = new StringBuilder()
+				.append("New Street Observer is been plugged.\n The positions is: ")
+				.append("\n   - Latitude:  " + streetObserver.getLatitude())
+				.append("\n   - Longitude: " + streetObserver.getLongitude())
+				.toString();
 		
-		SwingUtilities.invokeLater(() -> {JOptionPane.showOptionDialog(null, 
-				 													   msg,
-				 													   "Plug info",
-				 													   JOptionPane.CLOSED_OPTION, 
-				 													   JOptionPane.INFORMATION_MESSAGE, 
-				 													   null, null, null);
+		SwingUtilities.invokeLater(() -> {
+				JOptionPane.showOptionDialog(
+							null, 
+				 			msg,
+				 			"Plug info",
+				 			JOptionPane.CLOSED_OPTION,
+				 			JOptionPane.INFORMATION_MESSAGE,
+				 			null,
+				 			null,
+				 			null
+				);
 		});
 	}
 
