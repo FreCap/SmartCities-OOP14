@@ -6,6 +6,7 @@ import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+//TODO documentazione per fra
 public class StolenCarsPanel extends JPanel implements IStolenCarsPanel{
 
 	private static final long serialVersionUID = -3442595458503908271L;
