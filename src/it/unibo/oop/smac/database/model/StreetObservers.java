@@ -4,10 +4,8 @@ import it.unibo.oop.smac.database.Connection;
 import it.unibo.oop.smac.database.SightingDB;
 import it.unibo.oop.smac.database.StreetObserverDB;
 import it.unibo.oop.smac.datatype.InfoStreetObserver;
-import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.ISighting;
-import it.unibo.oop.smac.datatype.I.IStolenCar;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 import it.unibo.oop.smac.model.IStreetObservers;
 import it.unibo.oop.smac.model.Model;
@@ -21,7 +19,7 @@ import java.util.List;
 import com.j256.ormlite.dao.Dao;
 
 /**
- * 
+ * TODO
  * Questa classe è realizzata utilizzando il pattern Singleton.
  *
  */
@@ -188,22 +186,7 @@ public class StreetObservers implements IStreetObservers {
 				.build();
 	}
 
-	/**
-	 * Questo metodo raccoglie i dati su di un {@link IStolenCar}, e li
-	 * organizza restituendo al chiamante un {@link IInfoStolenCar} contenente i
-	 * dati sull'osservstore richiesto.
-	 * 
-	 * @param stolenCar
-	 *            L'{@link IStolenCar} di cui si vogliono conoscere le
-	 *            informazioni.
-	 * @return Un oggetto del tipo {@link IInfoStolenCar} contenente le
-	 *         informazioni sull'{@link IStolenCar} richiesto.
-	 */
-	@Override
-	public IInfoStolenCar getStolenCarInfo(IStolenCar stolenCar) {
-		// TODO
-		return null;
-	}
+	
 
 	/**
 	 * Restituisce lo {@link StreetObserverDB} corrispondente all'

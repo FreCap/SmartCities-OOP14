@@ -67,8 +67,10 @@ public class ControlPanel extends JScrollPane {
 	 * 			L'{@link IStreetObserver} che ha rilevato i dati.
 	 */
 	public void notifyPassage(IStreetObserver streetObserver){
-		StreetObserverPanel panel = this.streetObserversMap.get(streetObserver.getID());
-		panel.displayPassage();
+		if(this.streetObserversMap.containsKey(streetObserver.getID())){
+			StreetObserverPanel panel = this.streetObserversMap.get(streetObserver.getID());
+			panel.displayPassage();
+		}
 	};
 	
 }

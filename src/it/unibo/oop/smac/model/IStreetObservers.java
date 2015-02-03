@@ -1,9 +1,7 @@
 package it.unibo.oop.smac.model;
 
-import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.ISighting;
-import it.unibo.oop.smac.datatype.I.IStolenCar;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 import it.unibo.oop.smac.model.exception.DuplicateFoundException;
 import it.unibo.oop.smac.model.exception.NotFoundException;
@@ -55,15 +53,4 @@ public interface IStreetObservers {
 	 */
 	IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver)
 			throws IllegalArgumentException, NotFoundException;
-
-	/**
-	 * Questo metodo deve restituire un oggetto del tipo {@link IInfoStolenCar}
-	 * contenente i dati dell'{@link IStolenCar} richiesto.
-	 * 
-	 * @param stolenCar
-	 *            L'{@link IStolenCar} di cui si vogliono le informazioni.
-	 * @return Un {@link IInfoStolenCar} contenente le informazioni sull'
-	 *         {@link IStolenCar} richiesto.
-	 */
-	IInfoStolenCar getStolenCarInfo(IStolenCar stolenCar);
 }

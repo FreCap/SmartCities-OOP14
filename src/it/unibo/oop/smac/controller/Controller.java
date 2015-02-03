@@ -1,37 +1,88 @@
 package it.unibo.oop.smac.controller;
 
 import it.unibo.oop.smac.datatype.InfoStreetObserver;
-import it.unibo.oop.smac.datatype.LicensePlate;
-import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.ISighting;
-import it.unibo.oop.smac.datatype.I.IStolenCar;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
-import it.unibo.oop.smac.model.IStolenCars;
 import it.unibo.oop.smac.model.IStreetObservers;
 import it.unibo.oop.smac.model.Model;
-import it.unibo.oop.smac.model.ModelStolenCars;
 import it.unibo.oop.smac.model.exception.DuplicateFoundException;
 import it.unibo.oop.smac.model.exception.NotFoundException;
-import it.unibo.oop.smac.test.client.TrackSimulator;
 import it.unibo.oop.smac.view.IView;
 
+/**
+ * Implementazione del controller dell'applicazione.
+ * Tutta l'applicazione e' strutturata secondo il pattern MVC.
+ * 
+ * @author Federico Bellini
+ */
 public class Controller implements IController {
+	
+	// view dell'applicazione
+	protected final IView view;
+	// model dell'applicazione
+	protected final IStreetObservers model;
 
-	private final IView view;
-	private final IStreetObservers model;
-	private final IStolenCars modelStolenCars;
-	public final TrackSimulator trackSimulator = new TrackSimulator(
-			LicensePlate.generate());
-
+	/**
+	 * Costruttore pubblico della classe. Come parametro prende l'oggetto che compone la View 
+	 * dell'applicazione.
+	 * 
+	 * @param view
+	 * 			L'oggetto che implementa la View dell'applicazione
+	 */
 	public Controller(IView view) {
 		model = Model.getInstance();
-		modelStolenCars = ModelStolenCars.getInstance();
 		this.view = view;
 		this.view.attachStreetObserverObserver(this);
-		this.view.attachStolenCarsObserver(this);
 	}
+	
+	/**
+	 * Notifica che si e' verificato un nuovo passaggio sotto ad un osservatore.
+	 * 
+	 * @param streetObserver
+	 * 			L'osservatore che ha compiuto l'avvistamento.
+	 * @param sighting
+	 * 			Oggetto di tipo {@link ISighting} contenente le informazioni rilevate dall'osservatore.
+	 */
+	@Override
+	public void newPassage(IStreetObserver streetObserver, ISighting sighting) {
+		try {
+			// TODO cerca se esiste non chiamando il metodo per ricevere le info e vedendo se lancia eccezione!
+			model.getStreetObserverInfo(streetObserver);
+		} catch (NotFoundException e) {
+			addStreetObserver(streetObserver);
+		}
+		model.addSighting(sighting);
+		view.newPassage(streetObserver);	
+	}
+	
+	/**
+	 * Aggiunge un nuovo {@link IStreetObserver} all'applicazione.
+	 * 
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} da aggiungere.
+	 */
+	public void addStreetObserver(IStreetObserver streetObserver) {
+		try {
+			model.addNewStreetObserver(streetObserver);
+			view.addStreetObserver(streetObserver);
 
+		} catch (DuplicateFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Restituisce un oggetto del tipo {@link IInfoStreetObserver} contenente le
+	 * informazioni sull'{@link IStreetObserver} richiesto. In caso di qualche malfunzionamento
+	 * nel model, viene restituito un oggetto della classe {@link InfoStreetObserver} contenente
+	 * nessuna informazione.
+	 * 
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} di cui si richiedono informazioni.
+	 * @return 
+	 * 			Un oggetto {@link IStreetObserver} con le informazioni richieste.
+	 */
 	@Override
 	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver){
 		IInfoStreetObserver info;
@@ -44,46 +95,5 @@ public class Controller implements IController {
 		}
 		return info;
 	}
-
-	@Override
-	public IInfoStolenCar getStolenCarsInfo(IStolenCar stolenCar) {
-		return model.getStolenCarInfo(stolenCar);
-	}
-
-	@Override
-	public void addStreetObserver(IStreetObserver streetObserver) {
-		// check se da aggiungere
-
-		try {
-			model.addNewStreetObserver(streetObserver);
-			view.addStreetObserver(streetObserver);
-
-		} catch (DuplicateFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void newPassage(IStreetObserver streetObserver, ISighting is) {
-		// controllo di avere già lo streetObserver nel DB, se non l'ho
-		// l'aggiungo e notifico il controller
-		try {
-			model.getStreetObserverInfo(streetObserver);
-		} catch (NotFoundException e) {
-			addStreetObserver(streetObserver);
-		}
-		// aggiungo il sighting al model
-		model.addSighting(is);
-
-		// controllo che non si tratti di una rubata
-		;
-		if (modelStolenCars.checkStolenPlate(is.getLicensePlate())) {
-			// TODO crea alarm!! macchina fottuta
-		}
-
-		// notifico la view
-		view.newPassage(streetObserver);
-	}
-
+	
 }

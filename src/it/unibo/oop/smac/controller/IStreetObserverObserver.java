@@ -10,14 +10,12 @@ import it.unibo.oop.smac.datatype.I.IStreetObserver;
  * su di uno {@link IStreetObserver} dall'effettiva implementazione del Model.
  * 
  * @author Federico Bellini
- *
  */
 
 @FunctionalInterface
 public interface IStreetObserverObserver{
 	
 	/**
-	 * 
 	 * Restituisce un oggetto del tipo {@link IInfoStreetObserver} contenente le
 	 * informazioni sull'{@link IStreetObserver} richiesto.
 	 * 

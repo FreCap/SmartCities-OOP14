@@ -4,6 +4,7 @@ import it.unibo.oop.smac.database.Connection;
 import it.unibo.oop.smac.database.StolenCarDB;
 import it.unibo.oop.smac.datatype.LicensePlate;
 import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
+import it.unibo.oop.smac.datatype.I.IStolenCar;
 import it.unibo.oop.smac.model.IStolenCars;
 
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.util.List;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
+// TODO per fra
 public class StolenCars implements IStolenCars {
 	private static StolenCars instance;
 	protected StolenCars(){
@@ -59,5 +61,11 @@ public class StolenCars implements IStolenCars {
 		}
 
 		return exist.size() > 0;
+	}
+
+	@Override
+	public IInfoStolenCar getStolenCarInfo(IStolenCar stolenCar) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
