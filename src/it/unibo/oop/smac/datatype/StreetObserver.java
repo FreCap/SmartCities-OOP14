@@ -51,7 +51,7 @@ public class StreetObserver implements IStreetObserver{
 	 */
 	@Override
 	public Float getLatitude() {
-		return new Float(this.coordinates.getLatitude()); //defensive copy
+		return this.coordinates.getLatitude();
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class StreetObserver implements IStreetObserver{
 	 */
 	@Override
 	public Float getLongitude() {
-		return new Float(this.coordinates.getLongitude()); //defensive copy
+		return this.coordinates.getLongitude();
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class StreetObserver implements IStreetObserver{
 	 */
 	@Override
 	public String getID() {
-		return this.getLatitude().toString() + "." + this.getLongitude().toString();
+		return this.getLatitude() + "." + this.getLongitude();
 	}
 
 	@Override
@@ -84,6 +84,7 @@ public class StreetObserver implements IStreetObserver{
 		return result;
 	}
 
+	// Due IStreetObserver vengono ritenuti identici se hanno le stesse coordinate.
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof IStreetObserver) {
@@ -94,7 +95,7 @@ public class StreetObserver implements IStreetObserver{
 
 	@Override
 	public String toString() {
-		return "StreetObserver positioned in : " + coordinates;
+		return "StreetObserver in : " + coordinates;
 	}
 
 }

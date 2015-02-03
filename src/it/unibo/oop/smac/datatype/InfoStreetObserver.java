@@ -5,14 +5,32 @@ import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
 import java.util.Optional;
 
-// UTILIZZATO IL PATTERN BUILDER!!!
-
-// pacchetto di info che il data restituisce alla gui quando la gui richiede di avere
-// delle info su di uno street observer dal database
+/**
+ * Classe che fornisce metodi che restituiscono stringhe contenenti i dati su di uno
+ * specifico osservatore. I dati presenti vengono ricavati dalle informazioni contenute
+ * del Model dell'applicazione.
+ * Se per qualche motivo i dati non potessero essere ricavati dal Model, e quindi questo
+ * oggetto non ne fosse a conoscenza, esso restituisce una stringa di tipo EMPTY_STRING.
+ * Per l'implementazione della classe e' stato utilizzato il pattern Builder.
+ * 
+ * @author Federico Bellini
+ */
 public class InfoStreetObserver implements IInfoStreetObserver{
 	
+	/**
+	 * Stringa che viene restituita quando viene richiesto un campo di cui non si conosce
+	 * il valore (il campo è null).
+	 */
 	private static final String EMPTY_STRING = "  -  ";
 	
+	/**
+	 * Precisione decimale con cui i numeri di tipo Float vengono restituiti.
+	 */
+	private static final int DECIMAL_PRECISION = 2;
+	
+	/**
+	 * Campi di tipo Optional<> contenenti le informazioni sull'osservatore.
+	 */
 	private final Optional<IStreetObserver> streetObserver;
 	private final Optional<Integer> nOfSightLastHour;
 	private final Optional<Integer> nOfSightToday;
@@ -25,6 +43,9 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	private final Optional<Float> maxSpeedToday;
 	private final Optional<Float> maxCarRateToday;
 	
+	/**
+	 * Costruttore privato della classe che prende tutti i campi presenti in essa.
+	 */
 	private InfoStreetObserver(IStreetObserver streetObserver,
 			Integer nOfSightLastHour,
 			Integer nOfSightToday,
@@ -51,11 +72,18 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		this.maxCarRateToday = Optional.ofNullable(maxCarRateToday);
 	}
 	
+	/**
+	 * Metodo di utilita' che restituisce il valore dell'Optional preso come parametro se
+	 * e' presente, altrimenti restituisce la stringa EMPTY_STRING.
+	 * Nel caso in cui l'Optional fosse presente e la classe dell'oggetto in esso contenuto
+	 * fosse Float, restituisce il Numero Float in esso contenuto, ma con un numero
+	 * DECIMAL_PRECISION di cifre significative.
+	 */
 	private String stringOutputUtility(Optional<?> o){
 		if(o.isPresent()){
 			String out = o.get().toString();
 			if(o.get().getClass().equals(Float.class)){
-				return out.substring(0, out.indexOf(".") + 2);
+				return out.substring(0, out.indexOf(".") + DECIMAL_PRECISION);
 			}
 			return out;
 		} else{
@@ -69,7 +97,6 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 			return this.streetObserver.get().getCoordinates().toString();
 		}
 		else{
-			// TODO better throwing new exception?
 			return EMPTY_STRING;
 		}
 	}

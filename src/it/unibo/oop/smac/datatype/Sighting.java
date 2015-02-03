@@ -57,13 +57,11 @@ public class Sighting implements ISighting {
 	 * Restituisce la {@link Date} relativa al momento dell'avvistamento.
 	 * 
 	 * @return
-	 * 			la {@link Date} relativa al momento dell'avvistamento.
+	 * 			La {@link Date} relativa al momento dell'avvistamento.
 	 */
 	@Override
 	public Date getDate() {
-		Date out = new Date();
-		out.setTime(this.date.getTime()); //defensive copy
-		return out;
+		return this.date;
 	}
 
 	/**
@@ -74,7 +72,7 @@ public class Sighting implements ISighting {
 	 */
 	@Override
 	public LicensePlate getLicensePlate() {
-		return new LicensePlate(this.licensePlate); //defensive copy
+		return this.licensePlate;
 	}
 
 	/**
@@ -85,7 +83,7 @@ public class Sighting implements ISighting {
 	 */
 	@Override
 	public Float getSpeed() {
-		return new Float(this.speed); //defensive copy
+		return this.speed;
 	}
 	
 	/**
@@ -118,7 +116,7 @@ public class Sighting implements ISighting {
 		 * Costruisce l'oggetto Sighting con la data' passata come paramentro.
 		 * 
 		 * @param date
-		 * 			La data' da settare.
+		 * 			La data da settare.
 		 * @return
 		 * 			Il Builder stesso.
 		 */

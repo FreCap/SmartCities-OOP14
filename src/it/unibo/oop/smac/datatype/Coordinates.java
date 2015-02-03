@@ -5,27 +5,54 @@ import it.unibo.oop.smac.datatype.I.ICoordinates;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+/**
+ * Implementazione di una classe che gestisce le coordinate di un punto nello spazio.
+ * 
+ * @author Federico Bellini
+ */
 public class Coordinates implements ICoordinates, Serializable{
 
 	private static final long serialVersionUID = 6127098657709069219L;
-
+	
+	/**
+	 * La precisione dei decimali che si vuole nelle coordinate. Es. con DECIMAL_PRECISION
+	 * settata a 6, le coordinate avranno come lunghezza decimale massima 6 cifre, per +
+	 * esempio 42.123456
+	 */
 	private static final int DECIMAL_PRECISION = 6;
 	
 	private final Float latitude;
 	private final Float longitude;
 	
+	/**
+	 * Costruttore che prende in ingresso la latitudine e la longitudine di un punto per 
+	 * crearne le sue coordinate.
+	 * 
+	 * @param latitude
+	 * 			La latitudine del punto.
+	 * @param longitude
+	 * 			La longitudine del punto.
+	 */
 	public Coordinates(Float latitude, Float longitude) {
-		this.latitude = decimalRound(latitude);
-		this.longitude = decimalRound(longitude);
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 	
+	/**
+	 * Costruttore che prende in ingresso un'altro oggetto di tipo {@link ICoordinates} per
+	 * creare un nuovo oggetto posizionato nello stesso punto dell'oggetto passato.
+	 * 
+	 * @param coordinates
+	 * 			Un oggetto {@link ICoordinates} di cui se ne vuole riprodurre un altro
+	 * 			oggetto Coordinates avente la stessa posizione spaziale.
+	 */
 	public Coordinates(ICoordinates coordinates) {
 		this(coordinates.getLatitude(), coordinates.getLongitude());
 	}
 
 	/**
 	 * Metodo privato utilizzato per troncare i numeri Float fino ad una certa cifra
-	 * decimale, stabilita da DECIMAL_PRECISION.
+	 * decimale, stabilita dal campo DECIMAL_PRECISION.
 	 * 
 	 * @param number
 	 * 			Il numero da modificare.
@@ -38,14 +65,26 @@ public class Coordinates implements ICoordinates, Serializable{
         return bigDecimal.floatValue();
     }
 	
+	/**
+	 * Restituisce la latitudine del punto approssimata alla DECIMAL_PRECISION.
+	 * 
+	 * @return
+	 * 			La latitudine del punto.
+	 */
 	@Override
 	public Float getLongitude() {
-		return new Float(this.longitude);  //defensive copy
+		return decimalRound(this.longitude);
 	}
 
+	/**
+	 * Restituisce la longitudine del punto approssimata alla DECIMAL_PRECISION.
+	 * 
+	 * @return
+	 * 			La longitudine del punto.
+	 */
 	@Override
 	public Float getLatitude() {
-		return new Float(this.latitude);   //defensive copy
+		return decimalRound(this.latitude);
 	}
 
 	@Override
@@ -59,6 +98,10 @@ public class Coordinates implements ICoordinates, Serializable{
 		return result;
 	}
 	
+	/* 
+	 * Due oggetti di tipo coordinata sono ritenuti uguali se hanno stessa latitudine 
+	 * e longitudine.(non-Javadoc)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof ICoordinates){
@@ -70,8 +113,8 @@ public class Coordinates implements ICoordinates, Serializable{
 	
 	@Override
 	public String toString() {
-		return "Latitude = " + latitude.toString() + 
-				", Longitude = " + longitude.toString();
+		return "[Latitude = " + latitude.toString() + 
+				", Longitude = " + longitude.toString() + "]";
 	}
 
 }

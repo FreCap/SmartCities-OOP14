@@ -31,7 +31,7 @@ public class StreetObservers implements IStreetObservers {
 	private static StreetObservers instance;
 
 	/**
-	 * Costruttore privato della classe.
+	 * Costruttore della classe.
 	 */
 	protected StreetObservers() {
 	}

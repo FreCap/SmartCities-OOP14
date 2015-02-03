@@ -42,7 +42,7 @@ public class LicensePlate implements Serializable {
 	 * 			La targa del mezzo.
 	 */
 	public String getPlate(){
-		return new String(this.licensePlate);  //defensive copy
+		return this.licensePlate;
 	}
 
 	@Override
