@@ -21,7 +21,7 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	 * Stringa che viene restituita quando viene richiesto un campo di cui non si conosce
 	 * il valore (il campo è null).
 	 */
-	private static final String EMPTY_STRING = "  -  ";
+	protected static String EMPTY_STRING = "  -  ";
 	
 	/**
 	 * Precisione decimale con cui i numeri di tipo Float vengono restituiti.
@@ -92,26 +92,6 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	}
 
 	@Override
-	public String getStreetObserverLocation() {
-		if(this.streetObserver.isPresent()){
-			return this.streetObserver.get().getCoordinates().toString();
-		}
-		else{
-			return EMPTY_STRING;
-		}
-	}
-	
-	@Override
-	public String getStreetObserverID() {
-		if(this.streetObserver.isPresent()){
-			return String.valueOf(this.streetObserver.get().getID());
-		}
-		else{
-			return EMPTY_STRING;
-		}
-	}
-
-	@Override
 	public String getnOfSightLastHour() {
 		return this.stringOutputUtility(this.nOfSightLastHour);
 	}
@@ -162,6 +142,26 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 	}
 	
 	@Override
+	public String getStreetObserverLocation() {
+		if(this.streetObserver.isPresent()){
+			return this.streetObserver.get().getCoordinates().toString();
+		}
+		else{
+			return EMPTY_STRING;
+		}
+	}
+	
+	@Override
+	public String getStreetObserverID() {
+		if(this.streetObserver.isPresent()){
+			return String.valueOf(this.streetObserver.get().getID());
+		}
+		else{
+			return EMPTY_STRING;
+		}
+	}
+	
+	@Override
 	public String toString(){
 		return new StringBuilder().append(" streetObserverLocation=" + this.getStreetObserverLocation())
 								  .append(" streetObserverID=" + this.getStreetObserverID())
@@ -178,78 +178,256 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 								  .toString();
 	}
 
-	//TODO quando hai finito con i campi, aggiungi hash e equals
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime
+				* result
+				+ ((averageSpeedLastMonth == null) ? 0 : averageSpeedLastMonth
+						.hashCode());
+		result = prime
+				* result
+				+ ((averageSpeedLastWeek == null) ? 0 : averageSpeedLastWeek
+						.hashCode());
+		result = prime
+				* result
+				+ ((averageSpeedToday == null) ? 0 : averageSpeedToday
+						.hashCode());
+		result = prime * result
+				+ ((maxCarRateToday == null) ? 0 : maxCarRateToday.hashCode());
+		result = prime * result
+				+ ((maxSpeedToday == null) ? 0 : maxSpeedToday.hashCode());
+		result = prime
+				* result
+				+ ((nOfSightLaatMonth == null) ? 0 : nOfSightLaatMonth
+						.hashCode());
+		result = prime
+				* result
+				+ ((nOfSightLastHour == null) ? 0 : nOfSightLastHour.hashCode());
+		result = prime
+				* result
+				+ ((nOfSightLastWeek == null) ? 0 : nOfSightLastWeek.hashCode());
+		result = prime * result
+				+ ((nOfSightToday == null) ? 0 : nOfSightToday.hashCode());
+		result = prime * result
+				+ ((streetObserver == null) ? 0 : streetObserver.hashCode());
+		result = prime * result
+				+ ((totalNOfSight == null) ? 0 : totalNOfSight.hashCode());
+		return result;
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InfoStreetObserver other = (InfoStreetObserver) obj;
+		if (averageSpeedLastMonth == null) {
+			if (other.averageSpeedLastMonth != null)
+				return false;
+		} else if (!averageSpeedLastMonth.equals(other.averageSpeedLastMonth))
+			return false;
+		if (averageSpeedLastWeek == null) {
+			if (other.averageSpeedLastWeek != null)
+				return false;
+		} else if (!averageSpeedLastWeek.equals(other.averageSpeedLastWeek))
+			return false;
+		if (averageSpeedToday == null) {
+			if (other.averageSpeedToday != null)
+				return false;
+		} else if (!averageSpeedToday.equals(other.averageSpeedToday))
+			return false;
+		if (maxCarRateToday == null) {
+			if (other.maxCarRateToday != null)
+				return false;
+		} else if (!maxCarRateToday.equals(other.maxCarRateToday))
+			return false;
+		if (maxSpeedToday == null) {
+			if (other.maxSpeedToday != null)
+				return false;
+		} else if (!maxSpeedToday.equals(other.maxSpeedToday))
+			return false;
+		if (nOfSightLaatMonth == null) {
+			if (other.nOfSightLaatMonth != null)
+				return false;
+		} else if (!nOfSightLaatMonth.equals(other.nOfSightLaatMonth))
+			return false;
+		if (nOfSightLastHour == null) {
+			if (other.nOfSightLastHour != null)
+				return false;
+		} else if (!nOfSightLastHour.equals(other.nOfSightLastHour))
+			return false;
+		if (nOfSightLastWeek == null) {
+			if (other.nOfSightLastWeek != null)
+				return false;
+		} else if (!nOfSightLastWeek.equals(other.nOfSightLastWeek))
+			return false;
+		if (nOfSightToday == null) {
+			if (other.nOfSightToday != null)
+				return false;
+		} else if (!nOfSightToday.equals(other.nOfSightToday))
+			return false;
+		if (streetObserver == null) {
+			if (other.streetObserver != null)
+				return false;
+		} else if (!streetObserver.equals(other.streetObserver))
+			return false;
+		if (totalNOfSight == null) {
+			if (other.totalNOfSight != null)
+				return false;
+		} else if (!totalNOfSight.equals(other.totalNOfSight))
+			return false;
+		return true;
+	}
 
-	// builder for this class
+	/**
+	 * Classe statica innestata Builder della classe InfoStreetObserver.
+	 * Questa classe svolge il compito di creare un'oggetto della classe InfoStreetObserver.
+	 * 
+	 * @author Federico Bellini
+	 */
 	public static class Builder{
-		private IStreetObserver streetObserver;
-		private Integer nOfSightLastHour;
-		private Integer nOfSightToday;
-		private Integer nOfSightLastWeek;
-		private Integer nOfSightLaatMonth;
-		private Integer totalNOfSight;
-		private Float averageSpeedToday;
-		private Float averageSpeedLastWeek;
-		private Float averageSpeedLastMonth;
-		private Float maxSpeedToday;
-		private Float maxCarRateToday;
+		private IStreetObserver streetObserver = null;
+		private Integer nOfSightLastHour = null;
+		private Integer nOfSightToday = null;
+		private Integer nOfSightLastWeek = null;
+		private Integer nOfSightLaatMonth = null;
+		private Integer totalNOfSight = null;
+		private Float averageSpeedToday = null;
+		private Float averageSpeedLastWeek = null;
+		private Float averageSpeedLastMonth = null;
+		private Float maxSpeedToday = null;
+		private Float maxCarRateToday = null;
 		
+		/**
+		 * Imposta l'IStreetObserver che ha compiuto l'avvistamento.
+		 * 
+		 * @param streetObserver
+		 * 			L'IStreetObserver che ha compiuto l'avvistamento.
+		 */
 		public Builder streetObserver(IStreetObserver streetObserver){
 			this.streetObserver = streetObserver;
 			return this;
 		}
 		
+		/**
+		 * Imposta il numero di avvitamenti fatti nell'ultima ora.
+		 * 
+		 * @param nOfSightLastHour
+		 * 			Il numero di avvitamenti fatti nell'ultima ora.
+		 */
 		public Builder nOfSightLastHour(int nOfSightLastHour){
 			this.nOfSightLastHour = nOfSightLastHour;
 			return this;
 		}
 		
+		/**
+		 * Imposta il numero di avvitamenti fatti oggi.
+		 * 
+		 * @param nOfSightToday
+		 * 			Imposta il numero di avvitamenti fatti oggi.
+		 */
 		public Builder nOfSightToday(int nOfSightToday){
 			this.nOfSightToday = nOfSightToday;
 			return this;
 		}
 		
+		/**
+		 * Imposta il numero di avvitamenti fatti nell'ultima settimana.
+		 * @param nOfSightLastWeek
+		 * 			Imposta il numero di avvitamenti fatti nell'ultima settimana.
+		 */
 		public Builder nOfSightLastWeek(int nOfSightLastWeek){
 			this.nOfSightLastWeek = nOfSightLastWeek;
 			return this;
 		}
 		
+		/**
+		 * Imposta il numero di avvitamenti fatti nell'ultimo mese.
+		 * 
+		 * @param nOfSightLaatMonth
+		 * 			Il numero di avvitamenti fatti nell'ultimo mese.
+		 */
 		public Builder nOfSightLastMonth(int nOfSightLaatMonth){
 			this.nOfSightLaatMonth = nOfSightLaatMonth;
 			return this;
 		}
 		
+		/**
+		 * Imposta il numero totale di avvistamenti.
+		 * 
+		 * @param totalNOfSight
+		 * 			Il numero totale di avvistamenti
+		 */
 		public Builder totalNOfSight(int totalNOfSight){
 			this.totalNOfSight = totalNOfSight;
 			return this;
 		}
 		
+		/**
+		 * Imposta la velocita' media registrata oggi.
+		 * 
+		 * @param averageSpeedToday
+		 * 			La velocita' media registrata oggi.
+		 */
 		public Builder averageSpeedToday(float averageSpeedToday){
 			this.averageSpeedToday = averageSpeedToday;
 			return this;
 		}
 		
+		/**
+		 * Imposta la velocita' media registrata nell'ultima settimana.
+		 * 
+		 * @param averageSpeedLastWeek
+		 * 			La velocita' media registrata nell'ultima settimana.
+		 */
 		public Builder averageSpeedLastWeek(float averageSpeedLastWeek){
 			this.averageSpeedLastWeek = averageSpeedLastWeek;
 			return this;
 		}
 		
+		/**
+		 * Imposta la velocita' media registrata nell'ultimo mese.
+		 * 
+		 * @param averageSpeedLastMonth
+		 * 			La velocita' media registrata nell'ultimo mese.
+		 */
 		public Builder averageSpeedLastMonth(float averageSpeedLastMonth){
 			this.averageSpeedLastMonth = averageSpeedLastMonth;
 			return this;
 		}
 		
+		/**
+		 * Imposta la velocita' massima registrata oggi.
+		 * 
+		 * @param maxSpeedToday
+		 * 			La velocita' massima registrata oggi.
+		 */
 		public Builder maxSpeedToday(float maxSpeedToday){
 			this.maxSpeedToday = maxSpeedToday;
 			return this;
 		}
 		
+		/**
+		 * Imposta la 
+		 * @param maxCarRateToday
+		 * @return
+		 */
 		public Builder maxCarRateToday(float maxCarRateToday){
 			this.maxCarRateToday = maxCarRateToday;
 			return this;
 		}
 		
+		/**
+		 * Costruisce l'oggetto della classe InfoStreetObserver con i valori impostati.
+		 * 
+		 * @return
+		 * 			L'oggetto della classe InfoStreetObserver appena costruito.
+		 */
 		public InfoStreetObserver build(){
 			return new InfoStreetObserver(this.streetObserver,
 					this.nOfSightLastHour,
