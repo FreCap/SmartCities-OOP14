@@ -9,8 +9,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
 /**
- * Classe che implementa un pannello da aggiungere alla GUI che mostra le informazioni
- * relative ad uno street Observer.
+ * Classe che implementa un pannello che mostra le informazioni relative ad un osservatore.
  * 
  * @author Federico Bellini
  */
@@ -20,21 +19,29 @@ public class InformationsPanel extends JPanel {
 	private static final String NEW_LINE = System.lineSeparator();
 	private static final String TAB = "          ";
 	
+	// textArea che mostrano i dati ottenuti dall'osservatore selezionato
 	private final JTextArea streetObserverInfo = new JTextArea();
 	private final JTextArea carRateInfo = new JTextArea();
 	private final JTextArea sightInfo = new JTextArea();
 	private final JTextArea speedInfo = new JTextArea();
 	
+	// informazioni correnti da mostrare
 	private IInfoStreetObserver currentInfo;
 	
 	/**
-	 * Costruttore della classe.
+	 * Costruttore pubblico della classe.
 	 */
 	public InformationsPanel(){
 		super();
 		this.setBorder(new TitledBorder("Informations"));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		/*
+		 * Inizialmente costruisco un oggetto di InfoStreetObserver che non contiene
+		 * nessuna informazione.
+		 */
 		this.currentInfo = new InfoStreetObserver.Builder().build();
+		
 		this.streetObserverInfo.setEditable(false);
 		this.streetObserverInfo.setBackground(this.getBackground());;
 		this.carRateInfo.setEditable(false);
@@ -47,12 +54,12 @@ public class InformationsPanel extends JPanel {
 		this.add(carRateInfo);
 		this.add(sightInfo);
 		this.add(speedInfo);
+		
 		this.updateInfo();
 	}
 
 	/**
-	 * Questo metodo fa cambiare le informazioni visualizzate da questo JPanel con le
-	 * informazioni passate come parametro.
+	 * Questo metodo mostra a video le informazioni passate come parametro.
 	 * 
 	 * @param iso
 	 * 			Le informazioni da visualizzare.
@@ -66,16 +73,16 @@ public class InformationsPanel extends JPanel {
 	 * Restituisce questo JPanel.
 	 * 
 	 * @return
-	 * 			Questo JPanel.
+	 * 			Il JPanel richiesto.
 	 */
 	public JPanel getPanel() {
 		return this;
 	}
 	
 	/**
-	 * Metodo privato utile per aggiornare tutte le informazioni contenute nel JPanel.
+	 * Questo metodo aggiorna tutte le informazioni contenute nel pannello.
 	 */
-	private void updateInfo() {
+	protected void updateInfo() {
 		showStreetObserverInfo();
 		showCarRateInfo();
 		showSightingInfo();
@@ -83,63 +90,66 @@ public class InformationsPanel extends JPanel {
 	}
 	
 	/**
-	 * Aggiorna le informazioni sugli StreetObserver.
+	 * Mostra le informazioni sugli StreetObserver.
 	 */
 	private void showStreetObserverInfo() {
-		String s = new StringBuilder().append("   STREET OBSERVER\t\t\t")
-									  .append(NEW_LINE)
-									  .append(TAB + "Location: " + this.currentInfo.getStreetObserverLocation())
-									  .append(NEW_LINE)
-									  .append(TAB + "ID: " + this.currentInfo.getStreetObserverID())
-									  .toString();
+		String s = new StringBuilder()
+				.append("   STREET OBSERVER\t\t\t")
+				.append(NEW_LINE)
+				.append(TAB + "Location: " + this.currentInfo.getStreetObserverLocation())
+				.append(NEW_LINE)
+				.append(TAB + "ID: " + this.currentInfo.getStreetObserverID())
+				.toString();
 		this.streetObserverInfo.setText(s);
 		
 	}
 	
 	/**
-	 * Aggiorna le informazioni sul car rate.
+	 * Mostra le informazioni sul car rate.
 	 */
 	private void showCarRateInfo() {
-		String s = new StringBuilder().append("   CAR RATE")
-				  .append(NEW_LINE)
-				  .append(TAB + "Max car rate of today: " + this.currentInfo.getMaxCarRateToday())
-				  .toString();
+		String s = new StringBuilder()
+				.append("   CAR RATE")
+				.append(NEW_LINE)
+				.append(TAB + "Max car rate (today): " + this.currentInfo.getMaxCarRateToday())
+				.toString();
 		this.carRateInfo.setText(s);
 	}
 	
 	/**
-	 * Aggiorna le informazioni sugli avvistamenti.
+	 * Mostra le informazioni sugli avvistamenti.
 	 */
 	private void showSightingInfo() {
 		String s = new StringBuilder().append("   SIGHT DATA")
-				  .append(NEW_LINE)
-				  .append(TAB + "Number of sight (last hour): " + this.currentInfo.getnOfSightLastHour())
-				  .append(NEW_LINE)
-				  .append(TAB + "Number of sight (today): " + this.currentInfo.getnOfSightToday())
-				  .append(NEW_LINE)
-				  .append(TAB + "Number of sight (last week): " + this.currentInfo.getnOfSightLastWeek())
-				  .append(NEW_LINE)
-				  .append(TAB + "Number of sight (last month): " + this.currentInfo.getnOfSightLastMonth())
-				  .append(NEW_LINE)
-				  .append(TAB + "Total number of sight: " + this.currentInfo.getTotalNOfSight())
-				  .toString();
+				.append(NEW_LINE)
+				.append(TAB + "Number of sight (last hour): " + this.currentInfo.getnOfSightLastHour())
+				.append(NEW_LINE)
+				.append(TAB + "Number of sight (today): " + this.currentInfo.getnOfSightToday())
+				.append(NEW_LINE)
+				.append(TAB + "Number of sight (last week): " + this.currentInfo.getnOfSightLastWeek())
+				.append(NEW_LINE)
+				.append(TAB + "Number of sight (last month): " + this.currentInfo.getnOfSightLastMonth())
+				.append(NEW_LINE)
+				.append(TAB + "Total number of sight: " + this.currentInfo.getTotalNOfSight())
+				.toString();
 		this.sightInfo.setText(s);
 	}
 
 	/**
-	 * Aggiorna le informazioni sulle velocità rilevate.
+	 * Mostra le informazioni sulle velocita' rilevate.
 	 */
 	private void showSpeedInfo() {
-		String s = new StringBuilder().append("   SPEED DATA")
-				  .append(NEW_LINE)
-				  .append(TAB + "Average speed limit (today): " + this.currentInfo.getAverageSpeedToday())
-				  .append(NEW_LINE)
-				  .append(TAB + "Average speed limit (last week): " + this.currentInfo.getAverageSpeedLastWeek())
-				  .append(NEW_LINE)
-				  .append(TAB + "Average speed limit (last month): " + this.currentInfo.getAverageSpeedLastMonth())
-				  .append(NEW_LINE)
-				  .append(TAB + "Max speed registered today is: " + this.currentInfo.getMaxSpeedToday())
-				  .toString();
+		String s = new StringBuilder()
+				.append("   SPEED DATA")
+				.append(NEW_LINE)
+				.append(TAB + "Average speed limit (today): " + this.currentInfo.getAverageSpeedToday())
+				.append(NEW_LINE)
+				.append(TAB + "Average speed limit (last week): " + this.currentInfo.getAverageSpeedLastWeek())
+				.append(NEW_LINE)
+				.append(TAB + "Average speed limit (last month): " + this.currentInfo.getAverageSpeedLastMonth())
+				.append(NEW_LINE)
+				.append(TAB + "Max speed registered today is: " + this.currentInfo.getMaxSpeedToday())
+				.toString();
 		this.speedInfo.setText(s);
 	}
 

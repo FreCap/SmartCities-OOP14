@@ -90,6 +90,16 @@ public class OSMStaticMapConstructor {
 			return instance;
 		}
 		
+		/**
+		 * Questo metodo crea il corretto URL per la richiesta.
+		 * 
+		 * @param lat
+		 * 			La latitudine del centro della mappa.
+		 * @param lng
+		 * 			La longitudine del centro della mappa.
+		 * @return
+		 * 			L'URL cercato.
+		 */
 		public URL buildURL(Float lat, Float lng) {
 			URL url = null;
 			try {

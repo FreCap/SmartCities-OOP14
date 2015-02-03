@@ -6,8 +6,7 @@ import it.unibo.oop.smac.controller.IStreetObserverObserver;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
 /**
- * Interfaccia del JPanel contenente le informazioni raccolte dagli
- * {@link IStreetObserver}.
+ * Interfaccia di un panel contenente le informazioni raccolte dagli StreetObservers.
  * 
  * @author Federico Bellini
  */
