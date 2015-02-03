@@ -1,5 +1,9 @@
 package it.unibo.oop.smac.utils;
 
+/**
+ * 
+ * @author Francesco Capponi
+ */
 public class RandomStringGenerator {
 	
 	public static enum Mode {

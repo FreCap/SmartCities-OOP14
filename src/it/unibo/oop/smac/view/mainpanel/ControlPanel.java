@@ -1,6 +1,10 @@
 package it.unibo.oop.smac.view.mainpanel;
 
-import java.awt.Component;
+import it.unibo.oop.smac.datatype.I.IStreetObserver;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -9,35 +13,62 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 /**
- * Questa classe implementa un JScrollPane che deve mostrare lista di {@link StreetObserverPanel}
+ * Questa classe implementa un JScrollPane che deve mostrare una sequenza di
+ * {@link StreetObserverPanel}
  * 
  * @author Federico Bellini
  */
 public class ControlPanel extends JScrollPane {
 
 	private static final long serialVersionUID = -6541769613294971397L;
+	
+	// velocita' di scrolling del JScrollPane personalizzata
 	private static final int CUSTOM_SCROLLING = 30;
+	
+	// panel contenente tutti gli StreetObserverPanel
 	private final JPanel panel = new JPanel();
+	/*
+	 * Map che ha come chiave l'id dello streetObserver, e come valore il riferimento al
+	 * relativo StreetObserverPanel. Questa memorizzazione e' necessaria per richiamare
+	 * il metodo displayPassage della classe StreetObserverPanel sul giusto pannello. 
+	 */
+	private final Map<String, StreetObserverPanel> streetObserversMap = new HashMap<>();
 	
 	/**
-	 * Costruttore della classe.
+	 * Costruttore pubblico della classe.
 	 */
 	public ControlPanel(){
 		super();
-		this.setBorder(new TitledBorder("Controllers"));
+		this.setBorder(new TitledBorder("Observers"));
 		this.panel.setLayout(new BoxLayout(this.panel ,BoxLayout.Y_AXIS));
-		this.getViewport().add(panel);
 		this.getVerticalScrollBar().setUnitIncrement(CUSTOM_SCROLLING);
+		this.getViewport().add(panel);
 	}
 	
 	/**
-	 * Aggiunge un nuovo {@link Component} al JPanel.
+	 * Aggiunge uno streetObserver alla sequenza.
 	 * 
-	 * @param comp
-	 * 			Il componente da aggiungere.
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} da aggiungere.
+	 * @param consumer
+	 * 			L'observer da attaccare al panel contenente l'{@link IStreetObserver}
+	 * 			passato come primo paramentro.
 	 */
-	public void addStreetObserver(JPanel streetObserverPanel){
-		SwingUtilities.invokeLater(() -> this.panel.add(streetObserverPanel));
+	public void addStreetObserver(IStreetObserver streetObserver, Consumer<IStreetObserver> consumer){
+		StreetObserverPanel p = new StreetObserverPanel(streetObserver, consumer);
+		SwingUtilities.invokeLater(() -> this.panel.add(p));
+		this.streetObserversMap.put(streetObserver.getID(), p);
 	}
-
+	
+	/**
+	 * Mostra che un'{@link IStreetObserver} ha rilevato dei dati.
+	 * 
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} che ha rilevato i dati.
+	 */
+	public void notifyPassage(IStreetObserver streetObserver){
+		StreetObserverPanel panel = this.streetObserversMap.get(streetObserver.getID());
+		panel.displayPassage();
+	};
+	
 }

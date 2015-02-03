@@ -5,25 +5,30 @@ import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
 import java.awt.BorderLayout;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
-/// PATTERN OBSERVER!
+/**
+ * Implementazione del JPanel contenente le informazioni principali riguardanti gli osservatori.
+ * 
+ * @author Federico Bellini
+ */
 public class MainPanel extends JPanel implements IMainPanel {
 	
 	private static final long serialVersionUID = -5219662861548416920L;
+	
+	// Panel contenente tutte le informazioni riguardati lo streetObserver selezionato
 	private final InformationsPanel informationsPanel = new InformationsPanel();
+	// Panel contenente una successione degli streetObserver
 	private final ControlPanel controlPanel = new ControlPanel();
 	
+	// Observer degli streetObserver
 	private IStreetObserverObserver soo;
 	
-	// TODO qual'è l utilità di questa mappa nella GUI? boh..
-	private final Map<IStreetObserver, StreetObserverPanel> observersMap = new HashMap<>();
-	
+	/**
+	 * Costruttore pubblico della classe.
+	 */
 	public MainPanel() {
 		super();
 		this.setLayout(new BorderLayout());
@@ -31,33 +36,61 @@ public class MainPanel extends JPanel implements IMainPanel {
 		this.add(informationsPanel.getPanel(), BorderLayout.EAST);
 	}
 	
-	@Override
-	public void notifyPassage(IStreetObserver streetObserver) {
-		if(observersMap.containsKey(streetObserver)) {
-			observersMap.get(streetObserver).displayPassage();
-		} else {
-			// TODO in this case throw an exception
-			//throw new Exception();
-		}
-	}
-	
+	/**
+	 * Aggiunge un'{@link IStreetObserver} alla successione di osservatori presenti nel
+	 * relativo panel.
+	 * 
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} da aggiungere.
+	 */
 	@Override
 	public void addStreetObserver(IStreetObserver streetObserver) {
-		StreetObserverPanel p = new StreetObserverPanel(
-				streetObserver,
-				(t) -> {
-						IInfoStreetObserver info = this.soo.getStreetObserverInfo(t);
-						this.informationsPanel.showInformations(info);
+		this.controlPanel.addStreetObserver(streetObserver, (t) -> {
+				IInfoStreetObserver info = this.soo.getStreetObserverInfo(t);
+				this.informationsPanel.showInformations(info);
 		});
-		
 		this.plugMsg(streetObserver);
-		
-		SwingUtilities.invokeLater(() -> {	
-			this.controlPanel.addStreetObserver(p);
-			this.observersMap.put(streetObserver, p);
-		});
 	}
 	
+	/**
+	 * Mostra che un'{@link IStreetObserver} ha rilevato dei dati.
+	 * 
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} che ha rilevato dei dati.
+	 */
+	@Override
+	public void notifyPassage(IStreetObserver streetObserver) {
+		this.controlPanel.notifyPassage(streetObserver);
+	}	
+	
+	/**
+	 * Attacca un Observer degli StreetObserver.
+	 * 
+	 * @param soo
+	 * 			L'{@link IStreetObserverObserver} da attaccare.
+	 */
+	@Override
+	public void attachStreetObserverObserver(IStreetObserverObserver soo) {
+		this.soo = soo;
+	}
+	
+	/**
+	 * Restituisce il JPanel.
+	 * 
+	 * @return
+	 * 		Il JPanel.
+	 */
+	@Override
+	public JPanel getPanel() {
+		return this;
+	}
+	
+	/**
+	 * Mostra a video un messaggio con scritto che un nuovo street observer e' stato connesso.
+	 * 
+	 * @param streetObserver
+	 * 			L'osservatore appena connesso.
+	 */
 	private void plugMsg(IStreetObserver streetObserver) {
 		String msg = new StringBuilder()
 				.append("New Street Observer is been plugged.\n The positions is: ")
@@ -65,28 +98,16 @@ public class MainPanel extends JPanel implements IMainPanel {
 				.append("\n   - Longitude: " + streetObserver.getLongitude())
 				.toString();
 		
-		SwingUtilities.invokeLater(() -> {
-				JOptionPane.showOptionDialog(
-							null, 
-				 			msg,
-				 			"Plug info",
-				 			JOptionPane.CLOSED_OPTION,
-				 			JOptionPane.INFORMATION_MESSAGE,
-				 			null,
-				 			null,
-				 			null
-				);
-		});
-	}
-
-	@Override
-	public void attachStreetObserverObserver(IStreetObserverObserver soo) {
-		this.soo = soo;
+		JOptionPane.showOptionDialog(
+				null, 
+				 msg,
+				 "Plug info",
+				 JOptionPane.CLOSED_OPTION,
+				 JOptionPane.INFORMATION_MESSAGE,
+				 null,
+				 null,
+				 null
+		);
 	}
 	
-	@Override
-	public JPanel getPanel() {
-		return this;
-	}
-
 }

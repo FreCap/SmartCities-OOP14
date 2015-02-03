@@ -91,6 +91,12 @@ public class StreetObserverPanel extends JPanel{
 		});
 	}
 	
+	/**
+	 * Setta lo sfondo di questo oggetto con il colore passato come argomento.
+	 * 
+	 * @param c
+	 * 			Il Color da settare come sfondo.
+	 */
 	private void setColor(Color c){
 		try {
 			SwingUtilities.invokeLater(() -> this.setBackground(c));
@@ -99,6 +105,10 @@ public class StreetObserverPanel extends JPanel{
 		}
 	}
 	
+	/**
+	 * Mostra un avvenuto passaggio rilevato dall'osservatore cambiando per un breve tempo
+	 * l'icona a fianco della static map.
+	 */
 	public void displayPassage() {
 		SwingUtilities.invokeLater(() -> { this.setButtonOn(); });
 		try {
@@ -108,10 +118,16 @@ public class StreetObserverPanel extends JPanel{
 		SwingUtilities.invokeLater(() -> { this.setButtonOff(); });
 	}
 	
+	/**
+	 * Setta l'icona verde.
+	 */
 	private void setButtonOn() {
 		this.passageLabel.setIcon(PASSAGE_ACTIVE_ICON);
 	}
 	
+	/**
+	 * Setta l'icona rossa.
+	 */
 	private void setButtonOff() {
 		this.passageLabel.setIcon(PASSAGE_INACTIVE_ICON);
 	}
