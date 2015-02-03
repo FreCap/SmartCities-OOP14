@@ -308,6 +308,8 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		 * 
 		 * @param streetObserver
 		 * 			L'IStreetObserver che ha compiuto l'avvistamento.
+		 * @return
+		 * 			Il builder stesso.
 		 */
 		public Builder streetObserver(IStreetObserver streetObserver){
 			this.streetObserver = streetObserver;
@@ -319,6 +321,8 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		 * 
 		 * @param nOfSightLastHour
 		 * 			Il numero di avvitamenti fatti nell'ultima ora.
+		 * @return
+		 * 			Il builder stesso.
 		 */
 		public Builder nOfSightLastHour(int nOfSightLastHour){
 			this.nOfSightLastHour = nOfSightLastHour;
@@ -330,6 +334,8 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		 * 
 		 * @param nOfSightToday
 		 * 			Imposta il numero di avvitamenti fatti oggi.
+		 * @return
+		 * 			Il builder stesso.
 		 */
 		public Builder nOfSightToday(int nOfSightToday){
 			this.nOfSightToday = nOfSightToday;
@@ -340,6 +346,8 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		 * Imposta il numero di avvitamenti fatti nell'ultima settimana.
 		 * @param nOfSightLastWeek
 		 * 			Imposta il numero di avvitamenti fatti nell'ultima settimana.
+		 * @return
+		 * 			Il builder stesso.
 		 */
 		public Builder nOfSightLastWeek(int nOfSightLastWeek){
 			this.nOfSightLastWeek = nOfSightLastWeek;
@@ -351,6 +359,8 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		 * 
 		 * @param nOfSightLaatMonth
 		 * 			Il numero di avvitamenti fatti nell'ultimo mese.
+		 * @return
+		 * 			Il builder stesso.
 		 */
 		public Builder nOfSightLastMonth(int nOfSightLaatMonth){
 			this.nOfSightLaatMonth = nOfSightLaatMonth;
@@ -362,6 +372,8 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		 * 
 		 * @param totalNOfSight
 		 * 			Il numero totale di avvistamenti
+		 * @return
+		 * 			Il builder stesso.
 		 */
 		public Builder totalNOfSight(int totalNOfSight){
 			this.totalNOfSight = totalNOfSight;
@@ -373,6 +385,8 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		 * 
 		 * @param averageSpeedToday
 		 * 			La velocita' media registrata oggi.
+		 * @return
+		 * 			Il builder stesso.
 		 */
 		public Builder averageSpeedToday(float averageSpeedToday){
 			this.averageSpeedToday = averageSpeedToday;
@@ -384,6 +398,8 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		 * 
 		 * @param averageSpeedLastWeek
 		 * 			La velocita' media registrata nell'ultima settimana.
+		 * @return
+		 * 			Il builder stesso.
 		 */
 		public Builder averageSpeedLastWeek(float averageSpeedLastWeek){
 			this.averageSpeedLastWeek = averageSpeedLastWeek;
@@ -395,6 +411,8 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		 * 
 		 * @param averageSpeedLastMonth
 		 * 			La velocita' media registrata nell'ultimo mese.
+		 * @return
+		 * 			Il builder stesso.
 		 */
 		public Builder averageSpeedLastMonth(float averageSpeedLastMonth){
 			this.averageSpeedLastMonth = averageSpeedLastMonth;
@@ -406,6 +424,8 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		 * 
 		 * @param maxSpeedToday
 		 * 			La velocita' massima registrata oggi.
+		 * @return
+		 * 			Il builder stesso.
 		 */
 		public Builder maxSpeedToday(float maxSpeedToday){
 			this.maxSpeedToday = maxSpeedToday;
@@ -413,9 +433,12 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		}
 		
 		/**
-		 * Imposta la 
+		 * Imposta l'ora di maggior affluenza di mezzi.
+		 * 
 		 * @param maxCarRateToday
+		 * 			L'ora in cui si è registrata la maggior affluenza di mezzi.
 		 * @return
+		 * 			Il builder stesso.
 		 */
 		public Builder maxCarRateToday(float maxCarRateToday){
 			this.maxCarRateToday = maxCarRateToday;
