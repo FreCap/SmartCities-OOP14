@@ -11,8 +11,8 @@ import it.unibo.oop.smac.datatype.I.IStolenCar;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 import it.unibo.oop.smac.model.IStreetObservers;
 import it.unibo.oop.smac.model.Model;
-import it.unibo.oop.smac.model.exception.DuplicateFound;
-import it.unibo.oop.smac.model.exception.NotFound;
+import it.unibo.oop.smac.model.exception.DuplicateFoundException;
+import it.unibo.oop.smac.model.exception.NotFoundException;
 
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -53,11 +53,11 @@ public class StreetObservers implements IStreetObservers {
 	 * 
 	 * @param streetObserver
 	 *            L'{@link IStreetObserver} da inserire.
-	 * @throws DuplicateFound
+	 * @throws DuplicateFoundException
 	 * 			//TODO
 	 */
 	@Override
-	public synchronized void  addNewStreetObserver(IStreetObserver streetObserver) throws DuplicateFound {
+	public synchronized void  addNewStreetObserver(IStreetObserver streetObserver) throws DuplicateFoundException {
 		// TODO sarebbe meglio aggiungere anche alla classe streetObserverDB la
 		// genericità
 		StreetObserverDB streetObserverDB = new StreetObserverDB(
@@ -67,12 +67,12 @@ public class StreetObservers implements IStreetObservers {
 		try {
 			try {
 				if(getStreetObserverDB(streetObserverDB)!= null){
-					throw new DuplicateFound();
+					throw new DuplicateFoundException();
 				}
 			} catch (IllegalArgumentException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (NotFound e) {
+			} catch (NotFoundException e) {
 				streetObserverDao.createIfNotExists(streetObserverDB);
 				System.out.println("Reading datas just added: "
 						+ streetObserverDao.queryForId(streetObserver.getID()));
@@ -97,13 +97,13 @@ public class StreetObservers implements IStreetObservers {
 	public void addSighting(ISighting sighting) throws IllegalArgumentException {
 		try {
 			addNewStreetObserver(sighting.getStreetObserver());
-		} catch (DuplicateFound e1) {
+		} catch (DuplicateFoundException e1) {
 			//del tutto normale
 		}
 		StreetObserverDB streetObserverDB = null;
 		try {
 			streetObserverDB = getStreetObserverDB(sighting.getStreetObserver());
-		} catch (NotFound e) {
+		} catch (NotFoundException e) {
 			new Exception("Non può succedere");
 		}
 		SightingDB sightingDB = new SightingDB(sighting, streetObserverDB);
@@ -120,14 +120,14 @@ public class StreetObservers implements IStreetObservers {
 	 *            informazioni.
 	 * @return Un oggetto del tipo {@link IInfoStreetObserver} contenente le
 	 *         informazioni sull'{@link IStreetObserver} richiesto.
-	 * @throws NotFound
+	 * @throws NotFoundException
 	 * 			//TODO
 	 * @throws IllegalArgumentException
 	 * 			//TODO
 	 */
 	@Override
 	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver)
-			throws IllegalArgumentException, NotFound {
+			throws IllegalArgumentException, NotFoundException {
 		
 		StreetObserverDB streetObserverDB = getStreetObserverDB(streetObserver);
 		List<SightingDB> sightingList = streetObserverDB.getSightingsList();
@@ -217,12 +217,12 @@ public class StreetObservers implements IStreetObservers {
 	 * @throws IllegalArgumentException
 	 *             Quando l'{@link IStreetObserver} passato non viene trovato
 	 *             nel database.
-	 * @throws NotFound
+	 * @throws NotFoundException
 	 * 			//TODO
 	 */
 	private StreetObserverDB getStreetObserverDB(
 			IStreetObserver streetObserver) throws IllegalArgumentException,
-			NotFound {
+			NotFoundException {
 		Dao<StreetObserverDB, String> streetObserverDao = this
 				.getStreetObserverDao();
 		StreetObserverDB streetObserverDB = null;
@@ -230,7 +230,7 @@ public class StreetObservers implements IStreetObservers {
 			streetObserverDB = streetObserverDao.queryForId(streetObserver
 					.getID());
 			if (streetObserverDB == null)
-				throw new NotFound();
+				throw new NotFoundException();
 		} catch (SQLException e) {
 			throw new IllegalArgumentException(
 					"Problems occured in the database");

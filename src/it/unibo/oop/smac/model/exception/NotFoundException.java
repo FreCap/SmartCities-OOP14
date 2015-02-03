@@ -1,6 +1,6 @@
 package it.unibo.oop.smac.model.exception;
 
-public class NotFound extends Exception {
+public class NotFoundException extends Exception {
 
 	/**
 	 * 

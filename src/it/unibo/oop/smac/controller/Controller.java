@@ -11,8 +11,8 @@ import it.unibo.oop.smac.model.IStolenCars;
 import it.unibo.oop.smac.model.IStreetObservers;
 import it.unibo.oop.smac.model.Model;
 import it.unibo.oop.smac.model.ModelStolenCars;
-import it.unibo.oop.smac.model.exception.DuplicateFound;
-import it.unibo.oop.smac.model.exception.NotFound;
+import it.unibo.oop.smac.model.exception.DuplicateFoundException;
+import it.unibo.oop.smac.model.exception.NotFoundException;
 import it.unibo.oop.smac.test.client.TrackSimulator;
 import it.unibo.oop.smac.view.IView;
 
@@ -37,7 +37,7 @@ public class Controller implements IController {
 		IInfoStreetObserver info;
 		try {
 			info = model.getStreetObserverInfo(streetObserver);
-		} catch (IllegalArgumentException | NotFound e) {
+		} catch (IllegalArgumentException | NotFoundException e) {
 			e.printStackTrace();
 			// in caso di malfunzionamenti restituisco un info vuota
 			info = new InfoStreetObserver.Builder().build();
@@ -58,7 +58,7 @@ public class Controller implements IController {
 			model.addNewStreetObserver(streetObserver);
 			view.addStreetObserver(streetObserver);
 
-		} catch (DuplicateFound e) {
+		} catch (DuplicateFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -70,7 +70,7 @@ public class Controller implements IController {
 		// l'aggiungo e notifico il controller
 		try {
 			model.getStreetObserverInfo(streetObserver);
-		} catch (NotFound e) {
+		} catch (NotFoundException e) {
 			addStreetObserver(streetObserver);
 		}
 		// aggiungo il sighting al model

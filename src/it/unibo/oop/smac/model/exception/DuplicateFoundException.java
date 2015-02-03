@@ -1,6 +1,6 @@
 package it.unibo.oop.smac.model.exception;
 
-public class DuplicateFound extends Exception {
+public class DuplicateFoundException extends Exception {
 
 	/**
 	 * 
