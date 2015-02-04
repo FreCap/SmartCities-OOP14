@@ -14,7 +14,8 @@ import java.util.List;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
-// TODO per fra (io questa classe l'ho implementata con il metodo getInfo astratto, in modo che sia il
+// TODO per fra (io questa classe(StreetObserverModelDatabase)
+// l'ho implementata con il metodo getInfo astratto, in modo che sia il
 // model vero e proprio dell'applicazione ad implementarlo!
 public class StolenCarModelDatabase implements IStolenCarModel {
 	private static StolenCarModelDatabase instance;

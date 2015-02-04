@@ -8,6 +8,7 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
+// TODO commenta
 public class Connection {
 
 	private static Connection instance;
