@@ -18,18 +18,13 @@ public class Connection {
 
 	private final static String DATABASE_URL = "jdbc:h2:mem:account";
 
-	private Connection() {
-		try {
-			connectionSource = new JdbcConnectionSource(DATABASE_URL);
-			setupDatabase(connectionSource);
-			System.out.println("Connection succeed");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	private Connection() throws SQLException  {
+		connectionSource = new JdbcConnectionSource(DATABASE_URL);
+		setupDatabase(connectionSource);
+		System.out.println("Connection succeed");
 	}
 
-	public static synchronized Connection getInstance() {
+	public static synchronized Connection getInstance() throws SQLException {
 		if (instance != null)
 			return instance;
 		instance = new Connection();
@@ -40,9 +35,9 @@ public class Connection {
 	 * creazione delle tabelle
 	 * 
 	 * @param connectionSource
-	 * @throws Exception
+	 * @throws SQLException
 	 */
-	private void setupDatabase(ConnectionSource connectionSource) throws Exception {
+	private void setupDatabase(ConnectionSource connectionSource) throws SQLException {
 
 		this.sightingDao = DaoManager.createDao(connectionSource, SightingRow.class);
 		this.stolenCarDao = DaoManager.createDao(connectionSource, StolenCarRow.class);
@@ -55,15 +50,11 @@ public class Connection {
 
 	/**
 	 * chiusura connessione
+	 * @throws SQLException 
 	 */
-	private void close() {
+	private void close() throws SQLException {
 		if (connectionSource != null) {
-			try {
-				connectionSource.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			connectionSource.close();
 		}
 	}
 

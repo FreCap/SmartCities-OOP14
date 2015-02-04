@@ -3,83 +3,51 @@ package it.unibo.oop.smac.database.model;
 import it.unibo.oop.smac.database.Connection;
 import it.unibo.oop.smac.database.SightingRow;
 import it.unibo.oop.smac.database.StreetObserverRow;
-import it.unibo.oop.smac.datatype.InfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 import it.unibo.oop.smac.model.IStreetObserverModel;
-import it.unibo.oop.smac.model.Model;
-import it.unibo.oop.smac.model.exception.DuplicateFoundException;
 import it.unibo.oop.smac.model.exception.NotFoundException;
 
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
 
 /**
- * TODO
- * Questa classe è realizzata utilizzando il pattern Singleton.
- *
+ * Implementazione dell'interfaccia del Model dell'applicazione. Questa classe astratta si
+ * occupa di aggiungere {@link IStreetObserver} e {@link ISighting} nel database, lasciando
+ * il compito di ricercare, prelevare ed organizzare i dati quando richiesti alle classi
+ * che la estendono.
+ * 
+ * @author Federico Bellini
  */
-
-public class StreetObserverModelDatabase implements IStreetObserverModel {
-
-	private static StreetObserverModelDatabase instance;
+public abstract class StreetObserverModelDatabase implements IStreetObserverModel {
 
 	/**
-	 * Costruttore della classe.
-	 */
-	protected StreetObserverModelDatabase() {
-	}
-
-	/**
-	 * Metodo getInstance per realizzare pattern Singleton
-	 * 
-	 * @return Un istanza della classe {@link Model}
-	 */
-	public static synchronized StreetObserverModelDatabase getInstance() {
-		if (instance == null) {
-			instance = new StreetObserverModelDatabase();
-		}
-		return instance;
-	}
-
-	/**
-	 * Inserisce nel database un nuovo {@link IStreetObserver}.
+	 * Inserisce nel database un nuovo {@link IStreetObserver}. Nel caso in cui ci fossero
+	 * dei problemi nell'inserimento nel database di questo osservatore, l'applicazione termina.
 	 * 
 	 * @param streetObserver
-	 *            L'{@link IStreetObserver} da inserire.
-	 * @throws DuplicateFoundException
-	 * 			//TODO
+	 * 			L'{@link IStreetObserver} da inserire.
 	 */
 	@Override
-	public synchronized void  addNewStreetObserver(IStreetObserver streetObserver) throws DuplicateFoundException {
-		// TODO sarebbe meglio aggiungere anche alla classe streetObserverDB la
-		// genericità
-		StreetObserverRow streetObserverDB = new StreetObserverRow(
-				(IStreetObserver) streetObserver);
-		Dao<StreetObserverRow, String> streetObserverDao = this
-				.getStreetObserverDao();
-		try {
+	public synchronized void  addNewStreetObserver(IStreetObserver streetObserver) {
+		if(!this.isStreetObserverPresent(streetObserver)){
+			StreetObserverRow streetObserverDB = new StreetObserverRow(streetObserver);
+			Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
 			try {
-				if(getStreetObserverDB(streetObserverDB)!= null){
-					throw new DuplicateFoundException();
-				}
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NotFoundException e) {
 				streetObserverDao.createIfNotExists(streetObserverDB);
-				System.out.println("Reading datas just added: "
-						+ streetObserverDao.queryForId(streetObserver.getID()));
+			} catch (SQLException e) {
+				System.err.println("The creation on database of the new SteetObserver "
+						+ streetObserver + " is failed!");
+				System.exit(1);
 			}
-			
-		} catch (SQLException e) {
-			System.err
-					.println("The creation on database of the new SteetObserver "
-							+ streetObserver + " is failed!");
+			try {
+				System.out.println("Reading datas just added: " 
+							+ streetObserverDao.queryForId(streetObserver.getID()));
+			} catch (SQLException e) {
+				// do nothing
+			}
 		}
 	}
 
@@ -88,145 +56,114 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
 	 * 
 	 * @param sighting
 	 *            L'{@link ISighting} da inserire.
-	 * @throws IllegalArgumentException
-	 * 			//TODO
 	 */
 	@Override
-	public void addSighting(ISighting sighting) throws IllegalArgumentException {
-		try {
-			addNewStreetObserver(sighting.getStreetObserver());
-		} catch (DuplicateFoundException e1) {
-			//del tutto normale
+	public void addSighting(ISighting sighting) {
+		// controllo se l'osservatore è presente, altrimenti lo aggiungo
+		if(! this.isStreetObserverPresent(sighting.getStreetObserver())){
+			this.addNewStreetObserver(sighting.getStreetObserver());
 		}
-		StreetObserverRow streetObserverDB = null;
 		try {
-			streetObserverDB = getStreetObserverDB(sighting.getStreetObserver());
+			StreetObserverRow streetObserverRow = this.getStreetObserverRow(sighting.getStreetObserver());
+			SightingRow sightingRow = new SightingRow(sighting, streetObserverRow);
+			streetObserverRow.addSightings(sightingRow);
 		} catch (NotFoundException e) {
-			new Exception("Non può succedere");
+			// questo non può accadere!
+			e.printStackTrace();
 		}
-		SightingRow sightingDB = new SightingRow(sighting, streetObserverDB);
-		streetObserverDB.addSightings(sightingDB);
 	}
-
+	
 	/**
-	 * Questo metodo raccoglie i dati su di un {@link IStreetObserver}, e li
-	 * organizza restituendo al chiamante un {@link IInfoStreetObserver}
-	 * contenente i dati sull'osservstore richiesto.
+	 * Questo metodo controlla se l'{@link IStreetObserver} passato come argomento sia
+	 * gia' presente nel Model dell'appicazione.
 	 * 
 	 * @param streetObserver
-	 *            L'{@link IStreetObserver} di cui si vogliono conoscere le
-	 *            informazioni.
-	 * @return Un oggetto del tipo {@link IInfoStreetObserver} contenente le
-	 *         informazioni sull'{@link IStreetObserver} richiesto.
-	 * @throws NotFoundException
-	 * 			//TODO
-	 * @throws IllegalArgumentException
-	 * 			//TODO
+	 * 			L'{@link IStreetObserver} di cui verificare la presenza.
+	 * @return
+	 * 			True se esiste, false altrimenti.
 	 */
 	@Override
-	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver)
-			throws IllegalArgumentException, NotFoundException {
-		
-		StreetObserverRow streetObserverDB = getStreetObserverDB(streetObserver);
-		List<SightingRow> sightingList = streetObserverDB.getSightingsList();
-		
-		Calendar lastHour = Calendar.getInstance();
-		lastHour.add(Calendar.HOUR, -1);
-		Calendar today = Calendar.getInstance();
-		today.set(Calendar.HOUR, 0);
-		today.set(Calendar.MINUTE, 0);
-		today.set(Calendar.SECOND, 0);
-		today.set(Calendar.AM_PM, Calendar.AM);
-		Calendar lastWeek = Calendar.getInstance();
-		lastWeek.add(Calendar.DATE, -7);
-		Calendar lastMonth = Calendar.getInstance();
-		lastMonth.add(Calendar.MONTH, -1);
-		
-		int sightLastHour = 0;
-		int sightToday = 0;
-		int sightLastWeek = 0;
-		int sightLastMonth = 0;
-		float totalSpeedToday = 0;
-		float totalSpeedLastWeek = 0;
-		float totalSpeedLastMonth = 0;
-		float maxSpeedToday = 0;
-		
-		for(SightingRow s : sightingList){
-			if(s.getDate().after(lastMonth.getTime())){
-				sightLastMonth ++;
-				totalSpeedLastMonth += s.getSpeed();
-				if(s.getDate().after(lastWeek.getTime())){
-					sightLastWeek++;
-					totalSpeedLastWeek += s.getSpeed();
-					if(s.getDate().after(today.getTime())){
-						sightToday++;
-						totalSpeedToday += s.getSpeed();
-						if(s.getSpeed() > maxSpeedToday){
-							maxSpeedToday = s.getSpeed();
-						}
-						if(s.getDate().after(lastHour.getTime())){
-							sightLastHour++;
-						}
-					}
-				}
+	public boolean isStreetObserverPresent(IStreetObserver streetObserver) {
+		Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
+		 try {
+			if(streetObserverDao.queryForId(streetObserver.getID()) == null) {
+				return false;
+			} else {
+				return true;
 			}
+		} catch (SQLException e) {
+			return false;
 		}
-
-		return new InfoStreetObserver.Builder()
-				.streetObserver(streetObserverDB)
-				.totalNOfSight(sightingList.size())
-				.nOfSightLastHour(sightLastHour)
-				.nOfSightToday(sightToday)
-				.nOfSightLastWeek(sightLastWeek)
-				.nOfSightLastMonth(sightLastMonth)
-				.averageSpeedToday(totalSpeedToday/sightToday)
-				.averageSpeedLastWeek(totalSpeedLastWeek/sightLastWeek)
-				.averageSpeedLastMonth(totalSpeedLastMonth/sightLastMonth)
-				.maxSpeedToday(maxSpeedToday)
-				.build();
 	}
-
 	
-
 	/**
-	 * Restituisce lo {@link StreetObserverRow} corrispondente all'
-	 * {@link IStreetObserver} passato come argomento.
+	 * Questo metodo restituisce lo {@link StreetObserverRow} corrispondente all'{@link IStreetObserver} 
+	 * passato come argomento. Se si verificano dei problemi di lettura nel database, l'applicazione
+	 * termina.
 	 * 
 	 * @param streetObserver
-	 *            L'{@link IStreetObserver} da cercare.
-	 * @return Un oggetto {@link StreetObserverRow} corrispondente all'
-	 *         {@link IStreetObserver} passato.
+	 * 			L'{@link IStreetObserver} da cercare.
+	 * @return
+	 * 			Un oggetto {@link StreetObserverRow} corrispondente all'
+	 * 			{@link IStreetObserver} passato.
 	 * 
-	 * @throws IllegalArgumentException
-	 *             Quando l'{@link IStreetObserver} passato non viene trovato
-	 *             nel database.
 	 * @throws NotFoundException
-	 * 			//TODO
+	 * 			Eccezione lanciata nel caso in cui l'{@link IStreetObserver} di cui si vogliono
+	 * 			recuperare le informazioni non fosse presente nel Model dell'applicazione.
 	 */
-	protected StreetObserverRow getStreetObserverDB(IStreetObserver streetObserver)
-			throws IllegalArgumentException, NotFoundException {
-		Dao<StreetObserverRow, String> streetObserverDao = this
-				.getStreetObserverDao();
-		StreetObserverRow streetObserverDB = null;
-		try {
-			streetObserverDB = streetObserverDao.queryForId(streetObserver
-					.getID());
-			if (streetObserverDB == null)
-				throw new NotFoundException();
-		} catch (SQLException e) {
-			throw new IllegalArgumentException(
-					"Problems occured in the database");
+	protected StreetObserverRow getStreetObserverRow(IStreetObserver streetObserver)
+			throws NotFoundException {
+		if(this.isStreetObserverPresent(streetObserver)){
+			Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
+			try {
+				return streetObserverDao.queryForId(streetObserver.getID());
+			} catch (SQLException e) {
+				System.err.println("Problems occured in database");
+				System.exit(1);
+				return null;
+			}
+		} else {
+			throw new NotFoundException("The observer is not present");
 		}
-		return streetObserverDB;
 	}
-
+	
 	/**
-	 * Restituisce il Dao<> degli streetObserver della classe Connection
+	 * Questo metodo deve raccogliere i dati su di un {@link IStreetObserver}, e li
+	 * deve organizzare restituendo al chiamante un {@link IInfoStreetObserver} 
+	 * contenente le informazioni sull'osservstore richiesto.
 	 * 
-	 * @return il Dao<> richiesto.
+	 * @param streetObserver
+	 * 			L'{@link IStreetObserver} di cui si vogliono recuperare le informazioni.
+	 * @return 
+	 * 			Un oggetto del tipo {@link IInfoStreetObserver} contenente le informazioni 
+	 * 			sull'{@link IStreetObserver} richiesto.
+	 * 
+	 * @throws NotFoundException
+	 * 			Eccezione lanciata nel caso in cui l'{@link IStreetObserver} di cui si vogliono
+	 * 			recuperare le informazioni non fosse presente nel Model dell'applicazione.
+	 */
+	@Override
+	public abstract IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver)
+			throws IllegalArgumentException, NotFoundException;
+	
+	/**
+	 * Restituisce il Dao<> degli streetObserver della classe Connection.
+	 * Nel caso in cui la classe Connection lanciasse un eccezione di tipo SQLException, 
+	 * l'intera applicazione viene fatta terminare, poiche' significa che qualche 
+	 * operazione nella creazione o nella gestione del database non ha avuto successo,
+	 * e quindi il programma deve terminare.
+	 * 
+	 * @return
+	 * 			Il Dao<> richiesto.
 	 */
 	private Dao<StreetObserverRow, String> getStreetObserverDao() {
-		return Connection.getInstance().getStreetObserverDao();
+		try {
+			return Connection.getInstance().getStreetObserverDao();
+		} catch (SQLException e) {
+			System.err.println(e);
+			System.exit(1);
+			return null;
+		}
 	}
 
 }

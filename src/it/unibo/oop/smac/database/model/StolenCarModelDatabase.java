@@ -14,7 +14,8 @@ import java.util.List;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
-// TODO per fra
+// TODO per fra (io questa classe l'ho implementata con il metodo getInfo astratto, in modo che sia il
+// model vero e proprio dell'applicazione ad implementarlo!
 public class StolenCarModelDatabase implements IStolenCarModel {
 	private static StolenCarModelDatabase instance;
 	protected StolenCarModelDatabase(){
@@ -28,9 +29,15 @@ public class StolenCarModelDatabase implements IStolenCarModel {
 		return instance;
 	}
 	@Override
-	public List<IInfoStolenCar> getStolenCarsInfoList() {
+	public List<IInfoStolenCar> getStolenCarsInfoList()  {
 		List<StolenCarRow> stolenCars = null;
-		Dao<StolenCarRow, Integer> stolenCarDao = Connection.getInstance().getStolenCarDao();
+		Dao<StolenCarRow, Integer> stolenCarDao = null;
+		try {
+			stolenCarDao = Connection.getInstance().getStolenCarDao();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try {
 			stolenCars = stolenCarDao.queryForAll();
 		} catch (SQLException e) {
@@ -42,9 +49,15 @@ public class StolenCarModelDatabase implements IStolenCarModel {
 	}
 
 	@Override
-	public Boolean checkStolenPlate(LicensePlate licensePlate) {
-		Dao<StolenCarRow, Integer> stolenCarDao = Connection.getInstance()
-				.getStolenCarDao();
+	public Boolean checkStolenPlate(LicensePlate licensePlate){
+		Dao<StolenCarRow, Integer> stolenCarDao = null;
+		try {
+			stolenCarDao = Connection.getInstance()
+					.getStolenCarDao();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		QueryBuilder<StolenCarRow, Integer> statementBuilder = stolenCarDao
 				.queryBuilder();
 		List<StolenCarRow> exist = new ArrayList<StolenCarRow>();

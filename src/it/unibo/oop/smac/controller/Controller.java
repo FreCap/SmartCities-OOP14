@@ -6,7 +6,6 @@ import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 import it.unibo.oop.smac.model.IStreetObserverModel;
 import it.unibo.oop.smac.model.Model;
-import it.unibo.oop.smac.model.exception.DuplicateFoundException;
 import it.unibo.oop.smac.model.exception.NotFoundException;
 import it.unibo.oop.smac.view.IView;
 
@@ -63,13 +62,9 @@ public class Controller implements IController {
 	 * 			L'{@link IStreetObserver} da aggiungere.
 	 */
 	public void addStreetObserver(IStreetObserver streetObserver) {
-		try {
-			model.addNewStreetObserver(streetObserver);
-			view.addStreetObserver(streetObserver);
+		model.addNewStreetObserver(streetObserver);
+		view.addStreetObserver(streetObserver);
 
-		} catch (DuplicateFoundException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	/**
