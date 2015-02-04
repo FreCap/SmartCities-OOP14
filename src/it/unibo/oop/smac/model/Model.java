@@ -6,11 +6,11 @@ import java.util.List;
 
 import it.unibo.oop.smac.database.SightingRow;
 import it.unibo.oop.smac.database.StreetObserverRow;
+import it.unibo.oop.smac.database.model.NotFoundException;
 import it.unibo.oop.smac.database.model.StreetObserverModelDatabase;
 import it.unibo.oop.smac.datatype.InfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
-import it.unibo.oop.smac.model.exception.NotFoundException;
 
 /**
  * Implementazione del Model dell'applicazione. Questa classe riceve le richieste di lettura

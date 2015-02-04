@@ -7,7 +7,6 @@ import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 import it.unibo.oop.smac.model.IStreetObserverModel;
-import it.unibo.oop.smac.model.exception.NotFoundException;
 
 import java.sql.SQLException;
 
