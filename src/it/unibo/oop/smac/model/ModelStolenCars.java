@@ -1,8 +1,8 @@
 package it.unibo.oop.smac.model;
 
-import it.unibo.oop.smac.database.model.StolenCars;
+import it.unibo.oop.smac.database.model.StolenCarModelDatabase;
 
 // TODO per fra
-public class ModelStolenCars extends StolenCars implements IStolenCars {
+public class ModelStolenCars extends StolenCarModelDatabase implements IStolenCarModel {
 
 }

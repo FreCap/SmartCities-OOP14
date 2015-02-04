@@ -1,15 +1,14 @@
 package it.unibo.oop.smac.model;
 
-import it.unibo.oop.smac.database.model.StreetObservers;
+import it.unibo.oop.smac.database.model.StreetObserverModelDatabase;
 
 /**
  * Implementazione del Model dell'applicazione. Questa classe riceve le richieste di lettura
- * e scrittura di informazioni su degli oggetti.
- * Questa classe è realizzata utilizzando il pattern Singleton.
+ * e scrittura di informazioni sugli osservatori.
  * 
- *
+ * @author Federico Bellini
  */
-public class Model extends StreetObservers implements IStreetObservers {
+public class Model extends StreetObserverModelDatabase implements IStreetObserverModel {
 
 
 }

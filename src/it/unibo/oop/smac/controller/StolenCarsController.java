@@ -5,7 +5,7 @@ import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
-import it.unibo.oop.smac.model.IStolenCars;
+import it.unibo.oop.smac.model.IStolenCarModel;
 import it.unibo.oop.smac.model.ModelStolenCars;
 import it.unibo.oop.smac.test.client.TrackSimulator;
 import it.unibo.oop.smac.view.IView;
@@ -18,7 +18,7 @@ import it.unibo.oop.smac.view.IView;
 public class StolenCarsController extends Controller implements IStolenCarsObserver {
 	public final TrackSimulator trackSimulator = new TrackSimulator(LicensePlate.generate());
 	
-	protected final IStolenCars modelStolenCars;
+	protected final IStolenCarModel modelStolenCars;
 	
 	public StolenCarsController(IView view){
 		super(view);

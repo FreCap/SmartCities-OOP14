@@ -7,7 +7,7 @@ import it.unibo.oop.smac.datatype.InfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
-import it.unibo.oop.smac.model.IStreetObservers;
+import it.unibo.oop.smac.model.IStreetObserverModel;
 import it.unibo.oop.smac.model.Model;
 import it.unibo.oop.smac.model.exception.DuplicateFoundException;
 import it.unibo.oop.smac.model.exception.NotFoundException;
@@ -24,14 +24,14 @@ import com.j256.ormlite.dao.Dao;
  *
  */
 
-public class StreetObservers implements IStreetObservers {
+public class StreetObserverModelDatabase implements IStreetObserverModel {
 
-	private static StreetObservers instance;
+	private static StreetObserverModelDatabase instance;
 
 	/**
 	 * Costruttore della classe.
 	 */
-	protected StreetObservers() {
+	protected StreetObserverModelDatabase() {
 	}
 
 	/**
@@ -39,9 +39,9 @@ public class StreetObservers implements IStreetObservers {
 	 * 
 	 * @return Un istanza della classe {@link Model}
 	 */
-	public static synchronized StreetObservers getInstance() {
+	public static synchronized StreetObserverModelDatabase getInstance() {
 		if (instance == null) {
-			instance = new StreetObservers();
+			instance = new StreetObserverModelDatabase();
 		}
 		return instance;
 	}

@@ -7,8 +7,8 @@ import it.unibo.oop.smac.datatype.I.IStolenCar;
 import java.util.List;
 
 // TODO per fra
-public interface IStolenCars {
-	public static IStolenCars getInstance() {
+public interface IStolenCarModel {
+	public static IStolenCarModel getInstance() {
 		return null;
 	}
 

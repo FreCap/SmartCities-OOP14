@@ -4,7 +4,7 @@ import it.unibo.oop.smac.datatype.InfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
-import it.unibo.oop.smac.model.IStreetObservers;
+import it.unibo.oop.smac.model.IStreetObserverModel;
 import it.unibo.oop.smac.model.Model;
 import it.unibo.oop.smac.model.exception.DuplicateFoundException;
 import it.unibo.oop.smac.model.exception.NotFoundException;
@@ -21,7 +21,7 @@ public class Controller implements IController {
 	// view dell'applicazione
 	protected final IView view;
 	// model dell'applicazione
-	protected final IStreetObservers model;
+	protected final IStreetObserverModel model;
 
 	/**
 	 * Costruttore pubblico della classe. Come parametro prende l'oggetto che compone la View 

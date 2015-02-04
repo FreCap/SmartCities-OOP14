@@ -5,7 +5,7 @@ import it.unibo.oop.smac.database.StolenCarDB;
 import it.unibo.oop.smac.datatype.LicensePlate;
 import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
-import it.unibo.oop.smac.model.IStolenCars;
+import it.unibo.oop.smac.model.IStolenCarModel;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,16 +15,16 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 // TODO per fra
-public class StolenCars implements IStolenCars {
-	private static StolenCars instance;
-	protected StolenCars(){
+public class StolenCarModelDatabase implements IStolenCarModel {
+	private static StolenCarModelDatabase instance;
+	protected StolenCarModelDatabase(){
 		
 	};
 	
-	public static synchronized StolenCars getInstance() {
+	public static synchronized StolenCarModelDatabase getInstance() {
 		if (instance != null)
 			return instance;
-		instance = new StolenCars();
+		instance = new StolenCarModelDatabase();
 		return instance;
 	}
 	@Override

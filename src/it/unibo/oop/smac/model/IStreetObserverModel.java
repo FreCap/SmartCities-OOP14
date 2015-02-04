@@ -12,7 +12,7 @@ import it.unibo.oop.smac.model.exception.NotFoundException;
  * @author Federico Bellini
  *
  */
-public interface IStreetObservers {
+public interface IStreetObserverModel {
 
 	/**
 	 * Questo metodo deve aggiungere un nuovo {@link IStreetObserver} a quelli
