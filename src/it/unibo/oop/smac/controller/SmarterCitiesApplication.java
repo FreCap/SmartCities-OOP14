@@ -16,9 +16,10 @@ public class SmarterCitiesApplication {
 
 		final IController controller = new StolenCarsController(new ViewGUI());
 		new NetServer(controller);
-
+		
+		// creazione dei client
 		Thread.sleep(1000);
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 10; i++) {
 			Thread.sleep(2000);
 			new Thread(new SightingSenderClient()).start();
 		}

@@ -10,7 +10,7 @@ import it.unibo.oop.smac.model.ModelStolenCars;
 import it.unibo.oop.smac.test.client.TrackSimulator;
 import it.unibo.oop.smac.view.IView;
 
-/**
+/** TODO
  * utilizzato pattern Decorator.
  * 
  * @author Fra

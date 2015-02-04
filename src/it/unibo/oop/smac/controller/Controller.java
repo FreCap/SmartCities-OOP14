@@ -45,11 +45,8 @@ public class Controller implements IController {
 	 */
 	@Override
 	public void newPassage(IStreetObserver streetObserver, ISighting sighting) {
-		try {
-			// TODO cerca se esiste non chiamando il metodo per ricevere le info e vedendo se lancia eccezione!
-			model.getStreetObserverInfo(streetObserver);
-		} catch (NotFoundException e) {
-			addStreetObserver(streetObserver);
+		if(!this.model.isStreetObserverPresent(streetObserver)){
+			this.addStreetObserver(streetObserver);
 		}
 		model.addSighting(sighting);
 		view.newPassage(streetObserver);	
@@ -61,7 +58,7 @@ public class Controller implements IController {
 	 * @param streetObserver
 	 * 			L'{@link IStreetObserver} da aggiungere.
 	 */
-	public void addStreetObserver(IStreetObserver streetObserver) {
+	private void addStreetObserver(IStreetObserver streetObserver) {
 		model.addNewStreetObserver(streetObserver);
 		view.addStreetObserver(streetObserver);
 

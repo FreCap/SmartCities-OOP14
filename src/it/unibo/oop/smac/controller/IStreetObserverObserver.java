@@ -3,7 +3,6 @@ package it.unibo.oop.smac.controller;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
-
 /**
  * Questa interfaccia funzionale ha il compito di astrarre la logica del sistema dalla
  * parte di View, disaccoppiando la richiesta della View di ricevere delle informazioni 
