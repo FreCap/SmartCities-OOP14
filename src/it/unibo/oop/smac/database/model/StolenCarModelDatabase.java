@@ -1,7 +1,7 @@
 package it.unibo.oop.smac.database.model;
 
 import it.unibo.oop.smac.database.Connection;
-import it.unibo.oop.smac.database.StolenCarDB;
+import it.unibo.oop.smac.database.StolenCarRow;
 import it.unibo.oop.smac.datatype.LicensePlate;
 import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
@@ -29,8 +29,8 @@ public class StolenCarModelDatabase implements IStolenCarModel {
 	}
 	@Override
 	public List<IInfoStolenCar> getStolenCarsInfoList() {
-		List<StolenCarDB> stolenCars = null;
-		Dao<StolenCarDB, Integer> stolenCarDao = Connection.getInstance().getStolenCarDao();
+		List<StolenCarRow> stolenCars = null;
+		Dao<StolenCarRow, Integer> stolenCarDao = Connection.getInstance().getStolenCarDao();
 		try {
 			stolenCars = stolenCarDao.queryForAll();
 		} catch (SQLException e) {
@@ -43,15 +43,15 @@ public class StolenCarModelDatabase implements IStolenCarModel {
 
 	@Override
 	public Boolean checkStolenPlate(LicensePlate licensePlate) {
-		Dao<StolenCarDB, Integer> stolenCarDao = Connection.getInstance()
+		Dao<StolenCarRow, Integer> stolenCarDao = Connection.getInstance()
 				.getStolenCarDao();
-		QueryBuilder<StolenCarDB, Integer> statementBuilder = stolenCarDao
+		QueryBuilder<StolenCarRow, Integer> statementBuilder = stolenCarDao
 				.queryBuilder();
-		List<StolenCarDB> exist = new ArrayList<StolenCarDB>();
+		List<StolenCarRow> exist = new ArrayList<StolenCarRow>();
 		try {
-			List<StolenCarDB> stolenCars = stolenCarDao.query(statementBuilder
+			List<StolenCarRow> stolenCars = stolenCarDao.query(statementBuilder
 					.prepare());
-			statementBuilder.where().eq(StolenCarDB.LICENSEPLATE_FIELD_NAME,
+			statementBuilder.where().eq(StolenCarRow.LICENSEPLATE_FIELD_NAME,
 					licensePlate.toString());
 
 			exist = stolenCarDao.query(statementBuilder.prepare());

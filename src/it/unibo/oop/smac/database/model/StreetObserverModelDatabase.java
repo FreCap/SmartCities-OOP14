@@ -1,8 +1,8 @@
 package it.unibo.oop.smac.database.model;
 
 import it.unibo.oop.smac.database.Connection;
-import it.unibo.oop.smac.database.SightingDB;
-import it.unibo.oop.smac.database.StreetObserverDB;
+import it.unibo.oop.smac.database.SightingRow;
+import it.unibo.oop.smac.database.StreetObserverRow;
 import it.unibo.oop.smac.datatype.InfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.ISighting;
@@ -58,9 +58,9 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
 	public synchronized void  addNewStreetObserver(IStreetObserver streetObserver) throws DuplicateFoundException {
 		// TODO sarebbe meglio aggiungere anche alla classe streetObserverDB la
 		// genericità
-		StreetObserverDB streetObserverDB = new StreetObserverDB(
+		StreetObserverRow streetObserverDB = new StreetObserverRow(
 				(IStreetObserver) streetObserver);
-		Dao<StreetObserverDB, String> streetObserverDao = this
+		Dao<StreetObserverRow, String> streetObserverDao = this
 				.getStreetObserverDao();
 		try {
 			try {
@@ -98,13 +98,13 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
 		} catch (DuplicateFoundException e1) {
 			//del tutto normale
 		}
-		StreetObserverDB streetObserverDB = null;
+		StreetObserverRow streetObserverDB = null;
 		try {
 			streetObserverDB = getStreetObserverDB(sighting.getStreetObserver());
 		} catch (NotFoundException e) {
 			new Exception("Non può succedere");
 		}
-		SightingDB sightingDB = new SightingDB(sighting, streetObserverDB);
+		SightingRow sightingDB = new SightingRow(sighting, streetObserverDB);
 		streetObserverDB.addSightings(sightingDB);
 	}
 
@@ -127,8 +127,8 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
 	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver)
 			throws IllegalArgumentException, NotFoundException {
 		
-		StreetObserverDB streetObserverDB = getStreetObserverDB(streetObserver);
-		List<SightingDB> sightingList = streetObserverDB.getSightingsList();
+		StreetObserverRow streetObserverDB = getStreetObserverDB(streetObserver);
+		List<SightingRow> sightingList = streetObserverDB.getSightingsList();
 		
 		Calendar lastHour = Calendar.getInstance();
 		lastHour.add(Calendar.HOUR, -1);
@@ -151,7 +151,7 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
 		float totalSpeedLastMonth = 0;
 		float maxSpeedToday = 0;
 		
-		for(SightingDB s : sightingList){
+		for(SightingRow s : sightingList){
 			if(s.getDate().after(lastMonth.getTime())){
 				sightLastMonth ++;
 				totalSpeedLastMonth += s.getSpeed();
@@ -189,12 +189,12 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
 	
 
 	/**
-	 * Restituisce lo {@link StreetObserverDB} corrispondente all'
+	 * Restituisce lo {@link StreetObserverRow} corrispondente all'
 	 * {@link IStreetObserver} passato come argomento.
 	 * 
 	 * @param streetObserver
 	 *            L'{@link IStreetObserver} da cercare.
-	 * @return Un oggetto {@link StreetObserverDB} corrispondente all'
+	 * @return Un oggetto {@link StreetObserverRow} corrispondente all'
 	 *         {@link IStreetObserver} passato.
 	 * 
 	 * @throws IllegalArgumentException
@@ -203,12 +203,11 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
 	 * @throws NotFoundException
 	 * 			//TODO
 	 */
-	private StreetObserverDB getStreetObserverDB(
-			IStreetObserver streetObserver) throws IllegalArgumentException,
-			NotFoundException {
-		Dao<StreetObserverDB, String> streetObserverDao = this
+	protected StreetObserverRow getStreetObserverDB(IStreetObserver streetObserver)
+			throws IllegalArgumentException, NotFoundException {
+		Dao<StreetObserverRow, String> streetObserverDao = this
 				.getStreetObserverDao();
-		StreetObserverDB streetObserverDB = null;
+		StreetObserverRow streetObserverDB = null;
 		try {
 			streetObserverDB = streetObserverDao.queryForId(streetObserver
 					.getID());
@@ -226,7 +225,7 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
 	 * 
 	 * @return il Dao<> richiesto.
 	 */
-	private Dao<StreetObserverDB, String> getStreetObserverDao() {
+	private Dao<StreetObserverRow, String> getStreetObserverDao() {
 		return Connection.getInstance().getStreetObserverDao();
 	}
 

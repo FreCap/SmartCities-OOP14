@@ -15,7 +15,7 @@ import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "StreetObserver")
-public class StreetObserverDB implements IStreetObserver{
+public class StreetObserverRow implements IStreetObserver{
 	
 	@DatabaseField(id = true, canBeNull = false)
 	private String id;
@@ -24,26 +24,26 @@ public class StreetObserverDB implements IStreetObserver{
 	private Coordinates coordinates;
 	
 	@ForeignCollectionField(eager = false)
-    ForeignCollection<SightingDB> sightings;
+    ForeignCollection<SightingRow> sightings;
 	
 	// costruttori
-	public StreetObserverDB() {
+	public StreetObserverRow() {
 		this(new StreetObserver(new Coordinates(0f,0f)));
 	}
 	
-	public StreetObserverDB(IStreetObserver streetObserver) {
+	public StreetObserverRow(IStreetObserver streetObserver) {
 		this.coordinates = (Coordinates)streetObserver.getCoordinates();
 		this.id = streetObserver.getID();
 	}
 	
-	public void addSightings(SightingDB sighting) {
+	public void addSightings(SightingRow sighting) {
 		this.sightings.add(sighting);
 		System.out.println("Just added new sighting: " + sighting);
 	}
 	
 	// getters
-	public List<SightingDB> getSightingsList() {
-		return new ArrayList<SightingDB>(this.sightings); //defensive copy
+	public List<SightingRow> getSightingsList() {
+		return new ArrayList<SightingRow>(this.sightings); //defensive copy
 	}
 
 	@Override
