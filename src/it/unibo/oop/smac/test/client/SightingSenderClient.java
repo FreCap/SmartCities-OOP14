@@ -19,7 +19,7 @@ public final class SightingSenderClient implements Runnable {
 	static final int PORT = NetServer.PORT;
 
 	public final TrackSimulator trackSimulator = new TrackSimulator(
-			LicensePlate.generate());
+			LicensePlateTest.generate());
 
 	public final ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
 		@Override
