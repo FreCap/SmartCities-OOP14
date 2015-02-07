@@ -2,7 +2,12 @@ package it.unibo.oop.smac.model;
 
 import it.unibo.oop.smac.database.model.StolenCarModelDatabase;
 
-// TODO per fra(sarebbe bello che questo model estendesse dal mio, con i metodi dell'IstolenCar in più)
-public class ModelStolenCars extends StolenCarModelDatabase implements IStolenCarModel {
+/**
+ * Implementazione del Model dell'applicazione che. Questa classe riceve le
+ * richieste di lettura e scrittura di informazioni sulle stolen cars.
+ * 
+ */
+public class ModelStolenCars extends StolenCarModelDatabase implements
+		IStolenCarModel {
 
 }

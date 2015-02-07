@@ -10,6 +10,10 @@ import it.unibo.oop.smac.network.datatye.PlainSighting;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Classe implementata con il pattern Observer che alla ricezione da parte di un
+ * client di un messaggio di sighting, notifica il controller
+ */
 public class ControllerSightingSender implements Observer {
 
 	@Override

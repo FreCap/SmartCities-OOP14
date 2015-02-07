@@ -1,31 +1,38 @@
 package it.unibo.oop.smac.model;
 
 import it.unibo.oop.smac.datatype.LicensePlate;
-import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
 
 import java.util.List;
-
 
 public interface IStolenCarModel {
 	public static IStolenCarModel getInstance() {
 		return null;
 	}
 
-	public List<IInfoStolenCar> getStolenCarsInfoList();
-
-	public Boolean checkStolenPlate(LicensePlate licensePlate);
-	
 	/**
-	 * Questo metodo deve restituire un oggetto del tipo {@link IInfoStolenCar}
-	 * contenente i dati dell'{@link IStolenCar} richiesto.
+	 * Restituisce la lista delle stolenCars del tipo {@link IStolenCar}
+	 * contenute nel database
 	 * 
-	 * @param stolenCar
-	 *            L'{@link IStolenCar} di cui si vogliono le informazioni.
-	 * @return Un {@link IInfoStolenCar} contenente le informazioni sull'
-	 *         {@link IStolenCar} richiesto.
+	 * @return Lista di {@link IStolenCar}
 	 */
-	IInfoStolenCar getStolenCarInfo(IStolenCar stolenCar);
+	public List<IStolenCar> getStolenCarsInfoList();
+
+	/**
+	 * Controlla se la macchina con una determinata {@link LicensePlate}, è
+	 * nell'elenco delle macchine rubate
+	 * 
+	 * @return {@link Boolean se la macchina è stata rubata o meno}
+	 */
+	public Boolean checkStolenPlate(LicensePlate licensePlate);
+
+	/**
+	 * Questo metodo deve aggiungere un nuovo {@link IStolenCar} a quelli già
+	 * presenti nel Model.
+	 * 
+	 * @param licensePlate
+	 *            L'{@link LicensePlate} da aggiungere.
+	 */
 
 	void addNewStolenCar(LicensePlate licensePlate);
 

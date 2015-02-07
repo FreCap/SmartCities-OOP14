@@ -1,7 +1,7 @@
 package it.unibo.oop.smac.database;
 
 import it.unibo.oop.smac.datatype.LicensePlate;
-import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
+import it.unibo.oop.smac.datatype.I.IStolenCar;
 
 import java.util.Date;
 
@@ -11,7 +11,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 // TODO per fra
 @DatabaseTable(tableName = "StolenCar")
-public class StolenCarRow implements IInfoStolenCar {
+public class StolenCarRow implements IStolenCar {
 	public static final String LICENSEPLATE_FIELD_NAME = "licensePlate";
 	public static final String DATAINSERIMENTO_FIELD_NAME = "dataInserimento";
 
@@ -41,7 +41,7 @@ public class StolenCarRow implements IInfoStolenCar {
 		this.licensePlate = licensePlate.toString();
 	}
 
-	public Date getDataInserimento() {
+	public Date getInsertionDate() {
 		return dataInserimento;
 	}
 

@@ -5,10 +5,8 @@ import it.unibo.oop.smac.datatype.InfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
-import it.unibo.oop.smac.model.IStolenCarModel;
 import it.unibo.oop.smac.model.IStreetObserverModel;
 import it.unibo.oop.smac.model.Model;
-import it.unibo.oop.smac.model.ModelStolenCars;
 import it.unibo.oop.smac.view.IView;
 
 /**
@@ -23,7 +21,6 @@ public class Controller implements IController {
 	protected final IView view;
 	// model dell'applicazione
 	protected final IStreetObserverModel model;
-	protected final IStolenCarModel modelStolenCars;
 
 	/**
 	 * Costruttore pubblico della classe. Come parametro prende l'oggetto che
@@ -34,7 +31,6 @@ public class Controller implements IController {
 	 */
 	public Controller(IView view) {
 		model = Model.getInstance();
-		modelStolenCars = ModelStolenCars.getInstance();
 		this.view = view;
 		this.view.attachStreetObserverObserver(this);
 	}

@@ -3,11 +3,17 @@ package it.unibo.oop.smac.test.client;
 import it.unibo.oop.smac.datatype.LicensePlate;
 import it.unibo.oop.smac.utils.RandomStringGenerator;
 
+/**
+ * Classe che genera una nuova targa, utilizzata a fini di test
+ *
+ */
 public class LicensePlateTest {
 
-	// TODO questo metodo ha senso al di fuori della progettazione del server..
-	// dovrebbe essere un metodo che esiste solo nella parte di generazione
-	// casuale di eventi..
+	/**
+	 * funzione statica che implementa la generazione della targa
+	 * 
+	 * @return targa generata
+	 */
 	public static LicensePlate generate() {
 		LicensePlate licensePlate = new LicensePlate(
 				RandomStringGenerator.generateRandomString(2,

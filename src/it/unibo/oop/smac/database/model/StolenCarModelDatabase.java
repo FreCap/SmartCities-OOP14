@@ -2,11 +2,8 @@ package it.unibo.oop.smac.database.model;
 
 import it.unibo.oop.smac.database.Connection;
 import it.unibo.oop.smac.database.StolenCarRow;
-import it.unibo.oop.smac.database.StreetObserverRow;
 import it.unibo.oop.smac.datatype.LicensePlate;
-import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
 import it.unibo.oop.smac.model.IStolenCarModel;
 
 import java.sql.SQLException;
@@ -34,7 +31,7 @@ public class StolenCarModelDatabase implements IStolenCarModel {
 	}
 
 	@Override
-	public List<IInfoStolenCar> getStolenCarsInfoList() {
+	public List<IStolenCar> getStolenCarsInfoList() {
 		List<StolenCarRow> stolenCars = null;
 		Dao<StolenCarRow, Integer> stolenCarDao = null;
 		try {
@@ -48,7 +45,7 @@ public class StolenCarModelDatabase implements IStolenCarModel {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		List<IInfoStolenCar> stolen = (List<IInfoStolenCar>) (List<?>) stolenCars;
+		List<IStolenCar> stolen = (List<IStolenCar>) (List<?>) stolenCars;
 		return stolen;
 
 	}
@@ -103,9 +100,4 @@ public class StolenCarModelDatabase implements IStolenCarModel {
 		}
 	}
 
-	@Override
-	public IInfoStolenCar getStolenCarInfo(IStolenCar stolenCar) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
