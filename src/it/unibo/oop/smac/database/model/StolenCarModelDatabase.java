@@ -2,9 +2,11 @@ package it.unibo.oop.smac.database.model;
 
 import it.unibo.oop.smac.database.Connection;
 import it.unibo.oop.smac.database.StolenCarRow;
+import it.unibo.oop.smac.database.StreetObserverRow;
 import it.unibo.oop.smac.datatype.LicensePlate;
 import it.unibo.oop.smac.datatype.I.IInfoStolenCar;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
+import it.unibo.oop.smac.datatype.I.IStreetObserver;
 import it.unibo.oop.smac.model.IStolenCarModel;
 
 import java.sql.SQLException;
@@ -19,18 +21,20 @@ import com.j256.ormlite.stmt.QueryBuilder;
 // model vero e proprio dell'applicazione ad implementarlo!
 public class StolenCarModelDatabase implements IStolenCarModel {
 	private static StolenCarModelDatabase instance;
-	protected StolenCarModelDatabase(){
-		
+
+	protected StolenCarModelDatabase() {
+
 	};
-	
+
 	public static synchronized StolenCarModelDatabase getInstance() {
 		if (instance != null)
 			return instance;
 		instance = new StolenCarModelDatabase();
 		return instance;
 	}
+
 	@Override
-	public List<IInfoStolenCar> getStolenCarsInfoList()  {
+	public List<IInfoStolenCar> getStolenCarsInfoList() {
 		List<StolenCarRow> stolenCars = null;
 		Dao<StolenCarRow, Integer> stolenCarDao = null;
 		try {
@@ -50,11 +54,10 @@ public class StolenCarModelDatabase implements IStolenCarModel {
 	}
 
 	@Override
-	public Boolean checkStolenPlate(LicensePlate licensePlate){
+	public Boolean checkStolenPlate(LicensePlate licensePlate) {
 		Dao<StolenCarRow, Integer> stolenCarDao = null;
 		try {
-			stolenCarDao = Connection.getInstance()
-					.getStolenCarDao();
+			stolenCarDao = Connection.getInstance().getStolenCarDao();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -75,6 +78,29 @@ public class StolenCarModelDatabase implements IStolenCarModel {
 		}
 
 		return exist.size() > 0;
+	}
+
+	@Override
+	public synchronized void addNewStolenCar(LicensePlate licensePlate) {
+		if (!this.checkStolenPlate(licensePlate)) {
+			StolenCarRow stolenCarDB = new StolenCarRow(licensePlate);
+			Dao<StolenCarRow, Integer> stolenCarDao = null;
+			try {
+				stolenCarDao = Connection.getInstance().getStolenCarDao();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			try {
+				stolenCarDao.createIfNotExists(stolenCarDB);
+			} catch (SQLException e) {
+				System.err
+						.println("The creation on database of the new StolenCar "
+								+ stolenCarDB + " is failed!");
+				System.exit(1);
+			}
+
+		}
 	}
 
 	@Override

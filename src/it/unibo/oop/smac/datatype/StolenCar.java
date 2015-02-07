@@ -4,7 +4,6 @@ import it.unibo.oop.smac.datatype.I.IStolenCar;
 
 import java.util.Date;
 
-// TODO per fra
 public class StolenCar implements IStolenCar {
 
 	private LicensePlate licensePlate;

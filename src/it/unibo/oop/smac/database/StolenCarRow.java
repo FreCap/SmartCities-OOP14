@@ -22,9 +22,15 @@ public class StolenCarRow implements IInfoStolenCar {
 	private String licensePlate;
 
 	@DatabaseField(columnName = DATAINSERIMENTO_FIELD_NAME, canBeNull = false)
-	private Date dataInserimento;
+	private final Date dataInserimento;
 
 	StolenCarRow() {
+		this(new LicensePlate(""));
+	}
+
+	public StolenCarRow(LicensePlate licensePlate) {
+		setLicensePlate(licensePlate);
+		this.dataInserimento = new Date();
 	}
 
 	public LicensePlate getLicensePlate() {
@@ -37,10 +43,6 @@ public class StolenCarRow implements IInfoStolenCar {
 
 	public Date getDataInserimento() {
 		return dataInserimento;
-	}
-
-	public void setDataInserimento(Date dataInserimento) {
-		this.dataInserimento = dataInserimento;
 	}
 
 }

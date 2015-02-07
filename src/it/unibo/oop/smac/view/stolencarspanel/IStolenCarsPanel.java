@@ -14,6 +14,8 @@ public interface IStolenCarsPanel {
 	// attacco degli observers
 	void attachStolenCarsObserver(IStolenCarsObserver sco);
 	
+	IStolenCarsObserver getStolenCarsObserver() throws IllegalStateException;
+	
 	// torna il panel
 	JPanel getPanel();
 }

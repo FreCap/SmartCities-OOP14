@@ -27,7 +27,8 @@ public class ControlPanel extends JScrollPane {
 	
 	// panel contenente tutti gli StreetObserverPanel
 	private final JPanel panel = new JPanel();
-	/*
+	
+	/**
 	 * Map che ha come chiave l'id dello streetObserver, e come valore il riferimento al
 	 * relativo StreetObserverPanel. Questa memorizzazione e' necessaria per richiamare
 	 * il metodo displayPassage della classe StreetObserverPanel sul giusto pannello. 

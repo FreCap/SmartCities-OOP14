@@ -1,6 +1,12 @@
 package it.unibo.oop.smac.datatype.I;
 
-// TODO per fra
+import it.unibo.oop.smac.datatype.LicensePlate;
+
+import java.util.Date;
+
 public interface IInfoStolenCar {
-	// TODO getter and setters
+
+	public LicensePlate getLicensePlate();
+
+	public Date getDataInserimento();
 }

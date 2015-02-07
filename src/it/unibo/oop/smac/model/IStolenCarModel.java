@@ -6,7 +6,7 @@ import it.unibo.oop.smac.datatype.I.IStolenCar;
 
 import java.util.List;
 
-// TODO per fra
+
 public interface IStolenCarModel {
 	public static IStolenCarModel getInstance() {
 		return null;
@@ -26,5 +26,7 @@ public interface IStolenCarModel {
 	 *         {@link IStolenCar} richiesto.
 	 */
 	IInfoStolenCar getStolenCarInfo(IStolenCar stolenCar);
+
+	void addNewStolenCar(LicensePlate licensePlate);
 
 }
