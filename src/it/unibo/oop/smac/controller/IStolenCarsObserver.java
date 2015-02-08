@@ -1,9 +1,7 @@
 package it.unibo.oop.smac.controller;
 
-import it.unibo.oop.smac.datatype.LicensePlate;
-import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
+import it.unibo.oop.smac.datatype.StolenCar;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
 import java.util.List;
 
@@ -25,10 +23,10 @@ public interface IStolenCarsObserver {
 	/**
 	 * Inserisce una nuova macchina rubata nel model
 	 * 
-	 * @param licensePlate
+	 * @param stolenCar
 	 *            Inserisce la macchina con una determianta targa nella lista
 	 *            delle macchine rubate
 	 */
-	void addNewStolenCar(LicensePlate licensePlate);
+	void addNewStolenCar(StolenCar stolenCar);
 
 }

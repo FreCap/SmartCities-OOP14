@@ -3,6 +3,8 @@ package it.unibo.oop.smac.database.model;
 import it.unibo.oop.smac.database.Connection;
 import it.unibo.oop.smac.database.StolenCarRow;
 import it.unibo.oop.smac.datatype.LicensePlate;
+import it.unibo.oop.smac.datatype.StolenCar;
+import it.unibo.oop.smac.datatype.StolenCar;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
 import it.unibo.oop.smac.model.IStolenCarModel;
 
@@ -78,9 +80,9 @@ public class StolenCarModelDatabase implements IStolenCarModel {
 	}
 
 	@Override
-	public synchronized void addNewStolenCar(LicensePlate licensePlate) {
-		if (!this.checkStolenPlate(licensePlate)) {
-			StolenCarRow stolenCarDB = new StolenCarRow(licensePlate);
+	public synchronized void addNewStolenCar(StolenCar stolenCar) {
+		if (!this.checkStolenPlate(stolenCar.getLicensePlate())) {
+			StolenCarRow stolenCarDB = new StolenCarRow(stolenCar);
 			Dao<StolenCarRow, Integer> stolenCarDao = null;
 			try {
 				stolenCarDao = Connection.getInstance().getStolenCarDao();

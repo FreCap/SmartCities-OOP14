@@ -1,6 +1,7 @@
 package it.unibo.oop.smac.model;
 
 import it.unibo.oop.smac.datatype.LicensePlate;
+import it.unibo.oop.smac.datatype.StolenCar;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
 
 import java.util.List;
@@ -30,10 +31,10 @@ public interface IStolenCarModel {
 	 * Questo metodo deve aggiungere un nuovo {@link IStolenCar} a quelli già
 	 * presenti nel Model.
 	 * 
-	 * @param licensePlate
-	 *            L'{@link LicensePlate} da aggiungere.
+	 * @param stolenCar
+	 *            L'{@link StolenCar} da aggiungere.
 	 */
 
-	void addNewStolenCar(LicensePlate licensePlate);
+	void addNewStolenCar(StolenCar stolenCar);
 
 }

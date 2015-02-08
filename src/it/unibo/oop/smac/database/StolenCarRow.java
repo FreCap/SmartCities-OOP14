@@ -1,6 +1,7 @@
 package it.unibo.oop.smac.database;
 
 import it.unibo.oop.smac.datatype.LicensePlate;
+import it.unibo.oop.smac.datatype.StolenCar;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
 
 import java.util.Date;
@@ -31,6 +32,11 @@ public class StolenCarRow implements IStolenCar {
 	public StolenCarRow(LicensePlate licensePlate) {
 		setLicensePlate(licensePlate);
 		this.dataInserimento = new Date();
+	}
+
+	public StolenCarRow(StolenCar stolenCar) {
+		setLicensePlate(stolenCar.getLicensePlate());
+		this.dataInserimento = stolenCar.getInsertionDate();
 	}
 
 	public LicensePlate getLicensePlate() {

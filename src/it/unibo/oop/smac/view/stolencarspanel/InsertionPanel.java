@@ -1,6 +1,6 @@
 package it.unibo.oop.smac.view.stolencarspanel;
 
-import it.unibo.oop.smac.datatype.LicensePlate;
+import it.unibo.oop.smac.datatype.StolenCar;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -79,8 +79,12 @@ public class InsertionPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				StolenCar stolenCar = new StolenCar.Builder()
+						.licensePlate(fieldTarga.getText()).insertionDateNow()
+						.build();
+
 				getStolenCarsPanel().getStolenCarsObserver().addNewStolenCar(
-						new LicensePlate(fieldTarga.getText()));
+						stolenCar);
 			}
 		});
 	}

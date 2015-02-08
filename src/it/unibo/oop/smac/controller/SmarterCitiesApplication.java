@@ -19,7 +19,7 @@ public class SmarterCitiesApplication {
 		
 		// creazione dei client
 		Thread.sleep(1000);
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 2; i++) {
 			Thread.sleep(2000);
 			new Thread(new SightingSenderClient()).start();
 		}

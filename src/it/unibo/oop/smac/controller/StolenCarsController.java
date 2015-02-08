@@ -1,6 +1,6 @@
 package it.unibo.oop.smac.controller;
 
-import it.unibo.oop.smac.datatype.LicensePlate;
+import it.unibo.oop.smac.datatype.StolenCar;
 import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
@@ -34,7 +34,10 @@ public class StolenCarsController extends Controller implements
 
 		// inizializza il model
 		modelStolenCars = ModelStolenCars.getInstance();
-		modelStolenCars.addNewStolenCar(new LicensePlate("asdasd"));
+
+		// macchina aggiunta per test per dare una impatto visivo alla tabella
+		modelStolenCars.addNewStolenCar(new StolenCar.Builder().licensePlate(
+				"TE355TT").build());
 		this.view.attachStolenCarsObserver(this);
 	}
 
@@ -53,8 +56,8 @@ public class StolenCarsController extends Controller implements
 	 * @param licensePlate
 	 *            targa della macchina rubata
 	 */
-	public void addNewStolenCar(LicensePlate licensePlate) {
-		modelStolenCars.addNewStolenCar(licensePlate);
+	public void addNewStolenCar(StolenCar stolenCar) {
+		modelStolenCars.addNewStolenCar(stolenCar);
 	}
 
 	/**
@@ -62,9 +65,9 @@ public class StolenCarsController extends Controller implements
 	 * macchina è stata rubata e agisce di conseguenza
 	 * 
 	 * @param streetObserver
-	 * 		streetObserver che effettua l'avvistamento
+	 *            streetObserver che effettua l'avvistamento
 	 * @param sighting
-	 * 		sighting da aggiungere
+	 *            sighting da aggiungere
 	 */
 	@Override
 	public void newPassage(IStreetObserver streetObserver, ISighting sighting) {
