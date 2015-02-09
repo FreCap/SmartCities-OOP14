@@ -98,7 +98,7 @@ public class StolenCarTableModel extends AbstractTableModel {
 	 * @return l'oggetto corrispondente ad una determinata riga-colonna
 	 */
 	@Override
-	public Object getValueAt(int row, int col) {
+	public Object getValueAt(final int row,final  int col) {
 		switch (col) {
 		case 0:
 			return row + 1;

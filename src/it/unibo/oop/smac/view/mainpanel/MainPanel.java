@@ -46,7 +46,7 @@ public class MainPanel extends JPanel implements IMainPanel {
 	 *            L'{@link IStreetObserver} da aggiungere.
 	 */
 	@Override
-	public void addStreetObserver(IStreetObserver streetObserver) {
+	public void addStreetObserver(final IStreetObserver streetObserver) {
 		this.controlPanel.addStreetObserver(streetObserver, (t) -> {
 			final IInfoStreetObserver info = this.soo.getStreetObserverInfo(t);
 			this.informationsPanel.showInformations(info);

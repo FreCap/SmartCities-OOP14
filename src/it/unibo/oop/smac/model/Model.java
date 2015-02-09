@@ -60,7 +60,7 @@ public final class Model extends StreetObserverModelDatabase implements
 	 *             presente nel Model dell'applicazione.
 	 */
 	@Override
-	public IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver)
+	public IInfoStreetObserver getStreetObserverInfo(final IStreetObserver streetObserver)
 			throws NotFoundException {
 		final StreetObserverRow streetObserverRow = super
 				.getStreetObserverRow(streetObserver);

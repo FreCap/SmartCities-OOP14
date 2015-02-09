@@ -46,7 +46,7 @@ public final class NetServer {
 	 */
 	public ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
 		@Override
-		public void initChannel(SocketChannel ch) throws Exception {
+		public void initChannel(final SocketChannel ch) throws Exception {
 			final ChannelPipeline p = ch.pipeline();
 
 			p.addLast(new ObjectEncoder(),

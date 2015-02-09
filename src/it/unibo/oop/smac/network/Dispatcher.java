@@ -38,7 +38,7 @@ public class Dispatcher extends Observable {
 	 * Notifica gli observer
 	 */
 	@Override
-	public void notifyObservers(Object arg) {
+	public void notifyObservers(final Object arg) {
 		// Notifica che lo stato dell'applicazione è cambiato
 		setChanged();
 		// e quindi al richiamo della funzione notifyObserves, devono essere

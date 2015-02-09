@@ -51,7 +51,7 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel {
 	 *            L'{@link IStolenCarsObserver} da attaccare.
 	 */
 	@Override
-	public void attachStolenCarsObserver(IStolenCarsObserver sco) {
+	public void attachStolenCarsObserver(final IStolenCarsObserver sco) {
 		this.sco = sco;
 	}
 

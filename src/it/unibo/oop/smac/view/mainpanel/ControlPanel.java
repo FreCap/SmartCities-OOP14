@@ -58,7 +58,7 @@ public class ControlPanel extends JScrollPane {
 	 */
 	public void addStreetObserver(final IStreetObserver streetObserver,
 			final Consumer<IStreetObserver> consumer) {
-		StreetObserverPanel p = new StreetObserverPanel(streetObserver, consumer);
+		final StreetObserverPanel p = new StreetObserverPanel(streetObserver, consumer);
 		SwingUtilities.invokeLater(() -> this.panel.add(p));
 		this.streetObserversMap.put(streetObserver.getID(), p);
 	}

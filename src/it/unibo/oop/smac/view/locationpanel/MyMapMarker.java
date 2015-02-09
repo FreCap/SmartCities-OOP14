@@ -55,7 +55,7 @@ public abstract class MyMapMarker extends MapObjectImpl implements MapMarker {
 	 *             questo metodo.
 	 */
 	@Override
-	public void setLat(double arg0) {
+	public void setLat(final double arg0) {
 		throw new UnsupportedOperationException("Method setLat is unsupported.");
 	}
 
@@ -67,7 +67,7 @@ public abstract class MyMapMarker extends MapObjectImpl implements MapMarker {
 	 *             questo metodo.
 	 */
 	@Override
-	public void setLon(double arg0) {
+	public void setLon(final double arg0) {
 		throw new UnsupportedOperationException("Method setLon is unsupported.");
 	}
 
@@ -133,7 +133,7 @@ public abstract class MyMapMarker extends MapObjectImpl implements MapMarker {
 	 *            Inutilizzato
 	 */
 	@Override
-	public void paint(Graphics g, Point p, int radio) {
+	public void paint(final Graphics g, final Point p, final int radio) {
 		g.drawImage(locationImage, (int) p.getX(), (int) p.getY(), null);
 	}
 

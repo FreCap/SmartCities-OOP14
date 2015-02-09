@@ -95,7 +95,7 @@ public class OSMStaticMapConstructor {
 		 *            La longitudine del centro della mappa.
 		 * @return L'URL cercato.
 		 */
-		public URL buildURL(Float lat, Float lng) {
+		public URL buildURL(final Float lat, final Float lng) {
 			URL url = null;
 			try {
 				url = new URL(new StringBuilder().append(OSM_REQUEST_PREFIX)

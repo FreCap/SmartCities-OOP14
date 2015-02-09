@@ -1,5 +1,7 @@
 package it.unibo.oop.smac.test.client;
 
+import java.util.logging.Logger;
+
 import javax.management.InvalidAttributeValueException;
 
 import it.unibo.oop.smac.datatype.LicensePlate;

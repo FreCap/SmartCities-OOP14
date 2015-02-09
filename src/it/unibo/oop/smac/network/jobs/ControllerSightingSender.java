@@ -19,7 +19,7 @@ import javax.management.InvalidAttributeValueException;
 public class ControllerSightingSender implements Observer {
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(final Observable o, final Object arg) {
 		if (arg instanceof PlainSighting) {
 			final PlainSighting sighting = (PlainSighting) arg;
 			final StreetObserver streetObserver = new StreetObserver(
@@ -27,14 +27,11 @@ public class ControllerSightingSender implements Observer {
 
 			ISighting s = null;
 			try {
-				s = new Sighting.Builder()
-						.date(sighting.getDate())
-						.streetObserver(streetObserver)
-						.speed(sighting.getSpeed())
-						.licensePlate(
-								new LicensePlate(sighting.getLicensePlate()))
+				s = new Sighting.Builder().date(sighting.getDate())
+						.streetObserver(streetObserver).speed(sighting.getSpeed())
+						.licensePlate(new LicensePlate(sighting.getLicensePlate()))
 						.build();
-				final 	Dispatcher dispatcher = (Dispatcher) o;
+				final Dispatcher dispatcher = (Dispatcher) o;
 				dispatcher.getController().newPassage(streetObserver, s);
 			} catch (InvalidAttributeValueException e) {
 				// Targa non valida, interrompo la notifica

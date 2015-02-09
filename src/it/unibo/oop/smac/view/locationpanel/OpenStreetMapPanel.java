@@ -54,7 +54,7 @@ public class OpenStreetMapPanel extends JMapViewer implements ILocationPanel{
 	 * visualizzato, da rosso a verde.
 	 */
 	@Override
-	public void notifyPassage(IStreetObserver streetObserver) {
+	public void notifyPassage(final IStreetObserver streetObserver) {
 		final String id = streetObserver.getID();
 		final ICoordinates c = streetObserver.getCoordinates();
 		
