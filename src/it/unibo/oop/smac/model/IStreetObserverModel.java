@@ -1,6 +1,7 @@
 package it.unibo.oop.smac.model;
 
 import it.unibo.oop.smac.database.model.NotFoundException;
+import it.unibo.oop.smac.database.model.StreetObserverNotValidException;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
@@ -31,7 +32,7 @@ public interface IStreetObserverModel {
 	 * @return
 	 * 			True se esiste, false altrimenti.
 	 */
-	boolean isStreetObserverPresent(IStreetObserver streetObserver);
+	boolean checkStreetObserverExists(IStreetObserver streetObserver);
 
 	/**
 	 * Questo metodo deve aggiungere un nuovo {@link ISighting} a quelli già
@@ -39,8 +40,9 @@ public interface IStreetObserverModel {
 	 * 
 	 * @param sighting
 	 *            L'{@link ISighting} da aggiungere.
+	 * @throws StreetObserverNotValidException 
 	 */
-	void addSighting(ISighting sighting) throws IllegalArgumentException;
+	void addSighting(ISighting sighting) throws IllegalArgumentException, StreetObserverNotValidException;
 
 	/**
 	 * Questo metodo raccoglie i dati su di un {@link IStreetObserver}, e li

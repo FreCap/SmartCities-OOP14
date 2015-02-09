@@ -98,7 +98,7 @@ public class ViewGUI extends JFrame implements IView{
 	 * 			nella View.
 	 */
 	@Override
-	public void attachStreetObserverObserver(IStreetObserverObserver soo) {
+	public void attachStreetObserverController(IStreetObserverObserver soo) {
 		this.mainPanel.attachStreetObserverObserver(soo);
 	}
 
@@ -113,7 +113,7 @@ public class ViewGUI extends JFrame implements IView{
 	 * 			nella View.
 	 */
 	@Override
-	public void attachStolenCarsObserver(IStolenCarsObserver sco) {
+	public void attachStolenCarsController(IStolenCarsObserver sco) {
 		this.stolenCarsPanel.attachStolenCarsObserver(sco);		
 	}
 

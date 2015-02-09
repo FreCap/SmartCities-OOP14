@@ -12,15 +12,15 @@ public class StolenCar implements IStolenCar {
 	/**
 	 * Attributo contente la targa della macchina rubata.
 	 */
-	private LicensePlate licensePlate;
+	private final LicensePlate licensePlate;
 
 	/**
 	 * Attributo contenente la data del furto della macchina
 	 */
-	private Date insertionDate;
+	private final Date insertionDate;
 
 	/**
-	 * Costruttore della classe che permette l'inizializzazione dei suoi campi
+	 * Costruttore della classe che permette l'inizializzazione i suoi campi
 	 * 
 	 * @param licensePlate
 	 * @param insertionDate

@@ -1,5 +1,6 @@
 package it.unibo.oop.smac.datatype.I;
 
+import it.unibo.oop.smac.database.model.StreetObserverNotValidException;
 import it.unibo.oop.smac.datatype.LicensePlate;
 
 import java.util.Date;
@@ -19,8 +20,9 @@ public interface ISighting {
 	 * 
 	 * @return
 	 * 			L'{@link IStreetObserver} autore dell'avvistamento.
+	 * @throws StreetObserverNotValidException 
 	 */
-	public IStreetObserver getStreetObserver();
+	public IStreetObserver getStreetObserver() throws StreetObserverNotValidException;
 
 	/**
 	 * Restituisce la {@link Date} relativa al momento dell'avvistamento.

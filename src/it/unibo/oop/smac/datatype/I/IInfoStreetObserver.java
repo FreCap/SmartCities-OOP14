@@ -60,7 +60,7 @@ public interface IInfoStreetObserver {
 	String getnOfSightLastMonth();
 
 	/**
-	 * Rewstituisce il numero totale di avvistamenti fatti dall'osservatore da quando e'
+	 * Restituisce il numero totale di avvistamenti fatti dall'osservatore da quando e'
 	 * stato avviato.
 	 * 
 	 * @return

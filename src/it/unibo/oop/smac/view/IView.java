@@ -41,7 +41,7 @@ public interface IView {
 	 * 			L'{@link IStreetObserverObserver} da attaccare agli StreetObserver presenti
 	 * 			nella View.
 	 */
-	void attachStreetObserverObserver(IStreetObserverObserver soo);
+	void attachStreetObserverController(IStreetObserverObserver soo);
 		
 	/**
 	 * Questo metodo deve attaccare l'Observer passato come parametro alle StolenCars
@@ -53,5 +53,5 @@ public interface IView {
 	 * 			L'{@link IStolenCarsObserver} da attaccare alle StolenCars presenti
 	 * 			nella View.
 	 */
-	void attachStolenCarsObserver(IStolenCarsObserver sco);
+	void attachStolenCarsController(IStolenCarsObserver sco);
 }

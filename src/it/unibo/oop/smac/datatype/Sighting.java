@@ -1,5 +1,6 @@
 package it.unibo.oop.smac.datatype;
 
+import it.unibo.oop.smac.database.model.StreetObserverNotValidException;
 import it.unibo.oop.smac.datatype.I.ISighting;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
@@ -47,9 +48,10 @@ public class Sighting implements ISighting {
 	 * 
 	 * @return
 	 * 			L'{@link IStreetObserver} autore dell'avvistamento.
+	 * @throws StreetObserverNotValidException 
 	 */
 	@Override
-	public IStreetObserver getStreetObserver() {
+	public IStreetObserver getStreetObserver() throws StreetObserverNotValidException {
 		return new StreetObserver(this.streetObserver); //defensive copy
 	}
 	

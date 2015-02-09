@@ -38,7 +38,7 @@ public class StolenCarsController extends Controller implements
 		// macchina aggiunta per test per dare una impatto visivo alla tabella
 		modelStolenCars.addNewStolenCar(new StolenCar.Builder().licensePlate(
 				"TE355TT").build());
-		this.view.attachStolenCarsObserver(this);
+		this.view.attachStolenCarsController(this);
 	}
 
 	/**

@@ -3,7 +3,6 @@ package it.unibo.oop.smac.database.model;
 /**
  * Eccezione lanciata quando non vengono trovati dati nel database.
  * 
- * @author Federico Bellini
  */
 public class NotFoundException extends Exception {
 	

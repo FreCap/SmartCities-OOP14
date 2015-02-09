@@ -32,7 +32,7 @@ public class Controller implements IController {
 	public Controller(IView view) {
 		model = Model.getInstance();
 		this.view = view;
-		this.view.attachStreetObserverObserver(this);
+		this.view.attachStreetObserverController(this);
 	}
 
 	/**
@@ -46,11 +46,15 @@ public class Controller implements IController {
 	 */
 	@Override
 	public void newPassage(IStreetObserver streetObserver, ISighting sighting) {
-		if (!this.model.isStreetObserverPresent(streetObserver)) {
+		if (!this.model.checkStreetObserverExists(streetObserver)) {
 			this.addStreetObserver(streetObserver);
 		}
-		model.addSighting(sighting);
-		view.newPassage(streetObserver);
+		try {
+			model.addSighting(sighting);
+			view.newPassage(streetObserver);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

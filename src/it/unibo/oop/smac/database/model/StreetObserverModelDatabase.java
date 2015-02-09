@@ -31,7 +31,7 @@ public abstract class StreetObserverModelDatabase implements IStreetObserverMode
 	 */
 	@Override
 	public synchronized void  addNewStreetObserver(IStreetObserver streetObserver) {
-		if(!this.isStreetObserverPresent(streetObserver)){
+		if(!this.checkStreetObserverExists(streetObserver)){
 			StreetObserverRow streetObserverDB = new StreetObserverRow(streetObserver);
 			Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
 			try {
@@ -55,11 +55,15 @@ public abstract class StreetObserverModelDatabase implements IStreetObserverMode
 	 * 
 	 * @param sighting
 	 *            L'{@link ISighting} da inserire.
+	 * @throws StreetObserverNotValidException 
 	 */
 	@Override
-	public void addSighting(ISighting sighting) {
+	public void addSighting(ISighting sighting) throws StreetObserverNotValidException {
 		// controllo se l'osservatore è presente, altrimenti lo aggiungo
-		if(! this.isStreetObserverPresent(sighting.getStreetObserver())){
+		if(sighting.getStreetObserver() == null){
+			throw new StreetObserverNotValidException();
+		}
+		if(! this.checkStreetObserverExists(sighting.getStreetObserver())){
 			this.addNewStreetObserver(sighting.getStreetObserver());
 		}
 		try {
@@ -82,7 +86,7 @@ public abstract class StreetObserverModelDatabase implements IStreetObserverMode
 	 * 			True se esiste, false altrimenti.
 	 */
 	@Override
-	public boolean isStreetObserverPresent(IStreetObserver streetObserver) {
+	public boolean checkStreetObserverExists(IStreetObserver streetObserver) {
 		Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
 		 try {
 			if(streetObserverDao.queryForId(streetObserver.getID()) == null) {
@@ -112,7 +116,7 @@ public abstract class StreetObserverModelDatabase implements IStreetObserverMode
 	 */
 	protected StreetObserverRow getStreetObserverRow(IStreetObserver streetObserver)
 			throws NotFoundException {
-		if(this.isStreetObserverPresent(streetObserver)){
+		if(this.checkStreetObserverExists(streetObserver)){
 			Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
 			try {
 				return streetObserverDao.queryForId(streetObserver.getID());
