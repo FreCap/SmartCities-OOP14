@@ -36,8 +36,8 @@ public class StolenCarsController extends Controller implements
 		modelStolenCars = ModelStolenCars.getInstance();
 
 		// macchina aggiunta per test per dare una impatto visivo alla tabella
-		modelStolenCars.addNewStolenCar(new StolenCar.Builder().licensePlate(
-				"TE355TT").build());
+		modelStolenCars.addNewStolenCar(new StolenCar.Builder()
+				.licensePlate("TE355TT").insertionDateNow().build());
 		this.view.attachStolenCarsController(this);
 	}
 
