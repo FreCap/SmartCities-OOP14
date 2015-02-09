@@ -9,7 +9,7 @@ import it.unibo.oop.smac.utils.RandomStringGenerator;
  * Classe che genera una nuova targa, utilizzata a fini di test
  *
  */
-public class LicensePlateTest {
+public class LicensePlateGenerator {
 
 	/**
 	 * funzione statica che implementa la generazione della targa

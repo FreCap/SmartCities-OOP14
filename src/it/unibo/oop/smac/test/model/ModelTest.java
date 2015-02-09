@@ -10,7 +10,7 @@ import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 import it.unibo.oop.smac.model.IStreetObserverModel;
 import it.unibo.oop.smac.model.Model;
-import it.unibo.oop.smac.test.client.LicensePlateTest;
+import it.unibo.oop.smac.test.client.LicensePlateGenerator;
 
 import java.util.Date;
 import java.util.Random;
@@ -63,7 +63,7 @@ public class ModelTest {
 				this.generateCoordinates());
 		float speed = 44f;
 
-		LicensePlate licensePlate = LicensePlateTest.generate();
+		LicensePlate licensePlate = LicensePlateGenerator.generate();
 
 		Sighting sighting = new Sighting.Builder().date(new Date())
 				.streetObserver(streetObserver).speed(speed)
@@ -104,7 +104,7 @@ public class ModelTest {
 		StreetObserver streetObserver = new StreetObserver(
 				this.generateCoordinates());
 		Float speed = 44f;
-		LicensePlate licensePlate = LicensePlateTest.generate();
+		LicensePlate licensePlate = LicensePlateGenerator.generate();
 
 		Sighting sighting = new Sighting.Builder().date(new Date())
 				.streetObserver(streetObserver).speed(speed)

@@ -33,7 +33,7 @@ public final class SightingSenderClient implements Runnable {
 	 * connessione
 	 */
 	public final TrackSimulator trackSimulator = new TrackSimulator(
-			LicensePlateTest.generate());
+			LicensePlateGenerator.generate());
 
 	/**
 	 * Inizializzazione dell'inizializzatore di un nuovo channel (connessione)
