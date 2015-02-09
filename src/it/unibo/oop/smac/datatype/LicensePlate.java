@@ -1,8 +1,9 @@
 package it.unibo.oop.smac.datatype;
 
-import it.unibo.oop.smac.utils.RandomStringGenerator;
-
 import java.io.Serializable;
+import java.util.regex.Pattern;
+
+import javax.management.InvalidAttributeValueException;
 
 /**
  * Classe che implementa la struttura della targa di un mezzo.
@@ -13,35 +14,53 @@ public class LicensePlate implements Serializable {
 
 	private static final long serialVersionUID = -194344929770325193L;
 	private final String licensePlate;
-	
+
 	/**
-	 * Costruttore che crea una nuova LicensePlate, copia di quella passata come parametro.
+	 * Costruttore che crea una nuova LicensePlate, con la targa di test
+	 * "AA000AA".
+	 */
+	public LicensePlate() {
+		this.licensePlate = "AA000AA";
+	}
+
+	/**
+	 * Costruttore che crea una nuova LicensePlate, copia di quella passata come
+	 * parametro.
 	 * 
 	 * @param licensePlate
-	 * 			La LicensePlate di cui creare una copia.
+	 *            La LicensePlate di cui creare una copia.
+	 * @throws InvalidAttributeValueException
+	 *             scatenato quando la targa non è valida
 	 */
-	public LicensePlate(LicensePlate licensePlate){
+	public LicensePlate(LicensePlate licensePlate)
+			throws InvalidAttributeValueException {
 		this(licensePlate.getPlate());
 	}
-	
+
 	/**
-	 * Coostruttore che crea una nuova LicensePlate impostando la stringa passata come
-	 * parametro come targa del mezzo.
+	 * Coostruttore che crea una nuova LicensePlate impostando la stringa
+	 * passata come parametro come targa del mezzo.
 	 * 
 	 * @param licensePlate
-	 * 			La targa che si vuole impostare.
+	 *            La targa che si vuole impostare.
+	 * @throws InvalidAttributeValueException
+	 *             scatenato quando la targa non è valida
 	 */
-	public LicensePlate(String licensePlate) {
+	public LicensePlate(String licensePlate)
+			throws InvalidAttributeValueException {
+		if (!Pattern.matches("[a-zA-Z]{2}[0-9]{3,4}[a-zA-Z]{2}",
+				licensePlate)) {
+			throw new InvalidAttributeValueException();
+		}
 		this.licensePlate = licensePlate;
 	}
-	
+
 	/**
 	 * Restituisce una stringa contenente la targa del mezzo.
 	 * 
-	 * @return
-	 * 			La targa del mezzo.
+	 * @return La targa del mezzo.
 	 */
-	public String getPlate(){
+	public String getPlate() {
 		return this.licensePlate;
 	}
 
@@ -57,7 +76,7 @@ public class LicensePlate implements Serializable {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof LicensePlate) {
-			return this.getPlate().equals(((LicensePlate)obj).getPlate());
+			return this.getPlate().equals(((LicensePlate) obj).getPlate());
 		}
 		return false;
 	}
@@ -65,21 +84,6 @@ public class LicensePlate implements Serializable {
 	@Override
 	public String toString() {
 		return this.getPlate();
-	}
-
-	// TODO questo metodo ha senso al di fuori della progettazione del server..
-	// dovrebbe essere un metodo che esiste solo nella parte di generazione casuale
-	// di eventi..
-	public static LicensePlate generate() {
-		LicensePlate licensePlate = new LicensePlate(
-				RandomStringGenerator.generateRandomString(2,
-						RandomStringGenerator.Mode.ALPHA)
-						+ RandomStringGenerator.generateRandomString(3,
-								RandomStringGenerator.Mode.NUMERIC)
-						+ RandomStringGenerator.generateRandomString(2,
-								RandomStringGenerator.Mode.ALPHA));
-		return licensePlate;
-
 	}
 
 }

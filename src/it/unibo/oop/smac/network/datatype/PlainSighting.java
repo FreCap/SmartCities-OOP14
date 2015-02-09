@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.network.datatye;
+package it.unibo.oop.smac.network.datatype;
 
 import it.unibo.oop.smac.datatype.Coordinates;
 import it.unibo.oop.smac.datatype.Sighting;

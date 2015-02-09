@@ -4,6 +4,8 @@ import it.unibo.oop.smac.datatype.I.IStolenCar;
 
 import java.util.Date;
 
+import javax.management.InvalidAttributeValueException;
+
 /**
  * Implementazione concreta di un'{@link IStolenCar}.
  */
@@ -79,8 +81,12 @@ public class StolenCar implements IStolenCar {
 		 * @param licensePlate
 		 *            La LicensePlate' da settare.
 		 * @return Il Builder stesso.
+		 * @throws InvalidAttributeValueException
+		 *             restituita quando la targa non ha il formato giusto, es.
+		 *             AA000AA
 		 */
-		public Builder licensePlate(String licensePlate) {
+		public Builder licensePlate(String licensePlate)
+				throws InvalidAttributeValueException {
 			this.licensePlate(new LicensePlate(licensePlate));
 			return this;
 		}
@@ -114,8 +120,15 @@ public class StolenCar implements IStolenCar {
 		 * attributi appena settati.
 		 * 
 		 * @return L'oggetto della classe Sighting appena creato.
+		 * @throws StolenCarNotValidException
+		 * @exception IllegalArgumentException
+		 *                ricordarsi di impostare tutti i parametri
 		 */
 		public StolenCar build() {
+			if (this.licensePlate == null || this.insertionDate == null) {
+				throw new IllegalArgumentException(
+						"Devi completare tutti i campi prima di fare il build");
+			}
 			return new StolenCar(this.licensePlate, this.insertionDate);
 		}
 	}

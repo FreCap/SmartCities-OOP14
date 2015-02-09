@@ -6,9 +6,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.management.InvalidAttributeValueException;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -77,14 +79,32 @@ public class InsertionPanel extends JPanel {
 		// press del tasto aggiungi
 		buttonAggiungi.addActionListener(new ActionListener() {
 
+			private void invalidLicensePlateMsg(String licensePlate) {
+				String msg = new StringBuilder()
+						.append("Error inserting a new stolen car license plate: ")
+						.append("\n " + licensePlate + " is not valid.")
+						.append("\n AA000AA is a valid one.").toString();
+
+				JOptionPane.showOptionDialog(null, msg, "Insertion Erro",
+						JOptionPane.CLOSED_OPTION,
+						JOptionPane.INFORMATION_MESSAGE, null, null, null);
+			}
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				StolenCar stolenCar = new StolenCar.Builder()
-						.licensePlate(fieldTarga.getText()).insertionDateNow()
-						.build();
+				String licensePlate = fieldTarga.getText();
+				try {
+					StolenCar stolenCar = new StolenCar.Builder()
+							.licensePlate(fieldTarga.getText())
+							.insertionDateNow().build();
 
-				getStolenCarsPanel().getStolenCarsObserver().addNewStolenCar(
-						stolenCar);
+					getStolenCarsPanel().getStolenCarsObserver()
+							.addNewStolenCar(stolenCar);
+				} catch (InvalidAttributeValueException e1) {
+					invalidLicensePlateMsg(licensePlate);
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 	}

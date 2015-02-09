@@ -6,6 +6,8 @@ import it.unibo.oop.smac.datatype.I.IStolenCar;
 
 import java.util.Date;
 
+import javax.management.InvalidAttributeValueException;
+
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -26,7 +28,7 @@ public class StolenCarRow implements IStolenCar {
 	private final Date dataInserimento;
 
 	StolenCarRow() {
-		this(new LicensePlate(""));
+		this(new LicensePlate());
 	}
 
 	public StolenCarRow(LicensePlate licensePlate) {
@@ -40,7 +42,16 @@ public class StolenCarRow implements IStolenCar {
 	}
 
 	public LicensePlate getLicensePlate() {
-		return new LicensePlate(licensePlate);
+		LicensePlate response = null;
+		try {
+			response = new LicensePlate(licensePlate);
+		} catch (InvalidAttributeValueException e) {
+			// non può succede visto che se viene creata una copia difensiva di
+			// un oggetto già esistente, e quindi di cui è stato convalidato il
+			// valore
+			e.printStackTrace();
+		}
+		return response;
 	}
 
 	public void setLicensePlate(LicensePlate licensePlate) {

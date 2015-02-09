@@ -10,6 +10,8 @@ import it.unibo.oop.smac.view.IView;
 
 import java.util.List;
 
+import javax.management.InvalidAttributeValueException;
+
 /**
  * TODO utilizzato pattern Decorator.
  * 
@@ -36,8 +38,14 @@ public class StolenCarsController extends Controller implements
 		modelStolenCars = ModelStolenCars.getInstance();
 
 		// macchina aggiunta per test per dare una impatto visivo alla tabella
-		modelStolenCars.addNewStolenCar(new StolenCar.Builder()
-				.licensePlate("TE355TT").insertionDateNow().build());
+		try {
+			StolenCar stolenCar = new StolenCar.Builder()
+					.licensePlate("TE355TT").insertionDateNow().build();
+			modelStolenCars.addNewStolenCar(stolenCar);
+		} catch (InvalidAttributeValueException e) {
+			// NON PUO' succedere visto che la targa ha il giusto formato
+		}
+
 		this.view.attachStolenCarsController(this);
 	}
 
