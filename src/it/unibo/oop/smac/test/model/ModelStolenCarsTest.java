@@ -66,7 +66,7 @@ public class ModelStolenCarsTest {
 	 * @throws Exception
 	 */
 	@org.junit.Test
-	public void testInfoStreetObservera() throws Exception {
+	public void testNewStolenCar() throws Exception {
 		final IStolenCarModel modelStolenCars = ModelStolenCars.getInstance();
 
 		StolenCar stolenCar = new StolenCar.Builder()
@@ -75,6 +75,24 @@ public class ModelStolenCarsTest {
 		modelStolenCars.addNewStolenCar(stolenCar);
 		assertTrue(modelStolenCars.checkStolenPlate(new LicensePlate(
 				VALID_LICENSEPLATE)));
+
+	}
+	
+
+	/**
+	 * Controlla che venga restituita la lista delle car aggiunte
+	 * 
+	 * @throws Exception
+	 */
+	@org.junit.Test
+	public void testGetStolenCarsInfoList() throws Exception {
+		final IStolenCarModel modelStolenCars = ModelStolenCars.getInstance();
+
+		StolenCar stolenCar = new StolenCar.Builder()
+				.licensePlate(VALID_LICENSEPLATE).insertionDateNow().build();
+
+		modelStolenCars.addNewStolenCar(stolenCar);
+		assertTrue(modelStolenCars.getStolenCarsInfoList().size()>0);
 
 	}
 }
