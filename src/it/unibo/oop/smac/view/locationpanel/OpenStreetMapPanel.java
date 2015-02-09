@@ -30,7 +30,7 @@ public class OpenStreetMapPanel extends JMapViewer implements ILocationPanel{
 	 * Aggiunge un'{@link IStreetObserver} alla mappa.
 	 */
 	@Override
-	public void addStreetObserver(IStreetObserver streetObserver) {
+	public void addStreetObserver(final IStreetObserver streetObserver) {
 		this.addRedMapMarker(streetObserver.getID(), streetObserver.getCoordinates());
 		SwingUtilities.invokeLater(() -> {
 				this.setDisplayToFitMapMarkers();
@@ -55,8 +55,8 @@ public class OpenStreetMapPanel extends JMapViewer implements ILocationPanel{
 	 */
 	@Override
 	public void notifyPassage(IStreetObserver streetObserver) {
-		String id = streetObserver.getID();
-		ICoordinates c = streetObserver.getCoordinates();
+		final String id = streetObserver.getID();
+		final ICoordinates c = streetObserver.getCoordinates();
 		
 		removeMapMarker(id,c);
 		addGreenMapMarker(id, c);
@@ -77,7 +77,7 @@ public class OpenStreetMapPanel extends JMapViewer implements ILocationPanel{
 	 * @param coordinates
 	 * 			Le coodinate del {@link MyMapMarker}.
 	 */
-	private void addRedMapMarker(String id, ICoordinates coordinates){
+	private void addRedMapMarker(final String id,final  ICoordinates coordinates){
 		SwingUtilities.invokeLater(() -> 
 				this.addMapMarker(new RedMapMarker(id, coordinates))
 		);
@@ -91,7 +91,7 @@ public class OpenStreetMapPanel extends JMapViewer implements ILocationPanel{
 	 * @param coordinates
 	 * 			Le coodinate del {@link MyMapMarker}.
 	 */
-	private void addGreenMapMarker(String id, ICoordinates coordinates){
+	private void addGreenMapMarker(final String id,final  ICoordinates coordinates){
 		SwingUtilities.invokeLater(() -> 
 				this.addMapMarker(new GreenMapMarker(id, coordinates))
 		);		
@@ -105,7 +105,7 @@ public class OpenStreetMapPanel extends JMapViewer implements ILocationPanel{
 	 * @param coordinates
 	 * 			Le coodinate del {@link MyMapMarker}.
 	 */
-	private void removeMapMarker(String id, ICoordinates coordinates){
+	private void removeMapMarker(final String id, final ICoordinates coordinates){
 		/* nota che non c'è differenza tra rimuovere un RedMapMarker o un GreenMapMarker,
 		poichè quando il metodo removeMapMarker richiama la funziona equals, e cerca il
 		giusto MapMarker da rimuovere, essa non fa differenza tra red o green, ma si basa

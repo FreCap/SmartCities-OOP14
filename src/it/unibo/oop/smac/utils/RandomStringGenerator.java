@@ -1,32 +1,44 @@
 package it.unibo.oop.smac.utils;
 
 /**
- * 
- * @author Francesco Capponi
+ * Generatore di stringhe formato da u determinato set di caratteri
  */
-public class RandomStringGenerator {
-	
-	public static enum Mode {
-	    ALPHA, ALPHANUMERIC, NUMERIC 
-	}
-	
-	public static String generateRandomString(int length, Mode mode)  {
+public final class RandomStringGenerator {
 
-		StringBuffer buffer = new StringBuffer();
+	private RandomStringGenerator() {
+
+	}
+
+	public static enum Mode {
+		ALPHA, ALPHANUMERIC, NUMERIC
+	}
+
+	/**
+	 * Utility che data la lunghezza e la modalità di generazione, restituisce
+	 * una stringa composta dai caratteri richiesti
+	 * 
+	 * @param length
+	 * @param mode
+	 * @return
+	 */
+	public static String generateRandomString(final int length, final Mode mode) {
+
+		final StringBuffer buffer = new StringBuffer();
 		String characters = "";
-		switch(mode){
+		switch (mode) {
 		case ALPHA:
 			characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 			break;
 		case NUMERIC:
+		default:
 			characters = "1234567890";
-		    break;
+			break;
 		}
-		
-		int charactersLength = characters.length();
+
+		final int charactersLength = characters.length();
 
 		for (int i = 0; i < length; i++) {
-			double index = Math.random() * charactersLength;
+			final double index = Math.random() * charactersLength;
 			buffer.append(characters.charAt((int) index));
 		}
 		return buffer.toString();

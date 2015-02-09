@@ -36,7 +36,7 @@ public class TablePanel extends JPanel {
 	 * 
 	 * @param stolenCarsPanel
 	 */
-	public TablePanel(StolenCarsPanel stolenCarsPanel) {
+	public TablePanel(final StolenCarsPanel stolenCarsPanel) {
 		super();
 		// imposto il layout
 		this.setBorder(new TitledBorder("Dati"));
@@ -49,15 +49,15 @@ public class TablePanel extends JPanel {
 		// inizializzo la classe che andrà a gestire i dati nel model
 		stolenCarTableModel = new StolenCarTableModel();
 		// creo la tabella con i dati
-		JTable table = new JTable(stolenCarTableModel);
+		final JTable table = new JTable(stolenCarTableModel);
 		table.setEnabled(false);
 		this.add(new JScrollPane(table));
 
 		// imposto un timer che ogni X mi aggiorna i dati nella tabella
-		Timer timer = new Timer(2000, new ActionListener() {
+		final Timer timer = new Timer(2000, new ActionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				try {
 					IStolenCarsObserver sco = getStolenCarsPanel()
 							.getStolenCarsObserver();

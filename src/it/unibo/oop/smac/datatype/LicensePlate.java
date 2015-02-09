@@ -13,6 +13,10 @@ import javax.management.InvalidAttributeValueException;
 public class LicensePlate implements Serializable {
 
 	private static final long serialVersionUID = -194344929770325193L;
+	
+	/**
+	 * contenitore della valore della targa
+	 */
 	private final String licensePlate;
 
 	/**
@@ -32,8 +36,7 @@ public class LicensePlate implements Serializable {
 	 * @throws InvalidAttributeValueException
 	 *             scatenato quando la targa non è valida
 	 */
-	public LicensePlate(LicensePlate licensePlate)
-			throws InvalidAttributeValueException {
+	public LicensePlate(final LicensePlate licensePlate) throws InvalidAttributeValueException {
 		this(licensePlate.getPlate());
 	}
 
@@ -46,10 +49,8 @@ public class LicensePlate implements Serializable {
 	 * @throws InvalidAttributeValueException
 	 *             scatenato quando la targa non è valida
 	 */
-	public LicensePlate(String licensePlate)
-			throws InvalidAttributeValueException {
-		if (!Pattern.matches("[a-zA-Z]{2}[0-9]{3,4}[a-zA-Z]{2}",
-				licensePlate)) {
+	public LicensePlate(final String licensePlate) throws InvalidAttributeValueException {
+		if (!Pattern.matches("[a-zA-Z]{2}[0-9]{3,4}[a-zA-Z]{2}", licensePlate)) {
 			throw new InvalidAttributeValueException();
 		}
 		this.licensePlate = licensePlate;
@@ -68,13 +69,12 @@ public class LicensePlate implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((licensePlate == null) ? 0 : licensePlate.hashCode());
+		result = prime * result + ((licensePlate == null) ? 0 : licensePlate.hashCode());
 		return result;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (obj instanceof LicensePlate) {
 			return this.getPlate().equals(((LicensePlate) obj).getPlate());
 		}

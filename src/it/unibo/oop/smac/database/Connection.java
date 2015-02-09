@@ -11,7 +11,7 @@ import com.j256.ormlite.table.TableUtils;
 /**
  * Classe che permette la connessione al database, e la creazione delle tabelle
  */
-public class Connection {
+public final class Connection {
 
 	/**
 	 * Indirizzo del database
@@ -29,17 +29,13 @@ public class Connection {
 	private Dao<StreetObserverRow, String> streetObserverDao;
 
 	/**
-	 * connessione al database
-	 */
-	private JdbcConnectionSource connectionSource;
-
-	/**
 	 * Costruttore che inizializza la connessione
 	 * 
 	 * @throws SQLException
 	 */
 	private Connection() throws SQLException {
-		connectionSource = new JdbcConnectionSource(DATABASE_URL);
+		final JdbcConnectionSource connectionSource = new JdbcConnectionSource(
+				DATABASE_URL);
 		setupDatabase(connectionSource);
 		System.out.println("Connection succeed");
 	}
@@ -50,9 +46,10 @@ public class Connection {
 	 * @return istanza della connessione
 	 * @throws SQLException
 	 */
-	public static synchronized Connection getInstance() throws SQLException {
-		if (instance != null)
+	public synchronized static Connection getInstance() throws SQLException {
+		if (instance != null) {
 			return instance;
+		}
 		instance = new Connection();
 		return instance;
 	}
@@ -63,13 +60,11 @@ public class Connection {
 	 * @param connectionSource
 	 * @throws SQLException
 	 */
-	private void setupDatabase(ConnectionSource connectionSource)
+	private void setupDatabase(final ConnectionSource connectionSource)
 			throws SQLException {
 
-		this.sightingDao = DaoManager.createDao(connectionSource,
-				SightingRow.class);
-		this.stolenCarDao = DaoManager.createDao(connectionSource,
-				StolenCarRow.class);
+		this.sightingDao = DaoManager.createDao(connectionSource, SightingRow.class);
+		this.stolenCarDao = DaoManager.createDao(connectionSource, StolenCarRow.class);
 		this.streetObserverDao = DaoManager.createDao(connectionSource,
 				StreetObserverRow.class);
 

@@ -5,6 +5,8 @@ import it.unibo.oop.smac.test.client.LicensePlateGenerator;
 
 import javax.management.InvalidAttributeValueException;
 
+import org.junit.Test;
+
 public class LicensePlateTest {
 
 	/**
@@ -13,7 +15,7 @@ public class LicensePlateTest {
 	 * 
 	 * @throws Exception
 	 */
-	@org.junit.Test
+	@Test
 	public void testNewLicensePlate() throws Exception {
 		new LicensePlate("TE355TT");
 
@@ -25,7 +27,7 @@ public class LicensePlateTest {
 	 * 
 	 * @throws Exception
 	 */
-	@org.junit.Test(expected = InvalidAttributeValueException.class)
+	@Test(expected = InvalidAttributeValueException.class)
 	public void testNewLicensePlateFail() throws Exception {
 		new LicensePlate("NONCONFORME");
 	}
@@ -36,7 +38,7 @@ public class LicensePlateTest {
 	 * 
 	 * @throws Exception
 	 */
-	@org.junit.Test
+	@Test
 	public void testNewLicensePlateGenerator() throws Exception {
 		new LicensePlate(LicensePlateGenerator.generate());
 	}

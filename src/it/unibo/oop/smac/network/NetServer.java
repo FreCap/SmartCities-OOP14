@@ -17,18 +17,12 @@ import it.unibo.oop.smac.network.jobs.ControllerSightingSender;
 
 import java.util.Observable;
 
-public class NetServer {
-
-	/**
-	 * Costante dell'indirizzo del server su cui offrire il servizio
-	 */
-	static final String HOST = System.getProperty("host", "127.0.0.1");
+public final class NetServer {
 
 	/**
 	 * Costante della porta del server su cui offrire il servizio
 	 */
-	public static final int PORT = Integer.parseInt(System.getProperty("port",
-			"8007"));
+	public static final int PORT = Integer.parseInt(System.getProperty("port", "8007"));
 
 	/**
 	 * Dispatcher che notifica i jobs che l'osservano alla ricezione di
@@ -41,10 +35,10 @@ public class NetServer {
 	 * 
 	 * @param controller
 	 */
-	public NetServer(IController controller) {
+	public NetServer(final IController controller) {
 		this.dispatcher = new Dispatcher(controller);
 		dispatcher.addObserver(new ControllerSightingSender());
-		run();
+		this.run();
 	}
 
 	/**
@@ -53,7 +47,7 @@ public class NetServer {
 	public ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
 		@Override
 		public void initChannel(SocketChannel ch) throws Exception {
-			ChannelPipeline p = ch.pipeline();
+			final ChannelPipeline p = ch.pipeline();
 
 			p.addLast(new ObjectEncoder(),
 					new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
@@ -64,19 +58,18 @@ public class NetServer {
 	/**
 	 * Metodo che fa partire il processo server
 	 */
-	public void run() {
+	private void run() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				// inizializza i workers per gestire le connessioni entranti
 				// secondo la tecnica NIO (Nonblocking server)
-				EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-				EventLoopGroup workerGroup = new NioEventLoopGroup();
+				final EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+				final EventLoopGroup workerGroup = new NioEventLoopGroup();
 				try {
 					// inizializzo i parametri di connessione
-					ServerBootstrap b = new ServerBootstrap();
-					b.group(bossGroup, workerGroup)
-							.channel(NioServerSocketChannel.class)
+					final ServerBootstrap b = new ServerBootstrap();
+					b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
 							.handler(new LoggingHandler(LogLevel.INFO))
 							.childHandler(channelInitializer);
 

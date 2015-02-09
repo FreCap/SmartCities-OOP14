@@ -39,14 +39,14 @@ public class InsertionPanel extends JPanel {
 	/**
 	 * Costruttore pubblico della classe.
 	 */
-	public InsertionPanel(StolenCarsPanel stolenCarsPanel) {
+	public InsertionPanel(final StolenCarsPanel stolenCarsPanel) {
 		super();
 
 		// salvo il pannello parent
 		this.stolenCarsPanel = stolenCarsPanel;
 
 		// imposto il layout
-		GroupLayout layout = new GroupLayout(this);
+		final GroupLayout layout = new GroupLayout(this);
 		this.setLayout(layout);
 		this.setPreferredSize(new Dimension(300, 200));
 		this.setBorder(new TitledBorder("Inserisci"));
@@ -62,44 +62,40 @@ public class InsertionPanel extends JPanel {
 				.createSequentialGroup()
 				.addComponent(labelTarga)
 				.addGroup(
-						layout.createParallelGroup(
-								GroupLayout.Alignment.LEADING)
-								.addComponent(fieldTarga)
-								.addComponent(buttonAggiungi)));
+						layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+								.addComponent(fieldTarga).addComponent(buttonAggiungi)));
 		layout.setVerticalGroup(layout
 				.createSequentialGroup()
 				.addGroup(
-						layout.createParallelGroup(
-								GroupLayout.Alignment.BASELINE)
-								.addComponent(labelTarga)
-								.addComponent(fieldTarga))
+						layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+								.addComponent(labelTarga).addComponent(fieldTarga))
 				.addComponent(buttonAggiungi));
 
 		// listener che permmette l'inserzione di una nuova macchina rubata al
 		// press del tasto aggiungi
 		buttonAggiungi.addActionListener(new ActionListener() {
 
-			private void invalidLicensePlateMsg(String licensePlate) {
-				String msg = new StringBuilder()
+			private void invalidLicensePlateMsg(final String licensePlate) {
+				final String msg = new StringBuilder()
 						.append("Error inserting a new stolen car license plate: ")
 						.append("\n " + licensePlate + " is not valid.")
 						.append("\n AA000AA is a valid one.").toString();
 
 				JOptionPane.showOptionDialog(null, msg, "Insertion Erro",
-						JOptionPane.CLOSED_OPTION,
-						JOptionPane.INFORMATION_MESSAGE, null, null, null);
+						JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
+						null, null);
 			}
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String licensePlate = fieldTarga.getText();
+				final String licensePlate = fieldTarga.getText();
 				try {
-					StolenCar stolenCar = new StolenCar.Builder()
-							.licensePlate(fieldTarga.getText())
-							.insertionDateNow().build();
+					final StolenCar stolenCar = new StolenCar.Builder()
+							.licensePlate(fieldTarga.getText()).insertionDateNow()
+							.build();
 
-					getStolenCarsPanel().getStolenCarsObserver()
-							.addNewStolenCar(stolenCar);
+					getStolenCarsPanel().getStolenCarsObserver().addNewStolenCar(
+							stolenCar);
 				} catch (InvalidAttributeValueException e1) {
 					invalidLicensePlateMsg(licensePlate);
 					// TODO Auto-generated catch block

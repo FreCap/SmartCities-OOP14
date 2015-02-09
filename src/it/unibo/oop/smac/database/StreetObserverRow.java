@@ -20,118 +20,114 @@ import com.j256.ormlite.table.DatabaseTable;
  * @author Federico Bellini
  */
 @DatabaseTable(tableName = "StreetObserver")
-public class StreetObserverRow implements IStreetObserver{
-	
+public class StreetObserverRow implements IStreetObserver {
+
 	/**
 	 * Campo contenente l'ID dell'osservatore.
 	 */
 	@DatabaseField(id = true, canBeNull = false)
 	private final String id;
-	
+
 	/**
 	 * Campo contenente le coordinate dell'osservatore.
 	 */
-	@DatabaseField(canBeNull = false, dataType=DataType.SERIALIZABLE)
+	@DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
 	private final Coordinates coordinates;
-	
+
 	/**
 	 * Campo contenente tutti gli avvistamenti compiuti da questo osservatore.
 	 */
 	@ForeignCollectionField(eager = false)
-    private ForeignCollection<SightingRow> sightings;
-	
+	private ForeignCollection<SightingRow> sightings;
+
 	/**
-	 * Costruttore di default reimplementato per il corretto funzionamento delle librerie
-	 * di database.
+	 * Costruttore di default reimplementato per il corretto funzionamento delle
+	 * librerie di database.
 	 */
 	public StreetObserverRow() {
-		this(new StreetObserver(new Coordinates(0f,0f)));
+		this(new StreetObserver(new Coordinates(0f, 0f)));
 	}
-	
+
 	/**
-	 * Costruttore che prende in ingresso un'{@link IStreetObserver} di cui salvarne una copia.
+	 * Costruttore che prende in ingresso un'{@link IStreetObserver} di cui
+	 * salvarne una copia.
 	 * 
 	 * @param streetObserver
-	 * 			L'{@link IStreetObserver} da farne una copia.
+	 *            L'{@link IStreetObserver} da farne una copia.
 	 */
-	public StreetObserverRow(IStreetObserver streetObserver) {
-		this.coordinates = (Coordinates)streetObserver.getCoordinates();
+	public StreetObserverRow(final IStreetObserver streetObserver) {
+		this.coordinates = (Coordinates) streetObserver.getCoordinates();
 		this.id = streetObserver.getID();
 	}
-	
+
 	/**
-	 * Metodo pubblico che aggiunge un avvistamento alla lista di avvistamenti compiuti
-	 * da questo osservatore.
+	 * Metodo pubblico che aggiunge un avvistamento alla lista di avvistamenti
+	 * compiuti da questo osservatore.
 	 * 
 	 * @param sighting
-	 * 			L'avvistamento da aggiungere alla lista.
+	 *            L'avvistamento da aggiungere alla lista.
 	 */
-	public void addSightings(SightingRow sighting) {
+	public void addSightings(final SightingRow sighting) {
 		this.sightings.add(sighting);
 		System.out.println("Just added new sighting: " + sighting);
 	}
-	
+
 	/**
-	 * Metodo che restituisce una lista contenente tutti gli avvistamenti compiuti da
-	 * questo osservatore.
+	 * Metodo che restituisce una lista contenente tutti gli avvistamenti
+	 * compiuti da questo osservatore.
 	 * 
-	 * @return
-	 * 			Una lista contenente tutti gli avvistamenti compiuti da questo osservatore.
+	 * @return Una lista contenente tutti gli avvistamenti compiuti da questo
+	 *         osservatore.
 	 */
 	public List<SightingRow> getSightingsList() {
-		return new ArrayList<SightingRow>(this.sightings); //defensive copy
+		return new ArrayList<SightingRow>(this.sightings); // defensive copy
 	}
-	
+
 	/**
 	 * Restituisce le coordinate dove è posizionato l'osservatore.
 	 * 
-	 * @return
-	 * 			Le {@link ICoordinates} relative alla posizione dell'osservatore.
+	 * @return Le {@link ICoordinates} relative alla posizione dell'osservatore.
 	 */
 	@Override
 	public ICoordinates getCoordinates() {
-		return new Coordinates(this.coordinates); //defensive copy
+		return new Coordinates(this.coordinates); // defensive copy
 	}
-	
+
 	/**
 	 * Restituisce la latitudine dell'osservatore.
 	 * 
-	 * @return
-	 * 			La latitudine dell'osservatore.
+	 * @return La latitudine dell'osservatore.
 	 */
 	@Override
 	public Float getLatitude() {
 		return this.coordinates.getLatitude();
 	}
-	
+
 	/**
 	 * Restituisce la longitudine dell'osservatore.
 	 * 
-	 * @return
-	 * 			La longitudine dell'osservatore.
+	 * @return La longitudine dell'osservatore.
 	 */
 	@Override
 	public Float getLongitude() {
 		return this.coordinates.getLongitude();
 	}
-	
+
 	/**
-	 * Restituisce una stringa contenente un identificatore univoco per l'osservatore.
+	 * Restituisce una stringa contenente un identificatore univoco per
+	 * l'osservatore.
 	 * 
-	 * @return
-	 * 			L'identificatore univoco dell'osservatore.
+	 * @return L'identificatore univoco dell'osservatore.
 	 */
 	@Override
 	public String getID() {
-		return new String(this.id);   //defensive copy
+		return this.id;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "StreetObserverRow = " + 
-				"[ID : " + this.id +
-				"; " + this.coordinates +
-				"; " + this.sightings + "]";
+		return "StreetObserverRow = " + "[ID : " + this.id + "; "
+				+ this.coordinates + "; " + this.sightings + "]";
 	}
 
 	@Override
@@ -148,28 +144,30 @@ public class StreetObserverRow implements IStreetObserver{
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null || getClass() != obj.getClass()) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		final StreetObserverRow other = (StreetObserverRow) obj;
+		if (coordinates == null || other.coordinates != null) {
 			return false;
-		StreetObserverRow other = (StreetObserverRow) obj;
-		if (coordinates == null) {
-			if (other.coordinates != null)
-				return false;
-		} else if (!coordinates.equals(other.coordinates))
+		} else if (!coordinates.equals(other.coordinates)) {
 			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		}
+
+		if (id == null || other.id != null) {
 			return false;
-		if (sightings == null) {
-			if (other.sightings != null)
-				return false;
-		} else if (!sightings.equals(other.sightings))
+		} else if (!id.equals(other.id)) {
 			return false;
+		}
+
+		if (sightings == null || other.sightings != null) {
+			return false;
+		} else if (!sightings.equals(other.sightings)) {
+			return false;
+		}
 		return true;
 	}
 

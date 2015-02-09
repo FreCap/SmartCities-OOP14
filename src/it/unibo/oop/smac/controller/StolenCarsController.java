@@ -31,7 +31,7 @@ public class StolenCarsController extends Controller implements
 	 * @param view
 	 *            L'oggetto che implementa la View dell'applicazione
 	 */
-	public StolenCarsController(IView view) {
+	public StolenCarsController(final IView view) {
 		super(view);
 
 		// inizializza il model
@@ -39,7 +39,7 @@ public class StolenCarsController extends Controller implements
 
 		// macchina aggiunta per test per dare una impatto visivo alla tabella
 		try {
-			StolenCar stolenCar = new StolenCar.Builder()
+			final StolenCar stolenCar = new StolenCar.Builder()
 					.licensePlate("TE355TT").insertionDateNow().build();
 			modelStolenCars.addNewStolenCar(stolenCar);
 		} catch (InvalidAttributeValueException e) {
@@ -78,7 +78,7 @@ public class StolenCarsController extends Controller implements
 	 *            sighting da aggiungere
 	 */
 	@Override
-	public void newPassage(IStreetObserver streetObserver, ISighting sighting) {
+	public void newPassage(final IStreetObserver streetObserver,final  ISighting sighting) {
 		super.newPassage(streetObserver, sighting);
 
 		// controllo che non si tratti di una rubata

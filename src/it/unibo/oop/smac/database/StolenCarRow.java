@@ -31,12 +31,12 @@ public class StolenCarRow implements IStolenCar {
 		this(new LicensePlate());
 	}
 
-	public StolenCarRow(LicensePlate licensePlate) {
+	public StolenCarRow(final LicensePlate licensePlate) {
 		setLicensePlate(licensePlate);
 		this.dataInserimento = new Date();
 	}
 
-	public StolenCarRow(StolenCar stolenCar) {
+	public StolenCarRow(final StolenCar stolenCar) {
 		setLicensePlate(stolenCar.getLicensePlate());
 		this.dataInserimento = stolenCar.getInsertionDate();
 	}
@@ -54,7 +54,7 @@ public class StolenCarRow implements IStolenCar {
 		return response;
 	}
 
-	public void setLicensePlate(LicensePlate licensePlate) {
+	public void setLicensePlate(final LicensePlate licensePlate) {
 		this.licensePlate = licensePlate.toString();
 	}
 

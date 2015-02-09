@@ -109,7 +109,7 @@ public class Sighting implements ISighting {
 		 * @return
 		 * 			Il Builder stesso.
 		 */
-		public Builder streetObserver(IStreetObserver streetObserver){
+		public Builder streetObserver(final IStreetObserver streetObserver){
 			this.streetObserver = streetObserver;
 			return this;
 		}
@@ -122,7 +122,7 @@ public class Sighting implements ISighting {
 		 * @return
 		 * 			Il Builder stesso.
 		 */
-		public Builder date(Date date){
+		public Builder date(final Date date){
 			this.date = date;
 			return this;
 		}
@@ -135,7 +135,7 @@ public class Sighting implements ISighting {
 		 * @return
 		 * 			Il Builder stesso.
 		 */
-		public Builder licensePlate(LicensePlate licensePlate){
+		public Builder licensePlate(final LicensePlate licensePlate){
 			this.licensePlate = licensePlate;
 			return this;
 		}
@@ -148,7 +148,7 @@ public class Sighting implements ISighting {
 		 * @return
 		 * 			Il Builder stesso.
 		 */
-		public Builder speed(Float speed){
+		public Builder speed(final Float speed){
 			this.speed = speed;
 			return this;
 		}

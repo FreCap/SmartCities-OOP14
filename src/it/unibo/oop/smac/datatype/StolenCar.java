@@ -27,7 +27,7 @@ public class StolenCar implements IStolenCar {
 	 * @param licensePlate
 	 * @param insertionDate
 	 */
-	public StolenCar(LicensePlate licensePlate, Date insertionDate) {
+	public StolenCar(final LicensePlate licensePlate, final Date insertionDate) {
 		this.licensePlate = licensePlate;
 		this.insertionDate = insertionDate;
 	}
@@ -70,7 +70,7 @@ public class StolenCar implements IStolenCar {
 		 *            La LicensePlate' da settare.
 		 * @return Il Builder stesso.
 		 */
-		public Builder licensePlate(LicensePlate licensePlate) {
+		public Builder licensePlate(final LicensePlate licensePlate) {
 			this.licensePlate = licensePlate;
 			return this;
 		}
@@ -85,7 +85,7 @@ public class StolenCar implements IStolenCar {
 		 *             restituita quando la targa non ha il formato giusto, es.
 		 *             AA000AA
 		 */
-		public Builder licensePlate(String licensePlate)
+		public Builder licensePlate(final String licensePlate)
 				throws InvalidAttributeValueException {
 			this.licensePlate(new LicensePlate(licensePlate));
 			return this;
@@ -98,7 +98,7 @@ public class StolenCar implements IStolenCar {
 		 *            La data da settare.
 		 * @return Il Builder stesso.
 		 */
-		public Builder insertionDate(Date insertionDate) {
+		public Builder insertionDate(final Date insertionDate) {
 			this.insertionDate = insertionDate;
 			return this;
 		}

@@ -21,8 +21,8 @@ public class ControllerSightingSender implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if (arg instanceof PlainSighting) {
-			PlainSighting sighting = (PlainSighting) arg;
-			StreetObserver streetObserver = new StreetObserver(
+			final PlainSighting sighting = (PlainSighting) arg;
+			final StreetObserver streetObserver = new StreetObserver(
 					sighting.getCoordinates());
 
 			ISighting s = null;
@@ -34,7 +34,7 @@ public class ControllerSightingSender implements Observer {
 						.licensePlate(
 								new LicensePlate(sighting.getLicensePlate()))
 						.build();
-				Dispatcher dispatcher = (Dispatcher) o;
+				final 	Dispatcher dispatcher = (Dispatcher) o;
 				dispatcher.getController().newPassage(streetObserver, s);
 			} catch (InvalidAttributeValueException e) {
 				// Targa non valida, interrompo la notifica

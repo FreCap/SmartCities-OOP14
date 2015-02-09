@@ -29,7 +29,7 @@ public class Controller implements IController {
 	 * @param view
 	 *            L'oggetto che implementa la View dell'applicazione
 	 */
-	public Controller(IView view) {
+	public Controller(final IView view) {
 		model = Model.getInstance();
 		this.view = view;
 		this.view.attachStreetObserverController(this);
@@ -63,7 +63,7 @@ public class Controller implements IController {
 	 * @param streetObserver
 	 *            L'{@link IStreetObserver} da aggiungere.
 	 */
-	private void addStreetObserver(IStreetObserver streetObserver) {
+	private void addStreetObserver(final IStreetObserver streetObserver) {
 		model.addNewStreetObserver(streetObserver);
 		view.addStreetObserver(streetObserver);
 
@@ -81,7 +81,7 @@ public class Controller implements IController {
 	 */
 	@Override
 	public IInfoStreetObserver getStreetObserverInfo(
-			IStreetObserver streetObserver) {
+			final IStreetObserver streetObserver) {
 		IInfoStreetObserver info;
 		try {
 			info = model.getStreetObserverInfo(streetObserver);

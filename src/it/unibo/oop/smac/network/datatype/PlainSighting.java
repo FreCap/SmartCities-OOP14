@@ -51,7 +51,7 @@ public class PlainSighting implements Serializable {
 	/**
 	 * Imposta la data dell'avvistamento
 	 */
-	public void setDate(Date date) {
+	public void setDate(final Date date) {
 		this.date = date;
 	}
 
@@ -67,7 +67,7 @@ public class PlainSighting implements Serializable {
 	/**
 	 * Imposta la targa della macchina avvistata
 	 */
-	public void setLicensePlate(String licensePlate) {
+	public void setLicensePlate(final String licensePlate) {
 		this.licensePlate = licensePlate;
 	}
 
@@ -83,7 +83,7 @@ public class PlainSighting implements Serializable {
 	/**
 	 * Imposta la velocità della macchina avvistata
 	 */
-	public void setSpeed(Float speed) {
+	public void setSpeed(final Float speed) {
 		this.speed = speed;
 	}
 
@@ -100,7 +100,7 @@ public class PlainSighting implements Serializable {
 	/**
 	 * Imposta le coordinate dello street observer che effettua l'avvistamento
 	 */
-	public void setCoordinates(Coordinates coordinates) {
+	public void setCoordinates(final Coordinates coordinates) {
 		this.coordinates = coordinates;
 	}
 

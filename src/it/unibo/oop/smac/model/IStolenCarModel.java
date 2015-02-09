@@ -7,7 +7,7 @@ import it.unibo.oop.smac.datatype.I.IStolenCar;
 import java.util.List;
 
 public interface IStolenCarModel {
-	public static IStolenCarModel getInstance() {
+	static IStolenCarModel getInstance() {
 		return null;
 	}
 
@@ -17,7 +17,7 @@ public interface IStolenCarModel {
 	 * 
 	 * @return Lista di {@link IStolenCar}
 	 */
-	public List<IStolenCar> getStolenCarsInfoList();
+	List<IStolenCar> getStolenCarsInfoList();
 
 	/**
 	 * Controlla se la macchina con una determinata {@link LicensePlate}, è
@@ -25,7 +25,7 @@ public interface IStolenCarModel {
 	 * 
 	 * @return {@link Boolean se la macchina è stata rubata o meno}
 	 */
-	public Boolean checkStolenPlate(LicensePlate licensePlate);
+	Boolean checkStolenPlate(LicensePlate licensePlate);
 
 	/**
 	 * Questo metodo deve aggiungere un nuovo {@link IStolenCar} a quelli già

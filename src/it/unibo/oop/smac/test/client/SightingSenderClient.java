@@ -21,12 +21,12 @@ public final class SightingSenderClient implements Runnable {
 	/**
 	 * Costante dell'indirizzo del server cui collegarsi
 	 */
-	static final String HOST = System.getProperty("host", "127.0.0.1");
+	private static final String HOST = System.getProperty("host", "127.0.0.1");
 
 	/**
 	 * Costante della porta del server cui collegarsi
 	 */
-	static final int PORT = NetServer.PORT;
+	private static final int PORT = NetServer.PORT;
 
 	/**
 	 * Genero in maniera random un nuovo trackSimulator da utilizzare durante la
@@ -41,7 +41,7 @@ public final class SightingSenderClient implements Runnable {
 	public final ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
 		@Override
 		public void initChannel(SocketChannel ch) throws Exception {
-			ChannelPipeline p = ch.pipeline();
+			final ChannelPipeline p = ch.pipeline();
 
 			// imposto gli encoder-decoder che incapsulano i messaggi della
 			// connessione, e l'handler che gestisce gli eventi di scambio
@@ -56,12 +56,11 @@ public final class SightingSenderClient implements Runnable {
 	 * Metodo che fa partire il processo di connessione
 	 */
 	public void run() {
-		EventLoopGroup group = new NioEventLoopGroup();
+		final EventLoopGroup group = new NioEventLoopGroup();
 		try {
 			// inizializzo i parametri di connessione
-			Bootstrap b = new Bootstrap();
-			b.group(group).channel(NioSocketChannel.class)
-					.handler(channelInitializer);
+			final Bootstrap b = new Bootstrap();
+			b.group(group).channel(NioSocketChannel.class).handler(channelInitializer);
 
 			// faccio partire la connessione
 			b.connect(HOST, PORT).sync().channel().closeFuture().sync();

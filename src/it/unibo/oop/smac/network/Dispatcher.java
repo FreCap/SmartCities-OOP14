@@ -21,7 +21,7 @@ public class Dispatcher extends Observable {
 	 * 
 	 * @param controller
 	 */
-	Dispatcher(IController controller) {
+	Dispatcher(final IController controller) {
 		this.controller = controller;
 	};
 

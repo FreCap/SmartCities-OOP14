@@ -27,7 +27,7 @@ public class GreenMapMarker extends MyMapMarker {
 	 * @param coordinates
 	 * 			Coordinate di posizione del MapMarker.
 	 */
-	public GreenMapMarker(String id, ICoordinates coordinates) {
+	public GreenMapMarker(final String id,final  ICoordinates coordinates) {
 		super(id, coordinates);
 	}
 	

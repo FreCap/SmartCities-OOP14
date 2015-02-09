@@ -8,6 +8,8 @@ import it.unibo.oop.smac.model.ModelStolenCars;
 
 import javax.management.InvalidAttributeValueException;
 
+import org.junit.Test;
+
 public class ModelStolenCarsTest {
 
 	private static final String VALID_LICENSEPLATE = "TE355TT";
@@ -19,7 +21,7 @@ public class ModelStolenCarsTest {
 	 * 
 	 * @throws Exception
 	 */
-	@org.junit.Test
+	@Test
 	public void testNewStolenCarWithValidLicensePlate() throws Exception {
 		new StolenCar.Builder().licensePlate(VALID_LICENSEPLATE);
 
@@ -31,7 +33,7 @@ public class ModelStolenCarsTest {
 	 * 
 	 * @throws Exception
 	 */
-	@org.junit.Test(expected = InvalidAttributeValueException.class)
+	@Test(expected = InvalidAttributeValueException.class)
 	public void testNewStolenCarWithInvalidLicensePlate() throws Exception {
 		new StolenCar.Builder().licensePlate(INVALID_LICENSEPLATE);
 	}
@@ -42,7 +44,7 @@ public class ModelStolenCarsTest {
 	 * 
 	 * @throws Exception
 	 */
-	@org.junit.Test(expected = IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testStolenCarBuilderInvalidParameter() throws Exception {
 		new StolenCar.Builder().licensePlate(VALID_LICENSEPLATE).build();
 		new StolenCar.Builder().insertionDateNow().build();
@@ -54,10 +56,10 @@ public class ModelStolenCarsTest {
 	 * 
 	 * @throws Exception
 	 */
-	@org.junit.Test
+	@Test
 	public void testStolenCarBuildervalidParameter() throws Exception {
-		new StolenCar.Builder().licensePlate(VALID_LICENSEPLATE)
-				.insertionDateNow().build();
+		new StolenCar.Builder().licensePlate(VALID_LICENSEPLATE).insertionDateNow()
+				.build();
 	}
 
 	/**
@@ -65,34 +67,32 @@ public class ModelStolenCarsTest {
 	 * 
 	 * @throws Exception
 	 */
-	@org.junit.Test
+	@Test
 	public void testNewStolenCar() throws Exception {
 		final IStolenCarModel modelStolenCars = ModelStolenCars.getInstance();
 
-		StolenCar stolenCar = new StolenCar.Builder()
+		final StolenCar stolenCar = new StolenCar.Builder()
 				.licensePlate(VALID_LICENSEPLATE).insertionDateNow().build();
 
 		modelStolenCars.addNewStolenCar(stolenCar);
-		assertTrue(modelStolenCars.checkStolenPlate(new LicensePlate(
-				VALID_LICENSEPLATE)));
+		assertTrue(modelStolenCars.checkStolenPlate(new LicensePlate(VALID_LICENSEPLATE)));
 
 	}
-	
 
 	/**
 	 * Controlla che venga restituita la lista delle car aggiunte
 	 * 
 	 * @throws Exception
 	 */
-	@org.junit.Test
+	@Test
 	public void testGetStolenCarsInfoList() throws Exception {
 		final IStolenCarModel modelStolenCars = ModelStolenCars.getInstance();
 
-		StolenCar stolenCar = new StolenCar.Builder()
+		final StolenCar stolenCar = new StolenCar.Builder()
 				.licensePlate(VALID_LICENSEPLATE).insertionDateNow().build();
 
 		modelStolenCars.addNewStolenCar(stolenCar);
-		assertTrue(modelStolenCars.getStolenCarsInfoList().size()>0);
+		assertTrue(modelStolenCars.getStolenCarsInfoList().size() > 0);
 
 	}
 }

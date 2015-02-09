@@ -4,7 +4,6 @@ import it.unibo.oop.smac.database.Connection;
 import it.unibo.oop.smac.database.StolenCarRow;
 import it.unibo.oop.smac.datatype.LicensePlate;
 import it.unibo.oop.smac.datatype.StolenCar;
-import it.unibo.oop.smac.datatype.StolenCar;
 import it.unibo.oop.smac.datatype.I.IStolenCar;
 import it.unibo.oop.smac.model.IStolenCarModel;
 
@@ -15,23 +14,18 @@ import java.util.List;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
-// TODO per fra (io questa classe(StreetObserverModelDatabase)
-// l'ho implementata con il metodo getInfo astratto, in modo che sia il
-// model vero e proprio dell'applicazione ad implementarlo!
 public class StolenCarModelDatabase implements IStolenCarModel {
 	private static StolenCarModelDatabase instance;
 
-	protected StolenCarModelDatabase() {
-
-	};
-
-	public static synchronized StolenCarModelDatabase getInstance() {
-		if (instance != null)
+	public synchronized static StolenCarModelDatabase getInstance() {
+		if (instance != null) {
 			return instance;
+		}
 		instance = new StolenCarModelDatabase();
 		return instance;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<IStolenCar> getStolenCarsInfoList() {
 		List<StolenCarRow> stolenCars = null;
@@ -47,13 +41,11 @@ public class StolenCarModelDatabase implements IStolenCarModel {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		List<IStolenCar> stolen = (List<IStolenCar>) (List<?>) stolenCars;
-		return stolen;
-
+		return (List<IStolenCar>) (List<?>) stolenCars;
 	}
 
 	@Override
-	public Boolean checkStolenPlate(LicensePlate licensePlate) {
+	public Boolean checkStolenPlate(final LicensePlate licensePlate) {
 		Dao<StolenCarRow, Integer> stolenCarDao = null;
 		try {
 			stolenCarDao = Connection.getInstance().getStolenCarDao();
@@ -61,12 +53,12 @@ public class StolenCarModelDatabase implements IStolenCarModel {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		QueryBuilder<StolenCarRow, Integer> statementBuilder = stolenCarDao
+		final QueryBuilder<StolenCarRow, Integer> statementBuilder = stolenCarDao
 				.queryBuilder();
 		List<StolenCarRow> exist = new ArrayList<StolenCarRow>();
 		try {
-			List<StolenCarRow> stolenCars = stolenCarDao.query(statementBuilder
-					.prepare());
+			List<StolenCarRow> stolenCars = stolenCarDao
+					.query(statementBuilder.prepare());
 			statementBuilder.where().eq(StolenCarRow.LICENSEPLATE_FIELD_NAME,
 					licensePlate.toString());
 
@@ -76,7 +68,7 @@ public class StolenCarModelDatabase implements IStolenCarModel {
 			e.printStackTrace();
 		}
 
-		return exist.size() > 0;
+		return !exist.isEmpty();
 	}
 
 	@Override
@@ -93,9 +85,8 @@ public class StolenCarModelDatabase implements IStolenCarModel {
 			try {
 				stolenCarDao.createIfNotExists(stolenCarDB);
 			} catch (SQLException e) {
-				System.err
-						.println("The creation on database of the new StolenCar "
-								+ stolenCarDB + " is failed!");
+				System.err.println("The creation on database of the new StolenCar "
+						+ stolenCarDB + " is failed!");
 				System.exit(1);
 			}
 

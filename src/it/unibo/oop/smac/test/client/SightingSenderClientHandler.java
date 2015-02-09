@@ -19,7 +19,7 @@ public class SightingSenderClientHandler extends ChannelInboundHandlerAdapter {
 	 * 
 	 * @param trackSimulator
 	 */
-	public SightingSenderClientHandler(TrackSimulator trackSimulator) {
+	public SightingSenderClientHandler(final TrackSimulator trackSimulator) {
 		this.trackSimulator = trackSimulator;
 	}
 
@@ -27,7 +27,7 @@ public class SightingSenderClientHandler extends ChannelInboundHandlerAdapter {
 	 * Funzione che stabilisce cosa deve essere effettuato una volta creato il
 	 * canale di comunicazione client-server
 	 */
-	public void channelActive(ChannelHandlerContext ctx) {
+	public void channelActive(final ChannelHandlerContext ctx) {
 		// ai fini di test, finché l'applicazione è attiva, dovrà essere spedito
 		// un pacchetto al server contenente le informazioni del sighting,
 		// generato dal TrackCommand
@@ -39,7 +39,7 @@ public class SightingSenderClientHandler extends ChannelInboundHandlerAdapter {
 	/**
 	 * Effettua il flush dei dati nel buffer
 	 */
-	public void channelReadComplete(ChannelHandlerContext ctx) {
+	public void channelReadComplete(final ChannelHandlerContext ctx) {
 		ctx.flush();
 	}
 
@@ -48,7 +48,7 @@ public class SightingSenderClientHandler extends ChannelInboundHandlerAdapter {
 	 * altro errore, viene generata un'exception e terminata la connessione
 	 */
 	@Override
-	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+	public void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) {
 		cause.printStackTrace();
 		ctx.close();
 	}

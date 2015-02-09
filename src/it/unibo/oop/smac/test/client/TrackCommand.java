@@ -30,7 +30,7 @@ public class TrackCommand {
 	/**
 	 * Imposta il time di sleep della macchina.
 	 */
-	public void setSleep(Integer sleep) {
+	public void setSleep(final Integer sleep) {
 		this.sleep = sleep;
 	}
 
@@ -46,7 +46,7 @@ public class TrackCommand {
 	/**
 	 * Imposta le coordinate del sighting
 	 */
-	public void setCoordinate(Coordinates coordinate) {
+	public void setCoordinate(final Coordinates coordinate) {
 		this.coordinate = coordinate;
 	}
 

@@ -73,10 +73,10 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel {
 	 *             nel caso in cui non ci sia ancora alcun observer
 	 */
 	@Override
-	public IStolenCarsObserver getStolenCarsObserver()
-			throws IllegalStateException {
-		if (sco == null)
+	public IStolenCarsObserver getStolenCarsObserver() throws IllegalStateException {
+		if (sco == null) {
 			throw new IllegalSelectorException();
+		}
 		return sco;
 	}
 

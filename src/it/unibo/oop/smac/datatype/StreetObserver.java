@@ -21,7 +21,7 @@ public class StreetObserver implements IStreetObserver {
 	 *            L'{@link IStreetObserver} riprodurre.
 	 * @throws StreetObserverNotValidException 
 	 */
-	public StreetObserver(IStreetObserver streetObserver) throws StreetObserverNotValidException {
+	public StreetObserver(final IStreetObserver streetObserver) throws StreetObserverNotValidException {
 		if (streetObserver == null) {
 			throw new StreetObserverNotValidException();
 		}
@@ -35,7 +35,7 @@ public class StreetObserver implements IStreetObserver {
 	 * @param coordinates
 	 *            Le coordinate di posizione dell'osservatore.
 	 */
-	public StreetObserver(ICoordinates coordinates) {
+	public StreetObserver(final ICoordinates coordinates) {
 		this.coordinates = coordinates;
 	}
 
@@ -92,7 +92,7 @@ public class StreetObserver implements IStreetObserver {
 	// Due IStreetObserver vengono ritenuti identici se hanno le stesse
 	// coordinate.
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (obj instanceof IStreetObserver) {
 			return this.coordinates.equals(((IStreetObserver) obj)
 					.getCoordinates());

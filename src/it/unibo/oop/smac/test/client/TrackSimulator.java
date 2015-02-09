@@ -18,7 +18,7 @@ public class TrackSimulator {
 	/**
 	 * File contenente i tracks possibili
 	 */
-	public static final String fileName = "tracks/tracks.json";
+	public static final String FILENAME = "tracks/tracks.json";
 
 	/**
 	 * Track corrente da seguire
@@ -42,7 +42,7 @@ public class TrackSimulator {
 	 * @return {@link PlainSighting} del passaggio corrente
 	 */
 	public PlainSighting next() {
-		TrackCommand current = track.getTrackCommands().get(currentIndex);
+		final TrackCommand current = track.getTrackCommands().get(currentIndex);
 		try {
 			Thread.sleep(1000 * current.getSleep());
 		} catch (InterruptedException e) {
@@ -50,13 +50,13 @@ public class TrackSimulator {
 			e.printStackTrace();
 		}
 
-		PlainSighting response = new PlainSighting();
+		final PlainSighting response = new PlainSighting();
 		response.setCoordinates(current.getCoordinate());
 		response.setDate(new Date());
 		response.setLicensePlate(licensePlate.toString());
 		response.setSpeed(new Float(new Random().nextInt(50) + 30));
 
-		int size = track.getTrackCommands().size();
+		final int size = track.getTrackCommands().size();
 		// avanzo il contatore
 		currentIndex = (currentIndex + 1) % size;
 
@@ -72,7 +72,7 @@ public class TrackSimulator {
 	 * @param nTrack
 	 *            id del track da utilizzare
 	 */
-	public TrackSimulator(LicensePlate licensePlate, Integer nTrack) {
+	public TrackSimulator(final LicensePlate licensePlate, final Integer nTrack) {
 		track = getNTrack(nTrack);
 		this.licensePlate = licensePlate;
 	}
@@ -84,7 +84,7 @@ public class TrackSimulator {
 	 * @param licensePlate
 	 *            targa della macchina di cui si vuole simulare l'avanzamento
 	 */
-	public TrackSimulator(LicensePlate licensePlate) {
+	public TrackSimulator(final LicensePlate licensePlate) {
 		this(licensePlate, new Random().nextInt(100));
 	}
 
@@ -95,8 +95,8 @@ public class TrackSimulator {
 	 *            id della track richiesta
 	 * @return Track richiesta
 	 */
-	private Track getNTrack(Integer nTrack) {
-		Track[] tracks = getTracks();
+	private Track getNTrack(final Integer nTrack) {
+		final Track[] tracks = getTracks();
 		return tracks[nTrack % tracks.length];
 	}
 
@@ -106,8 +106,8 @@ public class TrackSimulator {
 	 * @return Track[] Tracks disponibili
 	 */
 	private Track[] getTracks() {
-		Gson gson = new Gson();
-		String rawJSON = readFile();
+		final Gson gson = new Gson();
+		final String rawJSON = readFile();
 		return gson.fromJson(rawJSON, Track[].class);
 	}
 
@@ -117,10 +117,10 @@ public class TrackSimulator {
 	 * @return String testo del file
 	 */
 	private String readFile() {
-		ClassLoader classLoader = getClass().getClassLoader();
-		InputStream stream = classLoader.getResourceAsStream(fileName);
-		Scanner scanner = new Scanner(stream, "UTF-8");
-		String fileText = scanner.useDelimiter("\\A").next();
+		final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		final InputStream stream = classLoader.getResourceAsStream(FILENAME);
+		final Scanner scanner = new Scanner(stream, "UTF-8");
+		final String fileText = scanner.useDelimiter("\\A").next();
 		scanner.close();
 		return fileText;
 	}

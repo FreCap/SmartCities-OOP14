@@ -15,12 +15,12 @@ public interface IStolenCar {
 	 * 
 	 * @return targa della macchina rubata
 	 */
-	public LicensePlate getLicensePlate();
+	LicensePlate getLicensePlate();
 
 	/**
 	 * Restituisce la data del furto della macchina
 	 * 
 	 * @return data del furto
 	 */
-	public Date getInsertionDate();
+	Date getInsertionDate();
 }

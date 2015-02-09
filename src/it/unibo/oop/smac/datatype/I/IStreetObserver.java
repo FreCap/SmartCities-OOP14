@@ -37,6 +37,6 @@ public interface IStreetObserver {
 	 * @return
 	 * 			L'identificatore univoco dell'osservatore.
 	 */
-	public String getID();
+	String getID();
 
 }

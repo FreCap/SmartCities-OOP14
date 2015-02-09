@@ -25,7 +25,7 @@ public class Track {
 	/**
 	 * Imposta la lista dei punti da cui è composto il percorso
 	 */
-	public void setTrackCommands(List<TrackCommand> trackCommands) {
+	public void setTrackCommands(final List<TrackCommand> trackCommands) {
 		this.trackCommands = trackCommands;
 	}
 }

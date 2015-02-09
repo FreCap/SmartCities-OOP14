@@ -22,7 +22,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 	 * 
 	 * @param dispatcher
 	 */
-	ServerHandler(Observable dispatcher) {
+	ServerHandler(final Observable dispatcher) {
 		this.dispatcher = dispatcher;
 	}
 
@@ -30,14 +30,14 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 	 * Metodo che alla ricezione di un determinato messaggio, notifica tutti i
 	 * job che stanno osservando il dispatcher
 	 */
-	public void channelRead(ChannelHandlerContext ctx, Object msg) {
+	public void channelRead(final ChannelHandlerContext ctx, final Object msg) {
 		dispatcher.notifyObservers(msg);
 	}
 
 	/**
 	 * Effettua il flush dei dati nel buffer
 	 */
-	public void channelReadComplete(ChannelHandlerContext ctx) {
+	public void channelReadComplete(final ChannelHandlerContext ctx) {
 		ctx.flush();
 	}
 
@@ -46,7 +46,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 	 * altro errore, viene generata un'exception e terminata la connessione
 	 */
 	@Override
-	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+	public void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) {
 		cause.printStackTrace();
 		ctx.close();
 	}

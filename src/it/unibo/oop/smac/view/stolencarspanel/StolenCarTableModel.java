@@ -25,7 +25,7 @@ public class StolenCarTableModel extends AbstractTableModel {
 	/**
 	 * Colonne della tabella
 	 */
-	private static final String[] columnNames = { "Id", "Targa", "Inserimento" };
+	private static final String[] COLUMN_NAMES = { "Id", "Targa", "Inserimento" };
 
 	/**
 	 * Costruttore che inizializza una tabella vuota
@@ -39,9 +39,9 @@ public class StolenCarTableModel extends AbstractTableModel {
 	 * 
 	 * @param stolenCars
 	 */
-	public void updateList(List<IStolenCar> stolenCars) {
+	public void updateList(final List<IStolenCar> stolenCars) {
 		this.stolenCars = stolenCars;
-		int rowCount = getRowCount();
+		final int rowCount = getRowCount();
 		fireTableRowsInserted(rowCount, rowCount);
 	}
 
@@ -63,7 +63,7 @@ public class StolenCarTableModel extends AbstractTableModel {
 	 */
 	@Override
 	public int getColumnCount() {
-		return columnNames.length;
+		return COLUMN_NAMES.length;
 	}
 
 	/**
@@ -75,15 +75,15 @@ public class StolenCarTableModel extends AbstractTableModel {
 	 *         <code>colonna</code>
 	 */
 	@Override
-	public String getColumnName(int col) {
-		return columnNames[col];
+	public String getColumnName(final int col) {
+		return COLUMN_NAMES[col];
 	}
 
 	/**
 	 * Metodo che impedisce la modifica di qualsiasi riga nella tabella
 	 */
 	@Override
-	public boolean isCellEditable(int row, int col) {
+	public boolean isCellEditable(final int row, final int col) {
 		return false;
 	}
 
@@ -99,15 +99,16 @@ public class StolenCarTableModel extends AbstractTableModel {
 	 */
 	@Override
 	public Object getValueAt(int row, int col) {
-		if (col == 0) {
+		switch (col) {
+		case 0:
 			return row + 1;
-		} else if (col == 1) {
-			DateFormat df = DateFormat.getDateInstance();
-			Date current = this.getStolenCars().get(row).getInsertionDate();
+		case 1:
+			final DateFormat df = DateFormat.getDateInstance();
+			final Date current = this.getStolenCars().get(row).getInsertionDate();
 			return df.format(current);
-		} else if (col == 2) {
+		case 2:
 			return this.getStolenCars().get(row).getLicensePlate();
-		} else {
+		default:
 			return null;
 		}
 	}

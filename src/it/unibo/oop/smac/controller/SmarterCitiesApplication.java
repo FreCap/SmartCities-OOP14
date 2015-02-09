@@ -10,13 +10,17 @@ import it.unibo.oop.smac.view.ViewGUI;
  * @author Federico Bellini
  * @author Francesco Capponi
  */
-public class SmarterCitiesApplication {
+public final class SmarterCitiesApplication {
+
+	private SmarterCitiesApplication() {
+
+	}
 
 	public static void main(String[] args) throws InterruptedException {
 
 		final IController controller = new StolenCarsController(new ViewGUI());
 		new NetServer(controller);
-		
+
 		// creazione dei client
 		Thread.sleep(1000);
 		for (int i = 0; i < 2; i++) {
@@ -24,5 +28,5 @@ public class SmarterCitiesApplication {
 			new Thread(new SightingSenderClient()).start();
 		}
 	}
-	
+
 }

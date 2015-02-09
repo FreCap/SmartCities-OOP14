@@ -14,7 +14,7 @@ public class NotFoundException extends Exception {
 	 * @param s
 	 * 			Stringa con messaggio da visualizzare.
 	 */
-	public NotFoundException(String s){
+	public NotFoundException(final String s){
 		super(s);
 	}
 

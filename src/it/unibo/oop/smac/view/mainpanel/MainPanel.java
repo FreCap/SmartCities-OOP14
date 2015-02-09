@@ -10,22 +10,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * Implementazione del JPanel contenente le informazioni principali riguardanti gli osservatori.
+ * Implementazione del JPanel contenente le informazioni principali riguardanti
+ * gli osservatori.
  * 
  * @author Federico Bellini
  */
 public class MainPanel extends JPanel implements IMainPanel {
-	
+
 	private static final long serialVersionUID = -5219662861548416920L;
-	
-	// Panel contenente tutte le informazioni riguardati lo streetObserver selezionato
+
+	// Panel contenente tutte le informazioni riguardati lo streetObserver
+	// selezionato
 	private final InformationsPanel informationsPanel = new InformationsPanel();
 	// Panel contenente una successione degli streetObserver
 	private final ControlPanel controlPanel = new ControlPanel();
-	
+
 	// Observer degli streetObserver
 	private IStreetObserverObserver soo;
-	
+
 	/**
 	 * Costruttore pubblico della classe.
 	 */
@@ -35,79 +37,70 @@ public class MainPanel extends JPanel implements IMainPanel {
 		this.add(controlPanel, BorderLayout.CENTER);
 		this.add(informationsPanel.getPanel(), BorderLayout.EAST);
 	}
-	
+
 	/**
-	 * Aggiunge un'{@link IStreetObserver} alla successione di osservatori presenti nel
-	 * relativo panel.
+	 * Aggiunge un'{@link IStreetObserver} alla successione di osservatori
+	 * presenti nel relativo panel.
 	 * 
 	 * @param streetObserver
-	 * 			L'{@link IStreetObserver} da aggiungere.
+	 *            L'{@link IStreetObserver} da aggiungere.
 	 */
 	@Override
 	public void addStreetObserver(IStreetObserver streetObserver) {
 		this.controlPanel.addStreetObserver(streetObserver, (t) -> {
-				IInfoStreetObserver info = this.soo.getStreetObserverInfo(t);
-				this.informationsPanel.showInformations(info);
+			final IInfoStreetObserver info = this.soo.getStreetObserverInfo(t);
+			this.informationsPanel.showInformations(info);
 		});
 		this.plugMsg(streetObserver);
 	}
-	
+
 	/**
 	 * Mostra che un'{@link IStreetObserver} ha rilevato dei dati.
 	 * 
 	 * @param streetObserver
-	 * 			L'{@link IStreetObserver} che ha rilevato dei dati.
+	 *            L'{@link IStreetObserver} che ha rilevato dei dati.
 	 */
 	@Override
-	public void notifyPassage(IStreetObserver streetObserver) {
+	public void notifyPassage(final IStreetObserver streetObserver) {
 		this.controlPanel.notifyPassage(streetObserver);
-	}	
-	
+	}
+
 	/**
 	 * Attacca un Observer degli StreetObserver.
 	 * 
 	 * @param soo
-	 * 			L'{@link IStreetObserverObserver} da attaccare.
+	 *            L'{@link IStreetObserverObserver} da attaccare.
 	 */
 	@Override
-	public void attachStreetObserverObserver(IStreetObserverObserver soo) {
+	public void attachStreetObserverObserver(final IStreetObserverObserver soo) {
 		this.soo = soo;
 	}
-	
+
 	/**
 	 * Restituisce il JPanel.
 	 * 
-	 * @return
-	 * 		Il JPanel.
+	 * @return Il JPanel.
 	 */
 	@Override
 	public JPanel getPanel() {
 		return this;
 	}
-	
+
 	/**
-	 * Mostra a video un messaggio con scritto che un nuovo street observer e' stato connesso.
+	 * Mostra a video un messaggio con scritto che un nuovo street observer e'
+	 * stato connesso.
 	 * 
 	 * @param streetObserver
-	 * 			L'osservatore appena connesso.
+	 *            L'osservatore appena connesso.
 	 */
-	private void plugMsg(IStreetObserver streetObserver) {
-		String msg = new StringBuilder()
+	private void plugMsg(final IStreetObserver streetObserver) {
+		final String msg = new StringBuilder()
 				.append("New Street Observer is been plugged.\n The positions is: ")
 				.append("\n   - Latitude:  " + streetObserver.getLatitude())
-				.append("\n   - Longitude: " + streetObserver.getLongitude())
-				.toString();
-		
-		JOptionPane.showOptionDialog(
-				null, 
-				 msg,
-				 "Plug info",
-				 JOptionPane.CLOSED_OPTION,
-				 JOptionPane.INFORMATION_MESSAGE,
-				 null,
-				 null,
-				 null
-		);
+				.append("\n   - Longitude: " + streetObserver.getLongitude()).toString();
+
+		JOptionPane.showOptionDialog(null, msg, "Plug info", JOptionPane.CLOSED_OPTION,
+				JOptionPane.INFORMATION_MESSAGE, null, null, null);
 	}
-	
+
 }

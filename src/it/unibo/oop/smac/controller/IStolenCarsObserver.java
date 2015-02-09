@@ -18,7 +18,7 @@ public interface IStolenCarsObserver {
 	 * @return Un oggetto {@link List} composto dalle macchine rubate
 	 *         {@link IStolenCar}
 	 */
-	public List<IStolenCar> getStolenCarsInfoList();
+	List<IStolenCar> getStolenCarsInfoList();
 
 	/**
 	 * Inserisce una nuova macchina rubata nel model
