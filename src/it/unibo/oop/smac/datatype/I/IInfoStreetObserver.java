@@ -1,22 +1,23 @@
 package it.unibo.oop.smac.datatype.I;
 
+import java.util.Optional;
+
 /**
  * Interfaccia che gestisce un oggetto contenente delle informazioni relative ad un 
  * singolo osservatore, che possono essere ricavate dai dati presenti nel Model 
- * dell'applicazione.
- * Tutte le informazioni vengono restituite sotto forma di stringa.
+ * dell'applicazione. I valori restituiti sono tutti degli Optional<>.
  * 
  * @author Federico Bellini
  */
 public interface IInfoStreetObserver {
 
 	/**
-	 * Restituisce la posizione nello spazio dell'osservatore.
+	 * Restituisce un Optional che dovrebbe contenere la posizione nello spazio dell'osservatore.
 	 * 
 	 * @return
 	 * 			La posizione nello spazio dell'osservatore.
 	 */
-	String getStreetObserverLocation();
+	Optional<ICoordinates> getStreetObserverLocation();
 	
 	/**
 	 * Restituisce l'ID dell'osservatore.
@@ -24,93 +25,93 @@ public interface IInfoStreetObserver {
 	 * @return
 	 * 			L'ID dell'osservatore.
 	 */
-	String getStreetObserverID();
+	Optional<String> getStreetObserverID();
 	
 	/**
-	 * Rewstituisce il numero di avvistamenti fatti dall'osservatore nell'ultima ora.
+	 * Restituisce un Optional che dovrebbe contenere il numero di avvistamenti fatti dall'osservatore nell'ultima ora.
 	 * 
 	 * @return
 	 * 			Il numero di avvistamenti fatti dall'osservatore nell'ultima ora.
 	 */
-	String getnOfSightLastHour();
+	Optional<Integer> getnOfSightLastHour();
 	
 	/**
-	 * Rewstituisce il numero di avvistamenti fatti dall'osservatore oggi (dalle 00:00 AM
+	 * Restituisce un Optional che dovrebbe contenere il numero di avvistamenti fatti dall'osservatore oggi (dalle 00:00 AM
 	 * all'ora corrente).
 	 * 
 	 * @return
 	 * 			Il numero di avvistamenti fatti dall'osservatore oggi.
 	 */
-	String getnOfSightToday();
+	Optional<Integer> getnOfSightToday();
 
 	/**
-	 * Rewstituisce il numero di avvistamenti fatti dall'osservatore nell'ultima settimana.
+	 * Restituisce un Optional che dovrebbe contenere il numero di avvistamenti fatti dall'osservatore nell'ultima settimana.
 	 * 
 	 * @return
 	 * 			Il numero di avvistamenti fatti dall'osservatore nell'ultima settimana.
 	 */
-	String getnOfSightLastWeek();
+	Optional<Integer> getnOfSightLastWeek();
 
 	/**
-	 * Rewstituisce il numero di avvistamenti fatti dall'osservatore nell'ultimo mese.
+	 * Restituisce un Optional che dovrebbe contenere il numero di avvistamenti fatti dall'osservatore nell'ultimo mese.
 	 * 
 	 * @return
 	 * 			Il numero di avvistamenti fatti dall'osservatore nell'ultimo mese.
 	 */
-	String getnOfSightLastMonth();
+	Optional<Integer> getnOfSightLastMonth();
 
 	/**
-	 * Restituisce il numero totale di avvistamenti fatti dall'osservatore da quando e'
+	 * Restituisce un Optional che dovrebbe contenere il numero totale di avvistamenti fatti dall'osservatore da quando e'
 	 * stato avviato.
 	 * 
 	 * @return
 	 * 			Il numero totale di avvistamenti fatti dall'osservatore da quando e'
 	 * 			stato avviato.
 	 */
-	String getTotalNOfSight();
+	Optional<Integer> getTotalNOfSight();
 
 	/**
-	 * Restituisce la velocita' media registrata nella giornata (dalle 00:00 AM all'ora
+	 * Restituisce un Optional che dovrebbe contenere la velocita' media registrata nella giornata (dalle 00:00 AM all'ora
 	 * corrente).
 	 * 
 	 * @return
 	 * 			La velocita' media registrata nella giornata.
 	 */
-	String getAverageSpeedToday();
+	Optional<Float> getAverageSpeedToday();
 
 	/**
-	 * Restituisce la velocita' media registrata nell'ultima settimana.
+	 * Restituisce un Optional che dovrebbe contenere la velocita' media registrata nell'ultima settimana.
 	 * 
 	 * @return
 	 * 			La velocita' media registrata nell'ultima settimana.
 	 */
-	String getAverageSpeedLastWeek();
+	Optional<Float> getAverageSpeedLastWeek();
 	
 	/**
-	 * Restituisce la velocita' media registrata nell'ultimo mese.
+	 * Restituisce un Optional che dovrebbe contenere la velocita' media registrata nell'ultimo mese.
 	 * 
 	 * @return
 	 * 			La velocita' media registrata nell'ultimo mese.
 	 */
-	String getAverageSpeedLastMonth();
+	Optional<Float> getAverageSpeedLastMonth();
 
 	/**
-	 * Restituisce la velocita' massima registrata nella giornata (dalle 00:00 AM all'ora
+	 * Restituisce un Optional che dovrebbe contenere la velocita' massima registrata nella giornata (dalle 00:00 AM all'ora
 	 * corrente).
 	 * 
 	 * @return
 	 * 			La velocita' massima registrata nella giornata.
 	 */
-	String getMaxSpeedToday();
+	Optional<Float> getMaxSpeedToday();
 	
 	/**
-	 * Restituisce l'ora della giornata in cui si è registrato il numero massimo di
+	 * Restituisce un Optional che dovrebbe contenere l'ora della giornata in cui si è registrato il numero massimo di
 	 * passaggi di mezzi (dalle 00:00 AM all'ora corrente).
 	 * 
 	 * @return
 	 * 			L'ora della giornata in cui si è registrato il numero massimo di
 	 * 			passaggi di mezzi.
 	 */
-	String getMaxCarRateToday();
+	Optional<Float> getMaxCarRateToday();
 
 }

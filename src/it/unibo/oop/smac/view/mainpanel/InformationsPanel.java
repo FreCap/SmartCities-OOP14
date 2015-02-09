@@ -1,5 +1,7 @@
 package it.unibo.oop.smac.view.mainpanel;
 
+import java.util.Optional;
+
 import it.unibo.oop.smac.datatype.InfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 
@@ -18,6 +20,8 @@ public class InformationsPanel extends JPanel {
 	private static final long serialVersionUID = -3058034776743041502L;
 	private static final String NEW_LINE = System.lineSeparator();
 	private static final String TAB = "          ";
+	private static final String NON_PRESENT_VALUE = " - ";
+	private static final int DECIMAL_PRECISION = 2;
 	
 	// textArea che mostrano i dati ottenuti dall'osservatore selezionato
 	private final JTextArea streetObserverInfo = new JTextArea();
@@ -90,15 +94,36 @@ public class InformationsPanel extends JPanel {
 	}
 	
 	/**
+	 * Metodo di utilita' che restituisce il valore dell'Optional preso come parametro se
+	 * e' presente, altrimenti restituisce la stringa NON_PRESENT_VALUE.
+	 * Nel caso in cui l'Optional fosse presente e la classe dell'oggetto in esso contenuto
+	 * fosse Float, restituisce il Numero Float in esso contenuto, ma con un numero
+	 * DECIMAL_PRECISION di cifre significative.
+	 */
+	private String stringOutputUtility(Optional<?> o){
+		if(o.isPresent()){
+			String out = o.get().toString();
+			if(o.get().getClass().equals(Float.class)){
+				return out.substring(0, out.indexOf(".") + DECIMAL_PRECISION);
+			}
+			return out;
+		} else{
+			return NON_PRESENT_VALUE;
+		}
+	}
+	
+	/**
 	 * Mostra le informazioni sugli StreetObserver.
 	 */
 	private void showStreetObserverInfo() {
 		String s = new StringBuilder()
 				.append("   STREET OBSERVER\t\t\t")
 				.append(NEW_LINE)
-				.append(TAB + "Location: " + this.currentInfo.getStreetObserverLocation())
+				.append(TAB + "Location: " + 
+							stringOutputUtility(this.currentInfo.getStreetObserverLocation()))
 				.append(NEW_LINE)
-				.append(TAB + "ID: " + this.currentInfo.getStreetObserverID())
+				.append(TAB + "ID: " + 
+							stringOutputUtility(this.currentInfo.getStreetObserverID()))
 				.toString();
 		this.streetObserverInfo.setText(s);
 		
@@ -111,7 +136,8 @@ public class InformationsPanel extends JPanel {
 		String s = new StringBuilder()
 				.append("   CAR RATE")
 				.append(NEW_LINE)
-				.append(TAB + "Max car rate (today): " + this.currentInfo.getMaxCarRateToday())
+				.append(TAB + "Max car rate (today): " + 
+							stringOutputUtility(this.currentInfo.getMaxCarRateToday()))
 				.toString();
 		this.carRateInfo.setText(s);
 	}
@@ -122,15 +148,20 @@ public class InformationsPanel extends JPanel {
 	private void showSightingInfo() {
 		String s = new StringBuilder().append("   SIGHT DATA")
 				.append(NEW_LINE)
-				.append(TAB + "Number of sight (last hour): " + this.currentInfo.getnOfSightLastHour())
+				.append(TAB + "Number of sight (last hour): " + 
+						stringOutputUtility(this.currentInfo.getnOfSightLastHour()))
 				.append(NEW_LINE)
-				.append(TAB + "Number of sight (today): " + this.currentInfo.getnOfSightToday())
+				.append(TAB + "Number of sight (today): " + 
+						stringOutputUtility(this.currentInfo.getnOfSightToday()))
 				.append(NEW_LINE)
-				.append(TAB + "Number of sight (last week): " + this.currentInfo.getnOfSightLastWeek())
+				.append(TAB + "Number of sight (last week): " + 
+						stringOutputUtility(this.currentInfo.getnOfSightLastWeek()))
 				.append(NEW_LINE)
-				.append(TAB + "Number of sight (last month): " + this.currentInfo.getnOfSightLastMonth())
+				.append(TAB + "Number of sight (last month): " + 
+						stringOutputUtility(this.currentInfo.getnOfSightLastMonth()))
 				.append(NEW_LINE)
-				.append(TAB + "Total number of sight: " + this.currentInfo.getTotalNOfSight())
+				.append(TAB + "Total number of sight: " + 
+						stringOutputUtility(this.currentInfo.getTotalNOfSight()))
 				.toString();
 		this.sightInfo.setText(s);
 	}
@@ -142,13 +173,17 @@ public class InformationsPanel extends JPanel {
 		String s = new StringBuilder()
 				.append("   SPEED DATA")
 				.append(NEW_LINE)
-				.append(TAB + "Average speed limit (today): " + this.currentInfo.getAverageSpeedToday())
+				.append(TAB + "Average speed limit (today): " + 
+						stringOutputUtility(this.currentInfo.getAverageSpeedToday()))
 				.append(NEW_LINE)
-				.append(TAB + "Average speed limit (last week): " + this.currentInfo.getAverageSpeedLastWeek())
+				.append(TAB + "Average speed limit (last week): " + 
+						stringOutputUtility(this.currentInfo.getAverageSpeedLastWeek()))
 				.append(NEW_LINE)
-				.append(TAB + "Average speed limit (last month): " + this.currentInfo.getAverageSpeedLastMonth())
+				.append(TAB + "Average speed limit (last month): " + 
+						stringOutputUtility(this.currentInfo.getAverageSpeedLastMonth()))
 				.append(NEW_LINE)
-				.append(TAB + "Max speed registered today is: " + this.currentInfo.getMaxSpeedToday())
+				.append(TAB + "Max speed registered today is: " + 
+						stringOutputUtility(this.currentInfo.getMaxSpeedToday()))
 				.toString();
 		this.speedInfo.setText(s);
 	}

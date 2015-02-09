@@ -1,5 +1,6 @@
 package it.unibo.oop.smac.datatype;
 
+import it.unibo.oop.smac.datatype.I.ICoordinates;
 import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
 import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
@@ -7,26 +8,12 @@ import java.util.Optional;
 
 /**
  * Classe che fornisce metodi che restituiscono stringhe contenenti i dati su di uno
- * specifico osservatore. I dati presenti vengono ricavati dalle informazioni contenute
- * del Model dell'applicazione.
- * Se per qualche motivo i dati non potessero essere ricavati dal Model, e quindi questo
- * oggetto non ne fosse a conoscenza, esso restituisce una stringa di tipo EMPTY_STRING.
+ * specifico osservatore.
  * Per l'implementazione della classe e' stato utilizzato il pattern Builder.
  * 
  * @author Federico Bellini
  */
 public class InfoStreetObserver implements IInfoStreetObserver{
-	
-	/**
-	 * Stringa che viene restituita quando viene richiesto un campo di cui non si conosce
-	 * il valore (il campo è null).
-	 */
-	protected static String EMPTY_STRING = "  -  ";
-	
-	/**
-	 * Precisione decimale con cui i numeri di tipo Float vengono restituiti.
-	 */
-	private static final int DECIMAL_PRECISION = 2;
 	
 	/**
 	 * Campi di tipo Optional<> contenenti le informazioni sull'osservatore.
@@ -71,94 +58,75 @@ public class InfoStreetObserver implements IInfoStreetObserver{
 		this.maxSpeedToday = Optional.ofNullable(maxSpeedToday);
 		this.maxCarRateToday = Optional.ofNullable(maxCarRateToday);
 	}
-	
-	/**
-	 * Metodo di utilita' che restituisce il valore dell'Optional preso come parametro se
-	 * e' presente, altrimenti restituisce la stringa EMPTY_STRING.
-	 * Nel caso in cui l'Optional fosse presente e la classe dell'oggetto in esso contenuto
-	 * fosse Float, restituisce il Numero Float in esso contenuto, ma con un numero
-	 * DECIMAL_PRECISION di cifre significative.
-	 */
-	private String stringOutputUtility(Optional<?> o){
-		if(o.isPresent()){
-			String out = o.get().toString();
-			if(o.get().getClass().equals(Float.class)){
-				return out.substring(0, out.indexOf(".") + DECIMAL_PRECISION);
-			}
-			return out;
-		} else{
-			return EMPTY_STRING;
-		}
-	}
 
 	@Override
-	public String getnOfSightLastHour() {
-		return this.stringOutputUtility(this.nOfSightLastHour);
-	}
-
-	@Override
-	public String getnOfSightToday() {
-		return this.stringOutputUtility(this.nOfSightToday);
-	}
-
-	@Override
-	public String getnOfSightLastWeek() {
-		return this.stringOutputUtility(this.nOfSightLastWeek);
-	}
-
-	@Override
-	public String getnOfSightLastMonth() {
-		return this.stringOutputUtility(this.nOfSightLaatMonth);
-	}
-
-	@Override
-	public String getTotalNOfSight() {
-		return this.stringOutputUtility(this.totalNOfSight);
-	}
-
-	@Override
-	public String getAverageSpeedToday() {
-		return this.stringOutputUtility(this.averageSpeedToday);
-	}
-
-	@Override
-	public String getAverageSpeedLastWeek() {
-		return this.stringOutputUtility(this.averageSpeedLastWeek);
-	}
-
-	@Override
-	public String getAverageSpeedLastMonth() {
-		return this.stringOutputUtility(this.averageSpeedLastMonth);
-	}
-
-	@Override
-	public String getMaxSpeedToday() {
-		return this.stringOutputUtility(this.maxSpeedToday);
-	}
-
-	@Override
-	public String getMaxCarRateToday() {
-		return this.stringOutputUtility(this.maxCarRateToday);
-	}
-	
-	@Override
-	public String getStreetObserverLocation() {
+	public Optional<ICoordinates> getStreetObserverLocation() {
 		if(this.streetObserver.isPresent()){
-			return this.streetObserver.get().getCoordinates().toString();
+			return Optional.ofNullable(this.streetObserver.get().getCoordinates());
 		}
 		else{
-			return EMPTY_STRING;
+			return Optional.empty();
 		}
 	}
 	
 	@Override
-	public String getStreetObserverID() {
+	public Optional<String> getStreetObserverID() {
 		if(this.streetObserver.isPresent()){
-			return String.valueOf(this.streetObserver.get().getID());
+			return Optional.ofNullable(this.streetObserver.get().getID());
 		}
 		else{
-			return EMPTY_STRING;
+			return Optional.empty();
 		}
+	}
+	
+	@Override
+	public Optional<Integer> getnOfSightLastHour() {
+		return this.nOfSightLastHour;
+	}
+
+	@Override
+	public Optional<Integer> getnOfSightToday() {
+		return this.nOfSightToday;
+	}
+
+	@Override
+	public Optional<Integer> getnOfSightLastWeek() {
+		return this.nOfSightLastWeek;
+	}
+
+	@Override
+	public Optional<Integer> getnOfSightLastMonth() {
+		return this.nOfSightLaatMonth;
+	}
+
+	@Override
+	public Optional<Integer> getTotalNOfSight() {
+		return this.totalNOfSight;
+	}
+
+	@Override
+	public Optional<Float> getAverageSpeedToday() {
+		return this.averageSpeedToday;
+	}
+
+	@Override
+	public Optional<Float> getAverageSpeedLastWeek() {
+		return this.averageSpeedLastWeek;
+	}
+
+	@Override
+	public Optional<Float> getAverageSpeedLastMonth() {
+		return this.averageSpeedLastMonth;
+	}
+
+	@Override
+	public Optional<Float> getMaxSpeedToday() {
+		return this.maxSpeedToday;
+	}
+
+	@Override
+	public Optional<Float> getMaxCarRateToday() {
+		return this.maxCarRateToday;
 	}
 	
 	@Override

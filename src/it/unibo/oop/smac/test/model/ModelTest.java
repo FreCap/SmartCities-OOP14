@@ -1,6 +1,6 @@
 package it.unibo.oop.smac.test.model;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import it.unibo.oop.smac.database.model.StreetObserverNotValidException;
 import it.unibo.oop.smac.datatype.Coordinates;
 import it.unibo.oop.smac.datatype.LicensePlate;
@@ -25,10 +25,9 @@ public class ModelTest {
 	/**
 	 * Controllo che il model riesca a creare uno streetObserver valido
 	 * 
-	 * @throws Exception
 	 */
 	@org.junit.Test
-	public void testAddNewStreetObserver() throws Exception {
+	public void testAddNewStreetObserver(){
 		final IStreetObserverModel model = Model.getInstance();
 		StreetObserver streetObserver = new StreetObserver(
 				this.generateCoordinates());
@@ -39,24 +38,27 @@ public class ModelTest {
 	/**
 	 * Controllo che il model NON riesca a creare uno streetObserver NON valido
 	 * 
-	 * @throws Exception
 	 */
 	@org.junit.Test(expected = StreetObserverNotValidException.class)
-	public void testAddNewStreetObserverFail() throws Exception {
+	public void testAddNewStreetObserverFail() {
 		final IStreetObserverModel model = Model.getInstance();
-		StreetObserver streetObserver = new StreetObserver(
-				(IStreetObserver) null);
+		StreetObserver streetObserver = null;
+		try {
+			streetObserver = new StreetObserver((IStreetObserver) null);
+			fail();
+		} catch (StreetObserverNotValidException e) {
+		}
+		
+		// questo test fallisce!
 		model.addNewStreetObserver(streetObserver);
-
 	}
 
 	/**
 	 * Controllo che il model riesca ad inserire un sighting valido
 	 * 
-	 * @throws Exception
 	 */
 	@org.junit.Test
-	public void testAddSighting() throws Exception {
+	public void testAddSighting() {
 		final IStreetObserverModel model = Model.getInstance();
 
 		StreetObserver streetObserver = new StreetObserver(
@@ -68,37 +70,45 @@ public class ModelTest {
 		Sighting sighting = new Sighting.Builder().date(new Date())
 				.streetObserver(streetObserver).speed(speed)
 				.licensePlate(licensePlate).build();
-		model.addSighting(sighting);
+		try {
+			model.addSighting(sighting);
+		} catch (Exception e) {
+			fail();
+		}
 
-		assertTrue(model.getStreetObserverInfo(streetObserver)
-				.getTotalNOfSight().equals("1"));
+		try {
+			assertTrue(model.getStreetObserverInfo(streetObserver)
+					.getTotalNOfSight().get().equals(1));
+		} catch (Exception e) {
+			fail();
+		}
 	}
 
 	/**
 	 * Controllo che il model NON riesca ad inserire un sighting con
 	 * streetObserver non valido
 	 * 
-	 * @throws Exception
 	 */
-	@org.junit.Test(expected = StreetObserverNotValidException.class)
-	public void testAddSightingFail() throws Exception {
+	@org.junit.Test
+	public void testAddSightingFail() {
 		final IStreetObserverModel model = Model.getInstance();
 		StreetObserver streetObserver = new StreetObserver(
 				this.generateCoordinates());
 		model.addNewStreetObserver(streetObserver);
 
-		model.addSighting(new Sighting.Builder().build());
-
+		try {
+			model.addSighting(new Sighting.Builder().build());
+			fail();
+		} catch (Exception e) {
+		}
 	}
 
 	/**
 	 * Controllo che il model restituisca un InfoStreetObserver con dati
 	 * coerenti a quelli nel database
-	 * 
-	 * @throws Exception
 	 */
 	@org.junit.Test
-	public void testInfoStreetObserver() throws Exception {
+	public void testInfoStreetObserver() {
 		final IStreetObserverModel model = Model.getInstance();
 
 		StreetObserver streetObserver = new StreetObserver(
@@ -109,14 +119,23 @@ public class ModelTest {
 		Sighting sighting = new Sighting.Builder().date(new Date())
 				.streetObserver(streetObserver).speed(speed)
 				.licensePlate(licensePlate).build();
-		model.addSighting(sighting);
+		try {
+			model.addSighting(sighting);
+		} catch (Exception e) {
+			fail();
+		}
 
-		IInfoStreetObserver infoStreetObserver = model
-				.getStreetObserverInfo(streetObserver);
-		assertTrue(infoStreetObserver.getTotalNOfSight().equals("1"));
+		IInfoStreetObserver infoStreetObserver = null;
+		try {
+			infoStreetObserver = model
+					.getStreetObserverInfo(streetObserver);
+		} catch (Exception e) {
+			fail();
+		}
+		assertTrue(infoStreetObserver.getTotalNOfSight().get().equals(1));
 		System.out.println(infoStreetObserver.getAverageSpeedToday());
 		System.out.println(speed);
-		assertTrue(infoStreetObserver.getAverageSpeedToday().equals(speed));
+		assertTrue(infoStreetObserver.getAverageSpeedToday().get().equals(speed));
 
 	}
 
