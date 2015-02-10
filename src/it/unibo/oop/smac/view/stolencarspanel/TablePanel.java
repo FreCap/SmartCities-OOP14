@@ -39,12 +39,12 @@ public class TablePanel extends JPanel {
   public TablePanel(final StolenCarsPanel stolenCarsPanel) {
     super();
     // imposto il layout
-    this.setBorder(new TitledBorder("Dati"));
+    this.setBorder(new TitledBorder("Datas"));
     this.setLayout(new FlowLayout());
 
     // salvo il model per un utilizzo successivo
     this.stolenCarsPanel = stolenCarsPanel;
-    this.add(new JLabel("informaioni sulle macchine rubate"));
+    this.add(new JLabel("Infos on Stolen Cars"));
 
     // inizializzo la classe che andrà a gestire i dati nel model
     stolenCarTableModel = new StolenCarTableModel();

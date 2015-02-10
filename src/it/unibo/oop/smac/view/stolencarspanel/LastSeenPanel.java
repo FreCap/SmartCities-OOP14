@@ -36,7 +36,7 @@ public class LastSeenPanel extends JPanel {
   public LastSeenPanel(final StolenCarsPanel stolenCarsPanel) {
     super();
     // imposto il layout
-    this.setBorder(new TitledBorder("Sighting"));
+    this.setBorder(new TitledBorder("Sightings"));
     this.setLayout(new FlowLayout());
 
     // salvo il model per un utilizzo successivo

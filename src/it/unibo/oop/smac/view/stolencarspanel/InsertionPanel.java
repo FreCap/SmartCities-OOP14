@@ -31,9 +31,9 @@ public class InsertionPanel extends JPanel {
   private final StolenCarsPanel stolenCarsPanel;
 
   // campi da visualizzare nella form
-  private final JLabel labelTarga = new JLabel("Targa:");
+  private final JLabel labelTarga = new JLabel("License Plate:");
   private final JTextField fieldTarga = new JTextField("AB918AD");
-  private final JButton buttonAggiungi = new JButton("Aggiungi");
+  private final JButton buttonAggiungi = new JButton("Add");
 
   /**
    * Costruttore pubblico della classe.
