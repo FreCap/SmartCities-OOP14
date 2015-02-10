@@ -9,6 +9,9 @@ import it.unibo.oop.smac.model.IStreetObserverModel;
 import it.unibo.oop.smac.model.Model;
 import it.unibo.oop.smac.view.IView;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Implementazione del controller dell'applicazione. Tutta l'applicazione e' strutturata secondo il
  * pattern MVC.
@@ -16,6 +19,11 @@ import it.unibo.oop.smac.view.IView;
  * @author Federico Bellini
  */
 public class Controller implements IController {
+
+  /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(Controller.class);
 
   // view dell'applicazione
   protected final IView view;
@@ -45,7 +53,9 @@ public class Controller implements IController {
    *          dall'osservatore.
    */
   @Override
-  public void newPassage(IStreetObserver streetObserver, ISighting sighting) {
+  public void newPassage(final IStreetObserver streetObserver, final ISighting sighting) {
+    LOGGER.info("Car {} has been seen", sighting.getLicensePlate());
+
     if (!this.model.checkStreetObserverExists(streetObserver)) {
       this.addStreetObserver(streetObserver);
     }
@@ -53,7 +63,7 @@ public class Controller implements IController {
       model.addSighting(sighting);
       view.newPassage(streetObserver);
     } catch (Exception e) {
-      e.printStackTrace();
+      LOGGER.error("Error in signaling a new passage ", e);
     }
   }
 
@@ -64,9 +74,9 @@ public class Controller implements IController {
    *          L'{@link IStreetObserver} da aggiungere.
    */
   private void addStreetObserver(final IStreetObserver streetObserver) {
+    LOGGER.info("Add street observer", streetObserver.getCoordinates());
     model.addNewStreetObserver(streetObserver);
     view.addStreetObserver(streetObserver);
-
   }
 
   /**
@@ -84,7 +94,7 @@ public class Controller implements IController {
     try {
       info = model.getStreetObserverInfo(streetObserver);
     } catch (IllegalArgumentException | NotFoundException e) {
-      e.printStackTrace();
+      LOGGER.error("Error in fetching data ", e);
       // in caso di malfunzionamenti restituisco un info vuota
       info = new InfoStreetObserver.Builder().build();
     }

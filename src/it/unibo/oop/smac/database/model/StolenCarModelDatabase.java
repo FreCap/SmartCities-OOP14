@@ -11,10 +11,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 public class StolenCarModelDatabase implements IStolenCarModel {
+
+  /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(StolenCarModelDatabase.class);
+
+  /**
+   * Instanza del Singleton
+   */
   private static StolenCarModelDatabase instance;
 
   /**
@@ -38,13 +50,12 @@ public class StolenCarModelDatabase implements IStolenCarModel {
     try {
       stolenCarDao = Connection.getInstance().getStolenCarDao();
     } catch (SQLException e1) {
-      // TODO Auto-generated catch block
-      e1.printStackTrace();
+      LOGGER.error("Database connection error ", e1);
     }
     try {
       stolenCars = stolenCarDao.queryForAll();
     } catch (SQLException e) {
-      e.printStackTrace();
+      LOGGER.error("Database query error ", e);
     }
     return (List<IStolenCar>) (List<?>) stolenCars;
   }
@@ -54,9 +65,8 @@ public class StolenCarModelDatabase implements IStolenCarModel {
     Dao<StolenCarRow, Integer> stolenCarDao = null;
     try {
       stolenCarDao = Connection.getInstance().getStolenCarDao();
-    } catch (SQLException e1) {
-      // TODO Auto-generated catch block
-      e1.printStackTrace();
+    } catch (SQLException e) {
+      LOGGER.error("Database query error ", e);
     }
     final QueryBuilder<StolenCarRow, Integer> statementBuilder = stolenCarDao.queryBuilder();
     List<StolenCarRow> exist = new ArrayList<StolenCarRow>();
@@ -67,7 +77,7 @@ public class StolenCarModelDatabase implements IStolenCarModel {
       exist = stolenCarDao.query(statementBuilder.prepare());
 
     } catch (SQLException e) {
-      e.printStackTrace();
+      LOGGER.error("Database query error ", e);
     }
 
     return !exist.isEmpty();
@@ -80,15 +90,17 @@ public class StolenCarModelDatabase implements IStolenCarModel {
       Dao<StolenCarRow, Integer> stolenCarDao = null;
       try {
         stolenCarDao = Connection.getInstance().getStolenCarDao();
-      } catch (SQLException e1) {
-        // TODO Auto-generated catch block
-        e1.printStackTrace();
+      } catch (SQLException e) {
+        LOGGER.error("Database query error ", e);
       }
       try {
         stolenCarDao.createIfNotExists(stolenCarRow);
       } catch (SQLException e) {
         System.err.println("The creation on database of the new StolenCar " + stolenCarRow
             + " is failed!");
+        LOGGER
+            .error("The creation on database of the new StolenCar {} is failed!", stolenCarRow, e);
+
       }
 
     }

@@ -12,11 +12,19 @@ import java.util.List;
 
 import javax.management.InvalidAttributeValueException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * TODO utilizzato pattern Decorator.
  * 
  */
 public class StolenCarsController extends Controller implements IStolenCarsObserver {
+
+  /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(StolenCarsController.class);
 
   /**
    * Model dell'applicazione.
@@ -42,6 +50,7 @@ public class StolenCarsController extends Controller implements IStolenCarsObser
           .insertionDateNow().build();
       modelStolenCars.addNewStolenCar(stolenCar);
     } catch (InvalidAttributeValueException e) {
+      LOGGER.error("NON PUO' succedere visto che la targa ha il giusto formato", e);
       // NON PUO' succedere visto che la targa ha il giusto formato
     }
 
@@ -65,7 +74,7 @@ public class StolenCarsController extends Controller implements IStolenCarsObser
    *          targa della macchina rubata
    */
   @Override
-  public void addNewStolenCar(StolenCar stolenCar) {
+  public void addNewStolenCar(final StolenCar stolenCar) {
     modelStolenCars.addNewStolenCar(stolenCar);
   }
 

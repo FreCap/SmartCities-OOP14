@@ -2,6 +2,9 @@ package it.unibo.oop.smac.database;
 
 import java.sql.SQLException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
@@ -12,6 +15,11 @@ import com.j256.ormlite.table.TableUtils;
  * Classe che permette la connessione al database, e la creazione delle tabelle.
  */
 public final class Connection {
+
+  /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(Connection.class);
 
   /**
    * Indirizzo del database.
@@ -37,7 +45,7 @@ public final class Connection {
   private Connection() throws SQLException {
     final JdbcConnectionSource connectionSource = new JdbcConnectionSource(DATABASE_URL);
     setupDatabase(connectionSource);
-    System.out.println("Connection succeed");
+    LOGGER.info("Connection succeed");
   }
 
   /**

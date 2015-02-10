@@ -8,20 +8,28 @@ import java.util.Date;
 
 import javax.management.InvalidAttributeValueException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-// TODO per fra
+/**
+ * 
+ */
 @DatabaseTable(tableName = "StolenCar")
 public class StolenCarRow implements IStolenCar {
+
+  /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(Connection.class);
+
   public static final String LICENSEPLATE_FIELD_NAME = "licensePlate";
   public static final String DATAINSERIMENTO_FIELD_NAME = "dataInserimento";
 
-  @DatabaseField(generatedId = true)
-  private int id;
-
-  @DatabaseField(columnName = LICENSEPLATE_FIELD_NAME, dataType = DataType.STRING)
+  @DatabaseField(id = true, columnName = LICENSEPLATE_FIELD_NAME, dataType = DataType.STRING)
   private String licensePlate;
 
   @DatabaseField(columnName = DATAINSERIMENTO_FIELD_NAME, canBeNull = false)
@@ -50,7 +58,7 @@ public class StolenCarRow implements IStolenCar {
       // non può succede visto che se viene creata una copia difensiva di
       // un oggetto già esistente, e quindi di cui è stato convalidato il
       // valore
-      e.printStackTrace();
+      LOGGER.error("How can a valid license plate generate a invalid license plate?", e);
     }
     return response;
   }

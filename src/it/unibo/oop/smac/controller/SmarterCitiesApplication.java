@@ -22,7 +22,7 @@ public final class SmarterCitiesApplication {
    * @param args
    * @throws InterruptedException
    */
-  public static void main(String[] args) throws InterruptedException {
+  public static void main(final String... varargs) throws InterruptedException {
 
     final IController controller = new StolenCarsController(new ViewGUI());
     new NetServer(controller);

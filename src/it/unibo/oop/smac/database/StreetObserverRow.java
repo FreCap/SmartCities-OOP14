@@ -128,7 +128,7 @@ public class StreetObserverRow implements IStreetObserver {
 
   @Override
   public int hashCode() {
-    final int prime = 31;
+    final int prime = (1 << 5) - 1;
     int result = 1;
     result = prime * result + ((coordinates == null) ? 0 : coordinates.hashCode());
     result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -137,7 +137,7 @@ public class StreetObserverRow implements IStreetObserver {
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(final Object obj) {
     if (this == obj) {
       return true;
     }

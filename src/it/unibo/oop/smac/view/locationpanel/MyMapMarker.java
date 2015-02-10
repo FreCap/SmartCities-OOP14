@@ -138,7 +138,7 @@ public abstract class MyMapMarker extends MapObjectImpl implements MapMarker {
    */
   @Override
   public int hashCode() {
-    final int prime = 31;
+    final int prime = (1 << 5) - 1;
     int result = 1;
     result = prime * result + ((coordinate == null) ? 0 : coordinate.hashCode());
     return result;
