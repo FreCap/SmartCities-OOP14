@@ -88,7 +88,7 @@ public abstract class StreetObserverModelDatabase implements IStreetObserverMode
   public boolean checkStreetObserverExists(IStreetObserver streetObserver) {
     final Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
     try {
-      return streetObserverDao.queryForId(streetObserver.getId()) == null;
+      return streetObserverDao.queryForId(streetObserver.getId()) != null;
     } catch (SQLException e) {
       return false;
     }

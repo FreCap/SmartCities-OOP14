@@ -3,7 +3,6 @@ package it.unibo.oop.smac.view.stolencarspanel;
 import it.unibo.oop.smac.controller.IStolenCarsObserver;
 
 import java.awt.BorderLayout;
-import java.nio.channels.IllegalSelectorException;
 
 import javax.swing.JPanel;
 
@@ -74,7 +73,7 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel {
   @Override
   public IStolenCarsObserver getStolenCarsObserver() throws IllegalStateException {
     if (sco == null) {
-      throw new IllegalSelectorException();
+      throw new IllegalStateException();
     }
     return sco;
   }
