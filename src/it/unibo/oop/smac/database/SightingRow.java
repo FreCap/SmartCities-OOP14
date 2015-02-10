@@ -78,7 +78,7 @@ public class SightingRow implements ISighting {
 
   @Override
   public Date getDate() {
-    return date;
+    return new Date(date.getTime());
   }
 
   @Override

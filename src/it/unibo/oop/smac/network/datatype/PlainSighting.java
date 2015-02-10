@@ -42,14 +42,14 @@ public class PlainSighting implements Serializable {
    * @return data d'avvistamento
    */
   public Date getDate() {
-    return date;
+    return new Date(date.getTime());
   }
 
   /**
    * Imposta la data dell'avvistamento.
    */
   public void setDate(final Date date) {
-    this.date = date;
+    this.date = new Date(date.getTime());
   }
 
   /**

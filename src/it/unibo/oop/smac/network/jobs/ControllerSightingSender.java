@@ -20,6 +20,10 @@ public class ControllerSightingSender implements Observer {
 
   @Override
   public void update(final Observable observable, final Object arg) {
+    if (!(observable instanceof Dispatcher)) {
+      throw new IllegalArgumentException();
+    }
+
     if (arg instanceof PlainSighting) {
       final PlainSighting netSighting = (PlainSighting) arg;
       final StreetObserver streetObserver = new StreetObserver(netSighting.getCoordinates());

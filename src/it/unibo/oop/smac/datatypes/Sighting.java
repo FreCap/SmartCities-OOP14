@@ -58,7 +58,7 @@ public class Sighting implements ISighting {
    */
   @Override
   public Date getDate() {
-    return this.date;
+    return new Date(this.date.getTime());
   }
 
   /**
@@ -113,7 +113,7 @@ public class Sighting implements ISighting {
      * @return Il Builder stesso.
      */
     public Builder date(final Date date) {
-      this.date = date;
+      this.date = new Date(date.getTime());
       return this;
     }
 

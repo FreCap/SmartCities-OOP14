@@ -38,7 +38,6 @@ public abstract class StreetObserverModelDatabase implements IStreetObserverMode
       } catch (SQLException e) {
         System.err.println("The creation on database of the new SteetObserver " + streetObserver
             + " is failed!");
-        System.exit(1);
       }
       try {
         System.out.println("Reading datas just added: "
@@ -117,7 +116,6 @@ public abstract class StreetObserverModelDatabase implements IStreetObserverMode
         return streetObserverDao.queryForId(streetObserver.getId());
       } catch (SQLException e) {
         System.err.println("Problems occured in database");
-        System.exit(1);
         return null;
       }
     } else {
@@ -156,7 +154,6 @@ public abstract class StreetObserverModelDatabase implements IStreetObserverMode
       return Connection.getInstance().getStreetObserverDao();
     } catch (SQLException e) {
       System.err.println(e);
-      System.exit(1);
       return null;
     }
   }

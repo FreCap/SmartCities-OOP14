@@ -61,7 +61,7 @@ public class StolenCarRow implements IStolenCar {
 
   @Override
   public Date getInsertionDate() {
-    return dataInserimento;
+    return new Date(dataInserimento.getTime());
   }
 
 }

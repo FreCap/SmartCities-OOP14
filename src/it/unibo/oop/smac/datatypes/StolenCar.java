@@ -24,10 +24,12 @@ public class StolenCar implements IStolenCar {
    * 
    * @param licensePlate
    * @param insertionDate
+   * @throws InvalidAttributeValueException
    */
-  public StolenCar(final LicensePlate licensePlate, final Date insertionDate) {
-    this.licensePlate = licensePlate;
-    this.insertionDate = insertionDate;
+  public StolenCar(final LicensePlate licensePlate, final Date insertionDate)
+      throws InvalidAttributeValueException {
+    this.licensePlate = new LicensePlate(licensePlate);
+    this.insertionDate = new Date(insertionDate.getTime());
   }
 
   /**
@@ -47,7 +49,7 @@ public class StolenCar implements IStolenCar {
    */
   @Override
   public Date getInsertionDate() {
-    return insertionDate;
+    return new Date(insertionDate.getTime());
   }
 
   /**
@@ -94,7 +96,7 @@ public class StolenCar implements IStolenCar {
      * @return Il Builder stesso.
      */
     public Builder insertionDate(final Date insertionDate) {
-      this.insertionDate = insertionDate;
+      this.insertionDate = new Date(insertionDate.getTime());
       return this;
     }
 
@@ -115,11 +117,12 @@ public class StolenCar implements IStolenCar {
      * settati.
      * 
      * @return L'oggetto della classe Sighting appena creato.
+     * @throws InvalidAttributeValueException
      * @throws StolenCarNotValidException
      * @exception IllegalArgumentException
      *              ricordarsi di impostare tutti i parametri
      */
-    public StolenCar build() {
+    public StolenCar build() throws InvalidAttributeValueException {
       if (this.licensePlate == null || this.insertionDate == null) {
         throw new IllegalArgumentException("Devi completare tutti i campi prima di fare il build");
       }

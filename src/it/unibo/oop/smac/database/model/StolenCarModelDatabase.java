@@ -89,7 +89,6 @@ public class StolenCarModelDatabase implements IStolenCarModel {
       } catch (SQLException e) {
         System.err.println("The creation on database of the new StolenCar " + stolenCarRow
             + " is failed!");
-        System.exit(1);
       }
 
     }
