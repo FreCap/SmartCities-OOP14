@@ -3,8 +3,6 @@ package it.unibo.oop.smac.view.stolencarspanel;
 import it.unibo.oop.smac.controller.IStolenCarsObserver;
 
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,80 +11,58 @@ import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.border.TitledBorder;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
- * Classe che implementa un pannello che mostra la tabella delle macchine rubate.
+ * Classe che implementa un pannello che mostra una tabella contenente la lista di tutte le macchine
+ * rubate conosciute. Questa classe e' implementata secondo il pattern Observer.
  * 
+ * @author Francesco Capponi
  */
 public class TablePanel extends JPanel {
-  /**
-   * Logger della classe
-   */
-  private static final Logger LOGGER = LoggerFactory.getLogger(InsertionPanel.class);
 
   private static final long serialVersionUID = -7140640507027357573L;
 
   /**
-   * E' il modello dei dati visualizzati nella tabella.
+   * Arco di tempo che intercorre tra ogni aggiornamento della tabella contenente le auto rubate.
    */
-  private final StolenCarTableModel stolenCarTableModel;
+  private static final int DELAY = 1000;
 
   /**
-   * parent che contiene i metodi d'accesso (e gestione degli errori) al model.
+   * Observer delle auto rubate.
    */
-  private final IStolenCarsPanel stolenCarsPanel;
+  private IStolenCarsObserver stolenCarsObserver;
 
   /**
    * Costruttore pubblico della classe.
-   * 
-   * @param stolenCarsPanel
-   *          pannello padre
    */
-  public TablePanel(final StolenCarsPanel stolenCarsPanel) {
+  public TablePanel() {
     super();
-    // imposto il layout
     this.setBorder(new TitledBorder("Datas"));
     this.setLayout(new FlowLayout());
 
-    // salvo il model per un utilizzo successivo
-    this.stolenCarsPanel = stolenCarsPanel;
-    this.add(new JLabel("Infos on Stolen Cars"));
+    this.add(new JLabel("Informations on Stolen Cars"));
 
-    // inizializzo la classe che andrà a gestire i dati nel model
-    stolenCarTableModel = new StolenCarTableModel();
+    // inizializzo la classe che andrà a gestire i dati del model
+    final StolenCarTable stolenCarTableModel = new StolenCarTable();
     // creo la tabella con i dati
     final JTable table = new JTable(stolenCarTableModel);
     table.setEnabled(false);
     this.add(new JScrollPane(table));
-
-    // imposto un timer che ogni X mi aggiorna i dati nella tabella
-    final Timer timer = new Timer(2000, new ActionListener() {
-
-      @Override
-      public void actionPerformed(final ActionEvent event) {
-        try {
-          IStolenCarsObserver sco = getStolenCarsPanel().getStolenCarsObserver();
-          stolenCarTableModel.updateList(sco.getStolenCarsInfoList());
-        } catch (IllegalStateException exception) {
-          LOGGER
-              .info("street observer model non ancora inizializzato, in pochi istanti verrà inizializzato");
-        }
-      }
-    });
+    // imposto un timer che aggiorna i dati nella tabella ad intervalli di tempo stabiliti
+    final Timer timer = new Timer(DELAY, (e) -> stolenCarTableModel.updateList(stolenCarsObserver
+        .getStolenCarsInfoList()));
     timer.setRepeats(true);
-    timer.setDelay(2000);
+    timer.setDelay(DELAY);
     timer.start();
   }
 
   /**
-   * Restituisce il pannello padre.
+   * Attacca l'Observer degli StolenCars.
    * 
-   * @return pannello padre
+   * @param sco
+   *          L'{@link IStolenCarsObserver} da attaccare.
    */
-  public IStolenCarsPanel getStolenCarsPanel() {
-    return stolenCarsPanel;
+  public void attachStolenCarsObserver(final IStolenCarsObserver sco) {
+    this.stolenCarsObserver = sco;
   }
 
 }

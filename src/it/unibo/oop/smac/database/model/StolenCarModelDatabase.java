@@ -96,10 +96,7 @@ public class StolenCarModelDatabase implements IStolenCarModel {
       try {
         stolenCarDao.createIfNotExists(stolenCarRow);
       } catch (SQLException e) {
-        System.err.println("The creation on database of the new StolenCar " + stolenCarRow
-            + " is failed!");
-        LOGGER
-            .error("The creation on database of the new StolenCar {} is failed!", stolenCarRow, e);
+        LOGGER.error("The creation on database of the new StolenCar is failed!", stolenCarRow, e);
 
       }
 

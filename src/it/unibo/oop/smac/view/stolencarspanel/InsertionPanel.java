@@ -1,5 +1,6 @@
 package it.unibo.oop.smac.view.stolencarspanel;
 
+import it.unibo.oop.smac.controller.IStolenCarsObserver;
 import it.unibo.oop.smac.datatypes.StolenCar;
 
 import java.awt.Dimension;
@@ -16,20 +17,19 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 /**
- * Classe che implementa un pannello che permette di inserire le le targhe di nuove macchine rubate.
+ * Classe che implementa un pannello che permette di inserire nuove macchine rubate nella lista gia'
+ * presente. Questa classe e' implementata secondo il pattern Observer.
  * 
+ * @author Francesco Capponi
  */
 public class InsertionPanel extends JPanel {
 
-  /**
-   * Serial Version UID della classe
-   */
   private static final long serialVersionUID = -3093237633576185609L;
 
   /**
-   * parent che contiene i metodi d'accesso (e gestione degli errori) al model.
+   * Observer delle auto rubate.
    */
-  private final StolenCarsPanel stolenCarsPanel;
+  private IStolenCarsObserver stolenCarsObserver;
 
   // campi da visualizzare nella form
   private final JLabel labelTarga = new JLabel("License Plate:");
@@ -44,9 +44,6 @@ public class InsertionPanel extends JPanel {
    */
   public InsertionPanel(final StolenCarsPanel stolenCarsPanel) {
     super();
-
-    // salvo il pannello parent
-    this.stolenCarsPanel = stolenCarsPanel;
 
     // imposto il layout
     final GroupLayout layout = new GroupLayout(this);
@@ -94,7 +91,7 @@ public class InsertionPanel extends JPanel {
           final StolenCar stolenCar = new StolenCar.Builder().licensePlate(fieldTarga.getText())
               .insertionDateNow().build();
 
-          getStolenCarsPanel().getStolenCarsObserver().addNewStolenCar(stolenCar);
+          stolenCarsObserver.addNewStolenCar(stolenCar);
         } catch (InvalidAttributeValueException e1) {
           invalidLicensePlateMsg(licensePlate);
         }
@@ -103,11 +100,13 @@ public class InsertionPanel extends JPanel {
   }
 
   /**
-   * Restituisce il pannello padre
+   * Attacca l'Observer degli StolenCars.
    * 
-   * @return pannello padre
+   * @param stolenCarsObserver
+   *          L'{@link IStolenCarsObserver} da attaccare.
    */
-  public StolenCarsPanel getStolenCarsPanel() {
-    return stolenCarsPanel;
+  public void attachStolenCarsObserver(final IStolenCarsObserver sco) {
+    this.stolenCarsObserver = sco;
   }
+
 }
