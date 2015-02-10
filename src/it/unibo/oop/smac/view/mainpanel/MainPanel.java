@@ -1,8 +1,8 @@
 package it.unibo.oop.smac.view.mainpanel;
 
 import it.unibo.oop.smac.controller.IStreetObserverObserver;
-import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
+import it.unibo.oop.smac.datatypes.IInfoStreetObserver;
+import it.unibo.oop.smac.datatypes.IStreetObserver;
 
 import java.awt.BorderLayout;
 

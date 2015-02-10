@@ -1,7 +1,7 @@
 package it.unibo.oop.smac.view.locationpanel;
 
-import it.unibo.oop.smac.datatype.I.ICoordinates;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
+import it.unibo.oop.smac.datatypes.ICoordinates;
+import it.unibo.oop.smac.datatypes.IStreetObserver;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;

@@ -1,8 +1,8 @@
 package it.unibo.oop.smac.database;
 
-import it.unibo.oop.smac.datatype.LicensePlate;
-import it.unibo.oop.smac.datatype.StolenCar;
-import it.unibo.oop.smac.datatype.I.IStolenCar;
+import it.unibo.oop.smac.datatypes.IStolenCar;
+import it.unibo.oop.smac.datatypes.LicensePlate;
+import it.unibo.oop.smac.datatypes.StolenCar;
 
 import java.util.Date;
 

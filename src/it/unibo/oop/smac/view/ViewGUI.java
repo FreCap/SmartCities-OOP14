@@ -2,7 +2,7 @@ package it.unibo.oop.smac.view;
 
 import it.unibo.oop.smac.controller.IStolenCarsObserver;
 import it.unibo.oop.smac.controller.IStreetObserverObserver;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
+import it.unibo.oop.smac.datatypes.IStreetObserver;
 import it.unibo.oop.smac.view.locationpanel.ILocationPanel;
 import it.unibo.oop.smac.view.locationpanel.OpenStreetMapPanel;
 import it.unibo.oop.smac.view.mainpanel.IMainPanel;

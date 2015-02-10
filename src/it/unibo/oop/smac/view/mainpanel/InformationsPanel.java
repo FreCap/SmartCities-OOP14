@@ -1,7 +1,7 @@
 package it.unibo.oop.smac.view.mainpanel;
 
-import it.unibo.oop.smac.datatype.InfoStreetObserver;
-import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
+import it.unibo.oop.smac.datatypes.IInfoStreetObserver;
+import it.unibo.oop.smac.datatypes.InfoStreetObserver;
 
 import java.util.Optional;
 

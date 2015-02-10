@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.datatype.I;
+package it.unibo.oop.smac.datatypes;
 
 /**
  * Interfaccia per gestire le funzioni di un'osservatore.

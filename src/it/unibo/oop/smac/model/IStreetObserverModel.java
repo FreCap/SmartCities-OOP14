@@ -2,9 +2,9 @@ package it.unibo.oop.smac.model;
 
 import it.unibo.oop.smac.database.model.NotFoundException;
 import it.unibo.oop.smac.database.model.StreetObserverNotValidException;
-import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
-import it.unibo.oop.smac.datatype.I.ISighting;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
+import it.unibo.oop.smac.datatypes.IInfoStreetObserver;
+import it.unibo.oop.smac.datatypes.ISighting;
+import it.unibo.oop.smac.datatypes.IStreetObserver;
 
 /**
  * Interfaccia del Model dell'applicazione. Chi implementa questa interfaccia di deve occupare della

@@ -1,7 +1,7 @@
 package it.unibo.oop.smac.controller;
 
-import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
+import it.unibo.oop.smac.datatypes.IInfoStreetObserver;
+import it.unibo.oop.smac.datatypes.IStreetObserver;
 
 /**
  * Questa interfaccia funzionale ha il compito di astrarre la logica del sistema dalla parte di

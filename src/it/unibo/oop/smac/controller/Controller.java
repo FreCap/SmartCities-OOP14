@@ -1,10 +1,10 @@
 package it.unibo.oop.smac.controller;
 
 import it.unibo.oop.smac.database.model.NotFoundException;
-import it.unibo.oop.smac.datatype.InfoStreetObserver;
-import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
-import it.unibo.oop.smac.datatype.I.ISighting;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
+import it.unibo.oop.smac.datatypes.IInfoStreetObserver;
+import it.unibo.oop.smac.datatypes.ISighting;
+import it.unibo.oop.smac.datatypes.IStreetObserver;
+import it.unibo.oop.smac.datatypes.InfoStreetObserver;
 import it.unibo.oop.smac.model.IStreetObserverModel;
 import it.unibo.oop.smac.model.Model;
 import it.unibo.oop.smac.view.IView;

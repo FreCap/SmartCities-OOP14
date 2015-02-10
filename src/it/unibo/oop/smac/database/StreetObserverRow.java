@@ -1,9 +1,9 @@
 package it.unibo.oop.smac.database;
 
-import it.unibo.oop.smac.datatype.Coordinates;
-import it.unibo.oop.smac.datatype.StreetObserver;
-import it.unibo.oop.smac.datatype.I.ICoordinates;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
+import it.unibo.oop.smac.datatypes.Coordinates;
+import it.unibo.oop.smac.datatypes.ICoordinates;
+import it.unibo.oop.smac.datatypes.IStreetObserver;
+import it.unibo.oop.smac.datatypes.StreetObserver;
 
 import java.util.ArrayList;
 import java.util.List;

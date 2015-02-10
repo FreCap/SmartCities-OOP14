@@ -1,8 +1,8 @@
 package it.unibo.oop.smac.test.model;
 
 import static org.junit.Assert.assertTrue;
-import it.unibo.oop.smac.datatype.LicensePlate;
-import it.unibo.oop.smac.datatype.StolenCar;
+import it.unibo.oop.smac.datatypes.LicensePlate;
+import it.unibo.oop.smac.datatypes.StolenCar;
 import it.unibo.oop.smac.model.IStolenCarModel;
 import it.unibo.oop.smac.model.ModelStolenCars;
 

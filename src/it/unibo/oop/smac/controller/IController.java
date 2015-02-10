@@ -1,7 +1,7 @@
 package it.unibo.oop.smac.controller;
 
-import it.unibo.oop.smac.datatype.I.ISighting;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
+import it.unibo.oop.smac.datatypes.ISighting;
+import it.unibo.oop.smac.datatypes.IStreetObserver;
 
 /**
  * Interfaccia per il controller dell'applicazione. In questo caso la classe che lo implementa deve

@@ -1,6 +1,4 @@
-package it.unibo.oop.smac.datatype;
-
-import it.unibo.oop.smac.datatype.I.IStolenCar;
+package it.unibo.oop.smac.datatypes;
 
 import java.util.Date;
 

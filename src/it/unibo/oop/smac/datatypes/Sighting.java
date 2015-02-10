@@ -1,8 +1,6 @@
-package it.unibo.oop.smac.datatype;
+package it.unibo.oop.smac.datatypes;
 
 import it.unibo.oop.smac.database.model.StreetObserverNotValidException;
-import it.unibo.oop.smac.datatype.I.ISighting;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
 
 import java.util.Date;
 

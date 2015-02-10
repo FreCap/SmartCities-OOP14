@@ -1,9 +1,9 @@
 package it.unibo.oop.smac.database;
 
-import it.unibo.oop.smac.datatype.LicensePlate;
-import it.unibo.oop.smac.datatype.Sighting;
-import it.unibo.oop.smac.datatype.I.ISighting;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
+import it.unibo.oop.smac.datatypes.ISighting;
+import it.unibo.oop.smac.datatypes.IStreetObserver;
+import it.unibo.oop.smac.datatypes.LicensePlate;
+import it.unibo.oop.smac.datatypes.Sighting;
 
 import java.util.Date;
 

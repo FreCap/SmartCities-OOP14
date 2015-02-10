@@ -1,6 +1,6 @@
 package it.unibo.oop.smac.test.client;
 
-import it.unibo.oop.smac.datatype.Coordinates;
+import it.unibo.oop.smac.datatypes.Coordinates;
 
 /**
  * POJO del modello dati contenuto nel JSON che descrive un azione del track.

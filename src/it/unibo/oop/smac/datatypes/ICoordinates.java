@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.datatype.I;
+package it.unibo.oop.smac.datatypes;
 
 /**
  * Interfaccia per una classe che implementa le coordinate di un punto dello spazio.

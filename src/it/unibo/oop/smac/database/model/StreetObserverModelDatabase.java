@@ -3,9 +3,9 @@ package it.unibo.oop.smac.database.model;
 import it.unibo.oop.smac.database.Connection;
 import it.unibo.oop.smac.database.SightingRow;
 import it.unibo.oop.smac.database.StreetObserverRow;
-import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
-import it.unibo.oop.smac.datatype.I.ISighting;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
+import it.unibo.oop.smac.datatypes.IInfoStreetObserver;
+import it.unibo.oop.smac.datatypes.ISighting;
+import it.unibo.oop.smac.datatypes.IStreetObserver;
 import it.unibo.oop.smac.model.IStreetObserverModel;
 
 import java.sql.SQLException;

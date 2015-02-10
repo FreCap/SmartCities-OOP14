@@ -1,6 +1,6 @@
 package it.unibo.oop.smac.test.client;
 
-import it.unibo.oop.smac.datatype.LicensePlate;
+import it.unibo.oop.smac.datatypes.LicensePlate;
 import it.unibo.oop.smac.utils.RandomStringGenerator;
 
 import javax.management.InvalidAttributeValueException;

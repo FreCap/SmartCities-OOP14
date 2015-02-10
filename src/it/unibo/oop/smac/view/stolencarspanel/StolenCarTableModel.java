@@ -1,6 +1,6 @@
 package it.unibo.oop.smac.view.stolencarspanel;
 
-import it.unibo.oop.smac.datatype.I.IStolenCar;
+import it.unibo.oop.smac.datatypes.IStolenCar;
 
 import java.text.DateFormat;
 import java.util.ArrayList;

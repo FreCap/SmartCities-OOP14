@@ -1,6 +1,6 @@
 package it.unibo.oop.smac.view.stolencarspanel;
 
-import it.unibo.oop.smac.datatype.StolenCar;
+import it.unibo.oop.smac.datatypes.StolenCar;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;

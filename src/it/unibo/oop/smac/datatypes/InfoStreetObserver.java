@@ -1,8 +1,4 @@
-package it.unibo.oop.smac.datatype;
-
-import it.unibo.oop.smac.datatype.I.ICoordinates;
-import it.unibo.oop.smac.datatype.I.IInfoStreetObserver;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
+package it.unibo.oop.smac.datatypes;
 
 import java.util.Optional;
 

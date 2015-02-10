@@ -1,6 +1,4 @@
-package it.unibo.oop.smac.datatype.I;
-
-import it.unibo.oop.smac.datatype.LicensePlate;
+package it.unibo.oop.smac.datatypes;
 
 import java.util.Date;
 

@@ -1,6 +1,4 @@
-package it.unibo.oop.smac.datatype;
-
-import it.unibo.oop.smac.datatype.I.ICoordinates;
+package it.unibo.oop.smac.datatypes;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

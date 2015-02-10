@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.datatype;
+package it.unibo.oop.smac.datatypes;
 
 import java.io.Serializable;
 import java.util.regex.Pattern;

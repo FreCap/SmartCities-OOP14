@@ -1,7 +1,7 @@
 package it.unibo.oop.smac.controller;
 
-import it.unibo.oop.smac.datatype.StolenCar;
-import it.unibo.oop.smac.datatype.I.IStolenCar;
+import it.unibo.oop.smac.datatypes.IStolenCar;
+import it.unibo.oop.smac.datatypes.StolenCar;
 
 import java.util.List;
 

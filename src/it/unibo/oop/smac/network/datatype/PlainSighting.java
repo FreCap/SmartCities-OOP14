@@ -1,7 +1,7 @@
 package it.unibo.oop.smac.network.datatype;
 
-import it.unibo.oop.smac.datatype.Coordinates;
-import it.unibo.oop.smac.datatype.Sighting;
+import it.unibo.oop.smac.datatypes.Coordinates;
+import it.unibo.oop.smac.datatypes.Sighting;
 
 import java.io.Serializable;
 import java.util.Date;

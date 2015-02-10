@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.datatype.I;
+package it.unibo.oop.smac.datatypes;
 
 import java.util.Optional;
 

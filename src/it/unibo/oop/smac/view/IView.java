@@ -2,7 +2,7 @@ package it.unibo.oop.smac.view;
 
 import it.unibo.oop.smac.controller.IStolenCarsObserver;
 import it.unibo.oop.smac.controller.IStreetObserverObserver;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
+import it.unibo.oop.smac.datatypes.IStreetObserver;
 
 /**
  * Interfaccia realizzata per la gestione della parte di View del programma. Essa puo' essere

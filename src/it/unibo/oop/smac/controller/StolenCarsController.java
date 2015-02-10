@@ -1,9 +1,9 @@
 package it.unibo.oop.smac.controller;
 
-import it.unibo.oop.smac.datatype.StolenCar;
-import it.unibo.oop.smac.datatype.I.ISighting;
-import it.unibo.oop.smac.datatype.I.IStolenCar;
-import it.unibo.oop.smac.datatype.I.IStreetObserver;
+import it.unibo.oop.smac.datatypes.ISighting;
+import it.unibo.oop.smac.datatypes.IStolenCar;
+import it.unibo.oop.smac.datatypes.IStreetObserver;
+import it.unibo.oop.smac.datatypes.StolenCar;
 import it.unibo.oop.smac.model.IStolenCarModel;
 import it.unibo.oop.smac.model.ModelStolenCars;
 import it.unibo.oop.smac.view.IView;

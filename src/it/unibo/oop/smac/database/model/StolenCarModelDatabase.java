@@ -2,9 +2,9 @@ package it.unibo.oop.smac.database.model;
 
 import it.unibo.oop.smac.database.Connection;
 import it.unibo.oop.smac.database.StolenCarRow;
-import it.unibo.oop.smac.datatype.LicensePlate;
-import it.unibo.oop.smac.datatype.StolenCar;
-import it.unibo.oop.smac.datatype.I.IStolenCar;
+import it.unibo.oop.smac.datatypes.IStolenCar;
+import it.unibo.oop.smac.datatypes.LicensePlate;
+import it.unibo.oop.smac.datatypes.StolenCar;
 import it.unibo.oop.smac.model.IStolenCarModel;
 
 import java.sql.SQLException;
