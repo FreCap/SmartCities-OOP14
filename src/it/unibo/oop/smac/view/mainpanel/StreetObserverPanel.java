@@ -102,11 +102,7 @@ public class StreetObserverPanel extends JPanel {
    *          Il Color da settare come sfondo.
    */
   private void setColor(final Color c) {
-    try {
-      SwingUtilities.invokeLater(() -> this.setBackground(c));
-    } catch (Exception e) {
-      // do nothing
-    }
+    SwingUtilities.invokeLater(() -> this.setBackground(c));
   }
 
   /**

@@ -17,7 +17,15 @@ import it.unibo.oop.smac.network.jobs.ControllerSightingSender;
 
 import java.util.Observable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public final class NetServer {
+
+  /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(NetServer.class);
 
   /**
    * Costante della porta del server su cui offrire il servizio.
@@ -47,7 +55,7 @@ public final class NetServer {
    */
   public ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
     @Override
-    public void initChannel(final SocketChannel ch) throws Exception {
+    public void initChannel(final SocketChannel ch) {
       final ChannelPipeline p = ch.pipeline();
 
       p.addLast(new ObjectEncoder(), new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
@@ -76,7 +84,9 @@ public final class NetServer {
           // client
           b.bind(PORT).sync().channel().closeFuture().sync();
         } catch (InterruptedException e) {
-          e.printStackTrace();
+          LOGGER.error(
+              "Service Interrupted, you have already another server running. I'm shutting down", e);
+          System.exit(0);
         } finally {
           bossGroup.shutdownGracefully();
           workerGroup.shutdownGracefully();

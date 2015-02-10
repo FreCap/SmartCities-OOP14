@@ -5,11 +5,19 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 
 import java.util.Observable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Classe le operazioni effettuate dal server di rete all'invio e alla ricezioni di messaggi dal
  * client
  */
 public class ServerHandler extends ChannelInboundHandlerAdapter {
+
+  /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(ServerHandler.class);
 
   /**
    * dispatcher che implementa l'interfaccia Observable per la notifica dei jobs dell'arrivo di un
@@ -51,7 +59,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
    */
   @Override
   public void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) {
-    cause.printStackTrace();
+    LOGGER.error("Error handling client connection", cause);
     ctx.close();
   }
 

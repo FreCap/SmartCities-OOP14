@@ -43,7 +43,7 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel {
     this.setLayout(new BorderLayout());
 
     // inserisco i 2 panels nel layout
-    JPanel innerPanel = new JPanel(new BorderLayout());
+    final JPanel innerPanel = new JPanel(new BorderLayout());
     innerPanel.add(insertionPanel, BorderLayout.NORTH);
     innerPanel.add(lastSeenPanel, BorderLayout.CENTER);
 
@@ -92,12 +92,12 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel {
    * Questo metodo deve segnalare che c'e' stato un passaggio sotto un'osservatore di una macchina
    * rubata.
    * 
-   * @param iSighting
+   * @param sighting
    *          L'{@link ISighting} dell'avvistamento della macchina rubata.
    */
   @Override
-  public void newPassageStolenCar(ISighting iSighting) {
-    lastSeenPanel.newPassageStolenCar(iSighting);
+  public void newPassageStolenCar(final ISighting sighting) {
+    lastSeenPanel.newPassageStolenCar(sighting);
   }
 
 }

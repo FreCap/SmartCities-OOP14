@@ -8,6 +8,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Implementazione concreta di un {@link MyMapMarker}. Questa implementazione restituisce come
  * immagine per il MapMarker un pin di colore rosso. Implementazione secondo il pattern Template
@@ -16,6 +19,11 @@ import javax.imageio.ImageIO;
  * @author Federico Bellini
  */
 public class RedMapMarker extends MyMapMarker {
+  /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(RedMapMarker.class);
+
   private static final String DEFAULT_RED_PATH = "/images/redPin.png";
 
   /**
@@ -42,6 +50,8 @@ public class RedMapMarker extends MyMapMarker {
     try {
       image = ImageIO.read(MainPanel.class.getResource(DEFAULT_RED_PATH));
     } catch (IOException e) {
+      LOGGER.error("Errore leggendo l'immagine {} dalle resources", DEFAULT_RED_PATH, e);
+
     }
     return image;
   }

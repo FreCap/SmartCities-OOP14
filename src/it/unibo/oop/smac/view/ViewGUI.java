@@ -122,7 +122,7 @@ public class ViewGUI extends JFrame implements IView {
    *          L'{@link ISighting} dell'avvistamento della macchina rubata.
    */
   @Override
-  public void newPassageStolenCar(ISighting iSighting) {
+  public void newPassageStolenCar(final ISighting iSighting) {
     this.stolenCarsPanel.newPassageStolenCar(iSighting);
   }
 

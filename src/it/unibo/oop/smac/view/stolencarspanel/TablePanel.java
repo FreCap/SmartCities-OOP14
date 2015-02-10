@@ -13,11 +13,18 @@ import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.border.TitledBorder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Classe che implementa un pannello che mostra la tabella delle macchine rubate.
  * 
  */
 public class TablePanel extends JPanel {
+  /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(InsertionPanel.class);
 
   private static final long serialVersionUID = -7140640507027357573L;
 
@@ -62,7 +69,8 @@ public class TablePanel extends JPanel {
           IStolenCarsObserver sco = getStolenCarsPanel().getStolenCarsObserver();
           stolenCarTableModel.updateList(sco.getStolenCarsInfoList());
         } catch (IllegalStateException exception) {
-          // not an error
+          LOGGER
+              .info("street observer model non ancora inizializzato, in pochi istanti verrà inizializzato");
         }
       }
     });

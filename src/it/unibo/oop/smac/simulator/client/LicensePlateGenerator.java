@@ -5,11 +5,23 @@ import it.unibo.oop.smac.utils.RandomStringGenerator;
 
 import javax.management.InvalidAttributeValueException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Classe che genera una nuova targa, utilizzata a fini di test.
  *
  */
 public final class LicensePlateGenerator {
+
+  /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(LicensePlateGenerator.class);
+
+  /**
+   * Costruttore privato per non rendere istanziabile questa classe di utility
+   */
   private LicensePlateGenerator() {
 
   }
@@ -21,18 +33,18 @@ public final class LicensePlateGenerator {
    */
   public static LicensePlate generate() {
     LicensePlate licensePlate = null;
+    final String licensePlateString = RandomStringGenerator.generateRandomString(2,
+        RandomStringGenerator.Mode.ALPHA)
+        + RandomStringGenerator.generateRandomString(3, RandomStringGenerator.Mode.NUMERIC)
+        + RandomStringGenerator.generateRandomString(2, RandomStringGenerator.Mode.ALPHA);
     try {
-      licensePlate = new LicensePlate(RandomStringGenerator.generateRandomString(2,
-          RandomStringGenerator.Mode.ALPHA)
-          + RandomStringGenerator.generateRandomString(3, RandomStringGenerator.Mode.NUMERIC)
-          + RandomStringGenerator.generateRandomString(2, RandomStringGenerator.Mode.ALPHA));
+      licensePlate = new LicensePlate(licensePlateString);
     } catch (InvalidAttributeValueException e) {
       // NON può succedere poiché la targa è generata secondo lo standard
       // richiesto
-      e.printStackTrace();
+      LOGGER.error("Il formato generato non è adeguato ({})", licensePlateString, e);
     }
     return licensePlate;
 
   }
-
 }

@@ -12,15 +12,23 @@ import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 import it.unibo.oop.smac.network.NetServer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Classe che gestisce l'apertura della connessione di un simulatore sighting tra client-serer.
  */
 public final class SightingSenderClient implements Runnable {
 
   /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(SightingSenderClient.class);
+
+  /**
    * Costante dell'indirizzo del server cui collegarsi.
    */
-  private static final String HOST = System.getProperty("host", "127.0.0.1");
+  private static final String HOST = System.getProperty("host", "localhost");
 
   /**
    * Costante della porta del server cui collegarsi.
@@ -37,7 +45,7 @@ public final class SightingSenderClient implements Runnable {
    */
   public final ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
     @Override
-    public void initChannel(SocketChannel ch) throws Exception {
+    public void initChannel(final SocketChannel ch) {
       final ChannelPipeline p = ch.pipeline();
 
       // imposto gli encoder-decoder che incapsulano i messaggi della
@@ -63,7 +71,7 @@ public final class SightingSenderClient implements Runnable {
       b.connect(HOST, PORT).sync().channel().closeFuture().sync();
     } catch (InterruptedException e) {
       // un client è morto indispettito
-      e.printStackTrace();
+      LOGGER.error("Errore durante la connessione del client al server", e);
     } finally {
       group.shutdownGracefully();
     }

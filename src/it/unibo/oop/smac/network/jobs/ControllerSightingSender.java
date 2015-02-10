@@ -12,32 +12,45 @@ import java.util.Observer;
 
 import javax.management.InvalidAttributeValueException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Classe implementata con il pattern Observer che alla ricezione da parte di un client di un
  * messaggio di sighting, notifica il controller.
  */
 public class ControllerSightingSender implements Observer {
 
+  /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(ControllerSightingSender.class);
+
   @Override
   public void update(final Observable observable, final Object arg) {
+    // controllo che sia stato attachato a un dispatcher valido
     if (!(observable instanceof Dispatcher)) {
       throw new IllegalArgumentException();
     }
 
+    // controllo che il messaggio sia un sighting
     if (arg instanceof PlainSighting) {
       final PlainSighting netSighting = (PlainSighting) arg;
       final StreetObserver streetObserver = new StreetObserver(netSighting.getCoordinates());
 
       ISighting sighting = null;
       try {
+        // provo a generare il sighting
         sighting = new Sighting.Builder().date(netSighting.getDate())
             .streetObserver(streetObserver).speed(netSighting.getSpeed())
             .licensePlate(new LicensePlate(netSighting.getLicensePlate())).build();
         final Dispatcher dispatcher = (Dispatcher) observable;
+
+        // lo spedisco al controller che ne farà il giusto dispatch alla view
         dispatcher.getController().newPassage(streetObserver, sighting);
       } catch (InvalidAttributeValueException e) {
         // Targa non valida, interrompo la notifica
-        e.printStackTrace();
+        LOGGER.error("Invalid license plate ({}) from a client", netSighting.getLicensePlate(), e);
       }
 
     }

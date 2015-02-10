@@ -3,11 +3,18 @@ package it.unibo.oop.smac.simulator.client;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Classe le operazioni effettuate dal client di rete all'invio e alla ricezioni di messaggi dal
  * server.
  */
 public class SightingSenderClientHandler extends ChannelInboundHandlerAdapter {
+  /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(SightingSenderClientHandler.class);
 
   /**
    * Track corrente di cui si vuole simulare il comportamento.
@@ -52,7 +59,7 @@ public class SightingSenderClientHandler extends ChannelInboundHandlerAdapter {
    */
   @Override
   public void exceptionCaught(final ChannelHandlerContext ctx, final Throwable cause) {
-    cause.printStackTrace();
+    LOGGER.error("Error handling client connection", cause);
     ctx.close();
   }
 }

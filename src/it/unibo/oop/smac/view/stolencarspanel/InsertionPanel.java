@@ -20,6 +20,7 @@ import javax.swing.border.TitledBorder;
  * 
  */
 public class InsertionPanel extends JPanel {
+
   /**
    * Serial Version UID della classe
    */
@@ -84,7 +85,7 @@ public class InsertionPanel extends JPanel {
       }
 
       @Override
-      public void actionPerformed(ActionEvent event) {
+      public void actionPerformed(final ActionEvent event) {
         final String licensePlate = fieldTarga.getText();
         try {
           final StolenCar stolenCar = new StolenCar.Builder().licensePlate(fieldTarga.getText())
@@ -93,8 +94,6 @@ public class InsertionPanel extends JPanel {
           getStolenCarsPanel().getStolenCarsObserver().addNewStolenCar(stolenCar);
         } catch (InvalidAttributeValueException e1) {
           invalidLicensePlateMsg(licensePlate);
-          // TODO Auto-generated catch block
-          e1.printStackTrace();
         }
       }
     });

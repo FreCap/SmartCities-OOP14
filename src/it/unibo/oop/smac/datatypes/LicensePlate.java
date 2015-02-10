@@ -65,7 +65,7 @@ public class LicensePlate implements Serializable {
 
   @Override
   public int hashCode() {
-    final int prime = 31;
+    final int prime = (1 << 5) - 1;
     int result = 1;
     result = prime * result + ((licensePlate == null) ? 0 : licensePlate.hashCode());
     return result;

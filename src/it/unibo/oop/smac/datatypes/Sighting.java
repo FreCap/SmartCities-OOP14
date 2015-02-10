@@ -58,6 +58,7 @@ public class Sighting implements ISighting {
    */
   @Override
   public Date getDate() {
+    // WARNING la defensive copy genera un errore
     return this.date;
   }
 

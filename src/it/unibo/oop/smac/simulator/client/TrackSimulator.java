@@ -8,12 +8,19 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.Gson;
 
 /**
  * Classe che gestisce la simulazione del percorso di una macchina.
  */
 public class TrackSimulator {
+  /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(SightingSenderClient.class);
 
   /**
    * File contenente i tracks possibili.
@@ -45,8 +52,7 @@ public class TrackSimulator {
     try {
       Thread.sleep(1000 * current.getSleep());
     } catch (InterruptedException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+      LOGGER.error("Thread ha ricevuto un interrupt mentre era in sleep", e);
     }
 
     final PlainSighting response = new PlainSighting();

@@ -7,6 +7,9 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Questa è una classe di utilita', e svolge il compito di costruire e restituire un'immagine
  * contenente una mappa del luogo di cui sono date le coordinate. Le Static Maps restituite vengono
@@ -15,6 +18,10 @@ import javax.swing.ImageIcon;
  * @author Federico Bellini
  */
 public class OSMStaticMapConstructor {
+  /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(OSMStaticMapConstructor.class);
 
   private static final String DEFAULT_ICON_PATH = "/images/somethingWrongHappened.png";
   private static OSMStaticMapConstructor staticMapConstructor;
@@ -97,7 +104,7 @@ public class OSMStaticMapConstructor {
             .append("&size=" + DEFAULT_WIDTH + "x" + DEFAULT_HEIGHT)
             .append("&markers=" + lat + "," + lng + ",red-pushpin").toString());
       } catch (Exception e) {
-        e.printStackTrace();
+        LOGGER.error("Errore nella formattazione dell'URL", e);
       }
       return url;
     }

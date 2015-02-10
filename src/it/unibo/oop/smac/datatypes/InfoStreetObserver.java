@@ -134,7 +134,7 @@ public class InfoStreetObserver implements IInfoStreetObserver {
 
   @Override
   public int hashCode() {
-    final int prime = 31;
+    final int prime = (1 << 5) - 1;
     int result = 1;
     result = prime * result
         + ((averageSpeedLastMonth == null) ? 0 : averageSpeedLastMonth.hashCode());
@@ -153,7 +153,7 @@ public class InfoStreetObserver implements IInfoStreetObserver {
   }
 
   @Override
-  public boolean equals(Object obj) {
+  public boolean equals(final Object obj) {
     if (this == obj) {
       return true;
     }
@@ -181,11 +181,11 @@ public class InfoStreetObserver implements IInfoStreetObserver {
       return false;
     }
 
-    if (streetObserver == null) {
-      if (other.streetObserver != null)
-        return false;
-    } else if (!streetObserver.equals(other.streetObserver))
+    if (streetObserver == null || other.streetObserver != null) {
       return false;
+    } else if (!streetObserver.equals(other.streetObserver)) {
+      return false;
+    }
 
     return true;
   }
