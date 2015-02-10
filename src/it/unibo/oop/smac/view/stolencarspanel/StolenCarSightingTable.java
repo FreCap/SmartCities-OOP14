@@ -28,7 +28,7 @@ public class StolenCarSightingTable extends AbstractTableModel {
   /**
    * Nomi delle colonne della tabella.
    */
-  private static final String[] COLUMN_NAMES = { "Lic. Plate", "Seen at", "Location" };
+  private static final String[] COLUMN_NAMES = { "License Plate", "Seen at", "Location" };
 
   /**
    * Lista di ISighting che devono essere visualizzati.

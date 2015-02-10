@@ -34,10 +34,7 @@ public class StolenCarSightPanel extends JPanel {
 
     // creo la tabella con i dati
     this.stolenCarsSightingTable = new StolenCarSightingTable();
-    final JTable table = new JTable(stolenCarsSightingTable);
-    table.setEnabled(false);
-    this.add(new JScrollPane(table));
-
+    this.add(new JScrollPane(new JTable(stolenCarsSightingTable)));
   }
 
   /**

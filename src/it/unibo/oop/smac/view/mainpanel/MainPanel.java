@@ -6,7 +6,6 @@ import it.unibo.oop.smac.datatypes.IStreetObserver;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -96,9 +95,9 @@ public class MainPanel extends JPanel implements IMainPanel {
         .append("New Street Observer is been plugged.\n The positions is: ")
         .append("\n   - Latitude:  " + streetObserver.getLatitude())
         .append("\n   - Longitude: " + streetObserver.getLongitude()).toString();
-
-    JOptionPane.showOptionDialog(null, msg, "Plug info", JOptionPane.CLOSED_OPTION,
-        JOptionPane.INFORMATION_MESSAGE, null, null, null);
+    // TODO reinserisci, tolto per comodità
+    // JOptionPane.showOptionDialog(null, msg, "Plug info", JOptionPane.CLOSED_OPTION,
+    // JOptionPane.INFORMATION_MESSAGE, null, null, null);
   }
 
 }

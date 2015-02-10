@@ -4,11 +4,13 @@ import it.unibo.oop.smac.controller.IStolenCarsObserver;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.border.TitledBorder;
 
@@ -45,17 +47,21 @@ public class TablePanel extends JPanel {
     // creo la tabella con i dati
     final StolenCarTable stolenCarTable = new StolenCarTable();
     final JTable table = new JTable(stolenCarTable);
-    table.setEnabled(false);
-    table.setMaximumSize(new Dimension(10, 10));
-    JScrollPane sp = new JScrollPane(table);
-    sp.setMaximumSize(new Dimension(10, 10));
-    this.add(sp);
+    table.setPreferredSize(new Dimension(
+        (Toolkit.getDefaultToolkit().getScreenSize().width / 100) * 29, (Toolkit
+            .getDefaultToolkit().getScreenSize().height / 100) * 63));
+    table.setPreferredScrollableViewportSize(table.getPreferredSize());
+    final JScrollPane jScrollPane = new JScrollPane(table);
+    jScrollPane.setViewportView(table);
+    this.add(jScrollPane);
 
     // imposto un timer che aggiorna i dati nella tabella ad intervalli di tempo stabiliti
-    final Timer timer = new Timer(DELAY, (e) -> stolenCarTable.updateList(stolenCarsObserver
-        .getStolenCarsInfoList()));
+    final Timer timer = new Timer(DELAY, (e) -> SwingUtilities.invokeLater(() -> {
+      stolenCarTable.updateList(stolenCarsObserver.getStolenCarsInfoList());
+      this.revalidate();
+      this.repaint();
+    }));
     timer.setRepeats(true);
-    timer.setDelay(DELAY);
     timer.start();
   }
 
