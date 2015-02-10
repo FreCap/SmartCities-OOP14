@@ -24,7 +24,7 @@ public class StolenCarsController extends Controller implements IStolenCarsObser
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(StolenCarsController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(StolenCarsController.class);
 
   /**
    * Model dell'applicazione.

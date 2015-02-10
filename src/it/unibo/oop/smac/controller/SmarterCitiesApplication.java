@@ -19,8 +19,10 @@ public final class SmarterCitiesApplication {
   /**
    * Main dell'applicazione. Starta i servizi e l'interfaccia grafica
    * 
-   * @param args
+   * @param varargs
+   *          Parametri passati all'applicazione, anche se non verranno usati
    * @throws InterruptedException
+   *           Chiusura forzata dell'applicazione
    */
   public static void main(final String... varargs) throws InterruptedException {
 

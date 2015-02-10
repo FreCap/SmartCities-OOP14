@@ -22,7 +22,7 @@ public class RedMapMarker extends MyMapMarker {
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(RedMapMarker.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(RedMapMarker.class);
 
   private static final String DEFAULT_RED_PATH = "/images/redPin.png";
 

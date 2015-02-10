@@ -69,7 +69,7 @@ public class PlainSighting implements Serializable {
   }
 
   /**
-   * Restituisce la velocità della macchina avvistata
+   * Restituisce la velocità della macchina avvistata.
    * 
    * @return velocità della macchina
    */

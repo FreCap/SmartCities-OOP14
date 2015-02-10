@@ -24,7 +24,7 @@ public class TablePanel extends JPanel {
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(InsertionPanel.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(InsertionPanel.class);
 
   private static final long serialVersionUID = -7140640507027357573L;
 
@@ -42,6 +42,7 @@ public class TablePanel extends JPanel {
    * Costruttore pubblico della classe.
    * 
    * @param stolenCarsPanel
+   *          pannello padre
    */
   public TablePanel(final StolenCarsPanel stolenCarsPanel) {
     super();
@@ -79,6 +80,11 @@ public class TablePanel extends JPanel {
     timer.start();
   }
 
+  /**
+   * Restituisce il pannello padre.
+   * 
+   * @return pannello padre
+   */
   public IStolenCarsPanel getStolenCarsPanel() {
     return stolenCarsPanel;
   }

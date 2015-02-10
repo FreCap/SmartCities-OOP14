@@ -25,6 +25,7 @@ public class StolenCar implements IStolenCar {
    * @param licensePlate
    * @param insertionDate
    * @throws InvalidAttributeValueException
+   *           viene generata se il valore della targa non è conforme alle specifiche (es. AA000AA)
    */
   public StolenCar(final LicensePlate licensePlate, final Date insertionDate)
       throws InvalidAttributeValueException {
@@ -103,8 +104,6 @@ public class StolenCar implements IStolenCar {
     /**
      * Costruisce l'oggetto StolenCar con la data' corrente.
      * 
-     * @param date
-     *          La data da settare.
      * @return Il Builder stesso.
      */
     public Builder insertionDateNow() {

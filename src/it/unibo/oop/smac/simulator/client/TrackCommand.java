@@ -28,6 +28,9 @@ public class TrackCommand {
 
   /**
    * Imposta il time di sleep della macchina.
+   * 
+   * @param sleep
+   *          tempo per cui si dovrà far dormire il simulatore
    */
   public void setSleep(final Integer sleep) {
     this.sleep = sleep;
@@ -44,6 +47,9 @@ public class TrackCommand {
 
   /**
    * Imposta le coordinate del sighting.
+   * 
+   * @param coordinate
+   *          punto in cui il simulatore dovrà segnalare il nuovo sighting
    */
   public void setCoordinate(final Coordinates coordinate) {
     this.coordinate = coordinate;

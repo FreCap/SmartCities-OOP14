@@ -74,7 +74,7 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel {
   }
 
   /**
-   * Restituisce l'Observer
+   * Restituisce l'Observer.
    * 
    * @return restituisce il {@link IStolenCarsObserver} corrente.
    * @throws IllegalStateException

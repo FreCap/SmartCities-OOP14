@@ -17,7 +17,7 @@ public final class LicensePlateGenerator {
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(LicensePlateGenerator.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(LicensePlateGenerator.class);
 
   /**
    * Costruttore privato per non rendere istanziabile questa classe di utility

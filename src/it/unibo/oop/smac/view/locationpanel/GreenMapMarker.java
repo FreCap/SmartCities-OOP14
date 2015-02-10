@@ -22,7 +22,7 @@ public class GreenMapMarker extends MyMapMarker {
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(GreenMapMarker.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(GreenMapMarker.class);
 
   private static final String DEFAULT_GREEN_PATH = "/images/greenPin.png";
 

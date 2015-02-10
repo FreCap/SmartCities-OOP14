@@ -25,7 +25,7 @@ public final class NetServer {
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(NetServer.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(NetServer.class);
 
   /**
    * Costante della porta del server su cui offrire il servizio.
@@ -53,7 +53,7 @@ public final class NetServer {
   /**
    * Inizializzazione dell'inizializzatore di un nuovo channel (connessione).
    */
-  public ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
+  private ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
     @Override
     public void initChannel(final SocketChannel ch) {
       final ChannelPipeline p = ch.pipeline();

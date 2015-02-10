@@ -24,7 +24,7 @@ public class ControllerSightingSender implements Observer {
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(ControllerSightingSender.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ControllerSightingSender.class);
 
   @Override
   public void update(final Observable observable, final Object arg) {

@@ -9,8 +9,23 @@ public final class RandomStringGenerator {
 
   }
 
+  /**
+   * Modalità con cui si vuole generare la stringa.
+   */
   public static enum Mode {
-    ALPHA, ALPHANUMERIC, NUMERIC
+    /**
+     * Solo lettere dell'alfabeto.
+     */
+    ALPHA,
+
+    /**
+     * lettere dell'alfabeto e numeri.
+     */
+    ALPHANUMERIC,
+    /**
+     * Solo numeri.
+     */
+    NUMERIC
   }
 
   /**

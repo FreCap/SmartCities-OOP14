@@ -22,7 +22,7 @@ public class StolenCarModelDatabase implements IStolenCarModel {
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(StolenCarModelDatabase.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(StolenCarModelDatabase.class);
 
   /**
    * Instanza del Singleton
@@ -34,7 +34,7 @@ public class StolenCarModelDatabase implements IStolenCarModel {
    * 
    * @return istanza del model database
    */
-  public synchronized static StolenCarModelDatabase getInstance() {
+  public static synchronized StolenCarModelDatabase getInstance() {
     if (instance != null) {
       return instance;
     }

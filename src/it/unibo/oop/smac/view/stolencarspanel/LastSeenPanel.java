@@ -32,6 +32,7 @@ public class LastSeenPanel extends JPanel {
    * Costruttore pubblico della classe.
    * 
    * @param stolenCarsPanel
+   *          Pannello padre
    */
   public LastSeenPanel(final StolenCarsPanel stolenCarsPanel) {
     super();
@@ -59,6 +60,11 @@ public class LastSeenPanel extends JPanel {
 
   }
 
+  /**
+   * Restituisce il pannello padre.
+   * 
+   * @return pannello padre
+   */
   public IStolenCarsPanel getStolenCarsPanel() {
     return stolenCarsPanel;
   }

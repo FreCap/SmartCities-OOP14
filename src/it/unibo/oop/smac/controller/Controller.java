@@ -23,11 +23,15 @@ public class Controller implements IController {
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(Controller.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(Controller.class);
 
-  // view dell'applicazione
+  /**
+   * view dell'applicazione.
+   */
   protected final IView view;
-  // model dell'applicazione
+  /**
+   * model dell'applicazione.
+   */
   protected final IStreetObserverModel model;
 
   /**

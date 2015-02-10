@@ -29,7 +29,7 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(StreetObserverModelDatabase.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(StreetObserverModelDatabase.class);
 
   /**
    * Instanza del Singleton
@@ -41,7 +41,7 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
    * 
    * @return istanza del model database
    */
-  public synchronized static StreetObserverModelDatabase getInstance() {
+  public static synchronized StreetObserverModelDatabase getInstance() {
     if (instance != null) {
       return instance;
     }

@@ -19,7 +19,7 @@ public final class Connection {
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(Connection.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(Connection.class);
 
   /**
    * Indirizzo del database.
@@ -55,7 +55,7 @@ public final class Connection {
    * @throws SQLException
    *           potrebbe fallire nell'inizializzazione della connessione
    */
-  public synchronized static Connection getInstance() throws SQLException {
+  public static synchronized Connection getInstance() throws SQLException {
     if (instance != null) {
       return instance;
     }

@@ -7,6 +7,9 @@ import javax.management.InvalidAttributeValueException;
 
 import org.junit.Test;
 
+/**
+ * Classe che controlla l'interfaccia esposta da {@link LicensePlateTest}.
+ */
 public class LicensePlateTest {
 
   /**
@@ -27,7 +30,7 @@ public class LicensePlateTest {
    * Controlla che la creazione di un oggetto {@link LicensePlate} con una targa NON conforme
    * restituisca eccezioni.
    * 
-   * @exception InvalidAttributeValueException
+   * @exception Exception
    *              necessaria l'exception per il successo del test
    */
   @Test(expected = InvalidAttributeValueException.class)

@@ -7,6 +7,12 @@ import it.unibo.oop.smac.datatypes.StolenCar;
 import java.util.List;
 
 public interface IStolenCarModel {
+
+  /**
+   * Resistuisce il Singleton della classe.
+   * 
+   * @return singleton
+   */
   static IStolenCarModel getInstance() {
     return null;
   }

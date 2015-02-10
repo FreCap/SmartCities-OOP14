@@ -10,6 +10,9 @@ import javax.management.InvalidAttributeValueException;
 
 import org.junit.Test;
 
+/**
+ * Classe che controlla l'interfaccia esposta da {@link ModelStolenCarsTest}.
+ */
 public class ModelStolenCarsTest {
 
   private static final String VALID_LICENSEPLATE = "TE355TT";
@@ -32,7 +35,7 @@ public class ModelStolenCarsTest {
    * Controlla che la creazione di un oggetto {@link StolenCar} con una targa NON conforme
    * restituisca eccezioni.
    * 
-   * @exception InvalidAttributeValueException
+   * @exception Exception
    *              necessaria l'exception per il successo del test
    */
   @Test(expected = InvalidAttributeValueException.class)
@@ -44,7 +47,7 @@ public class ModelStolenCarsTest {
    * Controlla che la creazione di un oggetto {@link StolenCar} con una targa senza tutti i
    * parametri settati dia errore.
    * 
-   * @exception IllegalArgumentException
+   * @exception Exception
    *              necessaria l'exception per il successo del test
    */
   @Test(expected = IllegalArgumentException.class)

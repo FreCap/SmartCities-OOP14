@@ -14,7 +14,7 @@ import java.util.Date;
  * @author Federico Bellini
  *
  */
-public class Sighting implements ISighting {
+public final class Sighting implements ISighting {
 
   private final IStreetObserver streetObserver;
   private final Date date;
@@ -33,7 +33,8 @@ public class Sighting implements ISighting {
    * @param speed
    *          La velocita' rilevata.
    */
-  private Sighting(IStreetObserver streetObserver, Date date, LicensePlate licensePlate, Float speed) {
+  private Sighting(final IStreetObserver streetObserver, final Date date,
+      final LicensePlate licensePlate, final Float speed) {
     this.streetObserver = streetObserver;
     this.date = date;
     this.licensePlate = licensePlate;

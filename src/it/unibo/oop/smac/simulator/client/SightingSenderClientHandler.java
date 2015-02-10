@@ -14,12 +14,12 @@ public class SightingSenderClientHandler extends ChannelInboundHandlerAdapter {
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(SightingSenderClientHandler.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SightingSenderClientHandler.class);
 
   /**
    * Track corrente di cui si vuole simulare il comportamento.
    */
-  public TrackSimulator trackSimulator;
+  private TrackSimulator trackSimulator;
 
   /**
    * Construttore che imposta la track che il client deve seguire.

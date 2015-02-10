@@ -19,7 +19,7 @@ public interface IStolenCarsPanel {
   void attachStolenCarsObserver(IStolenCarsObserver sco);
 
   /**
-   * Restituisce l'{@link IStolenCarsObserver}
+   * Restituisce l'{@link IStolenCarsObserver}.
    * 
    * @return restituisce il {@link IStolenCarsObserver} corrente.
    * @throws IllegalStateException
@@ -38,8 +38,8 @@ public interface IStolenCarsPanel {
    * Questo metodo deve segnalare che c'e' stato un passaggio sotto un'osservatore di una macchina
    * rubata.
    * 
-   * @param sco
+   * @param sighting
    *          L'{@link ISighting} dell'avvistamento della macchina rubata.
    */
-  void newPassageStolenCar(ISighting iSighting);
+  void newPassageStolenCar(ISighting sighting);
 }

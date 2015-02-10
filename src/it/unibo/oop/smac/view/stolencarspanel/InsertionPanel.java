@@ -38,6 +38,9 @@ public class InsertionPanel extends JPanel {
 
   /**
    * Costruttore pubblico della classe.
+   * 
+   * @param stolenCarsPanel
+   *          Pannello padre
    */
   public InsertionPanel(final StolenCarsPanel stolenCarsPanel) {
     super();
@@ -99,6 +102,11 @@ public class InsertionPanel extends JPanel {
     });
   }
 
+  /**
+   * Restituisce il pannello padre
+   * 
+   * @return pannello padre
+   */
   public StolenCarsPanel getStolenCarsPanel() {
     return stolenCarsPanel;
   }

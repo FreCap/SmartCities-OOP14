@@ -10,14 +10,14 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Classe le operazioni effettuate dal server di rete all'invio e alla ricezioni di messaggi dal
- * client
+ * client.
  */
 public class ServerHandler extends ChannelInboundHandlerAdapter {
 
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(ServerHandler.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ServerHandler.class);
 
   /**
    * dispatcher che implementa l'interfaccia Observable per la notifica dei jobs dell'arrivo di un

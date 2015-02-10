@@ -20,7 +20,7 @@ public class TrackSimulator {
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(SightingSenderClient.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SightingSenderClient.class);
 
   /**
    * File contenente i tracks possibili.
@@ -30,17 +30,17 @@ public class TrackSimulator {
   /**
    * Track corrente da seguire.
    */
-  public Track track;
+  private Track track;
 
   /**
    * Posizione del track in cui si trova la macchina in questo istante.
    */
-  public Integer currentIndex = 0;
+  private Integer currentIndex = 0;
 
   /**
    * Targa della macchina di cui si sta simulando lo spostamento.
    */
-  public final LicensePlate licensePlate;
+  private final LicensePlate licensePlate;
 
   /**
    * Azione con cui si genera un nuovo Sighting e l'avanzamento della macchina nel track.

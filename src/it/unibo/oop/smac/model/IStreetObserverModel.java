@@ -38,6 +38,9 @@ public interface IStreetObserverModel {
    * @param sighting
    *          L'{@link ISighting} da aggiungere.
    * @throws StreetObserverNotValidException
+   *           E' stato passato un {@link ISighting} con un {@link IStreetObserver} non valido
+   * @throws IllegalArgumentException
+   *           E' stato passato un {@link ISighting} non valido
    */
   void addSighting(ISighting sighting) throws IllegalArgumentException,
       StreetObserverNotValidException;
@@ -53,6 +56,8 @@ public interface IStreetObserverModel {
    * @throws NotFoundException
    *           Eccezione lanciata nel caso in cui l'{@link IStreetObserver} di cui si vogliono
    *           recuperare le informazioni non fosse presente nel Model dell'applicazione.
+   * @throws IllegalArgumentException
+   *           Richieste le info di uno StreetObserver non valido
    */
   IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver)
       throws IllegalArgumentException, NotFoundException;

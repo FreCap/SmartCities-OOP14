@@ -18,6 +18,9 @@ import java.util.Random;
 
 import org.junit.Test;
 
+/**
+ * Classe che controlla l'interfaccia esposta da {@link StreetObserverModelDatabase}.
+ */
 public class ModelStreetObserverTest {
 
   private Coordinates generateCoordinates() {
@@ -42,6 +45,8 @@ public class ModelStreetObserverTest {
    * 
    * @exception StreetObserverNotValidException
    *              necessaria l'exception per il successo del test
+   * @throws Exception
+   *           l'esecuzione dovrebbe restituire un eccezione
    */
   @Test(expected = StreetObserverNotValidException.class)
   public void testAddNewStreetObserverFail() throws Exception {
@@ -56,9 +61,12 @@ public class ModelStreetObserverTest {
   /**
    * Controllo che il model riesca ad inserire un sighting valido.
    * 
+   * @throws Exception
+   *           l'esecuzione non dovrebbe restituire un eccezioni, se le restituisce qualcosa è
+   *           andato storto e il test fallisce
    */
   @Test
-  public void testAddSighting() {
+  public void testAddSighting() throws Exception {
     final IStreetObserverModel model = StreetObserverModelDatabase.getInstance();
 
     final StreetObserver streetObserver = new StreetObserver(this.generateCoordinates());
@@ -68,42 +76,39 @@ public class ModelStreetObserverTest {
 
     final Sighting sighting = new Sighting.Builder().date(new Date())
         .streetObserver(streetObserver).speed(speed).licensePlate(licensePlate).build();
-    try {
-      model.addSighting(sighting);
-    } catch (Exception e) {
-      fail();
-    }
 
-    try {
-      assertTrue(model.getStreetObserverInfo(streetObserver).getTotalNOfSight().get().equals(1));
-    } catch (Exception e) {
-      fail();
-    }
+    model.addSighting(sighting);
+    assertTrue(model.getStreetObserverInfo(streetObserver).getTotalNOfSight().get().equals(1));
+
   }
 
   /**
    * Controllo che il model NON riesca ad inserire un sighting con streetObserver non valido.
    * 
+   * @throws Exception
+   *           l'esecuzione dovrebbe restituire un eccezione poiché il {@link Sighting.Builder} non
+   *           è stato creato correttamente
    */
-  @Test
-  public void testAddSightingFail() {
+  @Test(expected = Exception.class)
+  public void testAddSightingFail() throws Exception {
     final IStreetObserverModel model = StreetObserverModelDatabase.getInstance();
     final StreetObserver streetObserver = new StreetObserver(this.generateCoordinates());
     model.addNewStreetObserver(streetObserver);
 
-    try {
-      model.addSighting(new Sighting.Builder().build());
-      fail();
-    } catch (Exception e) {
-    }
+    model.addSighting(new Sighting.Builder().build());
+    fail();
   }
 
   /**
    * Controllo che il model restituisca un InfoStreetObserver con dati coerenti a quelli nel
    * database.
+   * 
+   * @throws Exception
+   *           l'esecuzione non dovrebbe restituire un eccezioni, se le restituisce qualcosa è
+   *           andato storto e il test fallisce
    */
   @Test
-  public void testInfoStreetObserver() {
+  public void testInfoStreetObserver() throws Exception {
     final IStreetObserverModel model = StreetObserverModelDatabase.getInstance();
 
     final StreetObserver streetObserver = new StreetObserver(this.generateCoordinates());
@@ -112,21 +117,10 @@ public class ModelStreetObserverTest {
 
     final Sighting sighting = new Sighting.Builder().date(new Date())
         .streetObserver(streetObserver).speed(speed).licensePlate(licensePlate).build();
-    try {
-      model.addSighting(sighting);
-    } catch (Exception e) {
-      fail();
-    }
+    model.addSighting(sighting);
 
-    IInfoStreetObserver infoStreetObserver = null;
-    try {
-      infoStreetObserver = model.getStreetObserverInfo(streetObserver);
-    } catch (Exception e) {
-      fail();
-    }
+    final IInfoStreetObserver infoStreetObserver = model.getStreetObserverInfo(streetObserver);
     assertTrue(infoStreetObserver.getTotalNOfSight().get().equals(1));
-    System.out.println(infoStreetObserver.getAverageSpeedToday());
-    System.out.println(speed);
     assertTrue(infoStreetObserver.getAverageSpeedToday().get().equals(speed));
 
   }

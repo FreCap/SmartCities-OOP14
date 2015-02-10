@@ -24,7 +24,7 @@ public class StolenCarRow implements IStolenCar {
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(Connection.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(Connection.class);
 
   public static final String LICENSEPLATE_FIELD_NAME = "licensePlate";
   public static final String DATAINSERIMENTO_FIELD_NAME = "dataInserimento";

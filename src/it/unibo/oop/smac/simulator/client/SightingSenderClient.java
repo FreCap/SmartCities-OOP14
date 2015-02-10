@@ -23,7 +23,7 @@ public final class SightingSenderClient implements Runnable {
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(SightingSenderClient.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SightingSenderClient.class);
 
   /**
    * Costante dell'indirizzo del server cui collegarsi.
@@ -38,10 +38,10 @@ public final class SightingSenderClient implements Runnable {
   /**
    * Genero in maniera random un nuovo trackSimulator da utilizzare durante la connessione.
    */
-  public final TrackSimulator trackSimulator = new TrackSimulator(LicensePlateGenerator.generate());
+  private final TrackSimulator trackSimulator = new TrackSimulator(LicensePlateGenerator.generate());
 
   /**
-   * Inizializzazione dell'inizializzatore di un nuovo channel (connessione)
+   * Inizializzazione dell'inizializzatore di un nuovo channel (connessione).
    */
   public final ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
     @Override

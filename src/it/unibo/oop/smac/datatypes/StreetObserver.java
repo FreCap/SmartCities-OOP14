@@ -17,6 +17,7 @@ public class StreetObserver implements IStreetObserver {
    * @param streetObserver
    *          L'{@link IStreetObserver} riprodurre.
    * @throws StreetObserverNotValidException
+   *           è stato passato uno {@link IStreetObserver} nullo
    */
   public StreetObserver(final IStreetObserver streetObserver)
       throws StreetObserverNotValidException {
