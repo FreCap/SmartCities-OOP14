@@ -1,6 +1,7 @@
 package it.unibo.oop.smac.view.stolencarspanel;
 
 import it.unibo.oop.smac.controller.IStolenCarsObserver;
+import it.unibo.oop.smac.datatypes.ISighting;
 
 import javax.swing.JPanel;
 
@@ -32,4 +33,13 @@ public interface IStolenCarsPanel {
    * @return Il {@link JPanel}.
    */
   JPanel getPanel();
+
+  /**
+   * Questo metodo deve segnalare che c'e' stato un passaggio sotto un'osservatore di una macchina
+   * rubata.
+   * 
+   * @param sco
+   *          L'{@link ISighting} dell'avvistamento della macchina rubata.
+   */
+  void newPassageStolenCar(ISighting iSighting);
 }

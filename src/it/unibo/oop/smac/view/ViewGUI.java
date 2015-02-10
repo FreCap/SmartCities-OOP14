@@ -2,6 +2,7 @@ package it.unibo.oop.smac.view;
 
 import it.unibo.oop.smac.controller.IStolenCarsObserver;
 import it.unibo.oop.smac.controller.IStreetObserverObserver;
+import it.unibo.oop.smac.datatypes.ISighting;
 import it.unibo.oop.smac.datatypes.IStreetObserver;
 import it.unibo.oop.smac.view.locationpanel.ILocationPanel;
 import it.unibo.oop.smac.view.locationpanel.OpenStreetMapPanel;
@@ -111,6 +112,18 @@ public class ViewGUI extends JFrame implements IView {
   @Override
   public void attachStolenCarsController(final IStolenCarsObserver sco) {
     this.stolenCarsPanel.attachStolenCarsObserver(sco);
+  }
+
+  /**
+   * Questo metodo deve segnalare che c'e' stato un passaggio sotto un'osservatore di una macchina
+   * rubata.
+   * 
+   * @param iSighting
+   *          L'{@link ISighting} dell'avvistamento della macchina rubata.
+   */
+  @Override
+  public void newPassageStolenCar(ISighting iSighting) {
+    this.stolenCarsPanel.newPassageStolenCar(iSighting);
   }
 
 }

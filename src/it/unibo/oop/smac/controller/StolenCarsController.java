@@ -84,7 +84,7 @@ public class StolenCarsController extends Controller implements IStolenCarsObser
 
     // controllo che non si tratti di una rubata
     if (modelStolenCars.checkStolenPlate(sighting.getLicensePlate())) {
-      // TODO crea alarm!! macchina fottuta
+      this.view.newPassageStolenCar(sighting);
     }
   }
 

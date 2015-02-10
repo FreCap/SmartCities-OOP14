@@ -48,7 +48,7 @@ public class LicensePlate implements Serializable {
    *           scatenato quando la targa non è valida
    */
   public LicensePlate(final String licensePlate) throws InvalidAttributeValueException {
-    if (!Pattern.matches("[a-zA-Z]{2}[0-9]{3,4}[a-zA-Z]{2}", licensePlate)) {
+    if (!Pattern.matches("[A-Z]{2}[0-9]{3}[A-Z]{2}", licensePlate)) {
       throw new InvalidAttributeValueException();
     }
     this.licensePlate = licensePlate;

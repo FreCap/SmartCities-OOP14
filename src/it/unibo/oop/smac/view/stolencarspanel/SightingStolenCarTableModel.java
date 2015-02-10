@@ -1,6 +1,6 @@
 package it.unibo.oop.smac.view.stolencarspanel;
 
-import it.unibo.oop.smac.datatypes.IStolenCar;
+import it.unibo.oop.smac.datatypes.ISighting;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,37 +13,36 @@ import javax.swing.table.AbstractTableModel;
 /**
  * Modello che gestisce la visualizzazione dei dati contenuti nel DB delle stolen cars.
  */
-public class StolenCarTableModel extends AbstractTableModel {
+public class SightingStolenCarTableModel extends AbstractTableModel {
 
   private static final long serialVersionUID = 6581624902840366368L;
 
   /**
    * List delle righe che devono essere visualizzate.
    */
-  private List<IStolenCar> stolenCars;
+  private final List<ISighting> sightings;
 
   /**
    * Colonne della tabella.
    */
-  private static final String[] COLUMN_NAMES = { "Id", "License Plate", "Insertion Date" };
+  private static final String[] COLUMN_NAMES = { "Id", "Lic. Plate", "Seen at" };
 
   /**
    * Costruttore che inizializza una tabella vuota.
    */
-  public StolenCarTableModel() {
-    stolenCars = new ArrayList<IStolenCar>();
+  public SightingStolenCarTableModel() {
+    sightings = new ArrayList<ISighting>();
   }
 
   /**
-   * Funzione che permette l'aggiornamento della tabella con nuovi dati.
+   * Funzione che permette l'aggiunta di un nuovo oggetto alla lista.
    * 
-   * @param stolenCars
-   *          nuova lista di {@link IStolenCar}
+   * @param sightings
+   *          nuova lista di {@link ISighting}
    */
-  public void updateList(final List<IStolenCar> stolenCars) {
-    this.stolenCars = stolenCars;
-    final int rowCount = getRowCount();
-    fireTableRowsInserted(rowCount, rowCount);
+  public void insertSighting(final ISighting sighting) {
+    this.sightings.add(sighting);
+    this.fireTableDataChanged();
   }
 
   /**
@@ -54,7 +53,7 @@ public class StolenCarTableModel extends AbstractTableModel {
    */
   @Override
   public int getRowCount() {
-    return stolenCars.size();
+    return sightings.size();
   }
 
   /**
@@ -102,9 +101,9 @@ public class StolenCarTableModel extends AbstractTableModel {
       case 0:
         return row + 1;
       case 1:
-        final SimpleDateFormat dt = new SimpleDateFormat("yy-MM-dd hh:mm",
+        final SimpleDateFormat dt = new SimpleDateFormat("yy-MM-dd HH:mm",
             Locale.getDefault(Locale.Category.FORMAT));
-        final Date current = this.getStolenCars().get(row).getInsertionDate();
+        final Date current = this.getStolenCars().get(row).getDate();
         return dt.format(current);
       case 2:
         return this.getStolenCars().get(row).getLicensePlate();
@@ -116,8 +115,8 @@ public class StolenCarTableModel extends AbstractTableModel {
   /**
    * Getter per la lista delle righe da visualizzare.
    */
-  private List<IStolenCar> getStolenCars() {
-    return stolenCars;
+  private List<ISighting> getStolenCars() {
+    return sightings;
   }
 
 }

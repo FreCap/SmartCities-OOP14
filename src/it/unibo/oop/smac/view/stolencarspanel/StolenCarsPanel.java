@@ -1,6 +1,7 @@
 package it.unibo.oop.smac.view.stolencarspanel;
 
 import it.unibo.oop.smac.controller.IStolenCarsObserver;
+import it.unibo.oop.smac.datatypes.ISighting;
 
 import java.awt.BorderLayout;
 
@@ -30,6 +31,11 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel {
   private final TablePanel tablePanel = new TablePanel(this);
 
   /**
+   * Terzo pannello che gestisce la tabella.
+   */
+  private final LastSeenPanel lastSeenPanel = new LastSeenPanel(this);
+
+  /**
    * Costruttore della classe.
    */
   public StolenCarsPanel() {
@@ -37,8 +43,12 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel {
     this.setLayout(new BorderLayout());
 
     // inserisco i 2 panels nel layout
-    this.add(insertionPanel, BorderLayout.WEST);
+    JPanel innerPanel = new JPanel(new BorderLayout());
+    innerPanel.add(insertionPanel, BorderLayout.NORTH);
+    innerPanel.add(lastSeenPanel, BorderLayout.CENTER);
+
     this.add(tablePanel, BorderLayout.CENTER);
+    this.add(innerPanel, BorderLayout.WEST);
 
   }
 
@@ -76,6 +86,18 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel {
       throw new IllegalStateException();
     }
     return sco;
+  }
+
+  /**
+   * Questo metodo deve segnalare che c'e' stato un passaggio sotto un'osservatore di una macchina
+   * rubata.
+   * 
+   * @param iSighting
+   *          L'{@link ISighting} dell'avvistamento della macchina rubata.
+   */
+  @Override
+  public void newPassageStolenCar(ISighting iSighting) {
+    lastSeenPanel.newPassageStolenCar(iSighting);
   }
 
 }
