@@ -6,10 +6,16 @@ import it.unibo.oop.smac.database.StreetObserverRow;
 import it.unibo.oop.smac.datatypes.IInfoStreetObserver;
 import it.unibo.oop.smac.datatypes.ISighting;
 import it.unibo.oop.smac.datatypes.IStreetObserver;
+import it.unibo.oop.smac.datatypes.InfoStreetObserver;
 import it.unibo.oop.smac.model.IStreetObserverModel;
 
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.j256.ormlite.dao.Dao;
 
@@ -17,10 +23,31 @@ import com.j256.ormlite.dao.Dao;
  * Implementazione dell'interfaccia del Model dell'applicazione. Questa classe astratta si occupa di
  * aggiungere {@link IStreetObserver} e {@link ISighting} nel database, lasciando il compito di
  * ricercare, prelevare ed organizzare i dati quando richiesti alle classi che la estendono.
- * 
- * @author Federico Bellini
  */
-public abstract class StreetObserverModelDatabase implements IStreetObserverModel {
+public class StreetObserverModelDatabase implements IStreetObserverModel {
+
+  /**
+   * Logger della classe
+   */
+  private final static Logger LOGGER = LoggerFactory.getLogger(StreetObserverModelDatabase.class);
+
+  /**
+   * Instanza del Singleton
+   */
+  private static StreetObserverModelDatabase instance;
+
+  /**
+   * Restituisce un'istanza del model del database.
+   * 
+   * @return istanza del model database
+   */
+  public synchronized static StreetObserverModelDatabase getInstance() {
+    if (instance != null) {
+      return instance;
+    }
+    instance = new StreetObserverModelDatabase();
+    return instance;
+  }
 
   /**
    * Inserisce nel database un nuovo {@link IStreetObserver}. Nel caso in cui ci fossero dei
@@ -37,14 +64,16 @@ public abstract class StreetObserverModelDatabase implements IStreetObserverMode
       try {
         streetObserverDao.createIfNotExists(streetObserverRow);
       } catch (SQLException e) {
-        System.err.println("The creation on database of the new SteetObserver " + streetObserver
-            + " is failed!");
+        System.err.println();
+        LOGGER.info("The creation on database of the new SteetObserver {} is failed!",
+            streetObserver, e);
+
       }
       try {
         System.out.println("Reading datas just added: "
             + streetObserverDao.queryForId(streetObserver.getId()));
       } catch (SQLException e) {
-        // do nothing
+        LOGGER.error("Errore del database nell'inserzione di uno street observer", e);
       }
     }
   }
@@ -72,8 +101,9 @@ public abstract class StreetObserverModelDatabase implements IStreetObserverMode
       final SightingRow sightingRow = new SightingRow(sighting, streetObserverRow);
       streetObserverRow.addSightings(sightingRow);
     } catch (NotFoundException e) {
-      // questo non può accadere!
-      e.printStackTrace();
+      // questo non può accadere! perché l'errore è generato solo se lo streetObserver non esiste,
+      // ma se non esistesse, sarebbe creato al passaggio precedente
+      LOGGER.error("Errore del database nell'inserzione di uno sighting", e);
     }
   }
 
@@ -145,9 +175,8 @@ public abstract class StreetObserverModelDatabase implements IStreetObserverMode
   }
 
   /**
-   * Questo metodo deve raccogliere i dati su di un {@link IStreetObserver}, e li deve organizzare
-   * restituendo al chiamante un {@link IInfoStreetObserver} contenente le informazioni
-   * sull'osservstore richiesto.
+   * Questo metodo raccoglie i dati su di un {@link IStreetObserver}, e li organizza restituendo al
+   * chiamante un {@link IInfoStreetObserver} contenente le informazioni sull'osservstore richiesto.
    * 
    * @param streetObserver
    *          L'{@link IStreetObserver} di cui si vogliono recuperare le informazioni.
@@ -159,8 +188,64 @@ public abstract class StreetObserverModelDatabase implements IStreetObserverMode
    *           recuperare le informazioni non fosse presente nel Model dell'applicazione.
    */
   @Override
-  public abstract IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver)
-      throws IllegalArgumentException, NotFoundException;
+  public IInfoStreetObserver getStreetObserverInfo(final IStreetObserver streetObserver)
+      throws NotFoundException {
+    final List<ISighting> sightingRowList = this.getStreetObserverSightings(streetObserver);
+
+    final Calendar lastHour = Calendar.getInstance();
+    lastHour.add(Calendar.HOUR, -1);
+    final Calendar today = Calendar.getInstance();
+    today.set(Calendar.HOUR, 0);
+    today.set(Calendar.MINUTE, 0);
+    today.set(Calendar.SECOND, 0);
+    today.set(Calendar.AM_PM, Calendar.AM);
+    final Calendar lastWeek = Calendar.getInstance();
+    lastWeek.add(Calendar.DATE, -7);
+    final Calendar lastMonth = Calendar.getInstance();
+    lastMonth.add(Calendar.MONTH, -1);
+
+    int sightLastHour = 0;
+    int sightToday = 0;
+    int sightLastWeek = 0;
+    int sightLastMonth = 0;
+    float totalSpeedToday = 0;
+    float totalSpeedLastWeek = 0;
+    float totalSpeedLastMonth = 0;
+    float maxSpeedToday = 0;
+
+    // ricerca ed elaborazione dei dati
+    for (final ISighting s : sightingRowList) {
+      final Date date = s.getDate();
+      if (date.after(lastMonth.getTime())) {
+        sightLastMonth++;
+        totalSpeedLastMonth += s.getSpeed();
+        if (date.after(lastWeek.getTime())) {
+          sightLastWeek++;
+          totalSpeedLastWeek += s.getSpeed();
+          if (date.after(today.getTime())) {
+            sightToday++;
+            totalSpeedToday += s.getSpeed();
+            if (s.getSpeed() > maxSpeedToday) {
+              maxSpeedToday = s.getSpeed();
+            }
+            if (date.after(lastHour.getTime())) {
+              sightLastHour++;
+            }
+          }
+        }
+      }
+    }
+
+    // costruzione dell'oggetto InfoStreetObserver contenente tutte le
+    // informazioni ricavate
+    return new InfoStreetObserver.Builder().streetObserver(streetObserver)
+        .totalNOfSight(sightingRowList.size()).nOfSightLastHour(sightLastHour)
+        .nOfSightToday(sightToday).nOfSightLastWeek(sightLastWeek)
+        .nOfSightLastMonth(sightLastMonth).averageSpeedToday(totalSpeedToday / sightToday)
+        .averageSpeedLastWeek(totalSpeedLastWeek / sightLastWeek)
+        .averageSpeedLastMonth(totalSpeedLastMonth / sightLastMonth).maxSpeedToday(maxSpeedToday)
+        .build();
+  }
 
   /**
    * Restituisce il Dao<> degli streetObserver della classe Connection. Nel caso in cui la classe

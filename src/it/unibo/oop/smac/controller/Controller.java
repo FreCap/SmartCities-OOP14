@@ -1,12 +1,12 @@
 package it.unibo.oop.smac.controller;
 
 import it.unibo.oop.smac.database.model.NotFoundException;
+import it.unibo.oop.smac.database.model.StreetObserverModelDatabase;
 import it.unibo.oop.smac.datatypes.IInfoStreetObserver;
 import it.unibo.oop.smac.datatypes.ISighting;
 import it.unibo.oop.smac.datatypes.IStreetObserver;
 import it.unibo.oop.smac.datatypes.InfoStreetObserver;
 import it.unibo.oop.smac.model.IStreetObserverModel;
-import it.unibo.oop.smac.model.Model;
 import it.unibo.oop.smac.view.IView;
 
 import org.slf4j.Logger;
@@ -38,7 +38,7 @@ public class Controller implements IController {
    *          L'oggetto che implementa la View dell'applicazione
    */
   public Controller(final IView view) {
-    model = Model.getInstance();
+    model = StreetObserverModelDatabase.getInstance();
     this.view = view;
     this.view.attachStreetObserverController(this);
   }

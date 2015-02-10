@@ -84,7 +84,7 @@ public class StolenCarModelDatabase implements IStolenCarModel {
   }
 
   @Override
-  public synchronized void addNewStolenCar(StolenCar stolenCar) {
+  public synchronized void addNewStolenCar(final StolenCar stolenCar) {
     if (!this.checkStolenPlate(stolenCar.getLicensePlate())) {
       final StolenCarRow stolenCarRow = new StolenCarRow(stolenCar);
       Dao<StolenCarRow, Integer> stolenCarDao = null;

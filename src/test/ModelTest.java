@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import it.unibo.oop.smac.database.model.StreetObserverModelDatabase;
 import it.unibo.oop.smac.database.model.StreetObserverNotValidException;
 import it.unibo.oop.smac.datatypes.Coordinates;
 import it.unibo.oop.smac.datatypes.IInfoStreetObserver;
@@ -10,7 +11,6 @@ import it.unibo.oop.smac.datatypes.LicensePlate;
 import it.unibo.oop.smac.datatypes.Sighting;
 import it.unibo.oop.smac.datatypes.StreetObserver;
 import it.unibo.oop.smac.model.IStreetObserverModel;
-import it.unibo.oop.smac.model.Model;
 import it.unibo.oop.smac.simulator.client.LicensePlateGenerator;
 
 import java.util.Date;
@@ -31,7 +31,7 @@ public class ModelTest {
    */
   @Test
   public void testAddNewStreetObserver() {
-    final IStreetObserverModel model = Model.getInstance();
+    final IStreetObserverModel model = StreetObserverModelDatabase.getInstance();
     final StreetObserver streetObserver = new StreetObserver(this.generateCoordinates());
     model.addNewStreetObserver(streetObserver);
     assertTrue(model.checkStreetObserverExists(streetObserver));
@@ -45,7 +45,7 @@ public class ModelTest {
    */
   @Test(expected = StreetObserverNotValidException.class)
   public void testAddNewStreetObserverFail() throws Exception {
-    final IStreetObserverModel model = Model.getInstance();
+    final IStreetObserverModel model = StreetObserverModelDatabase.getInstance();
     StreetObserver streetObserver = null;
     streetObserver = new StreetObserver((IStreetObserver) null);
 
@@ -59,7 +59,7 @@ public class ModelTest {
    */
   @Test
   public void testAddSighting() {
-    final IStreetObserverModel model = Model.getInstance();
+    final IStreetObserverModel model = StreetObserverModelDatabase.getInstance();
 
     final StreetObserver streetObserver = new StreetObserver(this.generateCoordinates());
     final float speed = 44f;
@@ -87,7 +87,7 @@ public class ModelTest {
    */
   @Test
   public void testAddSightingFail() {
-    final IStreetObserverModel model = Model.getInstance();
+    final IStreetObserverModel model = StreetObserverModelDatabase.getInstance();
     final StreetObserver streetObserver = new StreetObserver(this.generateCoordinates());
     model.addNewStreetObserver(streetObserver);
 
@@ -104,7 +104,7 @@ public class ModelTest {
    */
   @Test
   public void testInfoStreetObserver() {
-    final IStreetObserverModel model = Model.getInstance();
+    final IStreetObserverModel model = StreetObserverModelDatabase.getInstance();
 
     final StreetObserver streetObserver = new StreetObserver(this.generateCoordinates());
     final Float speed = 44f;

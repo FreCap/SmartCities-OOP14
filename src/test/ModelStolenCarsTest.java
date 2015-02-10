@@ -1,10 +1,10 @@
 package test;
 
 import static org.junit.Assert.assertTrue;
+import it.unibo.oop.smac.database.model.StolenCarModelDatabase;
 import it.unibo.oop.smac.datatypes.LicensePlate;
 import it.unibo.oop.smac.datatypes.StolenCar;
 import it.unibo.oop.smac.model.IStolenCarModel;
-import it.unibo.oop.smac.model.ModelStolenCars;
 
 import javax.management.InvalidAttributeValueException;
 
@@ -73,7 +73,7 @@ public class ModelStolenCarsTest {
    */
   @Test
   public void testNewStolenCar() throws Exception {
-    final IStolenCarModel modelStolenCars = ModelStolenCars.getInstance();
+    final IStolenCarModel modelStolenCars = StolenCarModelDatabase.getInstance();
 
     final StolenCar stolenCar = new StolenCar.Builder().licensePlate(VALID_LICENSEPLATE)
         .insertionDateNow().build();
@@ -91,7 +91,7 @@ public class ModelStolenCarsTest {
    */
   @Test
   public void testGetStolenCarsInfoList() throws Exception {
-    final IStolenCarModel modelStolenCars = ModelStolenCars.getInstance();
+    final IStolenCarModel modelStolenCars = StolenCarModelDatabase.getInstance();
 
     final StolenCar stolenCar = new StolenCar.Builder().licensePlate(VALID_LICENSEPLATE)
         .insertionDateNow().build();

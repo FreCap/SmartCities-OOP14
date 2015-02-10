@@ -1,11 +1,11 @@
 package it.unibo.oop.smac.controller;
 
+import it.unibo.oop.smac.database.model.StolenCarModelDatabase;
 import it.unibo.oop.smac.datatypes.ISighting;
 import it.unibo.oop.smac.datatypes.IStolenCar;
 import it.unibo.oop.smac.datatypes.IStreetObserver;
 import it.unibo.oop.smac.datatypes.StolenCar;
 import it.unibo.oop.smac.model.IStolenCarModel;
-import it.unibo.oop.smac.model.ModelStolenCars;
 import it.unibo.oop.smac.view.IView;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class StolenCarsController extends Controller implements IStolenCarsObser
     super(view);
 
     // inizializza il model
-    modelStolenCars = ModelStolenCars.getInstance();
+    modelStolenCars = StolenCarModelDatabase.getInstance();
 
     // macchina aggiunta per test per dare una impatto visivo alla tabella
     try {
