@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.test.model;
+package test;
 
 import static org.junit.Assert.assertTrue;
 import it.unibo.oop.smac.datatypes.LicensePlate;

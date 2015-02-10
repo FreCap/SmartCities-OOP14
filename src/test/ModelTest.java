@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.test.model;
+package test;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -11,7 +11,7 @@ import it.unibo.oop.smac.datatypes.Sighting;
 import it.unibo.oop.smac.datatypes.StreetObserver;
 import it.unibo.oop.smac.model.IStreetObserverModel;
 import it.unibo.oop.smac.model.Model;
-import it.unibo.oop.smac.test.client.LicensePlateGenerator;
+import it.unibo.oop.smac.simulator.client.LicensePlateGenerator;
 
 import java.util.Date;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.test.client;
+package it.unibo.oop.smac.simulator.client;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

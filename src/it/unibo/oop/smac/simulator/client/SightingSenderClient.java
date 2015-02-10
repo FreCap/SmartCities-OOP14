@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.test.client;
+package it.unibo.oop.smac.simulator.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;

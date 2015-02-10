@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.test.client;
+package it.unibo.oop.smac.simulator.client;
 
 import java.util.List;
 

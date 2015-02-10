@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.test.client;
+package it.unibo.oop.smac.simulator.client;
 
 import it.unibo.oop.smac.datatypes.LicensePlate;
 import it.unibo.oop.smac.utils.RandomStringGenerator;

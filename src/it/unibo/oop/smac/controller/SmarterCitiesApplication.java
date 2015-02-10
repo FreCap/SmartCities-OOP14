@@ -1,7 +1,7 @@
 package it.unibo.oop.smac.controller;
 
 import it.unibo.oop.smac.network.NetServer;
-import it.unibo.oop.smac.test.client.SightingSenderClient;
+import it.unibo.oop.smac.simulator.client.SightingSenderClient;
 import it.unibo.oop.smac.view.ViewGUI;
 
 /**

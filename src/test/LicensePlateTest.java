@@ -1,7 +1,7 @@
-package it.unibo.oop.smac.test.model;
+package test;
 
 import it.unibo.oop.smac.datatypes.LicensePlate;
-import it.unibo.oop.smac.test.client.LicensePlateGenerator;
+import it.unibo.oop.smac.simulator.client.LicensePlateGenerator;
 
 import javax.management.InvalidAttributeValueException;
 
