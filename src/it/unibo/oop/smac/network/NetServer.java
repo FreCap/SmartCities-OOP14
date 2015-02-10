@@ -19,71 +19,70 @@ import java.util.Observable;
 
 public final class NetServer {
 
-	/**
-	 * Costante della porta del server su cui offrire il servizio
-	 */
-	public static final int PORT = Integer.parseInt(System.getProperty("port", "8007"));
+  /**
+   * Costante della porta del server su cui offrire il servizio.
+   */
+  public static final int PORT = Integer.parseInt(System.getProperty("port", "8007"));
 
-	/**
-	 * Dispatcher che notifica i jobs che l'osservano alla ricezione di
-	 * pacchetti da parte della rete
-	 */
-	private final Observable dispatcher;
+  /**
+   * Dispatcher che notifica i jobs che l'osservano alla ricezione di pacchetti da parte della rete.
+   */
+  private final Observable dispatcher;
 
-	/**
-	 * Costruttore della classe
-	 * 
-	 * @param controller
-	 */
-	public NetServer(final IController controller) {
-		this.dispatcher = new Dispatcher(controller);
-		dispatcher.addObserver(new ControllerSightingSender());
-		this.run();
-	}
+  /**
+   * Costruttore della classe.
+   * 
+   * @param controller
+   *          dell'applicazione su cui verranno richiamate le funzioni di segnalazione all'arrivo di
+   *          eventi dalla rete
+   */
+  public NetServer(final IController controller) {
+    this.dispatcher = new Dispatcher(controller);
+    dispatcher.addObserver(new ControllerSightingSender());
+    this.run();
+  }
 
-	/**
-	 * Inizializzazione dell'inizializzatore di un nuovo channel (connessione)
-	 */
-	public ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
-		@Override
-		public void initChannel(final SocketChannel ch) throws Exception {
-			final ChannelPipeline p = ch.pipeline();
+  /**
+   * Inizializzazione dell'inizializzatore di un nuovo channel (connessione).
+   */
+  public ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
+    @Override
+    public void initChannel(final SocketChannel ch) throws Exception {
+      final ChannelPipeline p = ch.pipeline();
 
-			p.addLast(new ObjectEncoder(),
-					new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
-					new ServerHandler(dispatcher));
-		}
-	};
+      p.addLast(new ObjectEncoder(), new ObjectDecoder(ClassResolvers.cacheDisabled(null)),
+          new ServerHandler(dispatcher));
+    }
+  };
 
-	/**
-	 * Metodo che fa partire il processo server
-	 */
-	private void run() {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				// inizializza i workers per gestire le connessioni entranti
-				// secondo la tecnica NIO (Nonblocking server)
-				final EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-				final EventLoopGroup workerGroup = new NioEventLoopGroup();
-				try {
-					// inizializzo i parametri di connessione
-					final ServerBootstrap b = new ServerBootstrap();
-					b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
-							.handler(new LoggingHandler(LogLevel.INFO))
-							.childHandler(channelInitializer);
+  /**
+   * Metodo che fa partire il processo server.
+   */
+  private void run() {
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        // inizializza i workers per gestire le connessioni entranti
+        // secondo la tecnica NIO (Nonblocking server)
+        final EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+        final EventLoopGroup workerGroup = new NioEventLoopGroup();
+        try {
+          // inizializzo i parametri di connessione
+          final ServerBootstrap b = new ServerBootstrap();
+          b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
+              .handler(new LoggingHandler(LogLevel.INFO)).childHandler(channelInitializer);
 
-					// Binda la porta e inizia ad accettare le connessioni dai
-					// client
-					b.bind(PORT).sync().channel().closeFuture().sync();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} finally {
-					bossGroup.shutdownGracefully();
-					workerGroup.shutdownGracefully();
-				}
-			}
-		}).start();
-	}
+          // Binda la porta e inizia ad accettare le connessioni dai
+          // client
+          b.bind(PORT).sync().channel().closeFuture().sync();
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        } finally {
+          bossGroup.shutdownGracefully();
+          workerGroup.shutdownGracefully();
+        }
+      }
+    }).start();
+  }
 
 }

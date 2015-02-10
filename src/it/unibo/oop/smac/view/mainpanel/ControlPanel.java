@@ -14,67 +14,65 @@ import javax.swing.border.TitledBorder;
 
 /**
  * Questa classe implementa un JScrollPane che deve mostrare una sequenza di
- * {@link StreetObserverPanel}
+ * {@link StreetObserverPanel}.
  * 
  * @author Federico Bellini
  */
 public class ControlPanel extends JScrollPane {
 
-	private static final long serialVersionUID = -6541769613294971397L;
+  private static final long serialVersionUID = -6541769613294971397L;
 
-	// velocita' di scrolling del JScrollPane personalizzata
-	private static final int CUSTOM_SCROLLING = 30;
+  // velocita' di scrolling del JScrollPane personalizzata
+  private static final int CUSTOM_SCROLLING = 30;
 
-	// panel contenente tutti gli StreetObserverPanel
-	private final JPanel panel = new JPanel();
+  // panel contenente tutti gli StreetObserverPanel
+  private final JPanel panel = new JPanel();
 
-	/**
-	 * Map che ha come chiave l'id dello streetObserver, e come valore il
-	 * riferimento al relativo StreetObserverPanel. Questa memorizzazione e'
-	 * necessaria per richiamare il metodo displayPassage della classe
-	 * StreetObserverPanel sul giusto pannello.
-	 */
-	private final Map<String, StreetObserverPanel> streetObserversMap = new HashMap<>();
+  /**
+   * Map che ha come chiave l'id dello streetObserver, e come valore il riferimento al relativo
+   * StreetObserverPanel. Questa memorizzazione e' necessaria per richiamare il metodo
+   * displayPassage della classe StreetObserverPanel sul giusto pannello.
+   */
+  private final Map<String, StreetObserverPanel> streetObserversMap = new HashMap<>();
 
-	/**
-	 * Costruttore pubblico della classe.
-	 */
-	public ControlPanel() {
-		super();
-		this.setBorder(new TitledBorder("Observers"));
-		this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.Y_AXIS));
-		this.getVerticalScrollBar().setUnitIncrement(CUSTOM_SCROLLING);
-		this.getViewport().add(panel);
-	}
+  /**
+   * Costruttore pubblico della classe.
+   */
+  public ControlPanel() {
+    super();
+    this.setBorder(new TitledBorder("Observers"));
+    this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.Y_AXIS));
+    this.getVerticalScrollBar().setUnitIncrement(CUSTOM_SCROLLING);
+    this.getViewport().add(panel);
+  }
 
-	/**
-	 * Aggiunge uno streetObserver alla sequenza.
-	 * 
-	 * @param streetObserver
-	 *            L'{@link IStreetObserver} da aggiungere.
-	 * @param consumer
-	 *            L'observer da attaccare al panel contenente l'
-	 *            {@link IStreetObserver} passato come primo paramentro.
-	 */
-	public void addStreetObserver(final IStreetObserver streetObserver,
-			final Consumer<IStreetObserver> consumer) {
-		final StreetObserverPanel p = new StreetObserverPanel(streetObserver, consumer);
-		SwingUtilities.invokeLater(() -> this.panel.add(p));
-		this.streetObserversMap.put(streetObserver.getID(), p);
-	}
+  /**
+   * Aggiunge uno streetObserver alla sequenza.
+   * 
+   * @param streetObserver
+   *          L'{@link IStreetObserver} da aggiungere.
+   * @param consumer
+   *          L'observer da attaccare al panel contenente l' {@link IStreetObserver} passato come
+   *          primo paramentro.
+   */
+  public void addStreetObserver(final IStreetObserver streetObserver,
+      final Consumer<IStreetObserver> consumer) {
+    final StreetObserverPanel p = new StreetObserverPanel(streetObserver, consumer);
+    SwingUtilities.invokeLater(() -> this.panel.add(p));
+    this.streetObserversMap.put(streetObserver.getId(), p);
+  }
 
-	/**
-	 * Mostra che un'{@link IStreetObserver} ha rilevato dei dati.
-	 * 
-	 * @param streetObserver
-	 *            L'{@link IStreetObserver} che ha rilevato i dati.
-	 */
-	public void notifyPassage(final IStreetObserver streetObserver) {
-		if (this.streetObserversMap.containsKey(streetObserver.getID())) {
-			final StreetObserverPanel panel = this.streetObserversMap.get(streetObserver
-					.getID());
-			panel.displayPassage();
-		}
-	};
+  /**
+   * Mostra che un'{@link IStreetObserver} ha rilevato dei dati.
+   * 
+   * @param streetObserver
+   *          L'{@link IStreetObserver} che ha rilevato i dati.
+   */
+  public void notifyPassage(final IStreetObserver streetObserver) {
+    if (this.streetObserversMap.containsKey(streetObserver.getId())) {
+      final StreetObserverPanel panel = this.streetObserversMap.get(streetObserver.getId());
+      panel.displayPassage();
+    }
+  }
 
 }

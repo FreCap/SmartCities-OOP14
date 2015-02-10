@@ -14,66 +14,65 @@ import javax.swing.Timer;
 import javax.swing.border.TitledBorder;
 
 /**
- * Classe che implementa un pannello che mostra la tabella delle macchine rubate
+ * Classe che implementa un pannello che mostra la tabella delle macchine rubate.
  * 
  */
 public class TablePanel extends JPanel {
 
-	private static final long serialVersionUID = -7140640507027357573L;
+  private static final long serialVersionUID = -7140640507027357573L;
 
-	/**
-	 * E' il modello dei dati visualizzati nella tabella
-	 */
-	private final StolenCarTableModel stolenCarTableModel;
+  /**
+   * E' il modello dei dati visualizzati nella tabella.
+   */
+  private final StolenCarTableModel stolenCarTableModel;
 
-	/**
-	 * parent che contiene i metodi d'accesso (e gestione degli errori) al model
-	 */
-	private final IStolenCarsPanel stolenCarsPanel;
+  /**
+   * parent che contiene i metodi d'accesso (e gestione degli errori) al model.
+   */
+  private final IStolenCarsPanel stolenCarsPanel;
 
-	/**
-	 * Costruttore pubblico della classe.
-	 * 
-	 * @param stolenCarsPanel
-	 */
-	public TablePanel(final StolenCarsPanel stolenCarsPanel) {
-		super();
-		// imposto il layout
-		this.setBorder(new TitledBorder("Dati"));
-		this.setLayout(new FlowLayout());
+  /**
+   * Costruttore pubblico della classe.
+   * 
+   * @param stolenCarsPanel
+   */
+  public TablePanel(final StolenCarsPanel stolenCarsPanel) {
+    super();
+    // imposto il layout
+    this.setBorder(new TitledBorder("Dati"));
+    this.setLayout(new FlowLayout());
 
-		// salvo il model per un utilizzo successivo
-		this.stolenCarsPanel = stolenCarsPanel;
-		this.add(new JLabel("informaioni sulle macchine rubate"));
+    // salvo il model per un utilizzo successivo
+    this.stolenCarsPanel = stolenCarsPanel;
+    this.add(new JLabel("informaioni sulle macchine rubate"));
 
-		// inizializzo la classe che andrà a gestire i dati nel model
-		stolenCarTableModel = new StolenCarTableModel();
-		// creo la tabella con i dati
-		final JTable table = new JTable(stolenCarTableModel);
-		table.setEnabled(false);
-		this.add(new JScrollPane(table));
+    // inizializzo la classe che andrà a gestire i dati nel model
+    stolenCarTableModel = new StolenCarTableModel();
+    // creo la tabella con i dati
+    final JTable table = new JTable(stolenCarTableModel);
+    table.setEnabled(false);
+    this.add(new JScrollPane(table));
 
-		// imposto un timer che ogni X mi aggiorna i dati nella tabella
-		final Timer timer = new Timer(2000, new ActionListener() {
+    // imposto un timer che ogni X mi aggiorna i dati nella tabella
+    final Timer timer = new Timer(2000, new ActionListener() {
 
-			@Override
-			public void actionPerformed(final ActionEvent e) {
-				try {
-					IStolenCarsObserver sco = getStolenCarsPanel()
-							.getStolenCarsObserver();
-					stolenCarTableModel.updateList(sco.getStolenCarsInfoList());
-				} catch (IllegalStateException exception) {
-					// not an error
-				}
-			}
-		});
-		timer.setRepeats(true);
-		timer.setDelay(2000);
-		timer.start();
-	}
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        try {
+          IStolenCarsObserver sco = getStolenCarsPanel().getStolenCarsObserver();
+          stolenCarTableModel.updateList(sco.getStolenCarsInfoList());
+        } catch (IllegalStateException exception) {
+          // not an error
+        }
+      }
+    });
+    timer.setRepeats(true);
+    timer.setDelay(2000);
+    timer.start();
+  }
 
-	public IStolenCarsPanel getStolenCarsPanel() {
-		return stolenCarsPanel;
-	}
+  public IStolenCarsPanel getStolenCarsPanel() {
+    return stolenCarsPanel;
+  }
 
 }

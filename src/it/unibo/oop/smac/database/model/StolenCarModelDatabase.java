@@ -15,82 +15,84 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
 public class StolenCarModelDatabase implements IStolenCarModel {
-	private static StolenCarModelDatabase instance;
+  private static StolenCarModelDatabase instance;
 
-	public synchronized static StolenCarModelDatabase getInstance() {
-		if (instance != null) {
-			return instance;
-		}
-		instance = new StolenCarModelDatabase();
-		return instance;
-	}
+  /**
+   * Restituisce un'istanza del model del database.
+   * 
+   * @return istanza del model database
+   */
+  public synchronized static StolenCarModelDatabase getInstance() {
+    if (instance != null) {
+      return instance;
+    }
+    instance = new StolenCarModelDatabase();
+    return instance;
+  }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<IStolenCar> getStolenCarsInfoList() {
-		List<StolenCarRow> stolenCars = null;
-		Dao<StolenCarRow, Integer> stolenCarDao = null;
-		try {
-			stolenCarDao = Connection.getInstance().getStolenCarDao();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			stolenCars = stolenCarDao.queryForAll();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return (List<IStolenCar>) (List<?>) stolenCars;
-	}
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<IStolenCar> getStolenCarsInfoList() {
+    List<StolenCarRow> stolenCars = null;
+    Dao<StolenCarRow, Integer> stolenCarDao = null;
+    try {
+      stolenCarDao = Connection.getInstance().getStolenCarDao();
+    } catch (SQLException e1) {
+      // TODO Auto-generated catch block
+      e1.printStackTrace();
+    }
+    try {
+      stolenCars = stolenCarDao.queryForAll();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return (List<IStolenCar>) (List<?>) stolenCars;
+  }
 
-	@Override
-	public Boolean checkStolenPlate(final LicensePlate licensePlate) {
-		Dao<StolenCarRow, Integer> stolenCarDao = null;
-		try {
-			stolenCarDao = Connection.getInstance().getStolenCarDao();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		final QueryBuilder<StolenCarRow, Integer> statementBuilder = stolenCarDao
-				.queryBuilder();
-		List<StolenCarRow> exist = new ArrayList<StolenCarRow>();
-		try {
-			List<StolenCarRow> stolenCars = stolenCarDao
-					.query(statementBuilder.prepare());
-			statementBuilder.where().eq(StolenCarRow.LICENSEPLATE_FIELD_NAME,
-					licensePlate.toString());
+  @Override
+  public Boolean checkStolenPlate(final LicensePlate licensePlate) {
+    Dao<StolenCarRow, Integer> stolenCarDao = null;
+    try {
+      stolenCarDao = Connection.getInstance().getStolenCarDao();
+    } catch (SQLException e1) {
+      // TODO Auto-generated catch block
+      e1.printStackTrace();
+    }
+    final QueryBuilder<StolenCarRow, Integer> statementBuilder = stolenCarDao.queryBuilder();
+    List<StolenCarRow> exist = new ArrayList<StolenCarRow>();
+    try {
+      List<StolenCarRow> stolenCars = stolenCarDao.query(statementBuilder.prepare());
+      statementBuilder.where().eq(StolenCarRow.LICENSEPLATE_FIELD_NAME, licensePlate.toString());
 
-			exist = stolenCarDao.query(statementBuilder.prepare());
+      exist = stolenCarDao.query(statementBuilder.prepare());
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
 
-		return !exist.isEmpty();
-	}
+    return !exist.isEmpty();
+  }
 
-	@Override
-	public synchronized void addNewStolenCar(StolenCar stolenCar) {
-		if (!this.checkStolenPlate(stolenCar.getLicensePlate())) {
-			StolenCarRow stolenCarDB = new StolenCarRow(stolenCar);
-			Dao<StolenCarRow, Integer> stolenCarDao = null;
-			try {
-				stolenCarDao = Connection.getInstance().getStolenCarDao();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			try {
-				stolenCarDao.createIfNotExists(stolenCarDB);
-			} catch (SQLException e) {
-				System.err.println("The creation on database of the new StolenCar "
-						+ stolenCarDB + " is failed!");
-				System.exit(1);
-			}
+  @Override
+  public synchronized void addNewStolenCar(StolenCar stolenCar) {
+    if (!this.checkStolenPlate(stolenCar.getLicensePlate())) {
+      final StolenCarRow stolenCarRow = new StolenCarRow(stolenCar);
+      Dao<StolenCarRow, Integer> stolenCarDao = null;
+      try {
+        stolenCarDao = Connection.getInstance().getStolenCarDao();
+      } catch (SQLException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+      }
+      try {
+        stolenCarDao.createIfNotExists(stolenCarRow);
+      } catch (SQLException e) {
+        System.err.println("The creation on database of the new StolenCar " + stolenCarRow
+            + " is failed!");
+        System.exit(1);
+      }
 
-		}
-	}
+    }
+  }
 
 }

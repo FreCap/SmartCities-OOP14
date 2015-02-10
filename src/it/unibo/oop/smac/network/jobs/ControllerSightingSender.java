@@ -13,32 +13,30 @@ import java.util.Observer;
 import javax.management.InvalidAttributeValueException;
 
 /**
- * Classe implementata con il pattern Observer che alla ricezione da parte di un
- * client di un messaggio di sighting, notifica il controller
+ * Classe implementata con il pattern Observer che alla ricezione da parte di un client di un
+ * messaggio di sighting, notifica il controller.
  */
 public class ControllerSightingSender implements Observer {
 
-	@Override
-	public void update(final Observable o, final Object arg) {
-		if (arg instanceof PlainSighting) {
-			final PlainSighting sighting = (PlainSighting) arg;
-			final StreetObserver streetObserver = new StreetObserver(
-					sighting.getCoordinates());
+  @Override
+  public void update(final Observable observable, final Object arg) {
+    if (arg instanceof PlainSighting) {
+      final PlainSighting netSighting = (PlainSighting) arg;
+      final StreetObserver streetObserver = new StreetObserver(netSighting.getCoordinates());
 
-			ISighting s = null;
-			try {
-				s = new Sighting.Builder().date(sighting.getDate())
-						.streetObserver(streetObserver).speed(sighting.getSpeed())
-						.licensePlate(new LicensePlate(sighting.getLicensePlate()))
-						.build();
-				final Dispatcher dispatcher = (Dispatcher) o;
-				dispatcher.getController().newPassage(streetObserver, s);
-			} catch (InvalidAttributeValueException e) {
-				// Targa non valida, interrompo la notifica
-				e.printStackTrace();
-			}
+      ISighting sighting = null;
+      try {
+        sighting = new Sighting.Builder().date(netSighting.getDate())
+            .streetObserver(streetObserver).speed(netSighting.getSpeed())
+            .licensePlate(new LicensePlate(netSighting.getLicensePlate())).build();
+        final Dispatcher dispatcher = (Dispatcher) observable;
+        dispatcher.getController().newPassage(streetObserver, sighting);
+      } catch (InvalidAttributeValueException e) {
+        // Targa non valida, interrompo la notifica
+        e.printStackTrace();
+      }
 
-		}
-	}
+    }
+  }
 
 }

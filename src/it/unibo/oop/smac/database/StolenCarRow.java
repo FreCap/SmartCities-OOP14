@@ -15,51 +15,53 @@ import com.j256.ormlite.table.DatabaseTable;
 // TODO per fra
 @DatabaseTable(tableName = "StolenCar")
 public class StolenCarRow implements IStolenCar {
-	public static final String LICENSEPLATE_FIELD_NAME = "licensePlate";
-	public static final String DATAINSERIMENTO_FIELD_NAME = "dataInserimento";
+  public static final String LICENSEPLATE_FIELD_NAME = "licensePlate";
+  public static final String DATAINSERIMENTO_FIELD_NAME = "dataInserimento";
 
-	@DatabaseField(generatedId = true)
-	private int id;
+  @DatabaseField(generatedId = true)
+  private int id;
 
-	@DatabaseField(columnName = LICENSEPLATE_FIELD_NAME, dataType = DataType.STRING)
-	private String licensePlate;
+  @DatabaseField(columnName = LICENSEPLATE_FIELD_NAME, dataType = DataType.STRING)
+  private String licensePlate;
 
-	@DatabaseField(columnName = DATAINSERIMENTO_FIELD_NAME, canBeNull = false)
-	private final Date dataInserimento;
+  @DatabaseField(columnName = DATAINSERIMENTO_FIELD_NAME, canBeNull = false)
+  private final Date dataInserimento;
 
-	StolenCarRow() {
-		this(new LicensePlate());
-	}
+  StolenCarRow() {
+    this(new LicensePlate());
+  }
 
-	public StolenCarRow(final LicensePlate licensePlate) {
-		setLicensePlate(licensePlate);
-		this.dataInserimento = new Date();
-	}
+  public StolenCarRow(final LicensePlate licensePlate) {
+    setLicensePlate(licensePlate);
+    this.dataInserimento = new Date();
+  }
 
-	public StolenCarRow(final StolenCar stolenCar) {
-		setLicensePlate(stolenCar.getLicensePlate());
-		this.dataInserimento = stolenCar.getInsertionDate();
-	}
+  public StolenCarRow(final StolenCar stolenCar) {
+    setLicensePlate(stolenCar.getLicensePlate());
+    this.dataInserimento = stolenCar.getInsertionDate();
+  }
 
-	public LicensePlate getLicensePlate() {
-		LicensePlate response = null;
-		try {
-			response = new LicensePlate(licensePlate);
-		} catch (InvalidAttributeValueException e) {
-			// non può succede visto che se viene creata una copia difensiva di
-			// un oggetto già esistente, e quindi di cui è stato convalidato il
-			// valore
-			e.printStackTrace();
-		}
-		return response;
-	}
+  @Override
+  public LicensePlate getLicensePlate() {
+    LicensePlate response = null;
+    try {
+      response = new LicensePlate(licensePlate);
+    } catch (InvalidAttributeValueException e) {
+      // non può succede visto che se viene creata una copia difensiva di
+      // un oggetto già esistente, e quindi di cui è stato convalidato il
+      // valore
+      e.printStackTrace();
+    }
+    return response;
+  }
 
-	public void setLicensePlate(final LicensePlate licensePlate) {
-		this.licensePlate = licensePlate.toString();
-	}
+  public void setLicensePlate(final LicensePlate licensePlate) {
+    this.licensePlate = licensePlate.toString();
+  }
 
-	public Date getInsertionDate() {
-		return dataInserimento;
-	}
+  @Override
+  public Date getInsertionDate() {
+    return dataInserimento;
+  }
 
 }

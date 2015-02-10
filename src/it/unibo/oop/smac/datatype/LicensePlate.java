@@ -12,78 +12,76 @@ import javax.management.InvalidAttributeValueException;
  */
 public class LicensePlate implements Serializable {
 
-	private static final long serialVersionUID = -194344929770325193L;
-	
-	/**
-	 * contenitore della valore della targa
-	 */
-	private final String licensePlate;
+  private static final long serialVersionUID = -194344929770325193L;
 
-	/**
-	 * Costruttore che crea una nuova LicensePlate, con la targa di test
-	 * "AA000AA".
-	 */
-	public LicensePlate() {
-		this.licensePlate = "AA000AA";
-	}
+  /**
+   * contenitore della valore della targa
+   */
+  private final String licensePlate;
 
-	/**
-	 * Costruttore che crea una nuova LicensePlate, copia di quella passata come
-	 * parametro.
-	 * 
-	 * @param licensePlate
-	 *            La LicensePlate di cui creare una copia.
-	 * @throws InvalidAttributeValueException
-	 *             scatenato quando la targa non è valida
-	 */
-	public LicensePlate(final LicensePlate licensePlate) throws InvalidAttributeValueException {
-		this(licensePlate.getPlate());
-	}
+  /**
+   * Costruttore che crea una nuova LicensePlate, con la targa di test "AA000AA".
+   */
+  public LicensePlate() {
+    this.licensePlate = "AA000AA";
+  }
 
-	/**
-	 * Coostruttore che crea una nuova LicensePlate impostando la stringa
-	 * passata come parametro come targa del mezzo.
-	 * 
-	 * @param licensePlate
-	 *            La targa che si vuole impostare.
-	 * @throws InvalidAttributeValueException
-	 *             scatenato quando la targa non è valida
-	 */
-	public LicensePlate(final String licensePlate) throws InvalidAttributeValueException {
-		if (!Pattern.matches("[a-zA-Z]{2}[0-9]{3,4}[a-zA-Z]{2}", licensePlate)) {
-			throw new InvalidAttributeValueException();
-		}
-		this.licensePlate = licensePlate;
-	}
+  /**
+   * Costruttore che crea una nuova LicensePlate, copia di quella passata come parametro.
+   * 
+   * @param licensePlate
+   *          La LicensePlate di cui creare una copia.
+   * @throws InvalidAttributeValueException
+   *           scatenato quando la targa non è valida
+   */
+  public LicensePlate(final LicensePlate licensePlate) throws InvalidAttributeValueException {
+    this(licensePlate.getPlate());
+  }
 
-	/**
-	 * Restituisce una stringa contenente la targa del mezzo.
-	 * 
-	 * @return La targa del mezzo.
-	 */
-	public String getPlate() {
-		return this.licensePlate;
-	}
+  /**
+   * Coostruttore che crea una nuova LicensePlate impostando la stringa passata come parametro come
+   * targa del mezzo.
+   * 
+   * @param licensePlate
+   *          La targa che si vuole impostare.
+   * @throws InvalidAttributeValueException
+   *           scatenato quando la targa non è valida
+   */
+  public LicensePlate(final String licensePlate) throws InvalidAttributeValueException {
+    if (!Pattern.matches("[a-zA-Z]{2}[0-9]{3,4}[a-zA-Z]{2}", licensePlate)) {
+      throw new InvalidAttributeValueException();
+    }
+    this.licensePlate = licensePlate;
+  }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((licensePlate == null) ? 0 : licensePlate.hashCode());
-		return result;
-	}
+  /**
+   * Restituisce una stringa contenente la targa del mezzo.
+   * 
+   * @return La targa del mezzo.
+   */
+  public String getPlate() {
+    return this.licensePlate;
+  }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj instanceof LicensePlate) {
-			return this.getPlate().equals(((LicensePlate) obj).getPlate());
-		}
-		return false;
-	}
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((licensePlate == null) ? 0 : licensePlate.hashCode());
+    return result;
+  }
 
-	@Override
-	public String toString() {
-		return this.getPlate();
-	}
+  @Override
+  public boolean equals(final Object obj) {
+    if (obj instanceof LicensePlate) {
+      return this.getPlate().equals(((LicensePlate) obj).getPlate());
+    }
+    return false;
+  }
+
+  @Override
+  public String toString() {
+    return this.getPlate();
+  }
 
 }

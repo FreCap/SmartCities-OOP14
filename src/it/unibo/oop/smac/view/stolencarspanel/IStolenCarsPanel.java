@@ -9,27 +9,27 @@ import javax.swing.JPanel;
  */
 public interface IStolenCarsPanel {
 
-	/**
-	 * Attacca un {@link IStolenCarsObserver} degli StolenCars.
-	 * 
-	 * @param sco
-	 *            L'{@link IStolenCarsObserver} da attaccare.
-	 */
-	void attachStolenCarsObserver(IStolenCarsObserver sco);
+  /**
+   * Attacca un {@link IStolenCarsObserver} degli StolenCars.
+   * 
+   * @param sco
+   *          L'{@link IStolenCarsObserver} da attaccare.
+   */
+  void attachStolenCarsObserver(IStolenCarsObserver sco);
 
-	/**
-	 * Restituisce l'Observer
-	 * 
-	 * @return restituisce il {@link IStolenCarsObserver} corrente.
-	 * @throws IllegalStateException
-	 *             nel caso in cui non ci sia ancora alcun observer
-	 */
-	IStolenCarsObserver getStolenCarsObserver() throws IllegalStateException;
+  /**
+   * Restituisce l'{@link IStolenCarsObserver}
+   * 
+   * @return restituisce il {@link IStolenCarsObserver} corrente.
+   * @throws IllegalStateException
+   *           nel caso in cui non ci sia ancora alcun observer
+   */
+  IStolenCarsObserver getStolenCarsObserver() throws IllegalStateException;
 
-	/**
-	 * Restituisce il JPanel.
-	 * 
-	 * @return Il JPanel.
-	 */
-	JPanel getPanel();
+  /**
+   * Restituisce il {@link JPanel}.
+   * 
+   * @return Il {@link JPanel}.
+   */
+  JPanel getPanel();
 }
