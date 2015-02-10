@@ -30,6 +30,16 @@ public class TablePanel extends JPanel {
   private static final int DELAY = 1000;
 
   /**
+   * Profondita' della finestra.
+   */
+  private static final int WIDTH = 29;
+
+  /**
+   * Altezza della finestra.
+   */
+  private static final int HEIGHT = 63;
+
+  /**
    * Observer delle auto rubate.
    */
   private IStolenCarsObserver stolenCarsObserver;
@@ -47,9 +57,8 @@ public class TablePanel extends JPanel {
     // creo la tabella con i dati
     final StolenCarTable stolenCarTable = new StolenCarTable();
     final JTable table = new JTable(stolenCarTable);
-    table.setPreferredSize(new Dimension(
-        (Toolkit.getDefaultToolkit().getScreenSize().width / 100) * 29, (Toolkit
-            .getDefaultToolkit().getScreenSize().height / 100) * 63));
+    table.setPreferredSize(new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width / 100)
+        * WIDTH, (Toolkit.getDefaultToolkit().getScreenSize().height / 100) * HEIGHT));
     table.setPreferredScrollableViewportSize(table.getPreferredSize());
     final JScrollPane jScrollPane = new JScrollPane(table);
     jScrollPane.setViewportView(table);
