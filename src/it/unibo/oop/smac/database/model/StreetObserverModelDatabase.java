@@ -9,6 +9,7 @@ import it.unibo.oop.smac.datatypes.IStreetObserver;
 import it.unibo.oop.smac.model.IStreetObserverModel;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.j256.ormlite.dao.Dao;
 
@@ -85,7 +86,7 @@ public abstract class StreetObserverModelDatabase implements IStreetObserverMode
    * @return True se esiste, false altrimenti.
    */
   @Override
-  public boolean checkStreetObserverExists(IStreetObserver streetObserver) {
+  public boolean checkStreetObserverExists(final IStreetObserver streetObserver) {
     final Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
     try {
       return streetObserverDao.queryForId(streetObserver.getId()) != null;
@@ -121,6 +122,26 @@ public abstract class StreetObserverModelDatabase implements IStreetObserverMode
     } else {
       throw new NotFoundException("The observer is not present");
     }
+  }
+
+  /**
+   * Questo metodo restituisce la lista di {@link ISighting} avvistati dallo {@link IStreetObserver}
+   * . Se si verificano dei problemi di lettura nel database, l'applicazione termina.
+   * 
+   * @param streetObserver
+   *          L'{@link IStreetObserver} da cercare.
+   * @return Una lista di {@link ISighting} corrispondenti all' {@link IStreetObserver} passato.
+   * 
+   * @throws NotFoundException
+   *           Eccezione lanciata nel caso in cui l'{@link IStreetObserver} di cui si vogliono
+   *           recuperare le informazioni non fosse presente nel Model dell'applicazione.
+   */
+  @SuppressWarnings("unchecked")
+  protected List<ISighting> getStreetObserverSightings(final IStreetObserver streetObserver)
+      throws NotFoundException {
+    final StreetObserverRow streetObserverRow = this.getStreetObserverRow(streetObserver);
+    final List<SightingRow> sightingRowList = streetObserverRow.getSightingsList();
+    return (List<ISighting>) (List<?>) sightingRowList;
   }
 
   /**

@@ -1,10 +1,9 @@
 package it.unibo.oop.smac.model;
 
-import it.unibo.oop.smac.database.SightingRow;
-import it.unibo.oop.smac.database.StreetObserverRow;
 import it.unibo.oop.smac.database.model.NotFoundException;
 import it.unibo.oop.smac.database.model.StreetObserverModelDatabase;
 import it.unibo.oop.smac.datatypes.IInfoStreetObserver;
+import it.unibo.oop.smac.datatypes.ISighting;
 import it.unibo.oop.smac.datatypes.IStreetObserver;
 import it.unibo.oop.smac.datatypes.InfoStreetObserver;
 
@@ -58,8 +57,7 @@ public final class Model extends StreetObserverModelDatabase implements IStreetO
   @Override
   public IInfoStreetObserver getStreetObserverInfo(final IStreetObserver streetObserver)
       throws NotFoundException {
-    final StreetObserverRow streetObserverRow = super.getStreetObserverRow(streetObserver);
-    final List<SightingRow> sightingRowList = streetObserverRow.getSightingsList();
+    final List<ISighting> sightingRowList = super.getStreetObserverSightings(streetObserver);
 
     final Calendar lastHour = Calendar.getInstance();
     lastHour.add(Calendar.HOUR, -1);
@@ -83,7 +81,7 @@ public final class Model extends StreetObserverModelDatabase implements IStreetO
     float maxSpeedToday = 0;
 
     // ricerca ed elaborazione dei dati
-    for (final SightingRow s : sightingRowList) {
+    for (final ISighting s : sightingRowList) {
       final Date date = s.getDate();
       if (date.after(lastMonth.getTime())) {
         sightLastMonth++;
@@ -107,7 +105,7 @@ public final class Model extends StreetObserverModelDatabase implements IStreetO
 
     // costruzione dell'oggetto InfoStreetObserver contenente tutte le
     // informazioni ricavate
-    return new InfoStreetObserver.Builder().streetObserver(streetObserverRow)
+    return new InfoStreetObserver.Builder().streetObserver(streetObserver)
         .totalNOfSight(sightingRowList.size()).nOfSightLastHour(sightLastHour)
         .nOfSightToday(sightToday).nOfSightLastWeek(sightLastWeek)
         .nOfSightLastMonth(sightLastMonth).averageSpeedToday(totalSpeedToday / sightToday)
