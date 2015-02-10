@@ -3,12 +3,9 @@ package it.unibo.oop.smac.view.stolencarspanel;
 import it.unibo.oop.smac.controller.IStolenCarsObserver;
 import it.unibo.oop.smac.datatypes.StolenCar;
 
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.FlowLayout;
 
 import javax.management.InvalidAttributeValueException;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -31,70 +28,50 @@ public class InsertionPanel extends JPanel {
    */
   private IStolenCarsObserver stolenCarsObserver;
 
-  // campi da visualizzare nella form
-  private final JLabel labelTarga = new JLabel("License Plate:");
-  private final JTextField fieldTarga = new JTextField("AB918AD");
-  private final JButton buttonAggiungi = new JButton("Add");
+  /**
+   * Label per l'inserimento delle targhe
+   */
+  private final JLabel labelPlate = new JLabel("Insert license plate:");
+
+  /**
+   * Text field per l'inserimento delle targhe.
+   */
+  private final JTextField fieldPlate = new JTextField(7);
+
+  /**
+   * Button per l'inserimento dell'auto rubata.
+   */
+  private final JButton addButton = new JButton("Add stolen car");
 
   /**
    * Costruttore pubblico della classe.
-   * 
-   * @param stolenCarsPanel
-   *          Pannello padre
    */
-  public InsertionPanel(final StolenCarsPanel stolenCarsPanel) {
+  public InsertionPanel() {
     super();
+    this.setBorder(new TitledBorder("Insert a new stolen car into the stolen cars list"));
+    this.setLayout(new FlowLayout());
 
-    // imposto il layout
-    final GroupLayout layout = new GroupLayout(this);
-    this.setLayout(layout);
-    this.setPreferredSize(new Dimension(300, 200));
-    this.setBorder(new TitledBorder("Inserisci"));
+    this.add(this.labelPlate);
+    this.add(this.fieldPlate);
+    this.add(this.addButton);
 
-    layout.setAutoCreateGaps(true);
-    layout.setAutoCreateContainerGaps(true);
+    // inserimento di una nuova auto rubata quando viene premuto il pulsante addButton.
+    addButton.addActionListener((e) -> {
+      final String licensePlate = fieldPlate.getText();
+      try {
+        final StolenCar stolenCar = new StolenCar.Builder().licensePlate(fieldPlate.getText())
+            .insertionDateNow().build();
 
-    fieldTarga.setSize(new Dimension(200, 50));
-
-    // imposto il posizionamento degli elementi nel layout
-    labelTarga.setLabelFor(fieldTarga);
-    layout.setHorizontalGroup(layout
-        .createSequentialGroup()
-        .addComponent(labelTarga)
-        .addGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(fieldTarga)
-                .addComponent(buttonAggiungi)));
-    layout.setVerticalGroup(layout
-        .createSequentialGroup()
-        .addGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(labelTarga)
-                .addComponent(fieldTarga)).addComponent(buttonAggiungi));
-
-    // listener che permmette l'inserzione di una nuova macchina rubata al
-    // press del tasto aggiungi
-    buttonAggiungi.addActionListener(new ActionListener() {
-
-      private void invalidLicensePlateMsg(final String licensePlate) {
+        stolenCarsObserver.addNewStolenCar(stolenCar);
+      } catch (InvalidAttributeValueException exception) {
+        // nel caso in cui la targa non sia corretta, informo l'utente.
         final String msg = new StringBuilder()
             .append("Error inserting a new stolen car license plate: ")
-            .append("\n " + licensePlate + " is not valid.").append("\n AA000AA is a valid one.")
-            .toString();
+            .append("\n " + licensePlate + " is not valid.")
+            .append("\n The format AA000AA is a valid one.").toString();
 
-        JOptionPane.showOptionDialog(null, msg, "Insertion Erro", JOptionPane.CLOSED_OPTION,
+        JOptionPane.showOptionDialog(null, msg, "Insertion Error", JOptionPane.CLOSED_OPTION,
             JOptionPane.INFORMATION_MESSAGE, null, null, null);
-      }
-
-      @Override
-      public void actionPerformed(final ActionEvent event) {
-        final String licensePlate = fieldTarga.getText();
-        try {
-          final StolenCar stolenCar = new StolenCar.Builder().licensePlate(fieldTarga.getText())
-              .insertionDateNow().build();
-
-          stolenCarsObserver.addNewStolenCar(stolenCar);
-        } catch (InvalidAttributeValueException e1) {
-          invalidLicensePlateMsg(licensePlate);
-        }
       }
     });
   }
@@ -102,7 +79,7 @@ public class InsertionPanel extends JPanel {
   /**
    * Attacca l'Observer degli StolenCars.
    * 
-   * @param stolenCarsObserver
+   * @param sco
    *          L'{@link IStolenCarsObserver} da attaccare.
    */
   public void attachStolenCarsObserver(final IStolenCarsObserver sco) {

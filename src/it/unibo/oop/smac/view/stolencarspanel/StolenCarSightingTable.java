@@ -17,14 +17,14 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Francesco Capponi
  */
-public class SightingStolenCarTableModel extends AbstractTableModel {
+public class StolenCarSightingTable extends AbstractTableModel {
 
   private static final long serialVersionUID = 6581624902840366368L;
 
   /**
    * Logger della classe
    */
-  private static final Logger LOGGER = LoggerFactory.getLogger(SightingStolenCarTableModel.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(StolenCarSightingTable.class);
   /**
    * Nomi delle colonne della tabella.
    */
@@ -38,7 +38,7 @@ public class SightingStolenCarTableModel extends AbstractTableModel {
   /**
    * Costruttore che inizializza una tabella vuota.
    */
-  public SightingStolenCarTableModel() {
+  public StolenCarSightingTable() {
     super();
     sightings = new ArrayList<ISighting>();
   }

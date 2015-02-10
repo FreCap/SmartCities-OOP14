@@ -2,6 +2,7 @@ package it.unibo.oop.smac.view.stolencarspanel;
 
 import it.unibo.oop.smac.controller.IStolenCarsObserver;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JLabel;
@@ -36,19 +37,22 @@ public class TablePanel extends JPanel {
    */
   public TablePanel() {
     super();
-    this.setBorder(new TitledBorder("Datas"));
+    this.setBorder(new TitledBorder("Stolen Cars Database"));
     this.setLayout(new FlowLayout());
 
     this.add(new JLabel("Informations on Stolen Cars"));
 
-    // inizializzo la classe che andrà a gestire i dati del model
-    final StolenCarTable stolenCarTableModel = new StolenCarTable();
     // creo la tabella con i dati
-    final JTable table = new JTable(stolenCarTableModel);
+    final StolenCarTable stolenCarTable = new StolenCarTable();
+    final JTable table = new JTable(stolenCarTable);
     table.setEnabled(false);
-    this.add(new JScrollPane(table));
+    table.setMaximumSize(new Dimension(10, 10));
+    JScrollPane sp = new JScrollPane(table);
+    sp.setMaximumSize(new Dimension(10, 10));
+    this.add(sp);
+
     // imposto un timer che aggiorna i dati nella tabella ad intervalli di tempo stabiliti
-    final Timer timer = new Timer(DELAY, (e) -> stolenCarTableModel.updateList(stolenCarsObserver
+    final Timer timer = new Timer(DELAY, (e) -> stolenCarTable.updateList(stolenCarsObserver
         .getStolenCarsInfoList()));
     timer.setRepeats(true);
     timer.setDelay(DELAY);

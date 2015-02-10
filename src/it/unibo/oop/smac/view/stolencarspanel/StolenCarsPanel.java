@@ -20,7 +20,7 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel {
   /**
    * Primo pannello che gestisce l'inserimento delle auto rubate nel database.
    */
-  private final InsertionPanel insertionPanel = new InsertionPanel(this);
+  private final InsertionPanel insertionPanel = new InsertionPanel();
 
   /**
    * Pannello che gestisce una tabella che mostra la lista di auto rubate.
@@ -30,7 +30,7 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel {
   /**
    * Pannello che mostra i dati sulle auto rubate quando esse vengono avvistate.
    */
-  private final LastSeenPanel lastSeenPanel = new LastSeenPanel(this);
+  private final StolenCarSightPanel lastSeenPanel = new StolenCarSightPanel();
 
   /**
    * Costruttore pubblico della classe.
