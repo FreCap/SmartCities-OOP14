@@ -18,7 +18,7 @@ import java.util.Random;
 
 import org.junit.Test;
 
-public class ModelTest {
+public class ModelStreetObserverTest {
 
   private Coordinates generateCoordinates() {
     final Random rand = new Random();

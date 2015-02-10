@@ -55,7 +55,7 @@ public class StolenCarModelDatabase implements IStolenCarModel {
     try {
       stolenCars = stolenCarDao.queryForAll();
     } catch (SQLException e) {
-      LOGGER.error("Database query error ", e);
+      LOGGER.error("Error fetching Stolen cars list", e);
     }
     return (List<IStolenCar>) (List<?>) stolenCars;
   }
