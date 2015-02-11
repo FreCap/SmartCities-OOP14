@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
 
-public class StolenCarModelDatabase implements IStolenCarModel {
+public class StolenCarModelDatabase extends StreetObserverModelDatabase implements IStolenCarModel {
 
   /**
    * Logger della classe

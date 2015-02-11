@@ -12,7 +12,7 @@ import java.util.List;
  * 
  * @author Francesco Capponi
  */
-public interface IStolenCarModel {
+public interface IStolenCarModel extends IStreetObserverModel {
 
   /**
    * Restituisce la lista delle {@link IStolenCar} contenute in memoria.
