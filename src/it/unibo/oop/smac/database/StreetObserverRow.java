@@ -17,6 +17,7 @@ import com.j256.ormlite.table.DatabaseTable;
 /**
  * Classe che implementa un'{@link IStreetObserver} da salvare nel database.
  * 
+ * @author Francesco Capponi
  * @author Federico Bellini
  */
 @DatabaseTable(tableName = "StreetObserver")
@@ -128,7 +129,7 @@ public class StreetObserverRow implements IStreetObserver {
 
   @Override
   public int hashCode() {
-    final int prime = (1 << 5) - 1;
+    final int prime = (1 << 3) - 1;
     int result = 1;
     result = prime * result + ((coordinates == null) ? 0 : coordinates.hashCode());
     result = prime * result + ((id == null) ? 0 : id.hashCode());

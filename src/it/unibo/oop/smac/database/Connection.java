@@ -13,6 +13,9 @@ import com.j256.ormlite.table.TableUtils;
 
 /**
  * Classe che permette la connessione al database, e la creazione delle tabelle.
+ * 
+ * @author Francesco Capponi
+ * @author Federico Bellini
  */
 public final class Connection {
 
@@ -31,7 +34,9 @@ public final class Connection {
    */
   private static Connection instance;
 
-  // tabelle gestite
+  /**
+   * tabelle gestite
+   */
   private Dao<SightingRow, Integer> sightingDao;
   private Dao<StolenCarRow, Integer> stolenCarDao;
   private Dao<StreetObserverRow, String> streetObserverDao;
@@ -55,12 +60,13 @@ public final class Connection {
    * @throws SQLException
    *           potrebbe fallire nell'inizializzazione della connessione
    */
-  public static synchronized Connection getInstance() throws SQLException {
-    if (instance != null) {
+  public static Connection getInstance() throws SQLException {
+    synchronized (Connection.class) {
+      if (instance == null) {
+        instance = new Connection();
+      }
       return instance;
     }
-    instance = new Connection();
-    return instance;
   }
 
   /**

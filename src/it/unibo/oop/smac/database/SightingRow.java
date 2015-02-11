@@ -14,6 +14,7 @@ import com.j256.ormlite.table.DatabaseTable;
 /**
  * Classe che implementa un'{@link ISighting} da salvare nel database.
  * 
+ * @author Francesco Capponi
  * @author Federico Bellini
  */
 @DatabaseTable(tableName = "Sighting")
@@ -61,11 +62,11 @@ public class SightingRow implements ISighting {
    * 
    * @param sighting
    *          L'{@link ISighting} rilevato dall'osservatore.
-   * @param streetObserverRow
+   * @param stObserverRow
    *          L'osservatore che ha compiuto l'avvistamento.
    */
-  public SightingRow(final ISighting sighting, final StreetObserverRow streetObserverRow) {
-    this.streetObserverRow = streetObserverRow;
+  public SightingRow(final ISighting sighting, final StreetObserverRow stObserverRow) {
+    this.streetObserverRow = stObserverRow;
     this.date = sighting.getDate();
     this.licensePlate = sighting.getLicensePlate();
     this.speed = sighting.getSpeed();
@@ -99,7 +100,7 @@ public class SightingRow implements ISighting {
 
   @Override
   public int hashCode() {
-    final int prime = (1 << 5) - 1;
+    final int prime = (1 << 3) - 1;
     int result = 1;
     result = prime * result + ((date == null) ? 0 : date.hashCode());
     result = prime * result + id;
