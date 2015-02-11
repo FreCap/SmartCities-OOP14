@@ -1,6 +1,6 @@
 package it.unibo.oop.smac.controller;
 
-import it.unibo.oop.smac.database.model.NotFoundException;
+import it.unibo.oop.smac.database.model.DatabaseNotFoundException;
 import it.unibo.oop.smac.database.model.StreetObserverModelDatabase;
 import it.unibo.oop.smac.datatypes.IInfoStreetObserver;
 import it.unibo.oop.smac.datatypes.ISighting;
@@ -97,7 +97,7 @@ public class Controller implements IController {
     IInfoStreetObserver info;
     try {
       info = model.getStreetObserverInfo(streetObserver);
-    } catch (IllegalArgumentException | NotFoundException e) {
+    } catch (IllegalArgumentException | DatabaseNotFoundException e) {
       LOGGER.error("Error in fetching data ", e);
       // in caso di malfunzionamenti restituisco un info vuota
       info = new InfoStreetObserver.Builder().build();

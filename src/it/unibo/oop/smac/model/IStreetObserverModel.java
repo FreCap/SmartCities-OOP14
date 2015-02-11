@@ -1,6 +1,6 @@
 package it.unibo.oop.smac.model;
 
-import it.unibo.oop.smac.database.model.NotFoundException;
+import it.unibo.oop.smac.database.model.DatabaseNotFoundException;
 import it.unibo.oop.smac.database.model.StreetObserverNotValidException;
 import it.unibo.oop.smac.datatypes.IInfoStreetObserver;
 import it.unibo.oop.smac.datatypes.ISighting;
@@ -53,12 +53,12 @@ public interface IStreetObserverModel {
    *          L'{@link IStreetObserver} di cui si vogliono recuperare le informazioni.
    * @return Un oggetto del tipo {@link IInfoStreetObserver} contenente le informazioni sull'
    *         {@link IStreetObserver} richiesto.
-   * @throws NotFoundException
+   * @throws DatabaseNotFoundException
    *           Eccezione lanciata nel caso in cui l'{@link IStreetObserver} di cui si vogliono
    *           recuperare le informazioni non fosse presente nel Model dell'applicazione.
    * @throws IllegalArgumentException
    *           Richieste le info di uno StreetObserver non valido
    */
   IInfoStreetObserver getStreetObserverInfo(IStreetObserver streetObserver)
-      throws IllegalArgumentException, NotFoundException;
+      throws IllegalArgumentException, DatabaseNotFoundException;
 }

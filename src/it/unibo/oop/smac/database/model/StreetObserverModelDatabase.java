@@ -7,11 +7,13 @@ import it.unibo.oop.smac.datatypes.IInfoStreetObserver;
 import it.unibo.oop.smac.datatypes.ISighting;
 import it.unibo.oop.smac.datatypes.IStreetObserver;
 import it.unibo.oop.smac.datatypes.InfoStreetObserver;
+import it.unibo.oop.smac.datatypes.Sighting;
 import it.unibo.oop.smac.model.IStreetObserverModel;
 
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -20,9 +22,11 @@ import org.slf4j.LoggerFactory;
 import com.j256.ormlite.dao.Dao;
 
 /**
- * Implementazione dell'interfaccia del Model dell'applicazione. Questa classe astratta si occupa di
- * aggiungere {@link IStreetObserver} e {@link ISighting} nel database, lasciando il compito di
- * ricercare, prelevare ed organizzare i dati quando richiesti alle classi che la estendono.
+ * Implementazione dell'interfaccia del Model dell'applicazione. Questa classe si occupa di
+ * aggiungere {@link IStreetObserver} e {@link ISighting} nel database, e di restituire le
+ * informazioni in esso contenute. Questa classe utilizza il pattern Singleton.
+ * 
+ * @author Federico Bellini
  */
 public class StreetObserverModelDatabase implements IStreetObserverModel {
 
@@ -41,39 +45,39 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
    * 
    * @return istanza del model database
    */
-  public static synchronized StreetObserverModelDatabase getInstance() {
-    if (instance != null) {
+  public static StreetObserverModelDatabase getInstance() {
+    synchronized (StreetObserverModelDatabase.class) {
+      if (instance == null) {
+        instance = new StreetObserverModelDatabase();
+      }
       return instance;
     }
-    instance = new StreetObserverModelDatabase();
-    return instance;
   }
 
   /**
-   * Inserisce nel database un nuovo {@link IStreetObserver}. Nel caso in cui ci fossero dei
-   * problemi nell'inserimento nel database di questo osservatore, l'applicazione termina.
+   * Inserisce nel database un nuovo {@link IStreetObserver}. Questo metodo e' thread-safe.
    * 
    * @param streetObserver
    *          L'{@link IStreetObserver} da inserire.
    */
   @Override
-  public synchronized void addNewStreetObserver(final IStreetObserver streetObserver) {
-    if (!this.checkStreetObserverExists(streetObserver)) {
-      final StreetObserverRow streetObserverRow = new StreetObserverRow(streetObserver);
-      final Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
-      try {
-        streetObserverDao.createIfNotExists(streetObserverRow);
-      } catch (SQLException e) {
-        System.err.println();
-        LOGGER.info("The creation on database of the new SteetObserver {} is failed!",
-            streetObserver, e);
-
-      }
-      try {
-        System.out.println("Reading datas just added: "
-            + streetObserverDao.queryForId(streetObserver.getId()));
-      } catch (SQLException e) {
-        LOGGER.error("Errore del database nell'inserzione di uno street observer", e);
+  public void addNewStreetObserver(final IStreetObserver streetObserver) {
+    synchronized (StreetObserverModelDatabase.class) {
+      if (!this.checkStreetObserverExists(streetObserver)) {
+        final StreetObserverRow streetObserverRow = new StreetObserverRow(streetObserver);
+        final Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
+        try {
+          streetObserverDao.create(streetObserverRow);
+        } catch (SQLException e) {
+          LOGGER.error("The creation on database of the new SteetObserver {} is failed!",
+              streetObserver, e);
+        }
+        try {
+          System.out.println("Reading datas just added: "
+              + streetObserverDao.queryForId(streetObserver.getId()));
+        } catch (SQLException e) {
+          LOGGER.error("Error reading from database of data just added ", e);
+        }
       }
     }
   }
@@ -84,26 +88,26 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
    * @param sighting
    *          L'{@link ISighting} da inserire.
    * @throws StreetObserverNotValidException
-   *           se viene passato un sighting con streetObserver errato
+   *           Se viene passato un sighting con streetObserver nullo.
    */
   @Override
   public void addSighting(final ISighting sighting) throws StreetObserverNotValidException {
-    // controllo se l'osservatore è presente, altrimenti lo aggiungo
+    // controllo sullo streetObserver
     if (sighting.getStreetObserver() == null) {
       throw new StreetObserverNotValidException();
     }
+    // se non è mai stato inserito prima, lo faccio ora
     if (!this.checkStreetObserverExists(sighting.getStreetObserver())) {
       this.addNewStreetObserver(sighting.getStreetObserver());
     }
+    // aggiungo un nuovo sighting alla lista di sighting dello streetObserver
     try {
       final StreetObserverRow streetObserverRow = this.getStreetObserverRow(sighting
           .getStreetObserver());
       final SightingRow sightingRow = new SightingRow(sighting, streetObserverRow);
       streetObserverRow.addSightings(sightingRow);
-    } catch (NotFoundException e) {
-      // questo non può accadere! perché l'errore è generato solo se lo streetObserver non esiste,
-      // ma se non esistesse, sarebbe creato al passaggio precedente
-      LOGGER.error("Errore del database nell'inserzione di uno sighting", e);
+    } catch (DatabaseNotFoundException e) {
+      LOGGER.error("Errore del database nell'inserzione di un sighting", e);
     }
   }
 
@@ -127,51 +131,51 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
 
   /**
    * Questo metodo restituisce lo {@link StreetObserverRow} corrispondente all'
-   * {@link IStreetObserver} passato come argomento. Se si verificano dei problemi di lettura nel
-   * database, l'applicazione termina.
+   * {@link IStreetObserver} passato come argomento.
    * 
    * @param streetObserver
    *          L'{@link IStreetObserver} da cercare.
    * @return Un oggetto {@link StreetObserverRow} corrispondente all' {@link IStreetObserver}
    *         passato.
    * 
-   * @throws NotFoundException
+   * @throws DatabaseNotFoundException
    *           Eccezione lanciata nel caso in cui l'{@link IStreetObserver} di cui si vogliono
    *           recuperare le informazioni non fosse presente nel Model dell'applicazione.
    */
   protected StreetObserverRow getStreetObserverRow(final IStreetObserver streetObserver)
-      throws NotFoundException {
+      throws DatabaseNotFoundException {
     if (this.checkStreetObserverExists(streetObserver)) {
       final Dao<StreetObserverRow, String> streetObserverDao = this.getStreetObserverDao();
       try {
         return streetObserverDao.queryForId(streetObserver.getId());
       } catch (SQLException e) {
-        System.err.println("Problems occured in database");
+        LOGGER.error("Problems occured in database", e);
         return null;
       }
     } else {
-      throw new NotFoundException("The observer is not present");
+      throw new DatabaseNotFoundException("The observer is not present");
     }
   }
 
   /**
-   * Questo metodo restituisce la lista di {@link ISighting} avvistati dallo {@link IStreetObserver}
-   * . Se si verificano dei problemi di lettura nel database, l'applicazione termina.
+   * Questo metodo restituisce la lista di {@link ISighting} avvistati dall'osservatore richiesto.
    * 
    * @param streetObserver
-   *          L'{@link IStreetObserver} da cercare.
-   * @return Una lista di {@link ISighting} corrispondenti all' {@link IStreetObserver} passato.
-   * 
-   * @throws NotFoundException
+   *          L'{@link IStreetObserver} di cui si vogliono conoscere gli avvistamenti.
+   * @return La lista di {@link ISighting} rilevati dall'{@link IStreetObserver}.
+   * @throws DatabaseNotFoundException
    *           Eccezione lanciata nel caso in cui l'{@link IStreetObserver} di cui si vogliono
    *           recuperare le informazioni non fosse presente nel Model dell'applicazione.
    */
-  @SuppressWarnings("unchecked")
   protected List<ISighting> getStreetObserverSightings(final IStreetObserver streetObserver)
-      throws NotFoundException {
+      throws DatabaseNotFoundException {
     final StreetObserverRow streetObserverRow = this.getStreetObserverRow(streetObserver);
     final List<SightingRow> sightingRowList = streetObserverRow.getSightingsList();
-    return (List<ISighting>) (List<?>) sightingRowList;
+    final List<ISighting> out = new LinkedList<>();
+    sightingRowList.forEach((elem) -> out.add(new Sighting.Builder()
+        .streetObserver(elem.getStreetObserver()).date(elem.getDate())
+        .licensePlate(elem.getLicensePlate()).speed(elem.getSpeed()).build()));
+    return out;
   }
 
   /**
@@ -183,14 +187,17 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
    * @return Un oggetto del tipo {@link IInfoStreetObserver} contenente le informazioni sull'
    *         {@link IStreetObserver} richiesto.
    * 
-   * @throws NotFoundException
+   * @throws DatabaseNotFoundException
    *           Eccezione lanciata nel caso in cui l'{@link IStreetObserver} di cui si vogliono
-   *           recuperare le informazioni non fosse presente nel Model dell'applicazione.
+   *           recuperare le informazioni non fosse presente nel database.
    */
   @Override
   public IInfoStreetObserver getStreetObserverInfo(final IStreetObserver streetObserver)
-      throws NotFoundException {
-    final List<ISighting> sightingRowList = this.getStreetObserverSightings(streetObserver);
+      throws DatabaseNotFoundException {
+    if (!this.checkStreetObserverExists(streetObserver)) {
+      throw new DatabaseNotFoundException("The street observer " + streetObserver
+          + "does not exist! ");
+    }
 
     final Calendar lastHour = Calendar.getInstance();
     lastHour.add(Calendar.HOUR, -1);
@@ -213,7 +220,9 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
     float totalSpeedLastMonth = 0;
     float maxSpeedToday = 0;
 
+    // TODO manca da elaborare la max car rate
     // ricerca ed elaborazione dei dati
+    final List<ISighting> sightingRowList = this.getStreetObserverSightings(streetObserver);
     for (final ISighting s : sightingRowList) {
       final Date date = s.getDate();
       if (date.after(lastMonth.getTime())) {
@@ -248,10 +257,7 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
   }
 
   /**
-   * Restituisce il Dao<> degli streetObserver della classe Connection. Nel caso in cui la classe
-   * Connection lanciasse un eccezione di tipo SQLException, l'intera applicazione viene fatta
-   * terminare, poiche' significa che qualche operazione nella creazione o nella gestione del
-   * database non ha avuto successo, e quindi il programma deve terminare.
+   * Restituisce il Dao<> degli streetObserver della classe Connection.
    * 
    * @return Il Dao<> richiesto.
    */
@@ -259,7 +265,7 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
     try {
       return Connection.getInstance().getStreetObserverDao();
     } catch (SQLException e) {
-      System.err.println(e);
+      LOGGER.error("Fatal error: streetObserver can not be created in the database ", e);
       return null;
     }
   }

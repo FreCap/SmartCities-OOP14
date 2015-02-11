@@ -1,10 +1,11 @@
 package it.unibo.oop.smac.database.model;
 
 /**
- * Eccezione lanciata quando non vengono trovati dati nel database.
+ * Eccezione lanciata quando non vengono trovati i dati richiesti nel database.
  * 
+ * @author Francesco Capponi
  */
-public class NotFoundException extends Exception {
+public class DatabaseNotFoundException extends Exception {
 
   private static final long serialVersionUID = 5160048105729180736L;
 
@@ -14,7 +15,7 @@ public class NotFoundException extends Exception {
    * @param text
    *          Stringa con messaggio da visualizzare.
    */
-  public NotFoundException(final String text) {
+  public DatabaseNotFoundException(final String text) {
     super(text);
   }
 
