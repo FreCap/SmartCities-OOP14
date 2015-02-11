@@ -12,13 +12,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Implementazione concreta di un {@link MyMapMarker}. Questa implementazione restituisce come
+ * Implementazione concreta di un {@link AbstractMapMarker}. Questa implementazione restituisce come
  * immagine per il MapMarker un pin di colore verde. Implementazione secondo il pattern Template
  * Method.
  * 
  * @author Federico Bellini
  */
-public class GreenMapMarker extends MyMapMarker {
+public class GreenMapMarker extends AbstractMapMarker {
   /**
    * Logger della classe
    */

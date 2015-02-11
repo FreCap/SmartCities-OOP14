@@ -11,15 +11,27 @@ import org.openstreetmap.gui.jmapviewer.MapObjectImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 
 /**
- * Questa classe implementa la logica interna di un MapMarker personalizzato da utilizzare in una
- * {@link org.openstreetmap.gui.jmapviewer.JMapViewer}. Questa classe e le sue implementazioni sono
- * implementate secondo il pattern Template Method.
+ * Questa classe astratta implementa la logica interna di un MapMarker personalizzato da utilizzare
+ * in una {@link org.openstreetmap.gui.jmapviewer.JMapViewer}. Questa classe e le sue
+ * implementazioni sono realizzate secondo il pattern Template Method.
  * 
  * @author Federico Bellini
  */
-public abstract class MyMapMarker extends MapObjectImpl implements MapMarker {
+public abstract class AbstractMapMarker extends MapObjectImpl implements MapMarker {
 
+  /**
+   * Raggio del cerchio in cui il marker viene collocato.
+   */
+  private static final int RADIUS = 1;
+
+  /**
+   * Le coordinate di posizione del marker.
+   */
   private final Coordinate coordinate;
+
+  /**
+   * Immagine sottostante al marker.
+   */
   private final Image locationImage;
 
   /**
@@ -30,7 +42,7 @@ public abstract class MyMapMarker extends MapObjectImpl implements MapMarker {
    * @param coordinates
    *          Coordinate di posizione del MapMarker.
    */
-  public MyMapMarker(final String id, final ICoordinates coordinates) {
+  public AbstractMapMarker(final String id, final ICoordinates coordinates) {
     super(id);
     this.coordinate = new Coordinate(coordinates.getLatitude(), coordinates.getLongitude());
     this.locationImage = this.getImageForMarker();
@@ -46,7 +58,7 @@ public abstract class MyMapMarker extends MapObjectImpl implements MapMarker {
   protected abstract Image getImageForMarker();
 
   /**
-   * Questa operazione non è supportata
+   * Questa operazione non è supportata.
    * 
    * @throws UnsupportedOperationException
    *           Questa eccezione viene lanciata quando viene utilizzato questo metodo.
@@ -57,7 +69,7 @@ public abstract class MyMapMarker extends MapObjectImpl implements MapMarker {
   }
 
   /**
-   * Questa operazione non è supportata
+   * Questa operazione non è supportata.
    * 
    * @throws UnsupportedOperationException
    *           Questa eccezione viene lanciata quando viene utilizzato questo metodo.
@@ -115,7 +127,7 @@ public abstract class MyMapMarker extends MapObjectImpl implements MapMarker {
    */
   @Override
   public double getRadius() {
-    return 0;
+    return RADIUS;
   }
 
   /**
@@ -138,7 +150,7 @@ public abstract class MyMapMarker extends MapObjectImpl implements MapMarker {
    */
   @Override
   public int hashCode() {
-    final int prime = (1 << 5) - 1;
+    final int prime = (1 << 3) - 1;
     int result = 1;
     result = prime * result + ((coordinate == null) ? 0 : coordinate.hashCode());
     return result;
@@ -150,9 +162,9 @@ public abstract class MyMapMarker extends MapObjectImpl implements MapMarker {
    */
   @Override
   public boolean equals(final Object obj) {
-    if (obj instanceof MyMapMarker) {
-      return this.coordinate.getLat() == ((MyMapMarker) obj).getLat()
-          && this.coordinate.getLon() == ((MyMapMarker) obj).getLon();
+    if (obj instanceof AbstractMapMarker) {
+      return this.coordinate.getLat() == ((AbstractMapMarker) obj).getLat()
+          && this.coordinate.getLon() == ((AbstractMapMarker) obj).getLon();
     }
     return false;
   }

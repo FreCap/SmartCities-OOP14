@@ -1,7 +1,6 @@
 package it.unibo.oop.smac.view.mainpanel;
 
 import it.unibo.oop.smac.datatypes.IStreetObserver;
-import it.unibo.oop.smac.view.stolencarspanel.StolenCarSightingTable;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -32,7 +31,7 @@ public class StreetObserverPanel extends JPanel {
   /**
    * Logger della classe.
    */
-  private static final Logger LOGGER = LoggerFactory.getLogger(StolenCarSightingTable.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(StreetObserverPanel.class);
 
   /**
    * Icone che mostrano un avvenuto passaggio sotto ad un osservatore.

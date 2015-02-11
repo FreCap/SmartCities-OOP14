@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implementazione di una {@link JMapViewer}, che permette di visualizzare una mappa di
@@ -17,7 +19,16 @@ import org.openstreetmap.gui.jmapviewer.JMapViewer;
 public class OpenStreetMapPanel extends JMapViewer implements ILocationPanel {
 
   private static final long serialVersionUID = -2763079963863167233L;
-  private static final int TIME_DELAY = 300;
+
+  /**
+   * Logger della classe.
+   */
+  private static final Logger LOGGER = LoggerFactory.getLogger(OpenStreetMapPanel.class);
+
+  /**
+   * Tempo in millisecondi in cui l'icona di passaggio resta "accesa"
+   */
+  private static final int TIME_DELAY = 200;
 
   /**
    * Costruttore pubblico della classe.
@@ -62,43 +73,43 @@ public class OpenStreetMapPanel extends JMapViewer implements ILocationPanel {
     try {
       Thread.sleep(TIME_DELAY);
     } catch (InterruptedException e) {
-      // nothing to do
+      LOGGER.error("Thread interrupted while sleeping. ", e);
     }
     removeMapMarker(id, c);
     addRedMapMarker(id, c);
   }
 
   /**
-   * Aggiunge alla mappa un nuovo {@link MyMapMarker} di colore rosso.
+   * Aggiunge alla mappa un nuovo {@link AbstractMapMarker} di colore rosso.
    * 
    * @param id
-   *          ID del {@link MyMapMarker}.
+   *          ID del {@link AbstractMapMarker}.
    * @param coordinates
-   *          Le coodinate del {@link MyMapMarker}.
+   *          Le coodinate del {@link AbstractMapMarker}.
    */
   private void addRedMapMarker(final String id, final ICoordinates coordinates) {
     SwingUtilities.invokeLater(() -> this.addMapMarker(new RedMapMarker(id, coordinates)));
   }
 
   /**
-   * Aggiunge alla mappa un nuovo {@link MyMapMarker} di colore verde.
+   * Aggiunge alla mappa un nuovo {@link AbstractMapMarker} di colore verde.
    * 
    * @param id
-   *          ID del {@link MyMapMarker}.
+   *          ID del {@link AbstractMapMarker}.
    * @param coordinates
-   *          Le coodinate del {@link MyMapMarker}.
+   *          Le coodinate del {@link AbstractMapMarker}.
    */
   private void addGreenMapMarker(final String id, final ICoordinates coordinates) {
     SwingUtilities.invokeLater(() -> this.addMapMarker(new GreenMapMarker(id, coordinates)));
   }
 
   /**
-   * Rimuove dalla mappa un {@link MyMapMarker} esistente.
+   * Rimuove dalla mappa un {@link AbstractMapMarker} esistente.
    * 
    * @param id
-   *          ID del {@link MyMapMarker}.
+   *          ID del {@link AbstractMapMarker}.
    * @param coordinates
-   *          Le coodinate del {@link MyMapMarker}.
+   *          Le coodinate del {@link AbstractMapMarker}.
    */
   private void removeMapMarker(final String id, final ICoordinates coordinates) {
     /*
