@@ -14,6 +14,7 @@ import it.unibo.oop.smac.view.stolencarspanel.StolenCarsPanel;
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
@@ -28,30 +29,44 @@ public class ViewGUI extends JFrame implements IView {
 
   private static final long serialVersionUID = 6107931182231615768L;
 
-  // dimensioni iniziali della finestra
+  /**
+   * Dimensioni iniziali della finestra.
+   */
   private static final int DEFAULT_WIDTH = (Toolkit.getDefaultToolkit().getScreenSize().width / 3) * 2;
   private static final int DEFAULT_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().width / 2;
 
-  // Pannello principale dell'applicazione contenente le informazioni sugli
-  // osservatori.
+  /**
+   * Icona della finestra.
+   */
+  private static final ImageIcon FRAME_ICON = new ImageIcon(
+      ViewGUI.class.getResource("/images/smac-icon.png"));
+
+  /**
+   * Pannello principale dell'applicazione contenente le informazioni sugli osservatori.
+   */
   private final IMainPanel mainPanel = new MainPanel();
-  // Pannello contenente una mappa che descrive la posizione degli
-  // StreetObserver
+
+  /**
+   * Pannello contenente una mappa che descrive la posizione degli StreetObserver.
+   */
   private final ILocationPanel locationPanel = new OpenStreetMapPanel();
-  // Pannello contenente le informazioni sulle auto rubate.
+
+  /**
+   * Pannello contenente le informazioni sulle auto rubate.
+   */
   private final IStolenCarsPanel stolenCarsPanel = new StolenCarsPanel();
 
   /**
    * Costruttore pubblico della GUI.
    */
   public ViewGUI() {
-
     // creation of the frame
     super("SmarterCities");
     this.setLayout(new BorderLayout());
     this.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setLocationRelativeTo(null);
+    this.setIconImage(FRAME_ICON.getImage());
 
     // creation of tabbedPanel
     final JTabbedPane tabbedPane = new JTabbedPane();
