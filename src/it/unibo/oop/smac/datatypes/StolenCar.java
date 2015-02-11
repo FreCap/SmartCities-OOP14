@@ -28,7 +28,7 @@ public class StolenCar implements IStolenCar {
    * @param plate
    *          La {@link LicensePlate} della macchina.
    * @param d
-   *          La {@link Data} del furto della macchina.
+   *          La {@link Date} del furto della macchina.
    * @throws InvalidAttributeValueException
    *           Viene generata se il valore della targa non è conforme alle specifiche (es. AA000AA).
    */

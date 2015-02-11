@@ -49,8 +49,8 @@ public class StolenCarsController extends Controller implements IStolenCarsObser
   /**
    * Aggiunge una nuova stolen car al model.
    * 
-   * @param licensePlate
-   *          targa della macchina rubata
+   * @param stolenCar
+   *          L'auto rubata
    */
   @Override
   public void addNewStolenCar(final StolenCar stolenCar) {

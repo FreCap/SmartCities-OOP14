@@ -19,6 +19,7 @@ public class PlainSighting implements Serializable {
   /**
    * Coordinate dell'Observer che spedisce il Sighting.
    */
+  // TODO non è meglio utilizzare l'interfaccia ICoordinates invece di Coordinates?
   private Coordinates coordinates;
 
   /**
@@ -47,9 +48,12 @@ public class PlainSighting implements Serializable {
 
   /**
    * Imposta la data dell'avvistamento.
+   * 
+   * @param d
+   *          La {@link Date} dell'avvistamento.
    */
-  public void setDate(final Date date) {
-    this.date = new Date(date.getTime());
+  public void setDate(final Date d) {
+    this.date = new Date(d.getTime());
   }
 
   /**
@@ -63,9 +67,12 @@ public class PlainSighting implements Serializable {
 
   /**
    * Imposta la targa della macchina avvistata.
+   * 
+   * @param plate
+   *          La targa dell'auto avvistata.
    */
-  public void setLicensePlate(final String licensePlate) {
-    this.licensePlate = licensePlate;
+  public void setLicensePlate(final String plate) {
+    this.licensePlate = plate;
   }
 
   /**
@@ -79,9 +86,12 @@ public class PlainSighting implements Serializable {
 
   /**
    * Imposta la velocità della macchina avvistata.
+   * 
+   * @param s
+   *          La velocita' dell'auto avvistata.
    */
-  public void setSpeed(final Float speed) {
-    this.speed = speed;
+  public void setSpeed(final Float s) {
+    this.speed = s;
   }
 
   /**
@@ -95,9 +105,12 @@ public class PlainSighting implements Serializable {
 
   /**
    * Imposta le coordinate dello street observer che effettua l'avvistamento.
+   * 
+   * @param c
+   *          Le coordinate dello street observer.
    */
-  public void setCoordinates(final Coordinates coordinates) {
-    this.coordinates = coordinates;
+  public void setCoordinates(final Coordinates c) {
+    this.coordinates = c;
   }
 
 }

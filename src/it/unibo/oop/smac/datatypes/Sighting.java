@@ -46,7 +46,6 @@ public final class Sighting implements ISighting {
    * Restituisce l'{@link IStreetObserver} che ha generato le informazioni di questo avvistamento.
    * 
    * @return L'{@link IStreetObserver} autore dell'avvistamento.
-   * @throws StreetObserverNotValidException
    */
   @Override
   public IStreetObserver getStreetObserver() throws StreetObserverNotValidException {

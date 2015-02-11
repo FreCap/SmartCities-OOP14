@@ -68,7 +68,7 @@ public class MainPanel extends JPanel implements IMainPanel {
   /**
    * Attacca un Observer degli StreetObserver.
    * 
-   * @param soo
+   * @param streetObserverObserver
    *          L'{@link IStreetObserverObserver} da attaccare.
    */
   @Override

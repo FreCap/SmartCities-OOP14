@@ -62,7 +62,7 @@ public class StolenCarTable extends AbstractTableModel {
   /**
    * Restituisce il nome della colonna desiderata.
    * 
-   * @param colonna
+   * @param col
    *          Numero di colonna di cui si richiede il nome.
    * @return Una stringa che contiene il nome di default della <code>colonna</code>
    */
@@ -84,7 +84,7 @@ public class StolenCarTable extends AbstractTableModel {
    *
    * @param row
    *          Riga del valore richiesto.
-   * @param column
+   * @param col
    *          Colonna del valore richiesto.
    * @return L'oggetto corrispondente ad una determinata riga-colonna.
    */
