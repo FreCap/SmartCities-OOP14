@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Implementazione del controller dell'applicazione. Tutta l'applicazione e' strutturata secondo il
- * pattern MVC.
+ * pattern MVC. Questo controller funge anche da Observer per la parte della View.
  * 
  * @author Federico Bellini
  */
@@ -28,22 +28,23 @@ public class Controller implements IController {
   /**
    * view dell'applicazione.
    */
-  protected final IView view;
+  private final IView view;
+
   /**
    * model dell'applicazione.
    */
-  protected final IStreetObserverModel model;
+  private final IStreetObserverModel model;
 
   /**
    * Costruttore pubblico della classe. Come parametro prende l'oggetto che compone la View
    * dell'applicazione.
    * 
-   * @param view
+   * @param v
    *          L'oggetto che implementa la View dell'applicazione
    */
-  public Controller(final IView view) {
+  public Controller(final IView v) {
     model = StreetObserverModelDatabase.getInstance();
-    this.view = view;
+    this.view = v;
     this.view.attachStreetObserverController(this);
   }
 
@@ -103,6 +104,24 @@ public class Controller implements IController {
       info = new InfoStreetObserver.Builder().build();
     }
     return info;
+  }
+
+  /**
+   * Restituisce la View dell'applicazione.
+   * 
+   * @return L'{@link IView} dell'applicazione.
+   */
+  protected IView getView() {
+    return this.view;
+  }
+
+  /**
+   * Restituisce il Model dell'applicazione.
+   * 
+   * @return Il {@link IStreetObserverModel} dell'applicazione.
+   */
+  protected IStreetObserverModel getModel() {
+    return this.model;
   }
 
 }

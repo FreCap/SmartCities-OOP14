@@ -6,24 +6,25 @@ import it.unibo.oop.smac.datatypes.StolenCar;
 import java.util.List;
 
 /**
- * Interfaccia che permette alla View di accedere ai dati del model, senza essere a conoscenza
- * dell'implementazione del model.
+ * Interfaccia che permette (alla View) di accedere in lettura o scrittura ai dati contenuti nel
+ * Model dell'applicazione, senza essere a conoscenza dell'implementazione reale del Model.
+ * 
+ * @author Francesco Capponi
  */
-
 public interface IStolenCarsObserver {
+
   /**
-   * Restituisce la lista di oggetti del tipo {@link IStolenCar} delle macchine rubate inserite nel
-   * model fino ad ora.
+   * Restituisce la lista di {@link IStolenCar} inserite nel Model fino ad ora.
    * 
-   * @return Un oggetto {@link List} composto dalle macchine rubate {@link IStolenCar}
+   * @return Un oggetto {@link List} composto dalle macchine rubate {@link IStolenCar}.
    */
   List<IStolenCar> getStolenCarsInfoList();
 
   /**
-   * Inserisce una nuova macchina rubata nel model.
+   * Inserisce una nuova macchina rubata nel Model.
    * 
    * @param stolenCar
-   *          Inserisce la macchina con una determianta targa nella lista delle macchine rubate
+   *          L'auto da inserire nel Model tra quelle rubate.
    */
   void addNewStolenCar(StolenCar stolenCar);
 

@@ -10,24 +10,18 @@ import it.unibo.oop.smac.view.IView;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
- * TODO utilizzato pattern Decorator.
+ * Implementazione del Controller dell'applicazione, con l'aggiunta dei metodi necessari per la
+ * gestione delle auto rubate. Questo controller funge anche da Observer per la parte della View.
  * 
+ * @author Francesco Capponi
  */
 public class StolenCarsController extends Controller implements IStolenCarsObserver {
 
   /**
-   * Logger della classe
-   */
-  private static final Logger LOGGER = LoggerFactory.getLogger(StolenCarsController.class);
-
-  /**
    * Model dell'applicazione.
    */
-  protected final IStolenCarModel modelStolenCars;
+  private final IStolenCarModel modelStolenCars;
 
   /**
    * Costruttore pubblico della classe. Come parametro prende l'oggetto che compone la View
@@ -39,7 +33,7 @@ public class StolenCarsController extends Controller implements IStolenCarsObser
   public StolenCarsController(final IView view) {
     super(view);
     modelStolenCars = StolenCarModelDatabase.getInstance();
-    this.view.attachStolenCarsController(this);
+    this.getView().attachStolenCarsController(this);
   }
 
   /**
@@ -78,8 +72,18 @@ public class StolenCarsController extends Controller implements IStolenCarsObser
 
     // controllo che non si tratti di una rubata
     if (modelStolenCars.checkStolenPlate(sighting.getLicensePlate())) {
-      this.view.newPassageStolenCar(sighting);
+      this.getView().newPassageStolenCar(sighting);
     }
+  }
+
+  /**
+   * Restituisce il Model dell'applicazione.
+   * 
+   * @return Il {@link IStolenCarModel} dell'applicazione.
+   */
+  @Override
+  protected IStolenCarModel getModel() {
+    return this.modelStolenCars;
   }
 
 }
