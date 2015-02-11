@@ -1,6 +1,7 @@
 package it.unibo.oop.smac.view.mainpanel;
 
 import it.unibo.oop.smac.datatypes.IStreetObserver;
+import it.unibo.oop.smac.view.stolencarspanel.StolenCarSightingTable;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,6 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Questa classe implementa un JPanel contenente una static map che mostra la posizione
  * dell'osservatore, e un icona verde/rossa a seconda se sta avvenendo un passaggio al di sotto
@@ -25,20 +29,32 @@ public class StreetObserverPanel extends JPanel {
 
   private static final long serialVersionUID = 984911465198419L;
 
-  // icone di passaggio
+  /**
+   * Logger della classe.
+   */
+  private static final Logger LOGGER = LoggerFactory.getLogger(StolenCarSightingTable.class);
+
+  /**
+   * Icone che mostrano un avvenuto passaggio sotto ad un osservatore.
+   */
   private static final ImageIcon PASSAGE_ACTIVE_ICON = new ImageIcon(
       MainPanel.class.getResource("/images/activeButton.png"));
   private static final ImageIcon PASSAGE_INACTIVE_ICON = new ImageIcon(
       MainPanel.class.getResource("/images/inactiveButton.png"));
 
-  // tempo in millisecondi in cui l'icona di passaggio "accesa"
+  /**
+   * Tempo in millisecondi in cui l'icona di passaggio resta "accesa"
+   */
   private static final int DELAY = 150;
 
-  // colore di sfondo di default
-  private final Color DEFAUTLT_COLOR_BACKGROUND;
+  /**
+   * Colore di default dello sfondo
+   */
+  private final Color defaultColorBackground;
 
-  // label contenente l'icona che segnala il passaggio rilevato
-  // dall'osservatore
+  /**
+   * Label contenente l'icona che segnala il passaggio rilevato dall'osservatore
+   */
   private final JLabel passageLabel;
 
   /**
@@ -56,7 +72,7 @@ public class StreetObserverPanel extends JPanel {
     super();
     this.setLayout(new BorderLayout());
     this.setBorder(new TitledBorder("Street Observer  " + streetObserver.getId()));
-    this.DEFAUTLT_COLOR_BACKGROUND = this.getBackground();
+    this.defaultColorBackground = this.getBackground();
 
     this.passageLabel = new JLabel();
     this.setButtonOff();
@@ -80,7 +96,7 @@ public class StreetObserverPanel extends JPanel {
 
       @Override
       public void mouseExited(final MouseEvent arg0) {
-        setColor(DEFAUTLT_COLOR_BACKGROUND);
+        setColor(defaultColorBackground);
       }
 
       @Override
@@ -116,6 +132,7 @@ public class StreetObserverPanel extends JPanel {
     try {
       Thread.sleep(DELAY);
     } catch (InterruptedException e) {
+      LOGGER.error("Thread interrupted while sleeping. ", e);
     }
     SwingUtilities.invokeLater(() -> {
       this.setButtonOff();

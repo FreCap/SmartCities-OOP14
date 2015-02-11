@@ -17,11 +17,11 @@ import org.slf4j.LoggerFactory;
  * 
  * @author Federico Bellini
  */
-public class OSMStaticMapConstructor {
+public final class OSMStaticMapConstructor {
   /**
    * Logger della classe
    */
-  private final static Logger LOGGER = LoggerFactory.getLogger(OSMStaticMapConstructor.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(OSMStaticMapConstructor.class);
 
   private static final String DEFAULT_ICON_PATH = "/images/somethingWrongHappened.png";
   private static OSMStaticMapConstructor staticMapConstructor;
@@ -37,11 +37,14 @@ public class OSMStaticMapConstructor {
    * 
    * @return L'istanza di questo oggetto.
    */
-  public static synchronized OSMStaticMapConstructor getInstance() {
-    if (staticMapConstructor == null) {
-      staticMapConstructor = new OSMStaticMapConstructor();
+
+  public static OSMStaticMapConstructor getInstance() {
+    synchronized (OSMStaticMapConstructor.class) {
+      if (staticMapConstructor == null) {
+        staticMapConstructor = new OSMStaticMapConstructor();
+      }
+      return staticMapConstructor;
     }
-    return staticMapConstructor;
   }
 
   /**
@@ -69,7 +72,7 @@ public class OSMStaticMapConstructor {
    * 
    * @author Federico Bellini
    */
-  private static class OSMURLBuilder {
+  private static final class OSMURLBuilder {
     private static final int DEFAULT_ZOOM = 14;
     private static final String OSM_REQUEST_PREFIX = "http://staticmap.openstreetmap.de/staticmap.php?";
     private static final int DEFAULT_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width / 4;
@@ -80,11 +83,13 @@ public class OSMStaticMapConstructor {
     private OSMURLBuilder() {
     }
 
-    public static synchronized OSMURLBuilder getInstance() {
-      if (instance == null) {
-        instance = new OSMURLBuilder();
+    public static OSMURLBuilder getInstance() {
+      synchronized (OSMURLBuilder.class) {
+        if (instance == null) {
+          instance = new OSMURLBuilder();
+        }
+        return instance;
       }
-      return instance;
     }
 
     /**

@@ -70,8 +70,8 @@ public class ControlPanel extends JScrollPane {
    */
   public void notifyPassage(final IStreetObserver streetObserver) {
     if (this.streetObserversMap.containsKey(streetObserver.getId())) {
-      final StreetObserverPanel panel = this.streetObserversMap.get(streetObserver.getId());
-      panel.displayPassage();
+      final StreetObserverPanel p = this.streetObserversMap.get(streetObserver.getId());
+      p.displayPassage();
     }
   }
 

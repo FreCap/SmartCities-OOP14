@@ -30,7 +30,7 @@ public final class InformationsPanel extends JPanel {
   private final JTextArea speedInfo = new JTextArea();
 
   // informazioni correnti da mostrare
-  private IInfoStreetObserver currentInfo;
+  private transient IInfoStreetObserver currentInfo;
 
   /**
    * Costruttore pubblico della classe.
@@ -40,11 +40,8 @@ public final class InformationsPanel extends JPanel {
     this.setBorder(new TitledBorder("Informations"));
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-    /*
-     * Inizialmente costruisco un oggetto di InfoStreetObserver che non contiene nessuna
-     * informazione.
-     */
-    this.currentInfo = new InfoStreetObserver.Builder().build();
+    // setto le informazioni inizialmente vuote
+    currentInfo = new InfoStreetObserver.Builder().build();
 
     this.streetObserverInfo.setEditable(false);
     this.streetObserverInfo.setBackground(this.getBackground());
