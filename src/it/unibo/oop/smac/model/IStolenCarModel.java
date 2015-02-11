@@ -6,39 +6,37 @@ import it.unibo.oop.smac.datatypes.StolenCar;
 
 import java.util.List;
 
+/**
+ * Interfaccia del Model dell'applicazione, con aggiunta dei metodi necessari alla gestione delle
+ * auto rubate.
+ * 
+ * @author Francesco Capponi
+ */
 public interface IStolenCarModel {
 
   /**
-   * Resistuisce il Singleton della classe.
+   * Restituisce la lista delle {@link IStolenCar} contenute in memoria.
    * 
-   * @return singleton
-   */
-  static IStolenCarModel getInstance() {
-    return null;
-  }
-
-  /**
-   * Restituisce la lista delle stolenCars del tipo {@link IStolenCar} contenute nel database.
-   * 
-   * @return Lista di {@link IStolenCar}
+   * @return La lista di {@link IStolenCar} richiesta.
    */
   List<IStolenCar> getStolenCarsInfoList();
 
   /**
-   * Controlla se la macchina con una determinata {@link LicensePlate}, è nell'elenco delle
-   * macchine. rubate
+   * Controlla se la macchina con una determinata {@link LicensePlate}, è nell'elenco delle macchine
+   * rubate.
    * 
-   * @return {@link Boolean se la macchina è stata rubata o meno}
+   * @param licensePlate
+   *          La {@link LicensePlate} da controllare.
+   * @return True se la macchina è stata rubata, false altrimenti.
    */
   Boolean checkStolenPlate(LicensePlate licensePlate);
 
   /**
-   * Questo metodo deve aggiungere un nuovo {@link IStolenCar} a quelli già presenti nel Model.
+   * Aggiungere una nuova {@link IStolenCar} a quelle già presenti nel Model.
    * 
    * @param stolenCar
    *          L'{@link StolenCar} da aggiungere.
    */
-
   void addNewStolenCar(StolenCar stolenCar);
 
 }
