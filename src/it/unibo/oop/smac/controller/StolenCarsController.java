@@ -10,8 +10,6 @@ import it.unibo.oop.smac.view.IView;
 
 import java.util.List;
 
-import javax.management.InvalidAttributeValueException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,20 +38,7 @@ public class StolenCarsController extends Controller implements IStolenCarsObser
    */
   public StolenCarsController(final IView view) {
     super(view);
-
-    // inizializza il model
     modelStolenCars = StolenCarModelDatabase.getInstance();
-
-    // macchina aggiunta per test per dare una impatto visivo alla tabella
-    try {
-      final StolenCar stolenCar = new StolenCar.Builder().licensePlate("TE355TT")
-          .insertionDateNow().build();
-      modelStolenCars.addNewStolenCar(stolenCar);
-    } catch (InvalidAttributeValueException e) {
-      LOGGER.error("NON PUO' succedere visto che la targa ha il giusto formato", e);
-      // NON PUO' succedere visto che la targa ha il giusto formato
-    }
-
     this.view.attachStolenCarsController(this);
   }
 

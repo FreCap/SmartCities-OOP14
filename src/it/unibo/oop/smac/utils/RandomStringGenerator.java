@@ -1,7 +1,9 @@
 package it.unibo.oop.smac.utils;
 
 /**
- * Generatore di stringhe formato da u determinato set di caratteri.
+ * Generatore di stringhe formato da un determinato set di caratteri.
+ * 
+ * @author Francesco Capponi
  */
 public final class RandomStringGenerator {
 
