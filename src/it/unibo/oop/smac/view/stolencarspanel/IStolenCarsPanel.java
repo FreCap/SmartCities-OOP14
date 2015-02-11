@@ -6,8 +6,8 @@ import it.unibo.oop.smac.datatypes.ISighting;
 import javax.swing.JPanel;
 
 /**
- * Interfaccia per la gestione di un panel che visualizza le informazioni sulle auto rubate.
- * Utilizzato pattern Observer.
+ * Interfaccia per la gestione di un panel che visualizza le informazioni sulle auto rubate. Questa
+ * interfaccia e' disengata secondo il pattern Observer.
  * 
  * @author Francesco Capponi
  */

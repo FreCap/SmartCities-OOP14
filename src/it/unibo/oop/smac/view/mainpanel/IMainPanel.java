@@ -6,7 +6,8 @@ import it.unibo.oop.smac.datatypes.IStreetObserver;
 import javax.swing.JPanel;
 
 /**
- * Interfaccia di un panel contenente le informazioni raccolte dagli StreetObservers.
+ * Interfaccia di un panel contenente le informazioni raccolte dagli StreetObservers. Questa
+ * interfaccia e' disengata secondo il pattern Observer.
  * 
  * @author Federico Bellini
  */

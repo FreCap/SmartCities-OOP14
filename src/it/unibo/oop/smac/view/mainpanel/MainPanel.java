@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 /**
  * Implementazione del JPanel contenente le informazioni principali riguardanti gli osservatori.
+ * Questa classe e' implementata secondo il pattern Observer.
  * 
  * @author Federico Bellini
  */
