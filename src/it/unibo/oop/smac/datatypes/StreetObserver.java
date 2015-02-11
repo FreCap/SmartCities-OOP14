@@ -30,11 +30,11 @@ public class StreetObserver implements IStreetObserver {
   /**
    * Costruttore che crea un nuovo osservatore in base alle coordinate fornite.
    * 
-   * @param coordinates
+   * @param c
    *          Le coordinate di posizione dell'osservatore.
    */
-  public StreetObserver(final ICoordinates coordinates) {
-    this.coordinates = coordinates;
+  public StreetObserver(final ICoordinates c) {
+    this.coordinates = c;
   }
 
   /**
@@ -79,7 +79,7 @@ public class StreetObserver implements IStreetObserver {
 
   @Override
   public int hashCode() {
-    final int prime = (1 << 5) - 1;
+    final int prime = (1 << 3) - 1;
     int result = 1;
     result = prime * result + ((coordinates == null) ? 0 : coordinates.hashCode());
     return result;

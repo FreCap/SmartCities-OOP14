@@ -17,13 +17,14 @@ public class LicensePlate implements Serializable {
   /**
    * contenitore della valore della targa
    */
-  private final String licensePlate;
+  private final String plate;
 
   /**
-   * Costruttore che crea una nuova LicensePlate, con la targa di test "AA000AA".
+   * Costruttore che crea una nuova LicensePlate, con la targa di test "AA000AA". (necessario per
+   * funzionamento database)
    */
   public LicensePlate() {
-    this.licensePlate = "AA000AA";
+    this.plate = "AA000AA";
   }
 
   /**
@@ -51,7 +52,7 @@ public class LicensePlate implements Serializable {
     if (!Pattern.matches("[A-Z]{2}[0-9]{3}[A-Z]{2}", licensePlate)) {
       throw new InvalidAttributeValueException();
     }
-    this.licensePlate = licensePlate;
+    this.plate = licensePlate;
   }
 
   /**
@@ -60,14 +61,14 @@ public class LicensePlate implements Serializable {
    * @return La targa del mezzo.
    */
   public String getPlate() {
-    return this.licensePlate;
+    return this.plate;
   }
 
   @Override
   public int hashCode() {
-    final int prime = (1 << 5) - 1;
+    final int prime = (1 << 3) - 1;
     int result = 1;
-    result = prime * result + ((licensePlate == null) ? 0 : licensePlate.hashCode());
+    result = prime * result + ((plate == null) ? 0 : plate.hashCode());
     return result;
   }
 

@@ -7,15 +7,16 @@ import java.util.Date;
 /**
  * Questa classe implementa l'interfaccia {@link ISighting}, ed ha il compito di raccogliere tutte
  * le informazioni generate dall'osservatore, quali la data dell'avvistamento, la targa dell'auto
- * avvistata e la sua velocita'.
- * 
- * Questa classe è costruita utilizzando il pattern Builder.
+ * avvistata e la sua velocita'. Questa classe è costruita utilizzando il pattern Builder.
  * 
  * @author Federico Bellini
  *
  */
 public final class Sighting implements ISighting {
 
+  /**
+   * Campi privati della classe.
+   */
   private final IStreetObserver streetObserver;
   private final Date date;
   private final LicensePlate licensePlate;
@@ -24,21 +25,21 @@ public final class Sighting implements ISighting {
   /**
    * Costruttore privato della classe.
    * 
-   * @param streetObserver
+   * @param stObserver
    *          L'osservatore che ha compiuto l'avvistamento.
-   * @param date
+   * @param d
    *          La data dell'avvistamento.
-   * @param licensePlate
+   * @param plate
    *          La targa dell'auto avvistata.
-   * @param speed
+   * @param s
    *          La velocita' rilevata.
    */
-  private Sighting(final IStreetObserver streetObserver, final Date date,
-      final LicensePlate licensePlate, final Float speed) {
-    this.streetObserver = streetObserver;
-    this.date = date;
-    this.licensePlate = licensePlate;
-    this.speed = speed;
+  private Sighting(final IStreetObserver stObserver, final Date d, final LicensePlate plate,
+      final Float s) {
+    this.streetObserver = stObserver;
+    this.date = d;
+    this.licensePlate = plate;
+    this.speed = s;
   }
 
   /**
@@ -59,7 +60,7 @@ public final class Sighting implements ISighting {
    */
   @Override
   public Date getDate() {
-    // WARNING la defensive copy genera un errore
+    // TODO WARNING la defensive copy genera un errore!
     return this.date;
   }
 
@@ -90,10 +91,10 @@ public final class Sighting implements ISighting {
    * @author Federico Bellini
    */
   public static class Builder {
-    private IStreetObserver streetObserver;
-    private Date date;
-    private LicensePlate licensePlate;
-    private Float speed;
+    private IStreetObserver stObserver;
+    private Date d;
+    private LicensePlate plate;
+    private Float s;
 
     /**
      * Costruisce l'oggetto Sighting con l'IStreetObserver passato come paramentro.
@@ -103,7 +104,7 @@ public final class Sighting implements ISighting {
      * @return Il Builder stesso.
      */
     public Builder streetObserver(final IStreetObserver streetObserver) {
-      this.streetObserver = streetObserver;
+      this.stObserver = streetObserver;
       return this;
     }
 
@@ -115,7 +116,7 @@ public final class Sighting implements ISighting {
      * @return Il Builder stesso.
      */
     public Builder date(final Date date) {
-      this.date = new Date(date.getTime());
+      this.d = new Date(date.getTime());
       return this;
     }
 
@@ -127,7 +128,7 @@ public final class Sighting implements ISighting {
      * @return Il Builder stesso.
      */
     public Builder licensePlate(final LicensePlate licensePlate) {
-      this.licensePlate = licensePlate;
+      this.plate = licensePlate;
       return this;
     }
 
@@ -139,7 +140,7 @@ public final class Sighting implements ISighting {
      * @return Il Builder stesso.
      */
     public Builder speed(final Float speed) {
-      this.speed = speed;
+      this.s = speed;
       return this;
     }
 
@@ -150,7 +151,7 @@ public final class Sighting implements ISighting {
      * @return L'oggetto della classe Sighting appena creato.
      */
     public Sighting build() {
-      return new Sighting(this.streetObserver, this.date, this.licensePlate, this.speed);
+      return new Sighting(this.stObserver, this.d, this.plate, this.s);
     }
   }
 

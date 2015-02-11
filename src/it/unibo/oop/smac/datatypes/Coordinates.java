@@ -25,14 +25,14 @@ public class Coordinates implements ICoordinates, Serializable {
    * Costruttore che prende in ingresso la latitudine e la longitudine di un punto per crearne le
    * sue coordinate.
    * 
-   * @param latitude
+   * @param lat
    *          La latitudine del punto.
-   * @param longitude
+   * @param lng
    *          La longitudine del punto.
    */
-  public Coordinates(final Float latitude, final Float longitude) {
-    this.latitude = latitude;
-    this.longitude = longitude;
+  public Coordinates(final Float lat, final Float lng) {
+    this.latitude = lat;
+    this.longitude = lng;
   }
 
   /**
@@ -83,17 +83,14 @@ public class Coordinates implements ICoordinates, Serializable {
 
   @Override
   public int hashCode() {
-    final int prime = (1 << 5) - 1;
+    final int prime = (1 << 3) - 1;
     int result = 1;
     result = prime * result + ((latitude == null) ? 0 : latitude.hashCode());
     result = prime * result + ((longitude == null) ? 0 : longitude.hashCode());
     return result;
   }
 
-  /*
-   * Due oggetti di tipo coordinata sono ritenuti uguali se hanno stessa latitudine e
-   * longitudine.(non-Javadoc)
-   */
+  // Due oggetti di tipo coordinata sono ritenuti uguali se hanno stessa latitudine e longitudine.
   @Override
   public boolean equals(final Object obj) {
     if (obj instanceof ICoordinates) {

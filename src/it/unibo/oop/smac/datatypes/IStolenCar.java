@@ -3,7 +3,9 @@ package it.unibo.oop.smac.datatypes;
 import java.util.Date;
 
 /**
- * Interfaccia per gestire le informazioni della macchina rubata utilizzata all'interno della view.
+ * Interfaccia per la gestione delle informazioni su di una macchina rubata.
+ * 
+ * @author Francesco Capponi
  */
 public interface IStolenCar {
 

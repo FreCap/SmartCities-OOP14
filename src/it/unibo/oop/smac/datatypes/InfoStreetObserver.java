@@ -8,7 +8,7 @@ import java.util.Optional;
  * 
  * @author Federico Bellini
  */
-public class InfoStreetObserver implements IInfoStreetObserver {
+public final class InfoStreetObserver implements IInfoStreetObserver {
 
   /**
    * Campi di tipo Optional<> contenenti le informazioni sull'osservatore.
@@ -26,25 +26,25 @@ public class InfoStreetObserver implements IInfoStreetObserver {
   private final Optional<Float> maxCarRateToday;
 
   /**
-   * Costruttore privato della classe che prende tutti i campi presenti in essa.
+   * Costruttore privato della classe.
    */
-  private InfoStreetObserver(final IStreetObserver streetObserver, final Integer nOfSightLastHour,
-      final Integer nOfSightToday, final Integer nOfSightLastWeek, final Integer nOfSightLaatMonth,
-      final Integer totalNOfSight, final Float averageSpeedToday, final Float averageSpeedLastWeek,
-      final Float averageSpeedLastMonth, final Float maxSpeedToday, final Float maxCarRateToday) {
+  private InfoStreetObserver(final IStreetObserver stObserver, final Integer nSightLastHour,
+      final Integer nSightToday, final Integer nSightLastWeek, final Integer nSightLaatMonth,
+      final Integer totalSightis, final Float avSpeedToday, final Float avSpeedLastWeek,
+      final Float avSpeedLastMonth, final Float mSpeedToday, final Float mCarRateToday) {
 
     super();
-    this.streetObserver = Optional.ofNullable(streetObserver);
-    this.nOfSightLastHour = Optional.ofNullable(nOfSightLastHour);
-    this.nOfSightToday = Optional.ofNullable(nOfSightToday);
-    this.nOfSightLastWeek = Optional.ofNullable(nOfSightLastWeek);
-    this.nOfSightLaatMonth = Optional.ofNullable(nOfSightLaatMonth);
-    this.totalNOfSight = Optional.ofNullable(totalNOfSight);
-    this.averageSpeedToday = Optional.ofNullable(averageSpeedToday);
-    this.averageSpeedLastWeek = Optional.ofNullable(averageSpeedLastWeek);
-    this.averageSpeedLastMonth = Optional.ofNullable(averageSpeedLastMonth);
-    this.maxSpeedToday = Optional.ofNullable(maxSpeedToday);
-    this.maxCarRateToday = Optional.ofNullable(maxCarRateToday);
+    this.streetObserver = Optional.ofNullable(stObserver);
+    this.nOfSightLastHour = Optional.ofNullable(nSightLastHour);
+    this.nOfSightToday = Optional.ofNullable(nSightToday);
+    this.nOfSightLastWeek = Optional.ofNullable(nSightLastWeek);
+    this.nOfSightLaatMonth = Optional.ofNullable(nSightLaatMonth);
+    this.totalNOfSight = Optional.ofNullable(totalSightis);
+    this.averageSpeedToday = Optional.ofNullable(avSpeedToday);
+    this.averageSpeedLastWeek = Optional.ofNullable(avSpeedLastWeek);
+    this.averageSpeedLastMonth = Optional.ofNullable(avSpeedLastMonth);
+    this.maxSpeedToday = Optional.ofNullable(mSpeedToday);
+    this.maxCarRateToday = Optional.ofNullable(mCarRateToday);
   }
 
   @Override
@@ -134,7 +134,7 @@ public class InfoStreetObserver implements IInfoStreetObserver {
 
   @Override
   public int hashCode() {
-    final int prime = (1 << 5) - 1;
+    final int prime = (1 << 3) - 1;
     int result = 1;
     result = prime * result
         + ((averageSpeedLastMonth == null) ? 0 : averageSpeedLastMonth.hashCode());
@@ -160,19 +160,16 @@ public class InfoStreetObserver implements IInfoStreetObserver {
     if (obj == null || obj instanceof InfoStreetObserver) {
       return false;
     }
-
     final InfoStreetObserver other = (InfoStreetObserver) obj;
     if (!getAverageSpeedLastMonth().equals(other.getAverageSpeedLastMonth())
         || !getAverageSpeedLastWeek().equals(other.getAverageSpeedLastWeek())
         || !getAverageSpeedToday().equals(other.getAverageSpeedToday())) {
       return false;
     }
-
     if (!getMaxCarRateToday().equals(other.getMaxCarRateToday())
         || !getMaxSpeedToday().equals(other.getMaxSpeedToday())) {
       return false;
     }
-
     if (!getnOfSightLastHour().equals(other.getnOfSightLastHour())
         || !getnOfSightLastMonth().equals(other.getnOfSightLastMonth())
         || !getnOfSightLastWeek().equals(other.getnOfSightLastWeek())
@@ -180,13 +177,11 @@ public class InfoStreetObserver implements IInfoStreetObserver {
         || !getTotalNOfSight().equals(other.getTotalNOfSight())) {
       return false;
     }
-
     if (streetObserver == null || other.streetObserver != null) {
       return false;
     } else if (!streetObserver.equals(other.streetObserver)) {
       return false;
     }
-
     return true;
   }
 
@@ -197,17 +192,17 @@ public class InfoStreetObserver implements IInfoStreetObserver {
    * @author Federico Bellini
    */
   public static class Builder {
-    private IStreetObserver streetObserver;
-    private Integer nOfSightLastHour;
-    private Integer nOfSightToday;
-    private Integer nOfSightLastWeek;
-    private Integer nOfSightLaatMonth;
-    private Integer totalNOfSight;
-    private Float averageSpeedToday;
-    private Float averageSpeedLastWeek;
-    private Float averageSpeedLastMonth;
-    private Float maxSpeedToday;
-    private Float maxCarRateToday;
+    private IStreetObserver stObserver;
+    private Integer nSightLastHour;
+    private Integer nSightToday;
+    private Integer nSightLastWeek;
+    private Integer nSightLaatMonth;
+    private Integer totalSights;
+    private Float avSpeedToday;
+    private Float avSpeedLastWeek;
+    private Float avSpeedLastMonth;
+    private Float mSpeedToday;
+    private Float mCarRateToday;
 
     /**
      * Imposta l'IStreetObserver che ha compiuto l'avvistamento.
@@ -217,7 +212,7 @@ public class InfoStreetObserver implements IInfoStreetObserver {
      * @return Il builder stesso.
      */
     public Builder streetObserver(final IStreetObserver streetObserver) {
-      this.streetObserver = streetObserver;
+      this.stObserver = streetObserver;
       return this;
     }
 
@@ -229,7 +224,7 @@ public class InfoStreetObserver implements IInfoStreetObserver {
      * @return Il builder stesso.
      */
     public Builder nOfSightLastHour(final int nOfSightLastHour) {
-      this.nOfSightLastHour = nOfSightLastHour;
+      this.nSightLastHour = nOfSightLastHour;
       return this;
     }
 
@@ -241,7 +236,7 @@ public class InfoStreetObserver implements IInfoStreetObserver {
      * @return Il builder stesso.
      */
     public Builder nOfSightToday(final int nOfSightToday) {
-      this.nOfSightToday = nOfSightToday;
+      this.nSightToday = nOfSightToday;
       return this;
     }
 
@@ -253,7 +248,7 @@ public class InfoStreetObserver implements IInfoStreetObserver {
      * @return Il builder stesso.
      */
     public Builder nOfSightLastWeek(final int nOfSightLastWeek) {
-      this.nOfSightLastWeek = nOfSightLastWeek;
+      this.nSightLastWeek = nOfSightLastWeek;
       return this;
     }
 
@@ -265,7 +260,7 @@ public class InfoStreetObserver implements IInfoStreetObserver {
      * @return Il builder stesso.
      */
     public Builder nOfSightLastMonth(final int nOfSightLaatMonth) {
-      this.nOfSightLaatMonth = nOfSightLaatMonth;
+      this.nSightLaatMonth = nOfSightLaatMonth;
       return this;
     }
 
@@ -277,7 +272,7 @@ public class InfoStreetObserver implements IInfoStreetObserver {
      * @return Il builder stesso.
      */
     public Builder totalNOfSight(final int totalNOfSight) {
-      this.totalNOfSight = totalNOfSight;
+      this.totalSights = totalNOfSight;
       return this;
     }
 
@@ -289,7 +284,7 @@ public class InfoStreetObserver implements IInfoStreetObserver {
      * @return Il builder stesso.
      */
     public Builder averageSpeedToday(final float averageSpeedToday) {
-      this.averageSpeedToday = averageSpeedToday;
+      this.avSpeedToday = averageSpeedToday;
       return this;
     }
 
@@ -301,7 +296,7 @@ public class InfoStreetObserver implements IInfoStreetObserver {
      * @return Il builder stesso.
      */
     public Builder averageSpeedLastWeek(final float averageSpeedLastWeek) {
-      this.averageSpeedLastWeek = averageSpeedLastWeek;
+      this.avSpeedLastWeek = averageSpeedLastWeek;
       return this;
     }
 
@@ -313,7 +308,7 @@ public class InfoStreetObserver implements IInfoStreetObserver {
      * @return Il builder stesso.
      */
     public Builder averageSpeedLastMonth(final float averageSpeedLastMonth) {
-      this.averageSpeedLastMonth = averageSpeedLastMonth;
+      this.avSpeedLastMonth = averageSpeedLastMonth;
       return this;
     }
 
@@ -325,7 +320,7 @@ public class InfoStreetObserver implements IInfoStreetObserver {
      * @return Il builder stesso.
      */
     public Builder maxSpeedToday(final float maxSpeedToday) {
-      this.maxSpeedToday = maxSpeedToday;
+      this.mSpeedToday = maxSpeedToday;
       return this;
     }
 
@@ -337,7 +332,7 @@ public class InfoStreetObserver implements IInfoStreetObserver {
      * @return Il builder stesso.
      */
     public Builder maxCarRateToday(final float maxCarRateToday) {
-      this.maxCarRateToday = maxCarRateToday;
+      this.mCarRateToday = maxCarRateToday;
       return this;
     }
 
@@ -347,10 +342,10 @@ public class InfoStreetObserver implements IInfoStreetObserver {
      * @return L'oggetto della classe InfoStreetObserver appena costruito.
      */
     public InfoStreetObserver build() {
-      return new InfoStreetObserver(this.streetObserver, this.nOfSightLastHour, this.nOfSightToday,
-          this.nOfSightLastWeek, this.nOfSightLaatMonth, this.totalNOfSight,
-          this.averageSpeedToday, this.averageSpeedLastWeek, this.averageSpeedLastMonth,
-          this.maxSpeedToday, this.maxCarRateToday);
+      return new InfoStreetObserver(this.stObserver, this.nSightLastHour, this.nSightToday,
+          this.nSightLastWeek, this.nSightLaatMonth, this.totalSights,
+          this.avSpeedToday, this.avSpeedLastWeek, this.avSpeedLastMonth,
+          this.mSpeedToday, this.mCarRateToday);
     }
 
   }

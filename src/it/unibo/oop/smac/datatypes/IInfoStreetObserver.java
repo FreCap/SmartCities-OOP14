@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * Interfaccia che gestisce un oggetto contenente delle informazioni relative ad un singolo
  * osservatore, che possono essere ricavate dai dati presenti nel Model dell'applicazione. I valori
- * restituiti sono tutti degli Optional<>.
+ * restituiti sono tutti degli oggetti della classe Optional.
  * 
  * @author Federico Bellini
  */
