@@ -20,6 +20,9 @@ import org.junit.Test;
 
 /**
  * Classe che controlla l'interfaccia esposta da {@link StreetObserverModelDatabase}.
+ * 
+ * @author Francesco Capponi
+ * @author Federico Bellini
  */
 public class ModelStreetObserverTest {
 
@@ -30,7 +33,6 @@ public class ModelStreetObserverTest {
 
   /**
    * Controllo che il model riesca a creare uno streetObserver valido.
-   * 
    */
   @Test
   public void testAddNewStreetObserver() {
@@ -54,7 +56,6 @@ public class ModelStreetObserverTest {
     StreetObserver streetObserver = null;
     streetObserver = new StreetObserver((IStreetObserver) null);
 
-    // questo test fallisce!
     model.addNewStreetObserver(streetObserver);
   }
 
@@ -70,12 +71,11 @@ public class ModelStreetObserverTest {
     final IStreetObserverModel model = StreetObserverModelDatabase.getInstance();
 
     final StreetObserver streetObserver = new StreetObserver(this.generateCoordinates());
-    final float speed = 44f;
 
     final LicensePlate licensePlate = LicensePlateGenerator.generate();
 
     final Sighting sighting = new Sighting.Builder().date(new Date())
-        .streetObserver(streetObserver).speed(speed).licensePlate(licensePlate).build();
+        .streetObserver(streetObserver).speed(64f).licensePlate(licensePlate).build();
 
     model.addSighting(sighting);
     assertTrue(model.getStreetObserverInfo(streetObserver).getTotalNOfSight().get().equals(1));
@@ -112,16 +112,15 @@ public class ModelStreetObserverTest {
     final IStreetObserverModel model = StreetObserverModelDatabase.getInstance();
 
     final StreetObserver streetObserver = new StreetObserver(this.generateCoordinates());
-    final Float speed = 44f;
     final LicensePlate licensePlate = LicensePlateGenerator.generate();
 
     final Sighting sighting = new Sighting.Builder().date(new Date())
-        .streetObserver(streetObserver).speed(speed).licensePlate(licensePlate).build();
+        .streetObserver(streetObserver).speed(64f).licensePlate(licensePlate).build();
     model.addSighting(sighting);
 
     final IInfoStreetObserver infoStreetObserver = model.getStreetObserverInfo(streetObserver);
     assertTrue(infoStreetObserver.getTotalNOfSight().get().equals(1));
-    assertTrue(infoStreetObserver.getAverageSpeedToday().get().equals(speed));
+    assertTrue(infoStreetObserver.getAverageSpeedToday().get().equals(64f));
 
   }
 

@@ -9,6 +9,8 @@ import org.junit.Test;
 
 /**
  * Classe che controlla l'interfaccia esposta da {@link LicensePlateTest}.
+ * 
+ * @author Francesco Capponi
  */
 public class LicensePlateTest {
 

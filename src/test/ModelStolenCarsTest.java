@@ -12,6 +12,8 @@ import org.junit.Test;
 
 /**
  * Classe che controlla l'interfaccia esposta da {@link ModelStolenCarsTest}.
+ * 
+ * @author Francesco Capponi
  */
 public class ModelStolenCarsTest {
 
