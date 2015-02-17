@@ -53,7 +53,7 @@ public final class NetServer {
   /**
    * Inizializzazione dell'inizializzatore di un nuovo channel (connessione).
    */
-  private ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
+  private final ChannelInitializer<SocketChannel> channelInitializer = new ChannelInitializer<SocketChannel>() {
     @Override
     public void initChannel(final SocketChannel ch) {
       final ChannelPipeline p = ch.pipeline();

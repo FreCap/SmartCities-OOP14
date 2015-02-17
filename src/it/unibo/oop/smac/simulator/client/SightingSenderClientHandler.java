@@ -19,7 +19,7 @@ public class SightingSenderClientHandler extends ChannelInboundHandlerAdapter {
   /**
    * Track corrente di cui si vuole simulare il comportamento.
    */
-  private TrackSimulator trackSimulator;
+  private final TrackSimulator trackSimulator;
 
   /**
    * Construttore che imposta la track che il client deve seguire.

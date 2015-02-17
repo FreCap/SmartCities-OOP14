@@ -1,8 +1,6 @@
 package it.unibo.oop.smac.view;
 
-import it.unibo.oop.smac.controller.IStolenCarsObserver;
 import it.unibo.oop.smac.controller.IStreetObserverObserver;
-import it.unibo.oop.smac.datatypes.ISighting;
 import it.unibo.oop.smac.datatypes.IStreetObserver;
 
 /**
@@ -43,22 +41,4 @@ public interface IView {
    */
   void attachStreetObserverController(IStreetObserverObserver soo);
 
-  /**
-   * Questo metodo deve attaccare l'Observer passato come parametro alle StolenCars presenti nella
-   * View. In questo modo e' l'Observer preso come paramentro che gestisce il comportamento
-   * dell'applicazione quando vengono fatte delle richieste su delle StolenCars da parte della View.
-   * 
-   * @param sco
-   *          L'{@link IStolenCarsObserver} da attaccare alle StolenCars presenti nella View.
-   */
-  void attachStolenCarsController(IStolenCarsObserver sco);
-
-  /**
-   * Questo metodo deve segnalare che c'e' stato un passaggio sotto un'osservatore di una macchina
-   * rubata.
-   * 
-   * @param iSighting
-   *          L'{@link ISighting} dell'avvistamento della macchina rubata.
-   */
-  void newPassageStolenCar(ISighting iSighting);
 }

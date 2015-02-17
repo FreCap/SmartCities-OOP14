@@ -6,7 +6,7 @@ import it.unibo.oop.smac.datatypes.IStolenCar;
 import it.unibo.oop.smac.datatypes.IStreetObserver;
 import it.unibo.oop.smac.datatypes.StolenCar;
 import it.unibo.oop.smac.model.IStolenCarModel;
-import it.unibo.oop.smac.view.IView;
+import it.unibo.oop.smac.view.stolencars.IViewStolenCars;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
  * 
  * @author Francesco Capponi
  */
-public class StolenCarsController extends Controller implements IStolenCarsObserver {
+public class StolenCarsController extends Controller implements IStolenCarsController {
 
   /**
    * Model dell'applicazione.
@@ -30,10 +30,15 @@ public class StolenCarsController extends Controller implements IStolenCarsObser
    * @param view
    *          L'oggetto che implementa la View dell'applicazione
    */
-  public StolenCarsController(final IView view) {
+  public StolenCarsController(final IViewStolenCars view) {
     super(view);
     modelStolenCars = StolenCarModelDatabase.getInstance();
     this.getView().attachStolenCarsController(this);
+  }
+
+  @Override
+  protected IViewStolenCars getView() {
+    return (IViewStolenCars) super.getView();
   }
 
   /**

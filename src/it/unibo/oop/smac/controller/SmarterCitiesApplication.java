@@ -2,7 +2,7 @@ package it.unibo.oop.smac.controller;
 
 import it.unibo.oop.smac.network.NetServer;
 import it.unibo.oop.smac.simulator.client.SightingSenderClient;
-import it.unibo.oop.smac.view.ViewGUI;
+import it.unibo.oop.smac.view.stolencars.ViewGUIStolenCars;
 
 /**
  * Esempio di avvio dell'applicazione.
@@ -31,7 +31,7 @@ public final class SmarterCitiesApplication {
   public static void main(final String... varargs) throws InterruptedException {
 
     // creazione del controller e della view
-    final IController controller = new StolenCarsController(new ViewGUI());
+    final IController controller = new StolenCarsController(new ViewGUIStolenCars());
 
     // creazione del server e dei client ad esso connessi
     new NetServer(controller);
