@@ -64,6 +64,15 @@ public class StolenCarsController extends Controller implements IStolenCarsContr
   };
 
   /**
+   * Costruttore pubblico della classe. Presume che le view saranno aggiunte successivamente
+   * 
+   */
+  public StolenCarsController() {
+    super();
+    modelStolenCars = StolenCarModelDatabase.getInstance();
+  }
+
+  /**
    * Costruttore pubblico della classe. Come parametro prende l'oggetto che compone la View
    * dell'applicazione.
    * 

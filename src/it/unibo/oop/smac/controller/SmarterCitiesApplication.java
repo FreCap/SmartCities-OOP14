@@ -2,7 +2,7 @@ package it.unibo.oop.smac.controller;
 
 import it.unibo.oop.smac.simulator.client.SightingSenderClient;
 import it.unibo.oop.smac.view.gui.stolencars.ViewGUIStolenCars;
-import it.unibo.oop.smac.view.network.NetServer;
+import it.unibo.oop.smac.view.network.ViewNetworkStolenCars;
 
 /**
  * Esempio di avvio dell'applicazione.
@@ -30,16 +30,18 @@ public final class SmarterCitiesApplication {
    */
   public static void main(final String... varargs) throws InterruptedException {
 
-    // creazione del controller e della view
-    final IController controller = new StolenCarsController(new ViewGUIStolenCars());
+    // creazione del controller che gestirà tutti gli eventi tra le parti
+    final IStolenCarsController controller = new StolenCarsController();
+
+    // gli aggiungo la view Grafica (ViewGUI) con la possibilità di vedere anche le stolenCars
+    controller.addView(new ViewGUIStolenCars());
 
     // creazione del server e dei client ad esso connessi
-    new NetServer(controller);
+    controller.addView(new ViewNetworkStolenCars());
 
     for (int i = 0; i < N_CARS; i++) {
       Thread.sleep(1000); // garantisce un distacco tra le due auto
       new Thread(new SightingSenderClient()).start();
     }
   }
-
 }

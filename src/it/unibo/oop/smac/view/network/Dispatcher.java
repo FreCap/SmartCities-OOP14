@@ -1,6 +1,6 @@
 package it.unibo.oop.smac.view.network;
 
-import it.unibo.oop.smac.controller.IController;
+import it.unibo.oop.smac.controller.IStolenCarsObserver;
 
 import java.util.Observable;
 
@@ -14,26 +14,26 @@ public class Dispatcher extends Observable {
    * controller che contiene i metodi per la notificazione dell'applicazione dei messaggi ricevuti e
    * interpretati dai vari jobs.
    */
-  private final IController controller;
+  private final IStolenCarsObserver observer;
 
   /**
    * Costruttore della classe.
    * 
-   * @param controller
+   * @param observer
    *          dell'applicazione su cui verranno richiamate le funzioni di segnalazione all'arrivo di
    *          eventi dalla rete
    */
-  Dispatcher(final IController controller) {
-    this.controller = controller;
+  Dispatcher(final IStolenCarsObserver observer) {
+    this.observer = observer;
   }
 
   /**
-   * Restituisce il controller dell'applicazione.
+   * Restituisce l'observer dell'applicazione tramite cui poter comunicare i dati al controller
    * 
-   * @return controller
+   * @return observer observer dell'applicazione tramite cui poter comunicare i dati al controller
    */
-  public IController getController() {
-    return controller;
+  public IStolenCarsObserver getStolenCarsObserver() {
+    return observer;
   }
 
   /**

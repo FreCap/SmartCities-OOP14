@@ -12,7 +12,7 @@ import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import it.unibo.oop.smac.controller.IController;
+import it.unibo.oop.smac.controller.IStolenCarsObserver;
 import it.unibo.oop.smac.network.view.jobs.ControllerSightingSender;
 
 import java.util.Observable;
@@ -40,12 +40,12 @@ public final class NetServer {
   /**
    * Costruttore della classe.
    * 
-   * @param controller
+   * @param observer
    *          dell'applicazione su cui verranno richiamate le funzioni di segnalazione all'arrivo di
    *          eventi dalla rete
    */
-  public NetServer(final IController controller) {
-    this.dispatcher = new Dispatcher(controller);
+  public NetServer(final IStolenCarsObserver observer) {
+    this.dispatcher = new Dispatcher(observer);
     dispatcher.addObserver(new ControllerSightingSender());
     this.run();
   }

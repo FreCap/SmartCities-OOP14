@@ -47,7 +47,7 @@ public class ControllerSightingSender implements Observer {
         final Dispatcher dispatcher = (Dispatcher) observable;
 
         // lo spedisco al controller che ne farà il giusto dispatch alla view
-        dispatcher.getController().newSighting(streetObserver, sighting);
+        dispatcher.getStolenCarsObserver().newSighting(streetObserver, sighting);
       } catch (InvalidAttributeValueException e) {
         // Targa non valida, interrompo la notifica
         LOGGER.error("Invalid license plate ({}) from a client", netSighting.getLicensePlate(), e);
