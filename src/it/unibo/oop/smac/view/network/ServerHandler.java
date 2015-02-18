@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.network;
+package it.unibo.oop.smac.view.network;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

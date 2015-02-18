@@ -1,11 +1,11 @@
-package it.unibo.oop.smac.network.jobs;
+package it.unibo.oop.smac.network.view.jobs;
 
 import it.unibo.oop.smac.datatypes.ISighting;
 import it.unibo.oop.smac.datatypes.LicensePlate;
 import it.unibo.oop.smac.datatypes.Sighting;
 import it.unibo.oop.smac.datatypes.StreetObserver;
-import it.unibo.oop.smac.network.Dispatcher;
-import it.unibo.oop.smac.network.datatype.PlainSighting;
+import it.unibo.oop.smac.view.network.Dispatcher;
+import it.unibo.oop.smac.view.network.PlainSighting;
 
 import java.util.Observable;
 import java.util.Observer;

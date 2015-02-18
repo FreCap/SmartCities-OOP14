@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.view.stolencars.panel;
+package it.unibo.oop.smac.view.GUI.stolencars.panel;
 
 import it.unibo.oop.smac.controller.IStolenCarsObserver;
 import it.unibo.oop.smac.datatypes.StolenCar;

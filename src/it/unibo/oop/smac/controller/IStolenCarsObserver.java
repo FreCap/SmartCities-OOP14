@@ -1,6 +1,8 @@
 package it.unibo.oop.smac.controller;
 
+import it.unibo.oop.smac.datatypes.ISighting;
 import it.unibo.oop.smac.datatypes.IStolenCar;
+import it.unibo.oop.smac.datatypes.IStreetObserver;
 import it.unibo.oop.smac.datatypes.StolenCar;
 
 import java.util.List;
@@ -27,5 +29,15 @@ public interface IStolenCarsObserver {
    *          L'auto da inserire nel Model tra quelle rubate.
    */
   void addNewStolenCar(StolenCar stolenCar);
+
+  /**
+   * Avvisa il controller che c'è stato un nuovo sighting
+   * 
+   * @param streetObserver
+   *          streetObserver che effettua l'avvistamento
+   * @param sighting
+   *          sighting da aggiungere
+   */
+  void newSighting(IStreetObserver streetObserver, ISighting sighting);
 
 }

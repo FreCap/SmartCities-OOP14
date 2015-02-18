@@ -1,8 +1,8 @@
 package it.unibo.oop.smac.controller;
 
-import it.unibo.oop.smac.network.NetServer;
 import it.unibo.oop.smac.simulator.client.SightingSenderClient;
-import it.unibo.oop.smac.view.stolencars.ViewGUIStolenCars;
+import it.unibo.oop.smac.view.GUI.stolencars.ViewGUIStolenCars;
+import it.unibo.oop.smac.view.network.NetServer;
 
 /**
  * Esempio di avvio dell'applicazione.

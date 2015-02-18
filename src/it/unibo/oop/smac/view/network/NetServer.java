@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.network;
+package it.unibo.oop.smac.view.network;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -13,7 +13,7 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import it.unibo.oop.smac.controller.IController;
-import it.unibo.oop.smac.network.jobs.ControllerSightingSender;
+import it.unibo.oop.smac.network.view.jobs.ControllerSightingSender;
 
 import java.util.Observable;
 

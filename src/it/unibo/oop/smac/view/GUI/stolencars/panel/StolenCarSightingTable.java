@@ -1,41 +1,57 @@
-package it.unibo.oop.smac.view.stolencars.panel;
+package it.unibo.oop.smac.view.GUI.stolencars.panel;
 
-import it.unibo.oop.smac.datatypes.IStolenCar;
+import it.unibo.oop.smac.database.model.StreetObserverNotValidException;
+import it.unibo.oop.smac.datatypes.ISighting;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
- * Classe che implementa un {@link AbstractTableModel} che visualizza i dati delle auto dichiarate
- * come rubate.
+ * Classe che implementa un {@link AbstractTableModel} che visualizza i dati degli avvistamenti
+ * delle auto rubate.
  * 
  * @author Francesco Capponi
  */
-public class StolenCarTable extends AbstractTableModel {
+public class StolenCarSightingTable extends AbstractTableModel {
 
   private static final long serialVersionUID = 6581624902840366368L;
 
   /**
-   * Lista delle auto dichiarate come rubate.
+   * Logger della classe
    */
-  private List<IStolenCar> stolenCarList = new LinkedList<>();
+  private static final Logger LOGGER = LoggerFactory.getLogger(StolenCarSightingTable.class);
   /**
    * Nomi delle colonne della tabella.
    */
-  private static final String[] COLUMN_NAMES = { "License Plate", "Insertion Date" };
+  private static final String[] COLUMN_NAMES = { "License Plate", "Seen at", "Location" };
 
   /**
-   * Metodo che permette l'aggiornamento della tabella con nuovi dati.
-   * 
-   * @param stolenCars
-   *          La lista di {@link IStolenCar} da visualizzare.
+   * Lista di ISighting che devono essere visualizzati.
    */
-  public void updateList(final List<IStolenCar> stolenCars) {
-    this.stolenCarList = stolenCars;
-    final int rowCount = getRowCount();
-    fireTableRowsInserted(rowCount, rowCount);
+  private final List<ISighting> sightings;
+
+  /**
+   * Costruttore che inizializza una tabella vuota.
+   */
+  public StolenCarSightingTable() {
+    super();
+    sightings = new ArrayList<ISighting>();
+  }
+
+  /**
+   * Metodo che permette l'aggiunta di un nuovo oggetto {@link ISighting} alla lista.
+   * 
+   * @param sighting
+   *          L'{@link ISighting} da aggiungere.
+   */
+  public void insertSighting(final ISighting sighting) {
+    this.sightings.add(sighting);
+    this.fireTableDataChanged();
   }
 
   /**
@@ -46,7 +62,7 @@ public class StolenCarTable extends AbstractTableModel {
    */
   @Override
   public int getRowCount() {
-    return stolenCarList.size();
+    return sightings.size();
   }
 
   /**
@@ -93,10 +109,18 @@ public class StolenCarTable extends AbstractTableModel {
     switch (col) {
       case 0:
         // colonna relativa alla license plate
-        return this.stolenCarList.get(row).getLicensePlate();
+        return this.sightings.get(row).getLicensePlate();
       case 1:
         // colonna relativa alla data di avvistamento
-        return this.stolenCarList.get(row).getInsertionDate();
+        return this.sightings.get(row).getDate();
+      case 2:
+        // colonna relativa al luogo dell'avvistamento
+        try {
+          return this.sightings.get(row).getStreetObserver().getCoordinates();
+        } catch (StreetObserverNotValidException e) {
+          LOGGER.error("The Street Observer is corrupted ", e);
+          return null;
+        }
       default:
         return null;
     }

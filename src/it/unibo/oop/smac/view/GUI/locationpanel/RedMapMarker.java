@@ -1,7 +1,7 @@
-package it.unibo.oop.smac.view.locationpanel;
+package it.unibo.oop.smac.view.GUI.locationpanel;
 
 import it.unibo.oop.smac.datatypes.ICoordinates;
-import it.unibo.oop.smac.view.mainpanel.MainPanel;
+import it.unibo.oop.smac.view.GUI.mainpanel.MainPanel;
 
 import java.awt.Image;
 import java.io.IOException;

@@ -9,7 +9,7 @@ import it.unibo.oop.smac.datatypes.IStreetObserver;
  * 
  * @author Federico Bellini
  */
-public interface IController extends IStreetObserverObserver {
+public interface IController {
 
   /**
    * Notifica che si e' verificato un nuovo passaggio sotto ad un osservatore.

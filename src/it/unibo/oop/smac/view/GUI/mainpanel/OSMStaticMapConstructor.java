@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.view.mainpanel;
+package it.unibo.oop.smac.view.GUI.mainpanel;
 
 import java.awt.Toolkit;
 import java.io.IOException;

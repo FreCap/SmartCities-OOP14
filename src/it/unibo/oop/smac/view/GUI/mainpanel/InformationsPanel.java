@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.view.mainpanel;
+package it.unibo.oop.smac.view.GUI.mainpanel;
 
 import it.unibo.oop.smac.datatypes.IInfoStreetObserver;
 import it.unibo.oop.smac.datatypes.InfoStreetObserver;

@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.network;
+package it.unibo.oop.smac.view.network;
 
 import it.unibo.oop.smac.controller.IController;
 

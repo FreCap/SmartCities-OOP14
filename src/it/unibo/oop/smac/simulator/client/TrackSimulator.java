@@ -1,7 +1,7 @@
 package it.unibo.oop.smac.simulator.client;
 
 import it.unibo.oop.smac.datatypes.LicensePlate;
-import it.unibo.oop.smac.network.datatype.PlainSighting;
+import it.unibo.oop.smac.view.network.PlainSighting;
 
 import java.io.InputStream;
 import java.util.Date;
