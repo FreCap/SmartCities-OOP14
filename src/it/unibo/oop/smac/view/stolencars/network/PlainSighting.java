@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.view.network;
+package it.unibo.oop.smac.view.stolencars.network;
 
 import it.unibo.oop.smac.datatypes.Coordinates;
 import it.unibo.oop.smac.datatypes.Sighting;

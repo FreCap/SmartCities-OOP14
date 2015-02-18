@@ -10,7 +10,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
-import it.unibo.oop.smac.view.network.NetServer;
+import it.unibo.oop.smac.view.stolencars.network.NetServer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

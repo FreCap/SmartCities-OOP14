@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.view.network;
+package it.unibo.oop.smac.view.stolencars.network;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;

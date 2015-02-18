@@ -3,9 +3,9 @@ package it.unibo.oop.smac.view.gui.stolencars;
 import it.unibo.oop.smac.controller.IStolenCarsObserver;
 import it.unibo.oop.smac.datatypes.ISighting;
 import it.unibo.oop.smac.view.gui.ViewGUI;
-import it.unibo.oop.smac.view.gui.stolencars.panel.IStolenCarsPanel;
-import it.unibo.oop.smac.view.gui.stolencars.panel.StolenCarsPanel;
 import it.unibo.oop.smac.view.stolencars.IViewStolenCars;
+import it.unibo.oop.smac.view.stolencars.gui.panel.IStolenCarsPanel;
+import it.unibo.oop.smac.view.stolencars.gui.panel.StolenCarsPanel;
 
 /**
  * Implementazione dell'interfaccia IView con utilizzo di GUI. Questa classe e' implementata secondo

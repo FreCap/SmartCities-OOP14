@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.view.network;
+package it.unibo.oop.smac.view.stolencars.network;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
