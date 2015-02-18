@@ -57,30 +57,31 @@ public class ViewNetworkStolenCars implements IViewStolenCars {
    */
   @Override
   public void newSightingStolenCar(final ISighting iSighting) {
+    // No implementation necessary
   }
 
   /**
    * La seguente funzione, nell'implementazione corrente del Network server, non ha alcun effetto
    */
   @Override
-  public void addStreetObserver(IStreetObserver streetObserver) {
-
+  public void addStreetObserver(final IStreetObserver streetObserver) {
+    // No implementation necessary
   }
 
   /**
    * La seguente funzione, nell'implementazione corrente del Network server, non ha alcun effetto
    */
   @Override
-  public void newSighting(IStreetObserver streetObserver) {
-
+  public void newSighting(final IStreetObserver streetObserver) {
+    // No implementation necessary
   }
 
   /**
    * La seguente funzione, nell'implementazione corrente del Network server, non ha alcun effetto
    */
   @Override
-  public void attachStreetObserverController(IStreetObserverObserver soo) {
-
+  public void attachStreetObserverController(final IStreetObserverObserver soo) {
+    // No implementation necessary
   }
 
 }
