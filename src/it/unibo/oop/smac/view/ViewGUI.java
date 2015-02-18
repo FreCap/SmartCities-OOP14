@@ -105,9 +105,9 @@ public class ViewGUI extends JFrame implements IView {
    *          L'{@link IStreetObserver} che ha compiuto l'avvistamento.
    */
   @Override
-  public void newPassage(final IStreetObserver streetObserver) {
-    this.mainPanel.notifyPassage(streetObserver);
-    this.locationPanel.notifyPassage(streetObserver);
+  public void newSighting(final IStreetObserver streetObserver) {
+    this.mainPanel.notifySighting(streetObserver);
+    this.locationPanel.notifySighting(streetObserver);
   }
 
   /**

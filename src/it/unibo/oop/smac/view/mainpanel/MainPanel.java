@@ -61,8 +61,8 @@ public class MainPanel extends JPanel implements IMainPanel {
    *          L'{@link IStreetObserver} che ha rilevato dei dati.
    */
   @Override
-  public void notifyPassage(final IStreetObserver streetObserver) {
-    this.controlPanel.notifyPassage(streetObserver);
+  public void notifySighting(final IStreetObserver streetObserver) {
+    this.controlPanel.notifySighting(streetObserver);
   }
 
   /**

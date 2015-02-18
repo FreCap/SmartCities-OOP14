@@ -72,12 +72,12 @@ public class StolenCarsController extends Controller implements IStolenCarsContr
    *          sighting da aggiungere
    */
   @Override
-  public void newPassage(final IStreetObserver streetObserver, final ISighting sighting) {
-    super.newPassage(streetObserver, sighting);
+  public void newSighting(final IStreetObserver streetObserver, final ISighting sighting) {
+    super.newSighting(streetObserver, sighting);
 
     // controllo che non si tratti di una rubata
     if (modelStolenCars.checkStolenPlate(sighting.getLicensePlate())) {
-      this.getView().newPassageStolenCar(sighting);
+      this.getView().newSightingStolenCar(sighting);
     }
   }
 

@@ -27,7 +27,7 @@ public interface IMainPanel {
    * @param streetObserver
    *          L'{@link IStreetObserver} che ha rilevato dei dati.
    */
-  void notifyPassage(IStreetObserver streetObserver);
+  void notifySighting(IStreetObserver streetObserver);
 
   /**
    * Attacca un Observer degli StreetObserver.

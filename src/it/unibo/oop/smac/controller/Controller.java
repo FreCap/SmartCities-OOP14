@@ -58,7 +58,7 @@ public class Controller implements IController {
    *          dall'osservatore.
    */
   @Override
-  public void newPassage(final IStreetObserver streetObserver, final ISighting sighting) {
+  public void newSighting(final IStreetObserver streetObserver, final ISighting sighting) {
     LOGGER.info("Car {} has been seen", sighting.getLicensePlate());
 
     if (!this.model.checkStreetObserverExists(streetObserver)) {
@@ -66,9 +66,9 @@ public class Controller implements IController {
     }
     try {
       model.addSighting(sighting);
-      view.newPassage(streetObserver);
+      view.newSighting(streetObserver);
     } catch (Exception e) {
-      LOGGER.error("Error in signaling a new passage ", e);
+      LOGGER.error("Error in signaling a new sighting ", e);
     }
   }
 

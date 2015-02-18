@@ -35,6 +35,6 @@ public interface IStolenCarsPanel {
    * @param sighting
    *          L'{@link ISighting} dell'avvistamento della macchina rubata.
    */
-  void newPassageStolenCar(ISighting sighting);
+  void newSightingStolenCar(ISighting sighting);
 
 }

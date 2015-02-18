@@ -77,8 +77,8 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel {
    *          L'{@link ISighting} dell'avvistamento della macchina rubata.
    */
   @Override
-  public void newPassageStolenCar(final ISighting sighting) {
-    lastSeenPanel.newPassageStolenCar(sighting);
+  public void newSightingStolenCar(final ISighting sighting) {
+    lastSeenPanel.newSightingStolenCar(sighting);
   }
 
 }

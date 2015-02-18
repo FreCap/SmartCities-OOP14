@@ -27,7 +27,7 @@ public interface ILocationPanel {
    * @param streetObserver
    *          L'{@link IStreetObserver} che ha rilevato un passaggio.
    */
-  void notifyPassage(IStreetObserver streetObserver);
+  void notifySighting(IStreetObserver streetObserver);
 
   /**
    * Restituisce il JPanel.

@@ -20,5 +20,5 @@ public interface IController extends IStreetObserverObserver {
    *          Oggetto di tipo {@link ISighting} contenente le informazioni rilevate
    *          dall'osservatore.
    */
-  void newPassage(IStreetObserver streetObserver, ISighting sighting);
+  void newSighting(IStreetObserver streetObserver, ISighting sighting);
 }

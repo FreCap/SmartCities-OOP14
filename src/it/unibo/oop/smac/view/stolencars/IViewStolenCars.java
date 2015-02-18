@@ -31,5 +31,5 @@ public interface IViewStolenCars extends IView {
    * @param iSighting
    *          L'{@link ISighting} dell'avvistamento della macchina rubata.
    */
-  void newPassageStolenCar(ISighting iSighting);
+  void newSightingStolenCar(ISighting iSighting);
 }

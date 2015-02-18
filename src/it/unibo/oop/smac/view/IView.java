@@ -27,7 +27,7 @@ public interface IView {
    * @param streetObserver
    *          L'{@link IStreetObserver} che ha compiuto l'avvistamento.
    */
-  void newPassage(IStreetObserver streetObserver);
+  void newSighting(IStreetObserver streetObserver);
 
   /**
    * Questo metodo deve attaccare l'Observer passato come parametro agli StreetObserver presenti

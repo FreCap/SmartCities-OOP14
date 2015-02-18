@@ -50,8 +50,8 @@ public class ViewGUIStolenCars extends ViewGUI implements IViewStolenCars {
    *          L'{@link ISighting} dell'avvistamento della macchina rubata.
    */
   @Override
-  public void newPassageStolenCar(final ISighting iSighting) {
-    this.stolenCarsPanel.newPassageStolenCar(iSighting);
+  public void newSightingStolenCar(final ISighting iSighting) {
+    this.stolenCarsPanel.newSightingStolenCar(iSighting);
   }
 
 }

@@ -44,7 +44,7 @@ public class StolenCarSightPanel extends JPanel {
    * @param sighting
    *          L'{@link ISighting} dell'avvistamento della macchina rubata.
    */
-  public void newPassageStolenCar(final ISighting sighting) {
+  public void newSightingStolenCar(final ISighting sighting) {
     stolenCarsSightingTable.insertSighting(sighting);
   }
 

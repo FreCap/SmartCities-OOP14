@@ -124,7 +124,7 @@ public class StreetObserverPanel extends JPanel {
    * Mostra un avvenuto passaggio rilevato dall'osservatore cambiando per un breve tempo l'icona a
    * fianco della static map.
    */
-  public void displayPassage() {
+  public void displaySighting() {
     SwingUtilities.invokeLater(() -> {
       this.setButtonOn();
     });

@@ -31,7 +31,7 @@ public class ControlPanel extends JScrollPane {
   /**
    * Map che ha come chiave l'id dello streetObserver, e come valore il riferimento al relativo
    * StreetObserverPanel. Questa memorizzazione e' necessaria per richiamare il metodo
-   * displayPassage della classe StreetObserverPanel sul giusto pannello.
+   * displaySighting della classe StreetObserverPanel sul giusto pannello.
    */
   private final Map<String, StreetObserverPanel> streetObserversMap = new HashMap<>();
 
@@ -68,10 +68,10 @@ public class ControlPanel extends JScrollPane {
    * @param streetObserver
    *          L'{@link IStreetObserver} che ha rilevato i dati.
    */
-  public void notifyPassage(final IStreetObserver streetObserver) {
+  public void notifySighting(final IStreetObserver streetObserver) {
     if (this.streetObserversMap.containsKey(streetObserver.getId())) {
       final StreetObserverPanel p = this.streetObserversMap.get(streetObserver.getId());
-      p.displayPassage();
+      p.displaySighting();
     }
   }
 
