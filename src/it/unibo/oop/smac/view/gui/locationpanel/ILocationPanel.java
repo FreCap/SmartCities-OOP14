@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.view.GUI.locationpanel;
+package it.unibo.oop.smac.view.gui.locationpanel;
 
 import it.unibo.oop.smac.datatypes.IStreetObserver;
 

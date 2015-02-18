@@ -1,10 +1,10 @@
-package it.unibo.oop.smac.view.GUI.stolencars;
+package it.unibo.oop.smac.view.gui.stolencars;
 
 import it.unibo.oop.smac.controller.IStolenCarsObserver;
 import it.unibo.oop.smac.datatypes.ISighting;
-import it.unibo.oop.smac.view.GUI.ViewGUI;
-import it.unibo.oop.smac.view.GUI.stolencars.panel.IStolenCarsPanel;
-import it.unibo.oop.smac.view.GUI.stolencars.panel.StolenCarsPanel;
+import it.unibo.oop.smac.view.gui.ViewGUI;
+import it.unibo.oop.smac.view.gui.stolencars.panel.IStolenCarsPanel;
+import it.unibo.oop.smac.view.gui.stolencars.panel.StolenCarsPanel;
 import it.unibo.oop.smac.view.stolencars.IViewStolenCars;
 
 /**
@@ -27,7 +27,6 @@ public class ViewGUIStolenCars extends ViewGUI implements IViewStolenCars {
   public ViewGUIStolenCars() {
     super();
     super.addTab(" Stolen Cars ", stolenCarsPanel.getPanel());
-
   }
 
   /**

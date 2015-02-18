@@ -1,12 +1,12 @@
-package it.unibo.oop.smac.view.GUI;
+package it.unibo.oop.smac.view.gui;
 
 import it.unibo.oop.smac.controller.IStreetObserverObserver;
 import it.unibo.oop.smac.datatypes.IStreetObserver;
 import it.unibo.oop.smac.view.IView;
-import it.unibo.oop.smac.view.GUI.locationpanel.ILocationPanel;
-import it.unibo.oop.smac.view.GUI.locationpanel.OpenStreetMapPanel;
-import it.unibo.oop.smac.view.GUI.mainpanel.IMainPanel;
-import it.unibo.oop.smac.view.GUI.mainpanel.MainPanel;
+import it.unibo.oop.smac.view.gui.locationpanel.ILocationPanel;
+import it.unibo.oop.smac.view.gui.locationpanel.OpenStreetMapPanel;
+import it.unibo.oop.smac.view.gui.mainpanel.IMainPanel;
+import it.unibo.oop.smac.view.gui.mainpanel.MainPanel;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
