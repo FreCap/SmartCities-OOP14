@@ -8,7 +8,11 @@
 	<classpathentry kind="lib" path="libs/ormlite-core-4.48.jar" sourcepath="libs/ormlite-core-4.48-sources.jar"/>
 	<classpathentry kind="lib" path="libs/ormlite-jdbc-4.48-javadoc.jar"/>
 	<classpathentry kind="lib" path="libs/ormlite-jdbc-4.48.jar"/>
-	<classpathentry kind="lib" path="libs/JMapViewer.jar"/>
+	<classpathentry kind="lib" path="libs/JMapViewer.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://josm.openstreetmap.de/doc"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="libs/h2-1.4.185.jar"/>
 	<classpathentry kind="lib" path="libs/gson-2.3.1.jar"/>
 	<classpathentry kind="lib" path="libs/slf4j-api-1.7.10.jar"/>
