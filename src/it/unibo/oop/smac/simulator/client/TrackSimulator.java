@@ -20,7 +20,7 @@ public class TrackSimulator {
   /**
    * Logger della classe
    */
-  private static final Logger LOGGER = LoggerFactory.getLogger(SightingSenderClient.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(TrackSimulator.class);
 
   /**
    * File contenente i tracks possibili.

@@ -26,7 +26,7 @@ public class StolenCarRow implements IStolenCar {
   /**
    * Logger della classe
    */
-  private static final Logger LOGGER = LoggerFactory.getLogger(Connection.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(StolenCarRow.class);
 
   /**
    * Nome del campo contenente la targa.
