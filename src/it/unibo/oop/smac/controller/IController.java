@@ -2,6 +2,9 @@ package it.unibo.oop.smac.controller;
 
 import it.unibo.oop.smac.datatypes.ISighting;
 import it.unibo.oop.smac.datatypes.IStreetObserver;
+import it.unibo.oop.smac.view.IView;
+
+import java.util.List;
 
 /**
  * Interfaccia per il controller dell'applicazione. In questo caso la classe che lo implementa deve
@@ -21,4 +24,17 @@ public interface IController {
    *          dall'osservatore.
    */
   void newSighting(IStreetObserver streetObserver, ISighting sighting);
+
+  /**
+   * Viene aggiunta una View all'applicazione
+   * 
+   * @param v
+   *          view da aggiungere
+   */
+  void addView(IView v);
+
+  /**
+   *  
+   */
+  List<IView> getViews();
 }

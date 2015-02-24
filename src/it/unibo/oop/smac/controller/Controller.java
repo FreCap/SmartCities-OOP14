@@ -93,6 +93,7 @@ public class Controller implements IController {
    * @param v
    *          view da aggiungere
    */
+  @Override
   public void addView(final IView v) {
     v.attachStreetObserverController(observer);
     this.getViews().add(v);

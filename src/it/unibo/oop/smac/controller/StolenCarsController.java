@@ -17,7 +17,8 @@ import java.util.List;
  * 
  * @author Francesco Capponi
  */
-public class StolenCarsController extends Controller implements IStolenCarsController {
+public class StolenCarsController extends AbstractControllerDecorator implements
+    IStolenCarsController {
 
   /**
    * Model dell'applicazione.
@@ -67,22 +68,9 @@ public class StolenCarsController extends Controller implements IStolenCarsContr
    * Costruttore pubblico della classe. Presume che le view saranno aggiunte successivamente
    * 
    */
-  public StolenCarsController() {
-    super();
-    modelStolenCars = StolenCarModelDatabase.getInstance();
-  }
-
-  /**
-   * Costruttore pubblico della classe. Come parametro prende l'oggetto che compone la View
-   * dell'applicazione.
-   * 
-   * @param view
-   *          L'oggetto che implementa la View dell'applicazione
-   */
-  public StolenCarsController(final IViewStolenCars view) {
-    super();
-    modelStolenCars = StolenCarModelDatabase.getInstance();
-    this.addView(view);
+  public StolenCarsController(final IController controller) {
+    super(controller);
+    this.modelStolenCars = StolenCarModelDatabase.getInstance();
   }
 
   /**
@@ -122,7 +110,6 @@ public class StolenCarsController extends Controller implements IStolenCarsContr
    * 
    * @return Il {@link IStolenCarModel} dell'applicazione.
    */
-  @Override
   protected IStolenCarModel getModel() {
     return this.modelStolenCars;
   }

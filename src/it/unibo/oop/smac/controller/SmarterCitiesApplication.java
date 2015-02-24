@@ -31,7 +31,7 @@ public final class SmarterCitiesApplication {
   public static void main(final String... varargs) throws InterruptedException {
 
     // creazione del controller che gestirà tutti gli eventi tra le parti
-    final IStolenCarsController controller = new StolenCarsController();
+    final IStolenCarsController controller = new StolenCarsController(new Controller());
 
     // gli aggiungo la view Grafica (ViewGUI) con la possibilità di vedere anche le stolenCars
     controller.addView(new ViewGUIStolenCars());
