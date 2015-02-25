@@ -105,7 +105,7 @@ public class MainPanel extends JPanel implements IMainPanel {
    */
   private void plugMsg(final IStreetObserver streetObserver) {
     final String msg = new StringBuilder()
-        .append("New Street Observer is been plugged in position: ")
+        .append("New Street Observer has been plugged in position: ")
         .append(" - Latitude:  " + streetObserver.getLatitude())
         .append(" - Longitude: " + streetObserver.getLongitude()).toString();
 
