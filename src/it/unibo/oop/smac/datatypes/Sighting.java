@@ -61,7 +61,11 @@ public final class Sighting implements ISighting {
   public Date getDate() {
     // WARNING: la defensive copy di questo oggetto genera un errore interno alle librerie di
     // database!
-    return this.date;
+    Date response = null;
+    if (this.date != null) {
+      response = new Date(this.date.getTime());
+    }
+    return response;
   }
 
   /**

@@ -207,7 +207,7 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
     today.set(Calendar.SECOND, 0);
     today.set(Calendar.AM_PM, Calendar.AM);
     final Calendar lastWeek = Calendar.getInstance();
-    lastWeek.add(Calendar.DATE, -7);
+    lastWeek.add(Calendar.DATE, -Calendar.DAY_OF_WEEK);
     final Calendar lastMonth = Calendar.getInstance();
     lastMonth.add(Calendar.MONTH, -1);
 
