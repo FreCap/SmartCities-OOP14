@@ -54,4 +54,16 @@ public class ViewGUIStolenCars extends ViewGUI implements IViewStolenCars {
     this.stolenCarsPanel.newSightingStolenCar(iSighting);
   }
 
+  /**
+   * Questo metodo visualizza i dati sull'ultimo avvistamento compiuto in generale dagli
+   * osservatori.
+   * 
+   * @param sighting
+   *          L'{@link ISighting} dell'ultimo avvistamento compiuto.
+   */
+  @Override
+  public void showLastSighting(final ISighting sighting) {
+    this.stolenCarsPanel.showLastSighting(sighting);
+  };
+
 }
