@@ -22,7 +22,11 @@ import javax.swing.JOptionPane;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class NetServer {
+/**
+ * 
+ * @author Francesco Capponi
+ */
+public class NetServer {
 
   /**
    * Logger della classe
@@ -49,7 +53,6 @@ public final class NetServer {
   public NetServer(final IStolenCarsObserver observer) {
     this.dispatcher = new Dispatcher(observer);
     dispatcher.addObserver(new ControllerSightingSender());
-    this.run();
   }
 
   /**
@@ -84,7 +87,7 @@ public final class NetServer {
   /**
    * Metodo che fa partire il processo server.
    */
-  private void run() {
+  public void run() {
     final Thread t = new Thread(new Runnable() {
       @Override
       public void run() {

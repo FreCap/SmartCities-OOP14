@@ -29,7 +29,7 @@ public class ViewNetworkStolenCars implements IViewStolenCars {
    */
   private void initialize() {
     if (this.initialized && this.stolenCarsObserver != null) {
-      new NetServer(this.stolenCarsObserver);
+      new NetServer(this.stolenCarsObserver).run();
     }
   }
 

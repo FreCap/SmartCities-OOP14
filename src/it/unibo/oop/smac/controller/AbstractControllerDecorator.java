@@ -16,7 +16,7 @@ import java.util.List;
  */
 abstract class AbstractControllerDecorator implements IController {
 
-  protected final IController controllerDecorated;
+  private final IController controllerDecorated;
 
   /**
    * Costruttore del decorator
