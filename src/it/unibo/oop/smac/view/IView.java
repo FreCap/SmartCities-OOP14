@@ -5,7 +5,7 @@ import it.unibo.oop.smac.datatypes.IStreetObserver;
 
 /**
  * Interfaccia realizzata per la gestione della parte di View del programma. Essa puo' essere
- * implementata sia da un'interfaccia di tipo grafico sia non. In questo modo viene garantita la
+ * implementata sia da un'interfaccia di tipo grafico che non. In questo modo viene garantita la
  * massima genericità ed indipendenza della parte di View dell'applicazione dalle parti di Model e
  * Controller.
  * 

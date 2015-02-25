@@ -6,7 +6,6 @@ import it.unibo.oop.smac.datatypes.IStreetObserver;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -19,13 +18,24 @@ public class MainPanel extends JPanel implements IMainPanel {
 
   private static final long serialVersionUID = -5219662861548416920L;
 
-  // Panel contenente tutte le informazioni riguardati lo streetObserver
-  // selezionato
+  /**
+   * Panel contenente tutte le informazioni riguardati l'osservatore selezionato.
+   */
   private final InformationsPanel informationsPanel = new InformationsPanel();
-  // Panel contenente una successione degli streetObserver
+
+  /**
+   * Panel contenente una successione degli osservatori.
+   */
   private final ControlPanel controlPanel = new ControlPanel();
 
-  // Observer degli streetObserver
+  /**
+   * Panel che mostra un messaggio quando un nuovo osservatore viene collegato all'applicazione.
+   */
+  private final MessagePanel messagePanel = new MessagePanel();
+
+  /**
+   * Observer degli streetObserver
+   */
   private IStreetObserverObserver soo;
 
   /**
@@ -36,6 +46,7 @@ public class MainPanel extends JPanel implements IMainPanel {
     this.setLayout(new BorderLayout());
     this.add(controlPanel, BorderLayout.CENTER);
     this.add(informationsPanel.getPanel(), BorderLayout.EAST);
+    this.add(messagePanel, BorderLayout.SOUTH);
   }
 
   /**
@@ -94,12 +105,11 @@ public class MainPanel extends JPanel implements IMainPanel {
    */
   private void plugMsg(final IStreetObserver streetObserver) {
     final String msg = new StringBuilder()
-        .append("New Street Observer is been plugged.\n The positions is: ")
-        .append("\n   - Latitude:  " + streetObserver.getLatitude())
-        .append("\n   - Longitude: " + streetObserver.getLongitude()).toString();
+        .append("New Street Observer is been plugged in position: ")
+        .append(" - Latitude:  " + streetObserver.getLatitude())
+        .append(" - Longitude: " + streetObserver.getLongitude()).toString();
 
-    JOptionPane.showOptionDialog(null, msg, "Plug info", JOptionPane.CLOSED_OPTION,
-        JOptionPane.INFORMATION_MESSAGE, null, null, null);
+    this.messagePanel.showMessage(msg);
   }
 
 }

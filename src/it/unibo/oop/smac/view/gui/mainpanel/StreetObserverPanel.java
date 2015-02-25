@@ -90,22 +90,22 @@ public class StreetObserverPanel extends JPanel {
 
       @Override
       public void mouseEntered(final MouseEvent arg0) {
-        setColor(Color.YELLOW);
+        setColorBackground(Color.YELLOW);
       }
 
       @Override
       public void mouseExited(final MouseEvent arg0) {
-        setColor(defaultColorBackground);
+        setColorBackground(defaultColorBackground);
       }
 
       @Override
       public void mousePressed(final MouseEvent arg0) {
-        setColor(Color.GREEN);
+        setColorBackground(Color.GREEN);
       }
 
       @Override
       public void mouseReleased(final MouseEvent arg0) {
-        setColor(Color.YELLOW);
+        setColorBackground(Color.YELLOW);
       }
     });
   }
@@ -116,7 +116,7 @@ public class StreetObserverPanel extends JPanel {
    * @param c
    *          Il Color da settare come sfondo.
    */
-  private void setColor(final Color c) {
+  private void setColorBackground(final Color c) {
     SwingUtilities.invokeLater(() -> this.setBackground(c));
   }
 
