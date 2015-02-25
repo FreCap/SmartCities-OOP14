@@ -70,13 +70,13 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
           streetObserverDao.create(streetObserverRow);
         } catch (SQLException e) {
           LOGGER.error("The creation on database of the new SteetObserver {} is failed!",
-              streetObserver, e);
+              streetObserver);
         }
         try {
           System.out.println("Reading datas just added: "
               + streetObserverDao.queryForId(streetObserver.getId()));
         } catch (SQLException e) {
-          LOGGER.error("Error reading from database of data just added ", e);
+          LOGGER.error("Error reading from database of data just added ");
         }
       }
     }
