@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -199,6 +200,7 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
           + "does not exist! ");
     }
 
+    // imposto i vari intervalli di tempo di cui dobbiamo calcolare le statistiche
     final Calendar lastHour = Calendar.getInstance();
     lastHour.add(Calendar.HOUR, -1);
     final Calendar today = Calendar.getInstance();
@@ -211,6 +213,7 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
     final Calendar lastMonth = Calendar.getInstance();
     lastMonth.add(Calendar.MONTH, -1);
 
+    // counters
     int sightLastHour = 0;
     int sightToday = 0;
     int sightLastWeek = 0;
@@ -219,9 +222,10 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
     float totalSpeedLastWeek = 0;
     float totalSpeedLastMonth = 0;
     float maxSpeedToday = 0;
+    final int hoursInDay = (int) TimeUnit.DAYS.toHours(1);
 
-    // TODO manca da elaborare la max car rate
-    // ricerca ed elaborazione dei dati
+    int[] carInHour = new int[hoursInDay];
+    // aumento i counters
     final List<ISighting> sightingRowList = this.getStreetObserverSightings(streetObserver);
     for (final ISighting s : sightingRowList) {
       final Date date = s.getDate();
@@ -239,11 +243,24 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
         if (s.getSpeed() > maxSpeedToday) {
           maxSpeedToday = s.getSpeed();
         }
+        final Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        carInHour[calendar.get(Calendar.HOUR)]++;
       }
       if (date.after(lastHour.getTime())) {
         sightLastHour++;
       }
     }
+
+    // trovo il max car rate
+    float maxCarRate = 0;
+    int maxCarRateHour = 0;
+    for (int i = 0; i < carInHour.length; i++) {
+      if (carInHour[i] > carInHour[maxCarRateHour]) {
+        maxCarRateHour = i;
+      }
+    }
+    maxCarRate = carInHour[maxCarRateHour];
 
     // costruzione dell'oggetto InfoStreetObserver contenente tutte le
     // informazioni ricavate
@@ -253,7 +270,7 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
         .nOfSightLastMonth(sightLastMonth).averageSpeedToday(totalSpeedToday / sightToday)
         .averageSpeedLastWeek(totalSpeedLastWeek / sightLastWeek)
         .averageSpeedLastMonth(totalSpeedLastMonth / sightLastMonth).maxSpeedToday(maxSpeedToday)
-        .build();
+        .maxCarRateToday(maxCarRate).build();
   }
 
   /**

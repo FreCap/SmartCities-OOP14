@@ -135,7 +135,7 @@ public final class InformationsPanel extends JPanel {
         .append("   CAR RATE")
         .append(NEW_LINE)
         .append(
-            TAB + "Max car rate (today): "
+            TAB + "Max car rate (today in an hour): "
                 + stringOutputUtility(this.currentInfo.getMaxCarRateToday())).toString();
     this.carRateInfo.setText(s);
   }
