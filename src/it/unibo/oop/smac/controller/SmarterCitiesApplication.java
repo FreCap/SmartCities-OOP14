@@ -1,7 +1,7 @@
 package it.unibo.oop.smac.controller;
 
 import it.unibo.oop.smac.simulator.client.SightingSenderClient;
-import it.unibo.oop.smac.view.gui.stolencars.ViewGUIStolenCars;
+import it.unibo.oop.smac.view.stolencars.gui.ViewGUIStolenCars;
 import it.unibo.oop.smac.view.stolencars.network.ViewNetworkStolenCars;
 
 /**
