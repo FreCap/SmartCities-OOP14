@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Classe che genera una nuova targa, utilizzata a fini di test.
  *
+ * @author Francesco Capponi
  */
 public final class LicensePlateGenerator {
 

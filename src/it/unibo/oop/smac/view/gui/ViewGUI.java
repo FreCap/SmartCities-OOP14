@@ -76,12 +76,12 @@ public class ViewGUI extends JFrame implements IView {
   }
 
   /**
-   * Aggiunge una tab alla visuale grafica
+   * Aggiunge una tab alla visuale grafica.
    * 
    * @param title
-   *          titolo che dovrà avere la tab
+   *          Titolo che dovrà avere la tab
    * @param component
-   *          componente che dovrà essere formato dalla tab
+   *          Componente che dovrà essere formato dalla tab
    */
   protected void addTab(final String title, final Component component) {
     this.tabbedPane.addTab(title, component);

@@ -15,12 +15,19 @@ import com.google.gson.Gson;
 
 /**
  * Classe che gestisce la simulazione del percorso di una macchina.
+ * 
+ * @author Francesco Capponi
  */
 public class TrackSimulator {
   /**
    * Logger della classe
    */
   private static final Logger LOGGER = LoggerFactory.getLogger(TrackSimulator.class);
+
+  /**
+   * Velocita' media di un auto.
+   */
+  private static final int AVERAGE_SPEED = 40;
 
   /**
    * File contenente i tracks possibili.
@@ -59,7 +66,7 @@ public class TrackSimulator {
     response.setCoordinates(current.getCoordinate());
     response.setDate(new Date());
     response.setLicensePlate(licensePlate.toString());
-    response.setSpeed(new Float(new Random().nextInt(50) + 30));
+    response.setSpeed(new Float(new Random().nextInt(AVERAGE_SPEED) + AVERAGE_SPEED));
 
     final int size = track.getTrackCommands().size();
     // avanzo il contatore
@@ -72,25 +79,25 @@ public class TrackSimulator {
    * Costruttore della classe che richiede la targa della macchina di cui si vuole simulare il
    * comportamento, e su quale track devi passare.
    * 
-   * @param licensePlate
+   * @param plate
    *          targa della macchina di cui si vuole simulare l'avanzamento
    * @param trackIndex
    *          id del track da utilizzare
    */
-  public TrackSimulator(final LicensePlate licensePlate, final Integer trackIndex) {
+  public TrackSimulator(final LicensePlate plate, final Integer trackIndex) {
     track = getNTrack(trackIndex);
-    this.licensePlate = licensePlate;
+    this.licensePlate = plate;
   }
 
   /**
    * Costruttore della classe che richiede la targa della macchina di cui si vuole simulare il
    * comportamento, e sceglie un track casuale.
    * 
-   * @param licensePlate
+   * @param plate
    *          targa della macchina di cui si vuole simulare l'avanzamento
    */
-  public TrackSimulator(final LicensePlate licensePlate) {
-    this(licensePlate, new Random().nextInt(100));
+  public TrackSimulator(final LicensePlate plate) {
+    this(plate, new Random().nextInt(100));
   }
 
   /**

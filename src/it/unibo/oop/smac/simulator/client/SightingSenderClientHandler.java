@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Classe le operazioni effettuate dal client di rete all'invio e alla ricezioni di messaggi dal
  * server.
+ * 
+ * @author Francesco Capponi
  */
 public class SightingSenderClientHandler extends ChannelInboundHandlerAdapter {
   /**
@@ -24,11 +26,11 @@ public class SightingSenderClientHandler extends ChannelInboundHandlerAdapter {
   /**
    * Construttore che imposta la track che il client deve seguire.
    * 
-   * @param trackSimulator
+   * @param tSimulator
    *          oggetto che si occupa della simulazione del percorso del client corrente
    */
-  public SightingSenderClientHandler(final TrackSimulator trackSimulator) {
-    this.trackSimulator = trackSimulator;
+  public SightingSenderClientHandler(final TrackSimulator tSimulator) {
+    this.trackSimulator = tSimulator;
   }
 
   /**

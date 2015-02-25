@@ -4,6 +4,8 @@ import java.util.List;
 
 /**
  * POJO del modello dati contenuto nel JSON che descrive un Track, ossia un percorso.
+ * 
+ * @author Francesco Capponi
  */
 public class Track {
 
@@ -24,10 +26,10 @@ public class Track {
   /**
    * Imposta la lista dei punti da cui è composto il percorso.
    * 
-   * @param trackCommands
+   * @param trackComm
    *          passargli la lista di track Commands
    */
-  public void setTrackCommands(final List<TrackCommand> trackCommands) {
-    this.trackCommands = trackCommands;
+  public void setTrackCommands(final List<TrackCommand> trackComm) {
+    this.trackCommands = trackComm;
   }
 }

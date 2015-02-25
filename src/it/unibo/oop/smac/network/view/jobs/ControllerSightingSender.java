@@ -18,6 +18,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Classe implementata con il pattern Observer che alla ricezione da parte di un client di un
  * messaggio di sighting, notifica il controller.
+ * 
+ * @author Francesco Capponi
  */
 public class ControllerSightingSender implements Observer {
 

@@ -4,6 +4,8 @@ import it.unibo.oop.smac.datatypes.Coordinates;
 
 /**
  * POJO del modello dati contenuto nel JSON che descrive un azione del track.
+ * 
+ * @author Francesco Capponi
  */
 public class TrackCommand {
 
@@ -29,11 +31,11 @@ public class TrackCommand {
   /**
    * Imposta il time di sleep della macchina.
    * 
-   * @param sleep
+   * @param sleepTime
    *          tempo per cui si dovrà far dormire il simulatore
    */
-  public void setSleep(final Integer sleep) {
-    this.sleep = sleep;
+  public void setSleep(final Integer sleepTime) {
+    this.sleep = sleepTime;
   }
 
   /**
@@ -48,11 +50,11 @@ public class TrackCommand {
   /**
    * Imposta le coordinate del sighting.
    * 
-   * @param coordinate
+   * @param coord
    *          punto in cui il simulatore dovrà segnalare il nuovo sighting
    */
-  public void setCoordinate(final Coordinates coordinate) {
-    this.coordinate = coordinate;
+  public void setCoordinate(final Coordinates coord) {
+    this.coordinate = coord;
   }
 
 }

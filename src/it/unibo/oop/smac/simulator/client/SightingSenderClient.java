@@ -17,6 +17,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Classe che gestisce l'apertura della connessione di un simulatore sighting tra client-serer.
+ * 
+ * @author Francesco Capponi
  */
 public final class SightingSenderClient implements Runnable {
 
