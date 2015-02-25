@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.network.view.jobs;
+package it.unibo.oop.smac.view.stolencars.network.jobs;
 
 import it.unibo.oop.smac.datatypes.ISighting;
 import it.unibo.oop.smac.datatypes.LicensePlate;

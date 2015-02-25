@@ -13,9 +13,11 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import it.unibo.oop.smac.controller.IStolenCarsObserver;
-import it.unibo.oop.smac.network.view.jobs.ControllerSightingSender;
+import it.unibo.oop.smac.view.stolencars.network.jobs.ControllerSightingSender;
 
 import java.util.Observable;
+
+import javax.swing.JOptionPane;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,10 +66,26 @@ public final class NetServer {
   };
 
   /**
+   * Handler delle eccezioni rilasciate dal Thread. Nel particolare, fornisce un'interfaccia visiva
+   * ad un errore di inizializzazione del network Server
+   */
+  private final Thread.UncaughtExceptionHandler exceptionHandler = new Thread.UncaughtExceptionHandler() {
+    @Override
+    public void uncaughtException(final Thread th, final Throwable ex) {
+      JOptionPane
+          .showMessageDialog(
+              null,
+              "Il server Network non è stato avviato. Non si riceverà nessun Sighting. \n Controllare che la porta "
+                  + PORT + " non sia occupata e riavviare l'applicazione",
+              "Errore inizializzazione", JOptionPane.INFORMATION_MESSAGE);
+    }
+  };
+
+  /**
    * Metodo che fa partire il processo server.
    */
   private void run() {
-    new Thread(new Runnable() {
+    final Thread t = new Thread(new Runnable() {
       @Override
       public void run() {
         // inizializza i workers per gestire le connessioni entranti
@@ -86,13 +104,15 @@ public final class NetServer {
         } catch (InterruptedException e) {
           LOGGER.error(
               "Service Interrupted, you have already another server running. I'm shutting down", e);
-          System.exit(0);
+          throw new IllegalStateException(e);
         } finally {
           bossGroup.shutdownGracefully();
           workerGroup.shutdownGracefully();
         }
       }
-    }).start();
+    });
+    t.setUncaughtExceptionHandler(exceptionHandler);
+    t.start();
   }
 
 }
