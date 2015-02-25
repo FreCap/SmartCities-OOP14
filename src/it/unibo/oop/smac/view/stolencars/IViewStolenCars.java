@@ -22,16 +22,16 @@ public interface IViewStolenCars extends IView {
    * @param sco
    *          L'{@link IStolenCarsObserver} da attaccare alle StolenCars presenti nella View.
    */
-  void attachStolenCarsController(IStolenCarsObserver sco);
+  void attachStolenCarsObserver(IStolenCarsObserver sco);
 
   /**
    * Questo metodo deve segnalare che c'e' stato un passaggio sotto un'osservatore di una macchina
    * rubata.
    * 
-   * @param iSighting
+   * @param sighting
    *          L'{@link ISighting} dell'avvistamento della macchina rubata.
    */
-  void newSightingStolenCar(ISighting iSighting);
+  void newSightingStolenCar(ISighting sighting);
 
   /**
    * Questo metodo visualizza i dati sull'ultimo avvistamento compiuto in generale dagli

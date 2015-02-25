@@ -42,7 +42,7 @@ public class ViewNetworkStolenCars implements IViewStolenCars {
    *          L'{@link IStolenCarsObserver} da attaccare alle StolenCars presenti nella View.
    */
   @Override
-  public void attachStolenCarsController(final IStolenCarsObserver sco) {
+  public void attachStolenCarsObserver(final IStolenCarsObserver sco) {
     if (this.initialized) {
       throw new IllegalAccessError(
           "NON potete inizializzare più volte l'observer o verranno create più instance dello stesso NetServer");
@@ -80,7 +80,7 @@ public class ViewNetworkStolenCars implements IViewStolenCars {
    * La seguente funzione, nell'implementazione corrente del Network server, non ha alcun effetto.
    */
   @Override
-  public void attachStreetObserverController(final IStreetObserverObserver soo) {
+  public void attachStreetObserverObserver(final IStreetObserverObserver soo) {
     // No implementation necessary
   }
 

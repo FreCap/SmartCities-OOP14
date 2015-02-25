@@ -84,7 +84,7 @@ public class StolenCarsController extends AbstractControllerDecorator implements
   @Override
   public void addView(final IViewStolenCars v) {
     super.addView(v);
-    v.attachStolenCarsController(observer);
+    v.attachStolenCarsObserver(observer);
   }
 
   /**

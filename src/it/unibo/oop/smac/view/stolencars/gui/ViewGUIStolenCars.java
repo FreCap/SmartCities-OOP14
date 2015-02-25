@@ -8,8 +8,8 @@ import it.unibo.oop.smac.view.stolencars.gui.panel.IStolenCarsPanel;
 import it.unibo.oop.smac.view.stolencars.gui.panel.StolenCarsPanel;
 
 /**
- * Implementazione dell'interfaccia IView con utilizzo di GUI. Questa classe e' implementata secondo
- * il pattern Observer(metodi attachObservers).
+ * Implementazione dell'interfaccia {@link IViewStolenCars} con utilizzo di GUI. Questa classe e'
+ * implementata secondo il pattern Observer(metodi attachObservers).
  * 
  * @author Francesco Capponi
  */
@@ -38,7 +38,7 @@ public class ViewGUIStolenCars extends ViewGUI implements IViewStolenCars {
    *          L'{@link IStolenCarsObserver} da attaccare alle StolenCars presenti nella View.
    */
   @Override
-  public void attachStolenCarsController(final IStolenCarsObserver sco) {
+  public void attachStolenCarsObserver(final IStolenCarsObserver sco) {
     this.stolenCarsPanel.attachStolenCarsObserver(sco);
   }
 

@@ -121,7 +121,7 @@ public class ViewGUI extends JFrame implements IView {
    *          View.
    */
   @Override
-  public void attachStreetObserverController(final IStreetObserverObserver soo) {
+  public void attachStreetObserverObserver(final IStreetObserverObserver soo) {
     this.mainPanel.attachStreetObserverObserver(soo);
   }
 

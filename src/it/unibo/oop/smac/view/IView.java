@@ -39,6 +39,6 @@ public interface IView {
    *          L'{@link IStreetObserverObserver} da attaccare agli StreetObserver presenti nella
    *          View.
    */
-  void attachStreetObserverController(IStreetObserverObserver soo);
+  void attachStreetObserverObserver(IStreetObserverObserver soo);
 
 }

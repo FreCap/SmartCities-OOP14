@@ -3,8 +3,6 @@ package it.unibo.oop.smac.view.stolencars.network;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-import java.util.Observable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +23,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
    * dispatcher che implementa l'interfaccia Observable per la notifica dei jobs dell'arrivo di un
    * determinato messaggio
    */
-  private final Observable dispatcher;
+  private final Dispatcher dispatcher;
 
   /**
    * Costruttore della classe.
@@ -34,7 +32,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
    *          dell'applicazione su cui verranno richiamate le funzioni di segnalazione all'arrivo di
    *          eventi dalla rete
    */
-  ServerHandler(final Observable d) {
+  ServerHandler(final Dispatcher d) {
     this.dispatcher = d;
   }
 

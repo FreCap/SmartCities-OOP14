@@ -83,7 +83,7 @@ public class Controller implements IController {
    */
   @Override
   public void addView(final IView v) {
-    v.attachStreetObserverController(observer);
+    v.attachStreetObserverObserver(observer);
     this.getViews().add(v);
   }
 

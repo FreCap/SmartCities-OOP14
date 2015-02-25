@@ -15,8 +15,6 @@ import io.netty.handler.logging.LoggingHandler;
 import it.unibo.oop.smac.controller.IStolenCarsObserver;
 import it.unibo.oop.smac.view.stolencars.network.jobs.ControllerSightingSender;
 
-import java.util.Observable;
-
 import javax.swing.JOptionPane;
 
 import org.slf4j.Logger;
@@ -41,7 +39,7 @@ public class NetServer {
   /**
    * Dispatcher che notifica i jobs che l'osservano alla ricezione di pacchetti da parte della rete.
    */
-  private final Observable dispatcher;
+  private final Dispatcher dispatcher;
 
   /**
    * Costruttore della classe.
