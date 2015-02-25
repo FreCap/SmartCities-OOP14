@@ -13,17 +13,17 @@ import java.util.List;
 public interface IStolenCarsController extends IController {
 
   /**
-   * Restituisce le view associate all'applicazione
+   * Restituisce le Views associate all'applicazione.
    * 
-   * @return views attive nell'applicazione
+   * @return Le Views attive nell'applicazione
    */
   List<IViewStolenCars> getViewsStolenCars();
 
   /**
-   * Viene aggiunta una View all'applicazione
+   * Viene aggiunta una View all'applicazione.
    * 
    * @param v
-   *          view da aggiungere
+   *          La View da aggiungere
    */
   void addView(IViewStolenCars v);
 

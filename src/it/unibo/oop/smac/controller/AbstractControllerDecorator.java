@@ -10,8 +10,9 @@ import it.unibo.oop.smac.view.IView;
 import java.util.List;
 
 /**
+ * Classe astratta utilizzata per decorare il controller di base dell'applicazione.
+ * 
  * @author Francesco Capponi
- *
  */
 abstract class AbstractControllerDecorator implements IController {
 
@@ -20,8 +21,8 @@ abstract class AbstractControllerDecorator implements IController {
   /**
    * Costruttore del decorator
    */
-  public AbstractControllerDecorator(final IController controllerDecorated) {
-    this.controllerDecorated = controllerDecorated;
+  public AbstractControllerDecorator(final IController cDecorated) {
+    this.controllerDecorated = cDecorated;
   }
 
   /**

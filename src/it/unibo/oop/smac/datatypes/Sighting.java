@@ -59,7 +59,8 @@ public final class Sighting implements ISighting {
    */
   @Override
   public Date getDate() {
-    // TODO WARNING la defensive copy genera un errore!
+    // WARNING: la defensive copy di questo oggetto genera un errore interno alle librerie di
+    // database!
     return this.date;
   }
 

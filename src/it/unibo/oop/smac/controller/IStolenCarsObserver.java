@@ -31,7 +31,7 @@ public interface IStolenCarsObserver {
   void addNewStolenCar(StolenCar stolenCar);
 
   /**
-   * Avvisa il controller che c'è stato un nuovo sighting
+   * Avvisa il controller che c'è stato un nuovo sighting.
    * 
    * @param streetObserver
    *          streetObserver che effettua l'avvistamento

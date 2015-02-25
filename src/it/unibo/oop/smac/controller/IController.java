@@ -26,15 +26,17 @@ public interface IController {
   void newSighting(IStreetObserver streetObserver, ISighting sighting);
 
   /**
-   * Viene aggiunta una View all'applicazione
+   * Aggiunge una View all'applicazione.
    * 
    * @param v
-   *          view da aggiungere
+   *          View da aggiungere
    */
   void addView(IView v);
 
   /**
-   *  
+   * Restituisce le View associate all'applicazione.
+   * 
+   * @return Le Views attive nell'applicazione
    */
   List<IView> getViews();
 }

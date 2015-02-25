@@ -65,8 +65,10 @@ public class StolenCarsController extends AbstractControllerDecorator implements
   };
 
   /**
-   * Costruttore pubblico della classe. Presume che le view saranno aggiunte successivamente
+   * Costruttore pubblico della classe. Presume che le View saranno aggiunte successivamente.
    * 
+   * @param controller
+   *          Il Controller di base dell'applicazione.
    */
   public StolenCarsController(final IController controller) {
     super(controller);
@@ -74,10 +76,10 @@ public class StolenCarsController extends AbstractControllerDecorator implements
   }
 
   /**
-   * Viene aggiunta una View all'applicazione
+   * Viene aggiunta una View all'applicazione.
    * 
    * @param v
-   *          view da aggiungere
+   *          La View da aggiungere
    */
   @Override
   public void addView(final IViewStolenCars v) {
@@ -98,7 +100,7 @@ public class StolenCarsController extends AbstractControllerDecorator implements
   public void newSighting(final IStreetObserver streetObserver, final ISighting sighting) {
     super.newSighting(streetObserver, sighting);
 
-    // controllo che non si tratti di una rubata
+    // controllo che non si tratti di un'auto rubata
     if (modelStolenCars.checkStolenPlate(sighting.getLicensePlate())) {
       this.getViewsStolenCars().forEach((view) -> view.newSightingStolenCar(sighting));
 
@@ -115,9 +117,9 @@ public class StolenCarsController extends AbstractControllerDecorator implements
   }
 
   /**
-   * Restituisce le view associate all'applicazione
+   * Restituisce le view associate all'applicazione.
    * 
-   * @return views attive nell'applicazione
+   * @return Le Views attive nell'applicazione
    */
   @Override
   public List<IViewStolenCars> getViewsStolenCars() {

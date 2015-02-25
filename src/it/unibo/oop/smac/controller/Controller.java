@@ -9,7 +9,7 @@ import it.unibo.oop.smac.datatypes.InfoStreetObserver;
 import it.unibo.oop.smac.model.IStreetObserverModel;
 import it.unibo.oop.smac.view.IView;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -31,7 +31,7 @@ public class Controller implements IController {
   /**
    * View dell'applicazione.
    */
-  private final List<IView> views = new ArrayList<IView>();
+  private final List<IView> views = new LinkedList<IView>();
 
   /**
    * Model dell'applicazione.
@@ -39,32 +39,20 @@ public class Controller implements IController {
   private final IStreetObserverModel model;
 
   /**
-   * Observer che si metterà in ascolto degli eventi passati dalla GUI
+   * Observer che si metterà in ascolto degli eventi passati dalla GUI. Riceve un'
+   * {@link IStreetObserver} del quale ricava le informazioni dal Model dell'applicazione. In caso
+   * di qualche malfunzionamento del Model, restituisco un oggetto contenente nessuna informazione.
    */
-  private final IStreetObserverObserver observer = new IStreetObserverObserver() {
-    /**
-     * Restituisce un oggetto del tipo {@link IInfoStreetObserver} contenente le informazioni sull'
-     * {@link IStreetObserver} richiesto. In caso di qualche malfunzionamento nel model, viene
-     * restituito un oggetto della classe {@link InfoStreetObserver} contenente nessuna
-     * informazione.
-     * 
-     * @param streetObserver
-     *          L'{@link IStreetObserver} di cui si richiedono informazioni.
-     * @return Un oggetto {@link IStreetObserver} con le informazioni richieste.
-     */
-    @Override
-    public IInfoStreetObserver getStreetObserverInfo(final IStreetObserver streetObserver) {
-      IInfoStreetObserver info;
-      try {
-        info = model.getStreetObserverInfo(streetObserver);
-      } catch (IllegalArgumentException | DatabaseNotFoundException e) {
-        LOGGER.error("Error in fetching data ", e);
-        // in caso di malfunzionamenti restituisco un info vuota
-        info = new InfoStreetObserver.Builder().build();
-      }
-      return info;
+  private final IStreetObserverObserver observer = (streetObserver) -> {
+    IInfoStreetObserver info;
+    try {
+      info = model.getStreetObserverInfo(streetObserver);
+    } catch (IllegalArgumentException | DatabaseNotFoundException e) {
+      LOGGER.error("Error in fetching data ", e);
+      // in caso di malfunzionamenti restituisco un info vuota
+      info = new InfoStreetObserver.Builder().build();
     }
-
+    return info;
   };
 
   /**
@@ -88,10 +76,10 @@ public class Controller implements IController {
   }
 
   /**
-   * Viene aggiunta una View all'applicazione
+   * Viene aggiunta una View all'applicazione.
    * 
    * @param v
-   *          view da aggiungere
+   *          La View da aggiungere.
    */
   @Override
   public void addView(final IView v) {
@@ -145,10 +133,11 @@ public class Controller implements IController {
   }
 
   /**
-   * Restituisce le view associate all'applicazione
+   * Restituisce le View associate all'applicazione.
    * 
-   * @return views attive nell'applicazione
+   * @return Le Views attive nell'applicazione
    */
+  @Override
   public List<IView> getViews() {
     return views;
   }
