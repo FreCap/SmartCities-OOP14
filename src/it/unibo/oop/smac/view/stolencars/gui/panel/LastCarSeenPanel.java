@@ -1,4 +1,4 @@
-package it.unibo.oop.smac.view.gui.mainpanel;
+package it.unibo.oop.smac.view.stolencars.gui.panel;
 
 import java.awt.Color;
 
@@ -11,18 +11,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Panel che mostra un messaggio quando un nuovo osservatore viene collegato all'applicazione.
+ * Pannello che mostra le informazioni sull'ultimo avvistamento prodotto dagli osservatori.
  * 
- * @author Federico Bellini
+ * @author Francesco Capponi
  */
-public class MessagePanel extends JPanel {
+public class LastCarSeenPanel extends JPanel {
 
-  private static final long serialVersionUID = -7348946441622348948L;
+  private static final long serialVersionUID = 3065354652371642298L;
 
   /**
    * Logger della classe.
    */
-  private static final Logger LOGGER = LoggerFactory.getLogger(MessagePanel.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(LastCarSeenPanel.class);
 
   /**
    * Tempo in cui il messaggio visualizzato rimane di differente colore.
@@ -34,23 +34,22 @@ public class MessagePanel extends JPanel {
    */
   private final JTextArea message = new JTextArea();
 
-  MessagePanel() {
+  LastCarSeenPanel() {
     super();
-    this.setBorder(new TitledBorder(" Info message "));
+    this.setBorder(new TitledBorder(" Last car seen "));
     this.message.setEditable(false);
     this.message.setBackground(this.getBackground());
     this.add(this.message);
   }
 
   /**
-   * Mostra a video il messaggio passato come argomento. La scritta mostrata rimane di colore rosso
-   * per un tempo prefissato.
+   * Mostra a video i dati dell'ultimo avvistamento compiuto.
    * 
-   * @param msg
-   *          Il messaggio da visualizzare.
+   * @param sightingMessage
+   *          L'avvistamento da mostrare.
    */
-  public void showMessage(final String msg) {
-    this.message.setText(msg);
+  public void showMessage(final String sightingMessage) {
+    this.message.setText(sightingMessage);
     SwingUtilities.invokeLater(() -> this.message.setForeground(Color.RED));
     try {
       Thread.sleep(DELAY);
@@ -59,4 +58,5 @@ public class MessagePanel extends JPanel {
     }
     SwingUtilities.invokeLater(() -> this.message.setForeground(Color.BLACK));
   }
+
 }

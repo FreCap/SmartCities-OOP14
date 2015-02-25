@@ -84,4 +84,12 @@ public class ViewNetworkStolenCars implements IViewStolenCars {
     // No implementation necessary
   }
 
+  /**
+   * La seguente funzione, nell'implementazione corrente del Network server, non ha alcun effetto.
+   */
+  @Override
+  public void showLastSighting(final ISighting sighting) {
+    // No implementation necessary
+  }
+
 }

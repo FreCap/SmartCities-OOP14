@@ -88,8 +88,8 @@ public class StolenCarsController extends AbstractControllerDecorator implements
   }
 
   /**
-   * Aggiunge un pasaggio al model, e notifica la view Controlla se la macchina è stata rubata e
-   * agisce di conseguenza.
+   * Aggiunge un pasaggio al model, e notifica la view. Controlla inoltre se la macchina è stata
+   * rubata e agisce di conseguenza.
    * 
    * @param streetObserver
    *          streetObserver che effettua l'avvistamento
@@ -100,6 +100,7 @@ public class StolenCarsController extends AbstractControllerDecorator implements
   public void newSighting(final IStreetObserver streetObserver, final ISighting sighting) {
     super.newSighting(streetObserver, sighting);
 
+    this.getViewsStolenCars().forEach((view) -> view.showLastSighting(sighting));
     // controllo che non si tratti di un'auto rubata
     if (modelStolenCars.checkStolenPlate(sighting.getLicensePlate())) {
       this.getViewsStolenCars().forEach((view) -> view.newSightingStolenCar(sighting));

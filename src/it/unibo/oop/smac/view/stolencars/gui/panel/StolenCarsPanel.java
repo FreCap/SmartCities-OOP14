@@ -30,7 +30,12 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel {
   /**
    * Pannello che mostra i dati sulle auto rubate quando esse vengono avvistate.
    */
-  private final StolenCarSightPanel lastSeenPanel = new StolenCarSightPanel();
+  private final StolenCarSightPanel lastStolenSeenPanel = new StolenCarSightPanel();
+
+  /**
+   * Pannello che mostra i dati dell'ultima auto avvistata dagli osservatori.
+   */
+  private final LastCarSeenPanel lastCarSeenPanel = new LastCarSeenPanel();
 
   /**
    * Costruttore pubblico della classe.
@@ -41,10 +46,11 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel {
 
     final JPanel innerPanel = new JPanel(new BorderLayout());
     innerPanel.add(this.insertionPanel, BorderLayout.NORTH);
-    innerPanel.add(this.lastSeenPanel, BorderLayout.CENTER);
+    innerPanel.add(this.lastStolenSeenPanel, BorderLayout.CENTER);
 
     this.add(this.tablePanel, BorderLayout.CENTER);
     this.add(innerPanel, BorderLayout.WEST);
+    this.add(lastCarSeenPanel, BorderLayout.SOUTH);
   }
 
   /**
@@ -78,7 +84,20 @@ public class StolenCarsPanel extends JPanel implements IStolenCarsPanel {
    */
   @Override
   public void newSightingStolenCar(final ISighting sighting) {
-    lastSeenPanel.newSightingStolenCar(sighting);
+    lastStolenSeenPanel.newSightingStolenCar(sighting);
   }
 
+  /**
+   * Questo metodo visualizza i dati sull'ultimo avvistamento compiuto in generale dagli
+   * osservatori.
+   * 
+   * @param sighting
+   *          L'{@link ISighting} dell'ultimo avvistamento compiuto.
+   */
+  @Override
+  public void showLastSighting(final ISighting sighting) {
+    final String message = "The plate of the last car spotted is " + sighting.getLicensePlate()
+        + " at " + sighting.getDate();
+    lastCarSeenPanel.showMessage(message);
+  }
 }

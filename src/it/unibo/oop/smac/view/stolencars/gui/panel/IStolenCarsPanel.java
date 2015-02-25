@@ -37,4 +37,13 @@ public interface IStolenCarsPanel {
    */
   void newSightingStolenCar(ISighting sighting);
 
+  /**
+   * Questo metodo visualizza i dati sull'ultimo avvistamento compiuto in generale dagli
+   * osservatori.
+   * 
+   * @param sighting
+   *          L'{@link ISighting} dell'ultimo avvistamento compiuto.
+   */
+  void showLastSighting(ISighting sighting);
+
 }

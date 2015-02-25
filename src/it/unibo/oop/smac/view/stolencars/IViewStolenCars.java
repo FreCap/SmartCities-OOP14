@@ -32,4 +32,13 @@ public interface IViewStolenCars extends IView {
    *          L'{@link ISighting} dell'avvistamento della macchina rubata.
    */
   void newSightingStolenCar(ISighting iSighting);
+
+  /**
+   * Questo metodo visualizza i dati sull'ultimo avvistamento compiuto in generale dagli
+   * osservatori.
+   * 
+   * @param sighting
+   *          L'{@link ISighting} dell'ultimo avvistamento compiuto.
+   */
+  void showLastSighting(ISighting sighting);
 }
