@@ -4,6 +4,11 @@ import it.unibo.oop.smac.database.model.StreetObserverNotValidException;
 
 import java.util.Date;
 
+import javax.management.InvalidAttributeValueException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Questa classe implementa l'interfaccia {@link ISighting}, ed ha il compito di raccogliere tutte
  * le informazioni generate dall'osservatore, quali la data dell'avvistamento, la targa dell'auto
@@ -13,6 +18,11 @@ import java.util.Date;
  *
  */
 public final class Sighting implements ISighting {
+
+  /**
+   * Logger della classe
+   */
+  private static final Logger LOGGER = LoggerFactory.getLogger(Sighting.class);
 
   /**
    * Campi privati della classe.
@@ -59,11 +69,9 @@ public final class Sighting implements ISighting {
    */
   @Override
   public Date getDate() {
-    // WARNING: la defensive copy di questo oggetto genera un errore interno alle librerie di
-    // database!
     Date response = null;
     if (this.date != null) {
-      response = new Date(this.date.getTime());
+      response = new Date(this.date.getTime()); // defensive copy
     }
     return response;
   }
@@ -75,7 +83,15 @@ public final class Sighting implements ISighting {
    */
   @Override
   public LicensePlate getLicensePlate() {
-    return this.licensePlate;
+    LicensePlate out = new LicensePlate();
+    try {
+      if (this.licensePlate != null) {
+        out = new LicensePlate(this.licensePlate); // defensive copy
+      }
+    } catch (InvalidAttributeValueException e) {
+      LOGGER.error("Invalid plate creations", e);
+    }
+    return out;
   }
 
   /**
