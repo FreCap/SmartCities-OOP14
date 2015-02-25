@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 /**
  * Classe le operazioni effettuate dal server di rete all'invio e alla ricezioni di messaggi dal
  * client.
+ * 
+ * @author Francesco Capponi
  */
 public class ServerHandler extends ChannelInboundHandlerAdapter {
 
@@ -28,12 +30,12 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
   /**
    * Costruttore della classe.
    * 
-   * @param dispatcher
+   * @param d
    *          dell'applicazione su cui verranno richiamate le funzioni di segnalazione all'arrivo di
    *          eventi dalla rete
    */
-  ServerHandler(final Observable dispatcher) {
-    this.dispatcher = dispatcher;
+  ServerHandler(final Observable d) {
+    this.dispatcher = d;
   }
 
   /**

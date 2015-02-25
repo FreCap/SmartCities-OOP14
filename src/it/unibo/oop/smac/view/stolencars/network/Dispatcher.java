@@ -7,6 +7,8 @@ import java.util.Observable;
 /**
  * Classe che estende la classe Observable che permette di notificare determinati jobs dell'arrivo
  * di messaggi da parte di clients.
+ * 
+ * @author Francesco Capponi
  */
 public class Dispatcher extends Observable {
 
@@ -19,16 +21,16 @@ public class Dispatcher extends Observable {
   /**
    * Costruttore della classe.
    * 
-   * @param observer
+   * @param obs
    *          dell'applicazione su cui verranno richiamate le funzioni di segnalazione all'arrivo di
    *          eventi dalla rete
    */
-  Dispatcher(final IStolenCarsObserver observer) {
-    this.observer = observer;
+  Dispatcher(final IStolenCarsObserver obs) {
+    this.observer = obs;
   }
 
   /**
-   * Restituisce l'observer dell'applicazione tramite cui poter comunicare i dati al controller
+   * Restituisce l'observer dell'applicazione tramite cui poter comunicare i dati al controller.
    * 
    * @return observer observer dell'applicazione tramite cui poter comunicare i dati al controller
    */

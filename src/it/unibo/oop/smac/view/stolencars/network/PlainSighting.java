@@ -10,7 +10,9 @@ import java.util.Date;
  * Classe di scambio rete client-server, prima di essere tradotto in Sighting. Utilizzata poiché non
  * è possibile spedire attraverso la rete un messaggio contentente referenze ad database, quale
  * sarebbe un semplice {@link Sighting}. Implementa la classe Serializable per poter essere
- * serializzata e spedita via rete
+ * serializzata e spedita via rete.
+ * 
+ * @author Francesco Capponi
  */
 public class PlainSighting implements Serializable {
 

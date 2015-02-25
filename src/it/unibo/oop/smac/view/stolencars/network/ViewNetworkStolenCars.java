@@ -53,7 +53,7 @@ public class ViewNetworkStolenCars implements IViewStolenCars {
   }
 
   /**
-   * La seguente funzione, nell'implementazione corrente del Network server, non ha alcun effetto
+   * La seguente funzione, nell'implementazione corrente del Network server, non ha alcun effetto.
    */
   @Override
   public void newSightingStolenCar(final ISighting iSighting) {
@@ -61,7 +61,7 @@ public class ViewNetworkStolenCars implements IViewStolenCars {
   }
 
   /**
-   * La seguente funzione, nell'implementazione corrente del Network server, non ha alcun effetto
+   * La seguente funzione, nell'implementazione corrente del Network server, non ha alcun effetto.
    */
   @Override
   public void addStreetObserver(final IStreetObserver streetObserver) {
@@ -69,7 +69,7 @@ public class ViewNetworkStolenCars implements IViewStolenCars {
   }
 
   /**
-   * La seguente funzione, nell'implementazione corrente del Network server, non ha alcun effetto
+   * La seguente funzione, nell'implementazione corrente del Network server, non ha alcun effetto.
    */
   @Override
   public void newSighting(final IStreetObserver streetObserver) {
@@ -77,7 +77,7 @@ public class ViewNetworkStolenCars implements IViewStolenCars {
   }
 
   /**
-   * La seguente funzione, nell'implementazione corrente del Network server, non ha alcun effetto
+   * La seguente funzione, nell'implementazione corrente del Network server, non ha alcun effetto.
    */
   @Override
   public void attachStreetObserverController(final IStreetObserverObserver soo) {
