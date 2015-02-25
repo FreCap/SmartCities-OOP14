@@ -13,7 +13,10 @@ import it.unibo.oop.smac.datatypes.StreetObserver;
 import it.unibo.oop.smac.model.IStreetObserverModel;
 import it.unibo.oop.smac.simulator.client.LicensePlateGenerator;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import org.junit.Test;
@@ -114,14 +117,54 @@ public class ModelStreetObserverTest {
     final StreetObserver streetObserver = new StreetObserver(this.generateCoordinates());
     final LicensePlate licensePlate = LicensePlateGenerator.generate();
 
-    final Sighting sighting = new Sighting.Builder().date(new Date())
-        .streetObserver(streetObserver).speed(64f).licensePlate(licensePlate).build();
-    model.addSighting(sighting);
+    // Ho bisogno delle date in cui verranno simulati i passaggi
+    final Calendar lastHour = Calendar.getInstance();
+    lastHour.add(Calendar.HOUR, -1);
+    lastHour.add(Calendar.SECOND, 1);
 
+    final Calendar today = Calendar.getInstance();
+    today.set(Calendar.HOUR, 0);
+    today.set(Calendar.MINUTE, 0);
+    today.set(Calendar.SECOND, 0);
+    today.set(Calendar.AM_PM, Calendar.AM);
+    today.add(Calendar.SECOND, 1);
+
+    final Calendar lastWeek = Calendar.getInstance();
+    lastWeek.add(Calendar.DATE, -Calendar.DAY_OF_WEEK);
+    lastWeek.add(Calendar.SECOND, 1);
+
+    final Calendar lastMonth = Calendar.getInstance();
+    lastMonth.add(Calendar.MONTH, -1);
+    lastMonth.add(Calendar.SECOND, 1);
+
+    final List<Calendar> dates = new ArrayList<Calendar>();
+    dates.add(lastHour);
+    dates.add(today);
+    dates.add(lastWeek);
+    dates.add(lastMonth);
+
+    // aggiungo un po' di sighting per test, nella varie date possibili
+    for (int i = 0; i < 2; i++) {
+      for (final Calendar date : dates) {
+        final Sighting sighting = new Sighting.Builder().date(date.getTime())
+            .streetObserver(streetObserver).speed(64f).licensePlate(licensePlate).build();
+        model.addSighting(sighting);
+      }
+    }
+
+    // prendo le info necessarie
     final IInfoStreetObserver infoStreetObserver = model.getStreetObserverInfo(streetObserver);
-    assertTrue(infoStreetObserver.getTotalNOfSight().get().equals(1));
+
+    // verifico che tutti i parametri siano stati impostati correttamente
+    assertTrue(infoStreetObserver.getTotalNOfSight().get().equals(8));
     assertTrue(infoStreetObserver.getAverageSpeedToday().get().equals(64f));
+    assertTrue(infoStreetObserver.getAverageSpeedLastWeek().get().equals(64f));
+    assertTrue(infoStreetObserver.getAverageSpeedLastMonth().get().equals(64f));
+    assertTrue(infoStreetObserver.getnOfSightLastHour().get().equals(2));
+    assertTrue(infoStreetObserver.getnOfSightToday().get().equals(4));
+    assertTrue(infoStreetObserver.getnOfSightLastWeek().get().equals(6));
+    assertTrue(infoStreetObserver.getnOfSightLastMonth().get().equals(8));
+    assertTrue(infoStreetObserver.getMaxSpeedToday().get().equals(64f));
 
   }
-
 }

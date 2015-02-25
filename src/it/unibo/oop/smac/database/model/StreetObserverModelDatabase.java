@@ -228,20 +228,20 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
       if (date.after(lastMonth.getTime())) {
         sightLastMonth++;
         totalSpeedLastMonth += s.getSpeed();
-        if (date.after(lastWeek.getTime())) {
-          sightLastWeek++;
-          totalSpeedLastWeek += s.getSpeed();
-          if (date.after(today.getTime())) {
-            sightToday++;
-            totalSpeedToday += s.getSpeed();
-            if (s.getSpeed() > maxSpeedToday) {
-              maxSpeedToday = s.getSpeed();
-            }
-            if (date.after(lastHour.getTime())) {
-              sightLastHour++;
-            }
-          }
+      }
+      if (date.after(lastWeek.getTime())) {
+        sightLastWeek++;
+        totalSpeedLastWeek += s.getSpeed();
+      }
+      if (date.after(today.getTime())) {
+        sightToday++;
+        totalSpeedToday += s.getSpeed();
+        if (s.getSpeed() > maxSpeedToday) {
+          maxSpeedToday = s.getSpeed();
         }
+      }
+      if (date.after(lastHour.getTime())) {
+        sightLastHour++;
       }
     }
 
