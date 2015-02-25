@@ -144,7 +144,7 @@ public class ModelStreetObserverTest {
     dates.add(lastMonth);
 
     // aggiungo un po' di sighting per test, nella varie date possibili
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 8; i++) {
       for (final Calendar date : dates) {
         final Sighting sighting = new Sighting.Builder().date(date.getTime())
             .streetObserver(streetObserver).speed(64f).licensePlate(licensePlate).build();
@@ -156,14 +156,14 @@ public class ModelStreetObserverTest {
     final IInfoStreetObserver infoStreetObserver = model.getStreetObserverInfo(streetObserver);
 
     // verifico che tutti i parametri siano stati impostati correttamente
-    assertTrue(infoStreetObserver.getTotalNOfSight().get().equals(8));
+    assertTrue(infoStreetObserver.getTotalNOfSight().get().equals(8 * dates.size()));
     assertTrue(infoStreetObserver.getAverageSpeedToday().get().equals(64f));
     assertTrue(infoStreetObserver.getAverageSpeedLastWeek().get().equals(64f));
     assertTrue(infoStreetObserver.getAverageSpeedLastMonth().get().equals(64f));
-    assertTrue(infoStreetObserver.getnOfSightLastHour().get().equals(2));
-    assertTrue(infoStreetObserver.getnOfSightToday().get().equals(4));
-    assertTrue(infoStreetObserver.getnOfSightLastWeek().get().equals(6));
-    assertTrue(infoStreetObserver.getnOfSightLastMonth().get().equals(8));
+    assertTrue(infoStreetObserver.getnOfSightLastHour().get().equals(8 * dates.size() / 4 * 1));
+    assertTrue(infoStreetObserver.getnOfSightToday().get().equals(8 * dates.size() / 4 * 2));
+    assertTrue(infoStreetObserver.getnOfSightLastWeek().get().equals(8 * dates.size() / 4 * 3));
+    assertTrue(infoStreetObserver.getnOfSightLastMonth().get().equals(8 * dates.size() / 4 * 4));
     assertTrue(infoStreetObserver.getMaxSpeedToday().get().equals(64f));
 
   }
