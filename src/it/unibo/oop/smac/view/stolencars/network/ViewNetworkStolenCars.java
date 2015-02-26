@@ -44,8 +44,7 @@ public class ViewNetworkStolenCars implements IViewStolenCars {
   @Override
   public void attachStolenCarsObserver(final IStolenCarsObserver sco) {
     if (this.initialized) {
-      throw new IllegalAccessError(
-          "NON potete inizializzare più volte l'observer o verranno create più instance dello stesso NetServer");
+      throw new IllegalAccessError("You can't initialize more than one observer!");
     }
     this.initialized = true;
     this.stolenCarsObserver = sco;

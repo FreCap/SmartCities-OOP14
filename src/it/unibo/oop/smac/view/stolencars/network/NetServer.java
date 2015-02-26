@@ -73,12 +73,9 @@ public class NetServer {
   private final Thread.UncaughtExceptionHandler exceptionHandler = new Thread.UncaughtExceptionHandler() {
     @Override
     public void uncaughtException(final Thread th, final Throwable ex) {
-      JOptionPane
-          .showMessageDialog(
-              null,
-              "Il server Network non è stato avviato. Non si riceverà nessun Sighting. \n Controllare che la porta "
-                  + PORT + " non sia occupata e riavviare l'applicazione",
-              "Errore inizializzazione", JOptionPane.INFORMATION_MESSAGE);
+      JOptionPane.showMessageDialog(null, "Server is not working. \n Assert that port" + PORT
+          + " is not busy and restart application.", "Initialization Error",
+          JOptionPane.INFORMATION_MESSAGE);
     }
   };
 
