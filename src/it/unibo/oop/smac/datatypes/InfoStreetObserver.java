@@ -3,7 +3,7 @@ package it.unibo.oop.smac.datatypes;
 import java.util.Optional;
 
 /**
- * Classe che fornisce metodi che restituiscono Optional<> contenenti i dati su di uno specifico
+ * Classe che fornisce metodi che restituiscono Optional contenenti i dati su di uno specifico
  * osservatore. Per l'implementazione della classe e' stato utilizzato il pattern Builder.
  * 
  * @author Federico Bellini

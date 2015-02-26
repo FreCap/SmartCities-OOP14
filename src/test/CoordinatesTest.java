@@ -26,7 +26,7 @@ public class CoordinatesTest {
    * Estremi di validità per le coordinate. Una coordinata che supera questi limiti è inconsistente.
    */
   private static final Float MAX_COORDINATE = 180f;
-  private static final Float MIN_COODRINATE = -180f;
+  private static final Float MIN_COORDINATE = -180f;
 
   /**
    * Controllo sulla creazione corretta delle Coordinates.
@@ -48,14 +48,14 @@ public class CoordinatesTest {
     }
 
     try {
-      new Coordinates(null, -360f);
+      new Coordinates(null, -1f);
       fail();
     } catch (InvalidAttributeValueException e) {
       LOGGER.info("Test 3 success");
     }
 
     try {
-      new Coordinates(-360f, 4f);
+      new Coordinates(MIN_COORDINATE - 1, 4f);
       fail();
     } catch (InvalidAttributeValueException e) {
       LOGGER.info("Test 4 success");
@@ -69,7 +69,7 @@ public class CoordinatesTest {
     }
 
     try {
-      new Coordinates(MAX_COORDINATE, MIN_COODRINATE);
+      new Coordinates(MAX_COORDINATE, MIN_COORDINATE);
     } catch (InvalidAttributeValueException e) {
       fail();
     }

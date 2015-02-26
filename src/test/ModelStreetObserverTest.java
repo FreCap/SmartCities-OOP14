@@ -46,6 +46,7 @@ public class ModelStreetObserverTest {
    * Controllo che il model riesca a creare uno streetObserver valido.
    * 
    * @throws InvalidAttributeValueException
+   *           Questa evenienza non dovrebbe verificarsi.
    */
   @Test
   public void testAddNewStreetObserver() throws InvalidAttributeValueException {

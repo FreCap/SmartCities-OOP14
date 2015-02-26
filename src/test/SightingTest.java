@@ -27,6 +27,9 @@ public class SightingTest {
    */
   private static final Logger LOGGER = LoggerFactory.getLogger(SightingTest.class);
 
+  /**
+   * Test svolti sulla creazione della classe {@link Sighting}.
+   */
   @Test
   public void creationTest() {
 
@@ -70,7 +73,7 @@ public class SightingTest {
 
     try {
       // velocità negativa
-      new Sighting.Builder().speed(-2f);
+      new Sighting.Builder().speed(-1f);
       fail();
     } catch (InvalidAttributeValueException e) {
       LOGGER.info("Test 7 success");
