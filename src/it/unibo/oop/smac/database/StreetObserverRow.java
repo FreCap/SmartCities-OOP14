@@ -8,6 +8,11 @@ import it.unibo.oop.smac.datatypes.StreetObserver;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.InvalidAttributeValueException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
@@ -22,6 +27,11 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "StreetObserver")
 public class StreetObserverRow implements IStreetObserver {
+
+  /**
+   * Logger della classe
+   */
+  private static final Logger LOGGER = LoggerFactory.getLogger(StreetObserverRow.class);
 
   /**
    * Campo contenente l'ID dell'osservatore.
@@ -43,8 +53,11 @@ public class StreetObserverRow implements IStreetObserver {
 
   /**
    * Costruttore di default reimplementato per il corretto funzionamento delle librerie di database.
+   * 
+   * @throws InvalidAttributeValueException
+   *           Questo caso non si può presentare mai.
    */
-  public StreetObserverRow() {
+  public StreetObserverRow() throws InvalidAttributeValueException {
     this(new StreetObserver(new Coordinates(0f, 0f)));
   }
 
@@ -88,7 +101,13 @@ public class StreetObserverRow implements IStreetObserver {
    */
   @Override
   public ICoordinates getCoordinates() {
-    return new Coordinates(this.coordinates); // defensive copy
+    Coordinates out = null;
+    try {
+      out = new Coordinates(this.coordinates); // defensive copy
+    } catch (InvalidAttributeValueException e) {
+      LOGGER.error("Invalid inner coordinates ", e);
+    }
+    return out;
   }
 
   /**

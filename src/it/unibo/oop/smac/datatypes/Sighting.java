@@ -89,7 +89,7 @@ public final class Sighting implements ISighting {
         out = new LicensePlate(this.licensePlate); // defensive copy
       }
     } catch (InvalidAttributeValueException e) {
-      LOGGER.error("Invalid plate creations", e);
+      LOGGER.error("Invalid inner plate", e);
     }
     return out;
   }
@@ -117,13 +117,19 @@ public final class Sighting implements ISighting {
     private Float s;
 
     /**
-     * Costruisce l'oggetto Sighting con l'IStreetObserver passato come paramentro.
+     * Costruisce l'oggetto Sighting con l'{@link IStreetObserver} passato come paramentro.
      * 
      * @param streetObserver
      *          L'IStreetObserver da settare.
      * @return Il Builder stesso.
+     * @throws InvalidAttributeValueException
+     *           Nel caso in cui lo streetObserver passato non sia valido.
      */
-    public Builder streetObserver(final IStreetObserver streetObserver) {
+    public Builder streetObserver(final IStreetObserver streetObserver)
+        throws InvalidAttributeValueException {
+      if (streetObserver == null) {
+        throw new InvalidAttributeValueException();
+      }
       this.stObserver = streetObserver;
       return this;
     }
@@ -134,8 +140,13 @@ public final class Sighting implements ISighting {
      * @param date
      *          La data da settare.
      * @return Il Builder stesso.
+     * @throws InvalidAttributeValueException
+     *           Nel caso in cui la data non sia valida, oppure successiva alla data attuale.
      */
-    public Builder date(final Date date) {
+    public Builder date(final Date date) throws InvalidAttributeValueException {
+      if (date == null || date.after(new Date())) {
+        throw new InvalidAttributeValueException();
+      }
       this.d = new Date(date.getTime());
       return this;
     }
@@ -146,8 +157,14 @@ public final class Sighting implements ISighting {
      * @param licensePlate
      *          La LicensePlate' da settare.
      * @return Il Builder stesso.
+     * @throws InvalidAttributeValueException
+     *           Nel caso in cui la licensePlate non sia valida.
      */
-    public Builder licensePlate(final LicensePlate licensePlate) {
+    public Builder licensePlate(final LicensePlate licensePlate)
+        throws InvalidAttributeValueException {
+      if (licensePlate == null) {
+        throw new InvalidAttributeValueException();
+      }
       this.plate = licensePlate;
       return this;
     }
@@ -158,8 +175,13 @@ public final class Sighting implements ISighting {
      * @param speed
      *          La velocita' da settare.
      * @return Il Builder stesso.
+     * @throws InvalidAttributeValueException
+     *           Nel caso in cui la velocita' non sia valida(nulla o negativa).
      */
-    public Builder speed(final Float speed) {
+    public Builder speed(final Float speed) throws InvalidAttributeValueException {
+      if (speed == null || speed < 0) {
+        throw new InvalidAttributeValueException();
+      }
       this.s = speed;
       return this;
     }

@@ -172,10 +172,18 @@ public class StreetObserverModelDatabase implements IStreetObserverModel {
       throws DatabaseNotFoundException {
     final StreetObserverRow streetObserverRow = this.getStreetObserverRow(streetObserver);
     final List<SightingRow> sightingRowList = streetObserverRow.getSightingsList();
-    final List<ISighting> out = new LinkedList<>();
-    sightingRowList.forEach((elem) -> out.add(new Sighting.Builder()
-        .streetObserver(elem.getStreetObserver()).date(elem.getDate())
-        .licensePlate(elem.getLicensePlate()).speed(elem.getSpeed()).build()));
+    final List<ISighting> out = new LinkedList<>(); // defensive copy
+
+    sightingRowList.forEach((elem) -> {
+      try {
+        out.add(new Sighting.Builder().streetObserver(elem.getStreetObserver())
+            .date(elem.getDate()).licensePlate(elem.getLicensePlate()).speed(elem.getSpeed())
+            .build());
+      } catch (Exception e) {
+        LOGGER.error("Creation of defensive copy failed", e);
+      }
+    });
+
     return out;
   }
 

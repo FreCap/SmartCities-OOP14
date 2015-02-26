@@ -2,6 +2,11 @@ package it.unibo.oop.smac.datatypes;
 
 import it.unibo.oop.smac.database.model.StreetObserverNotValidException;
 
+import javax.management.InvalidAttributeValueException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Implementazione concreta di un'{@link IStreetObserver}.
  * 
@@ -9,6 +14,14 @@ import it.unibo.oop.smac.database.model.StreetObserverNotValidException;
  */
 public class StreetObserver implements IStreetObserver {
 
+  /**
+   * Logger della classe.
+   */
+  private static final Logger LOGGER = LoggerFactory.getLogger(StreetObserver.class);
+
+  /**
+   * Le coordinate dell'osservatore.
+   */
   private final ICoordinates coordinates;
 
   /**
@@ -17,7 +30,7 @@ public class StreetObserver implements IStreetObserver {
    * @param streetObserver
    *          L'{@link IStreetObserver} riprodurre.
    * @throws StreetObserverNotValidException
-   *           è stato passato uno {@link IStreetObserver} nullo
+   *           Se viene passato uno {@link IStreetObserver} nullo.
    */
   public StreetObserver(final IStreetObserver streetObserver)
       throws StreetObserverNotValidException {
@@ -32,8 +45,13 @@ public class StreetObserver implements IStreetObserver {
    * 
    * @param c
    *          Le coordinate di posizione dell'osservatore.
+   * @throws InvalidAttributeValueException
+   *           Se le coordinate passate non sono valide.
    */
-  public StreetObserver(final ICoordinates c) {
+  public StreetObserver(final ICoordinates c) throws InvalidAttributeValueException {
+    if (c == null) {
+      throw new InvalidAttributeValueException();
+    }
     this.coordinates = c;
   }
 
@@ -44,7 +62,13 @@ public class StreetObserver implements IStreetObserver {
    */
   @Override
   public ICoordinates getCoordinates() {
-    return new Coordinates(this.coordinates); // defensive copy
+    Coordinates out = null;
+    try {
+      out = new Coordinates(this.coordinates);
+    } catch (InvalidAttributeValueException e) {
+      LOGGER.error("Invalid inner coordinates ", e);
+    }
+    return out;
   }
 
   /**

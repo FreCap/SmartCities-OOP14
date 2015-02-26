@@ -19,6 +19,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import javax.management.InvalidAttributeValueException;
+
 import org.junit.Test;
 
 /**
@@ -29,16 +31,24 @@ import org.junit.Test;
  */
 public class ModelStreetObserverTest {
 
-  private Coordinates generateCoordinates() {
+  /**
+   * Indica il range di validità delle coordinate(+\- 180).
+   */
+  private static final int COORDINATES_RANGE = 180;
+
+  private Coordinates generateCoordinates() throws InvalidAttributeValueException {
     final Random rand = new Random();
-    return new Coordinates(rand.nextFloat(), rand.nextFloat());
+    return new Coordinates(rand.nextFloat() % COORDINATES_RANGE, -rand.nextFloat()
+        % COORDINATES_RANGE);
   }
 
   /**
    * Controllo che il model riesca a creare uno streetObserver valido.
+   * 
+   * @throws InvalidAttributeValueException
    */
   @Test
-  public void testAddNewStreetObserver() {
+  public void testAddNewStreetObserver() throws InvalidAttributeValueException {
     final IStreetObserverModel model = StreetObserverModelDatabase.getInstance();
     final StreetObserver streetObserver = new StreetObserver(this.generateCoordinates());
     model.addNewStreetObserver(streetObserver);

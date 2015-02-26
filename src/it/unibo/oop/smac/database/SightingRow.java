@@ -7,6 +7,8 @@ import it.unibo.oop.smac.datatypes.Sighting;
 
 import java.util.Date;
 
+import javax.management.InvalidAttributeValueException;
+
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -52,8 +54,11 @@ public class SightingRow implements ISighting {
 
   /**
    * Costruttore di default reimplementato per il corretto funzionamento delle librerie di database.
+   * 
+   * @throws InvalidAttributeValueException
+   *           Questo caso non può presentarsi.
    */
-  SightingRow() {
+  SightingRow() throws InvalidAttributeValueException {
     this(new Sighting.Builder().build(), new StreetObserverRow());
   }
 

@@ -3,6 +3,8 @@ package it.unibo.oop.smac.datatypes;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.management.InvalidAttributeValueException;
+
 /**
  * Implementazione di una classe che gestisce le coordinate di un punto nello spazio.
  * 
@@ -11,6 +13,12 @@ import java.math.BigDecimal;
 public class Coordinates implements ICoordinates, Serializable {
 
   private static final long serialVersionUID = 6127098657709069219L;
+
+  /**
+   * Estremi di validità per le coordinate. Una coordinata che supera questi limiti è inconsistente.
+   */
+  private static final int MAX_COORDINATE = 180;
+  private static final int MIN_COODRINATE = -180;
 
   /**
    * La precisione dei decimali che si vuole nelle coordinate. Es. con DECIMAL_PRECISION settata a
@@ -29,8 +37,14 @@ public class Coordinates implements ICoordinates, Serializable {
    *          La latitudine del punto.
    * @param lng
    *          La longitudine del punto.
+   * @throws InvalidAttributeValueException
+   *           Questa eccezione viene lanciata quando le coordinate passate non sono valide.
    */
-  public Coordinates(final Float lat, final Float lng) {
+  public Coordinates(final Float lat, final Float lng) throws InvalidAttributeValueException {
+    if (lat == null || lng == null || lat < MIN_COODRINATE || lat > MAX_COORDINATE
+        || lng < MIN_COODRINATE || lng > MAX_COORDINATE) {
+      throw new InvalidAttributeValueException();
+    }
     this.latitude = lat;
     this.longitude = lng;
   }
@@ -42,8 +56,10 @@ public class Coordinates implements ICoordinates, Serializable {
    * @param coordinates
    *          Un oggetto {@link ICoordinates} di cui se ne vuole riprodurre un altro oggetto
    *          Coordinates avente la stessa posizione spaziale.
+   * @throws InvalidAttributeValueException
+   *           Questa eccezione viene lanciata quando le coordinate passate non sono valide.
    */
-  public Coordinates(final ICoordinates coordinates) {
+  public Coordinates(final ICoordinates coordinates) throws InvalidAttributeValueException {
     this(coordinates.getLatitude(), coordinates.getLongitude());
   }
 

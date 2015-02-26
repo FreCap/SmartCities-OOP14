@@ -15,7 +15,6 @@ import com.j256.ormlite.table.TableUtils;
  * Classe che permette la connessione al database, e la creazione delle tabelle.
  * 
  * @author Francesco Capponi
- * @author Federico Bellini
  */
 public final class Connection {
 

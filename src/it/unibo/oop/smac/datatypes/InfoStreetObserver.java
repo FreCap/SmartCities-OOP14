@@ -3,7 +3,7 @@ package it.unibo.oop.smac.datatypes;
 import java.util.Optional;
 
 /**
- * Classe che fornisce metodi che restituiscono stringhe contenenti i dati su di uno specifico
+ * Classe che fornisce metodi che restituiscono Optional<> contenenti i dati su di uno specifico
  * osservatore. Per l'implementazione della classe e' stato utilizzato il pattern Builder.
  * 
  * @author Federico Bellini
@@ -343,9 +343,8 @@ public final class InfoStreetObserver implements IInfoStreetObserver {
      */
     public InfoStreetObserver build() {
       return new InfoStreetObserver(this.stObserver, this.nSightLastHour, this.nSightToday,
-          this.nSightLastWeek, this.nSightLaatMonth, this.totalSights,
-          this.avSpeedToday, this.avSpeedLastWeek, this.avSpeedLastMonth,
-          this.mSpeedToday, this.mCarRateToday);
+          this.nSightLastWeek, this.nSightLaatMonth, this.totalSights, this.avSpeedToday,
+          this.avSpeedLastWeek, this.avSpeedLastMonth, this.mSpeedToday, this.mCarRateToday);
     }
 
   }

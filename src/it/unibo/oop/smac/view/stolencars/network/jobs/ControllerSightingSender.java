@@ -38,7 +38,12 @@ public class ControllerSightingSender implements Observer {
     // controllo che il messaggio sia un sighting
     if (arg instanceof PlainSighting) {
       final PlainSighting netSighting = (PlainSighting) arg;
-      final StreetObserver streetObserver = new StreetObserver(netSighting.getCoordinates());
+      StreetObserver streetObserver = null;
+      try {
+        streetObserver = new StreetObserver(netSighting.getCoordinates());
+      } catch (InvalidAttributeValueException e) {
+        LOGGER.error("Creation failed: invalid coordinates.", e);
+      }
 
       ISighting sighting = null;
       try {
@@ -57,5 +62,4 @@ public class ControllerSightingSender implements Observer {
 
     }
   }
-
 }
