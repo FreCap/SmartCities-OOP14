@@ -37,19 +37,19 @@ public class SightingRow implements ISighting {
   /**
    * Campo contenente la data di avvistamento.
    */
-  @DatabaseField(canBeNull = false, dataType = DataType.DATE_LONG)
+  @DatabaseField(canBeNull = true, dataType = DataType.DATE_LONG)
   private final Date date;
 
   /**
    * Campo contenente la targa del mezzo rilevata.
    */
-  @DatabaseField(canBeNull = false, dataType = DataType.SERIALIZABLE)
+  @DatabaseField(canBeNull = true, dataType = DataType.SERIALIZABLE)
   private final LicensePlate licensePlate;
 
   /**
    * Campo contenente la velocita' rilevata.
    */
-  @DatabaseField(canBeNull = false)
+  @DatabaseField(canBeNull = true)
   private final Float speed;
 
   /**
