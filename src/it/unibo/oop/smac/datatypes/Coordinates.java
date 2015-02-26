@@ -17,8 +17,8 @@ public class Coordinates implements ICoordinates, Serializable {
   /**
    * Estremi di validità per le coordinate. Una coordinata che supera questi limiti è inconsistente.
    */
-  private static final int MAX_COORDINATE = 180;
-  private static final int MIN_COODRINATE = -180;
+  private static final Float MAX_COORDINATE = 180f;
+  private static final Float MIN_COODRINATE = -180f;
 
   /**
    * La precisione dei decimali che si vuole nelle coordinate. Es. con DECIMAL_PRECISION settata a

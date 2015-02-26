@@ -58,8 +58,14 @@ public final class Sighting implements ISighting {
    * @return L'{@link IStreetObserver} autore dell'avvistamento.
    */
   @Override
-  public IStreetObserver getStreetObserver() throws StreetObserverNotValidException {
-    return new StreetObserver(this.streetObserver); // defensive copy
+  public IStreetObserver getStreetObserver() {
+    StreetObserver out = null;
+    try {
+      out = new StreetObserver(this.streetObserver);
+    } catch (StreetObserverNotValidException e) {
+      LOGGER.error("Inner street observer is not valid", e);
+    }
+    return out;
   }
 
   /**
@@ -102,6 +108,28 @@ public final class Sighting implements ISighting {
   @Override
   public Float getSpeed() {
     return this.speed;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = (1 << 3) - 1;
+    int result = 1;
+    result = prime * result + ((date == null) ? 0 : date.hashCode());
+    result = prime * result + ((licensePlate == null) ? 0 : licensePlate.hashCode());
+    result = prime * result + ((speed == null) ? 0 : speed.hashCode());
+    result = prime * result + ((streetObserver == null) ? 0 : streetObserver.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    if (obj instanceof Sighting) {
+      return this.getDate().equals(((Sighting) obj).getDate())
+          && this.getLicensePlate().equals(((Sighting) obj).getLicensePlate())
+          && this.getSpeed().equals(((Sighting) obj).getSpeed())
+          && this.getStreetObserver().equals(((Sighting) obj).getStreetObserver());
+    }
+    return false;
   }
 
   /**
