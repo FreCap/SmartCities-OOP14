@@ -43,16 +43,19 @@ public class Controller implements IController {
    * {@link IStreetObserver} del quale ricava le informazioni dal Model dell'applicazione. In caso
    * di qualche malfunzionamento del Model, restituisco un oggetto contenente nessuna informazione.
    */
-  private final IStreetObserverObserver observer = (streetObserver) -> {
-    IInfoStreetObserver info;
-    try {
-      info = model.getStreetObserverInfo(streetObserver);
-    } catch (IllegalArgumentException | DatabaseNotFoundException e) {
-      LOGGER.error("Error in fetching data ", e);
-      // in caso di malfunzionamenti restituisco un info vuota
-      info = new InfoStreetObserver.Builder().build();
+  private final IStreetObserverObserver observer = new IStreetObserverObserver() {
+    @Override
+    public IInfoStreetObserver getStreetObserverInfo(final IStreetObserver streetObserver) {
+      IInfoStreetObserver info;
+      try {
+        info = model.getStreetObserverInfo(streetObserver);
+      } catch (IllegalArgumentException | DatabaseNotFoundException e) {
+        LOGGER.error("Error in fetching data ", e);
+        // in caso di malfunzionamenti restituisco un info vuota
+        info = new InfoStreetObserver.Builder().build();
+      }
+      return info;
     }
-    return info;
   };
 
   /**
